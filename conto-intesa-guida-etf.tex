@@ -42,8 +42,8 @@
 \maketitle
 
 \begin{abstract}
-  Questa guida è un  aiuto per chi volesse ricostruire i calcoli  di tenuta conto del
-  Conto Titoli di \emph{Banca Intesa Sanpaolo} per gli investimenti in \emph{Exchange
+  Questa guida è un  aiuto per chi volesse ricostruire i calcoli  di tenuta del Conto
+  Titoli  di \emph{Banca  Intesa  Sanpaolo} per  gli  investimenti in  \emph{Exchange
      Traded Funds} (ETF).  Questa guida è incompleta:  non copre tutto ciò che c'è da
   sapere sugli ETF,  né l'operatività del sito di \emph{home  banking} di \emph{Banca
      Intesa Sanpaolo}.   Questa guida  è pericolosa:  ognuno la usa  a suo  rischio e
@@ -83,7 +83,7 @@ Nei  calcoli  di tenuta  Conto  Titoli  si  usa  spesso l'operazione  di  \emph{
    aritmetica} e  in particolare  la sua riscrittura  come \emph{media  ponderata}; è
 utile richiamare queste idee e alcune delle loro proprietà.
 
-Si  ricorda che  la  \textbf{media aritmetica}  tra i  numeri:  \num{11}, \num{22}  e
+Si  ricorda che  la  \textbf{media  aritmetica} tra  i  numeri  \num{11}, \num{22}  e
 \num{33} si scrive:
 \begin{equation*}
   \frac{\num{11} + \num{22} + \num{33}}{3} = \num{22}
@@ -632,6 +632,7 @@ In generale  si cerca di  vendere a  un prezzo maggiore  del prezzo di  acquisto
 occorre  liquidità: si  potrebbe essere  costretti a  disinvestire vendendo  a prezzi
 inferiori.
 
+%page
 \subsection{Accoppiamento diretto tra acquisti e vendite}
 
 Si cerca di vendere  ogni singola quota a un \emph{prezzo medio  netto di vendita} in
@@ -661,13 +662,57 @@ per ogni gruppo di quote acquistate e poi vendute si realizzano i guadagni:
   \(\num{40} \times (\num{48,00} - \num{44,00}) = \Eur{160,00}\);
 \end{itemize}
 in  cui i  risultati  rappresentano uscite  dal  Conto Titoli  ed  entrate nel  Conto
-Corrente.
+Corrente.  Quindi il rendimento totale in valuta risulta:
+\begin{align*}
+  \num{120,00} + \num{150,00} + \num{160,00} = \Eur{430,00}
+\end{align*}
+e in percentuale:
+\begin{align*}
+  100 \times{} \frac{\num{430,00}}
+  {20 \times{} \num{22,00} + 30 \times{} \num{33,00} + \num{40} \times{} \num{44,00}}
+  = \SI{13,48}{\percent}
+\end{align*}
 
+%page
 \subsection{Metodo delle medie ponderate}
 
 Si cerca  di vendere le quote  in modo che  la media ponderata dei  \emph{prezzi medi
-   netti di vendita}  sia maggiore del \emph{prezzo medio di  carico nel saldo}.  Per
-esempio, si supponga di eseguire le operazioni:
+   netti  di vendita}  sia  maggiore del  \emph{prezzo medio  di  carico nel  saldo}.
+Riprendendo le operazioni dell'esempio precedente:
+\begin{enumerate}
+\item acquisto di \num{20} quote al \emph{prezzo  medio di carico di acquisto} pari a
+  \Eur{22,00};
+\item acquisto di \num{30} quote al \emph{prezzo  medio di carico di acquisto} pari a
+  \Eur{33,00};
+\item acquisto di \num{40} quote al \emph{prezzo  medio di carico di acquisto} pari a
+  \Eur{44,00};
+\item vendita  di \num{20}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
+  \Eur{28,00};
+\item vendita  di \num{30}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
+  \Eur{38,00};
+\item vendita  di \num{40}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
+  \Eur{48,00};
+\end{enumerate}
+il \emph{prezzo medio di carico nel saldo} risulta:
+\begin{equation*}
+  \frac{20 \times{} \num{22,00} + 30 \times{} \num{33,00} + 40 \times{} \num{44,00}}
+  {20 + 30 + 40} = \Eur{35,44}
+\end{equation*}
+la media ponderata dei \emph{prezzi medi netti di vendita} risulta:
+\begin{equation*}
+  \frac{20 \times{} \num{28,00} + 30 \times{} \num{38,00} + 40 \times{} \num{48,00}}
+  {20 + 30 + 40} = \Eur{40,22}
+\end{equation*}
+quindi il rendimento totale percentuale risulta:
+\begin{align*}
+  100 \times{} \frac{\num{40,22} - \num{35,44}}{35,44} = \SI{13,48}{\percent}
+\end{align*}
+e in valuta:
+\begin{align*}
+  (20 + 30 + 40) \times{} (\num{40,22} - \num{35,44}) = \Eur{430,20}
+\end{align*}
+
+Come altro esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
 \item acquisto di \num{20} quote al \emph{prezzo  medio di carico di acquisto} pari a
   \Eur{22,00};
