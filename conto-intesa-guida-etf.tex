@@ -155,10 +155,10 @@ numero di quote assume il ruolo di ``molteplicità di un prezzo''.
 
 
 L'attività di  investire in  un ETF  è costituita  da una  sequenza di  operazioni di
-acquisto e  vendita di quote  del fondo; il prezzo  del totale delle  quote possedute
-viene calcolato aggiornando una \emph{media ponderata} dopo ogni operazione.  È utile
-richiamare come il calcolo di una  \emph{media ponderata} possa essere eseguito passo
-dopo passo.
+acquisto e vendita di quote del fondo; acquisti e vendite possono essere intercalati;
+il  prezzo  del  totale  delle   quote  possedute  viene  calcolato  aggiornando  una
+\emph{media ponderata} dopo  ogni operazione.  È utile richiamare come  il calcolo di
+una \emph{media ponderata} possa essere eseguito passo dopo passo.
 
 Si considerino  ancora i  numeri \num{11}, \num{11},  \num{11}, \num{22},  \num{33} e
 \num{33}; si  è calcolato che  la loro  \emph{media aritmetica} può  essere riscritta
@@ -209,7 +209,7 @@ numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
       \frac{\num{1} \times{} \num{11}
       + \num{1} \times{} \num{22}
       + \num{1} \times{} \num{33}}{\num{3}} \\
-    &= \frac{\num{3}}{\num{5}} \times{} \num{20,17}
+    &\simeq \frac{\num{3}}{\num{5}} \times{} \num{20,17}
       = \frac{\num{3} \times{} \num{20,17}}{\num{5}}
   \end{align*}
   e quindi la \emph{media ponderata aggiornata} risulta:
@@ -219,8 +219,11 @@ numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
     = \frac{\num{2} \times{} \num{11} + \num{3} \times{} \num{20,17}}{\num{5}}
     \simeq \num{17,6}
   \end{align*}
-  cioè la \emph{media  ponderata aggiornata} è pari alla  \emph{media ponderata} tra:
-  la \emph{media ponderata precedente} e il nuovo numero aggiunto;
+  cioè la \emph{media ponderata aggiornata} è pari alla \emph{media ponderata} tra:
+  \begin{itemize}
+  \item la \emph{media ponderata precedente}, con la sua molteplicità;
+  \item il nuovo numero aggiunto, con la sua molteplicità;
+  \end{itemize}
 
 \item  infine  si  aggiunga  il  numero  \num{33};  la  nuova  \emph{media  ponderata
      aggiornata} è la \emph{media ponderata totale} e procedendo come prima risulta:
@@ -233,8 +236,14 @@ numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
 
 Nei calcoli  di tenuta  Conto Titoli:  dopo ogni acquisto  di quote  di un  fondo, si
 calcola  il  prezzo  medio  di   ogni  quota  posseduta  come  \emph{media  ponderata
-   aggiornata}  tra: la  \emph{media ponderata  precedente} e  il prezzo  delle nuove
-quote acquistate.
+   aggiornata} tra:
+\begin{itemize}
+\item  la  \emph{media ponderata  precedente},  con  il  precedente numero  di  quote
+  possedute come molteplicità;
+\item il prezzo delle nuove quote acquistate,  con il numero di quote acquistate come
+  molteplicità.
+\end{itemize}
+
 
 %page
 \section{Direzione dei trasferimenti di denaro}
@@ -245,25 +254,25 @@ ritengono scambiate tra il Conto Corrente e il Conto Titoli:
 \begin{itemize}
 \item le somme di denaro \emph{investite} in  quote di fondi sono in \emph{uscita dal
      Conto Corrente} e in \emph{entrata nel Conto Titoli};
-\item somme di denaro \emph{disinvestite} da quote di fondi sono in \emph{entrata nel
-     Conto Corrente} e in \emph{uscita dal Conto Titoli}.
+\item le somme di denaro \emph{disinvestite}  da quote di fondi sono in \emph{entrata
+     nel Conto Corrente} e in \emph{uscita dal Conto Titoli}.
 \end{itemize}
 
-Per esempio,  si supponga di acquistare  quote di un fondo  per \Eur{1000,00}; questa
-quantità di denaro esce dal Conto Corrente  ed entra nel Conto Titoli; si considerino
-i due casi:
+Per esempio,  si supponga  di acquistare  quote di un  fondo per  \Eur{1000,00} tutto
+incluso; questa quantità di denaro esce dal Conto Corrente ed entra nel Conto Titoli;
+si considerino i due casi:
 \begin{itemize}
 \item si vendono le quote al prezzo netto di \Eur{1200,00}; questa quantità di denaro
-  esce  dal Conto  Titoli  ed entra  nel  Conto Corrente;  il  bilancio totale  delle
-  operazioni si esprime con la differenza algebrica:
+  esce dal Conto Titoli ed entra nel  Conto Corrente; il bilancio delle operazioni si
+  esprime con la differenza algebrica:
   \begin{equation*}
     \num{1200,00} - \num{1000,00} = \Eur{+200,00}
   \end{equation*}
   cioè, nel  saldo finale, \Eur{200,00} ``appaiono''  nel Conto Titoli, vi  escono ed
   entrano nel Conto Corrente: un guadagno;
 \item si vendono le quote al prezzo  netto di \Eur{900,00}; questa quantità di denaro
-  esce  dal Conto  Titoli  ed entra  nel  Conto Corrente;  il  bilancio totale  delle
-  operazioni si esprime con la differenza algebrica:
+  esce dal Conto Titoli ed entra nel  Conto Corrente; il bilancio delle operazioni si
+  esprime con la differenza algebrica:
   \begin{equation*}
     \num{900,00} - \num{1000,00} = \Eur{-100,00}
   \end{equation*}
@@ -362,13 +371,13 @@ Il saldo di un investimento in quote di ETF è rappresentato dalle tre quantità
 dopo l'esecuzione di ogni operazione di acquisto occorre ricalcolare il saldo.
 
 Il \textbf{prezzo medio di carico nel saldo} è la media ponderata tra il \emph{prezzo
-   medio di carico  del nuovo acquisto} e il precedente  \emph{prezzo medio di carico
-   nel saldo}.
+   medio di \underline{carico} del nuovo acquisto} e il precedente \emph{prezzo medio
+   di carico nel saldo}.
 
 Il \textbf{NAV  del prezzo medio  di carico  nel saldo} è  la media ponderata  tra il
-\emph{prezzo medio eseguito del nuovo acquisto}  e il precedente \emph{NAV del prezzo
-   medio di carico  nel saldo}; questo valore è usato  per il calcolo dell'imponibile
-per la tassazione sui redditi da capitale.
+\emph{prezzo medio \underline{eseguito} del nuovo acquisto} e il precedente \emph{NAV
+   del  prezzo medio  di carico  nel saldo};  questo valore  è usato  per il  calcolo
+dell'imponibile per la tassazione sui redditi da capitale.
 
 Per esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
@@ -391,7 +400,7 @@ Per esempio, si supponga di eseguire le operazioni:
     + \num{0,0024} \times{} (\num{4} \times{} \num{40,00})] = \Eur{40,85}
   \end{equation*}
 \end{enumerate}
-all'inizio il si consideri un Conto  Titoli vuoto, con saldo convenzionale di \num{0}
+all'inizio si  consideri un Conto  Titoli vuoto,  con saldo convenzionale  di \num{0}
 quote al prezzo di \Eur{0}.  L'aggiornamento del saldo avviene nel seguente modo.
 
 \begin{enumerate}
@@ -412,16 +421,15 @@ quote al prezzo di \Eur{0}.  L'aggiornamento del saldo avviene nel seguente modo
   \end{equation*}
 
 \item  Dopo il  terzo acquisto:  il numero  di  quote in  carico nel  Conto Titoli  è
-  \(5 + 4 =  9\); il \emph{prezzo medio di carico nel saldo}  si calcola con la media
-  ponderata:
+  \(5 + 4 = 9\); il \emph{prezzo medio di carico nel saldo} è la media ponderata:
   \begin{equation*}
     \frac{5 \times{} \num{27,23} + 4 \times{} \num{40,85}}{5 + 4}
-    = \Eur{33.28}
+    = \Eur{33,28}
   \end{equation*}
  il \emph{NAV del prezzo medio di carico nel saldo} è la media ponderata:
   \begin{equation*}
     \frac{\num{5} \times{} \num{26,00} + \num{4} \times{} \num{40}}{5 + 4}
-    = \Eur{32.22}
+    = \Eur{32,22}
   \end{equation*}
 \end{enumerate}
 
@@ -492,7 +500,7 @@ pagare:
 \item le spese per la banca pari a un fisso di \Eur{0,50};
 \item i costi di intermediario pari a un fisso di \Eur{2,50};
 \item   le   commissioni   per   la   banca   pari   allo   \SI{0,24}{\percent}   del
-  \emph{controvalore dell'operazione}, in valore assoluto.
+  \emph{controvalore dell'operazione}.
 \end{itemize}
 Se un  ordine non è eseguito:  si paga nulla.  Se  un ordine è eseguito  in piú fasi:
 nella prima fase si  pagano i costi fissi piú la  commissione percentuale; nelle fasi
@@ -549,10 +557,10 @@ numero di quote in carico.  Per esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
 \item acquisto di \num{20} quote al  \emph{prezzo medio eseguito} di \Eur{20,00} e al
   \emph{prezzo medio di carico} di \Eur{21,54};
-\item vendita di \num{15} quote, ai fini del saldo: non importa a quale prezzo;
+\item vendita di \num{15} quote; ai fini del saldo: non importa a quale prezzo;
 \item acquisto di \num{30} quote al  \emph{prezzo medio eseguito} di \Eur{30,00} e al
   \emph{prezzo medio di carico} di \Eur{31,07};
-\item vendita di \num{5} quote, ai fini del saldo: non importa a quale prezzo.
+\item vendita di \num{5} quote; ai fini del saldo: non importa a quale prezzo.
 \end{enumerate}
 all'inizio il si consideri un Conto  Titoli vuoto, con saldo convenzionale di \num{0}
 quote al prezzo di \Eur{0}; l'aggiornamento del saldo avviene nel seguente modo.
@@ -568,14 +576,12 @@ quote al prezzo di \Eur{0}; l'aggiornamento del saldo avviene nel seguente modo.
   \Eur{20,00}.
 
 \item  Dopo  il  terza  operazione  (acquisto):  il  numero  di  quote  in  carico  è
-  \(5 + 30 = 35\); il \emph{prezzo medio di carico nel saldo} si calcola con la media
-  ponderata:
+  \(5 + 30 = 35\); il \emph{prezzo medio di carico nel saldo} è la media ponderata:
   \begin{equation*}
     \frac{5 \times{} \num{21,54} + 30 \times{} \num{31,07}}{5 + 30}
     = \Eur{29,71}
   \end{equation*}
-  il  \emph{NAV del  prezzo  medio di  carico  nel  saldo} si  calcola  con la  media
-  ponderata:
+  il \emph{NAV del prezzo medio di carico nel saldo} è la media ponderata:
   \begin{equation*}
     \frac{5 \times{} \num{20,00} + 30 \times{} \num{30,00}}{5 + 30}
     = \Eur{28,57}
@@ -594,8 +600,9 @@ Nel sito  di \emph{home banking}  di Intesa Sanpaolo è  indicato, per ogni  fon
 Conto Titoli, il  saldo costituito dal numero  di quote in carico  e dal \emph{prezzo
    medio di  carico}; in piú è  visibile la stima dell'\emph{Utile  o Perdita} (U/P),
 nell'ipotesi di vendita  di tutte le quote al prezzo  dell'ultima quotazione rilevata
-sulla Borsa di negoziazione  del titolo.  L'\emph{Utile} è al lordo  sia dei costi di
-vendita che delle tasse sui redditi.
+sulla Borsa di  negoziazione del titolo.  L'\emph{Utile} mostrato è  al lordo sia dei
+costi di vendita che  delle tasse sui redditi; la \emph{Perdita}  mostrata è al lordo
+dei costi vendita.
 
 Si supponga  di avere in  carico \num{16}  quote di un  ETF al \emph{prezzo  medio di
    carico nel saldo} di \Eur{128,98}:
@@ -635,9 +642,9 @@ inferiori.
 %page
 \subsection{Accoppiamento diretto tra acquisti e vendite}
 
-Si cerca di vendere  ogni singola quota a un \emph{prezzo medio  netto di vendita} in
-valore assoluto  maggiore del  suo \emph{prezzo  medio di  carico di  acquisto}.  Per
-esempio, si supponga di eseguire le operazioni:
+Si cerca  di vendere  ogni singola quota  a un \emph{prezzo  medio netto  di vendita}
+maggiore del suo \emph{prezzo medio di carico di acquisto}.  Per esempio, si supponga
+di eseguire le operazioni:
 \begin{enumerate}
 \item acquisto di \num{20} quote al \emph{prezzo  medio di carico di acquisto} pari a
   \Eur{22,00};
@@ -672,28 +679,8 @@ e in percentuale:
   {20 \times{} \num{22,00} + 30 \times{} \num{33,00} + \num{40} \times{} \num{44,00}}
   = \SI{13,48}{\percent}
 \end{align*}
-
-%page
-\subsection{Metodo delle medie ponderate}
-
-Si cerca  di vendere le quote  in modo che  la media ponderata dei  \emph{prezzi medi
-   netti  di vendita}  sia  maggiore del  \emph{prezzo medio  di  carico nel  saldo}.
-Riprendendo le operazioni dell'esempio precedente:
-\begin{enumerate}
-\item acquisto di \num{20} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{22,00};
-\item acquisto di \num{30} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{33,00};
-\item acquisto di \num{40} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{44,00};
-\item vendita  di \num{20}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{28,00};
-\item vendita  di \num{30}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{38,00};
-\item vendita  di \num{40}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{48,00};
-\end{enumerate}
-il \emph{prezzo medio di carico nel saldo} risulta:
+Siccome  si sono  eseguiti  prima tutti  gli  acquisti  e poi  tutte  le vendite,  il
+\emph{prezzo medio di carico nel saldo} risulta:
 \begin{equation*}
   \frac{20 \times{} \num{22,00} + 30 \times{} \num{33,00} + 40 \times{} \num{44,00}}
   {20 + 30 + 40} = \Eur{35,44}
@@ -703,7 +690,7 @@ la media ponderata dei \emph{prezzi medi netti di vendita} risulta:
   \frac{20 \times{} \num{28,00} + 30 \times{} \num{38,00} + 40 \times{} \num{48,00}}
   {20 + 30 + 40} = \Eur{40,22}
 \end{equation*}
-quindi il rendimento totale percentuale risulta:
+quindi il rendimento totale percentuale si può calcolare anche come:
 \begin{align*}
   100 \times{} \frac{\num{40,22} - \num{35,44}}{35,44} = \SI{13,48}{\percent}
 \end{align*}
@@ -712,7 +699,61 @@ e in valuta:
   (20 + 30 + 40) \times{} (\num{40,22} - \num{35,44}) = \Eur{430,20}
 \end{align*}
 
-Come altro esempio, si supponga di eseguire le operazioni:
+%page
+\subsection{Metodo delle medie ponderate}
+
+Si cerca  di vendere le quote  a un prezzo  talmente maggiore del prezzo  di acquisto
+che, recuperati i costi e pagate le tasse, si realizza un guadagno.
+\begin{itemize}
+\item Se il \emph{prezzo medio netto di vendita} è maggiore del \emph{prezzo medio di
+     carico nel saldo} in  quel momento: si recuperano i costi  di acquisto e vendita
+  e, dopo aver pagato le tasse, si realizza un guadagno.
+
+\item Se il  \emph{prezzo medio netto di  vendita} è uguale al  \emph{prezzo medio di
+     carico nel saldo}: l'operazione di vendita recupera i costi ma, dopo aver pagato
+  le tasse, resta nessun guadagno.
+
+\item Se il \emph{prezzo  medio netto di vendita} è minore  del \emph{prezzo medio di
+     carico nel saldo}: tolti i costi  ed eventualmente le tasse, l'operazione genera
+  una perdita.
+\end{itemize}
+
+Come esempio  di guadagno,  si posseggano  \num{100} quote  al \emph{prezzo  medio di
+   carico} di \Eur{88,00}; si vendano  \num{50} quote al \emph{prezzo medio eseguito}
+di \Eur{95,00}; risulta:
+\begin{itemize}
+\item \emph{controvalore dell'operazione}: \(\num{50} \times{} \num{95,00} = \Eur{4750}\);
+\item \emph{costo dell'operazione di vendita}: \(\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{4750} = \Eur{14,40}\);
+\item \emph{tasse sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{95,00} - \num{88,00}) = \Eur{91,00}\);
+\item \emph{controvalore totale di vendita}: \(\num{4750} - \num{91,00} - \num{14,40} = \Eur{4644,60}\);
+\item \emph{prezzo medio netto di vendita}: \(\num{4644,60} / \num{50} = \Eur{92,89}\);
+\end{itemize}
+quindi un rendimento percentuale di:
+\begin{equation*}
+  100 \times{} \frac{\num{92,89} - \num{88,00}}{\num{88,00}} = \SI{+5,56}{\percent}
+\end{equation*}
+
+Come  esempio di  perdita, si  posseggano \num{100}  quote al  \emph{prezzo medio  di
+   carico nel saldo} di \Eur{88,00}; si  vendano \num{50} quote al \emph{prezzo medio
+   eseguito} di \Eur{88,20}; risulta:
+\begin{itemize}
+\item \emph{controvalore dell'operazione}: \(\num{50} \times{} \num{88,20} = \Eur{4410,00}\);
+\item \emph{costo dell'operazione di vendita}: \(\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{4410,00} = \Eur{13,58}\);
+\item \emph{tasse sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{88,20} - \num{88,00}) = \Eur{2,60}\);
+\item \emph{controvalore totale di vendita}: \(\num{4410,00} - \num{2,60} - \num{13,58} = \Eur{4393,82}\);
+\item \emph{prezzo medio netto di vendita}: \(\num{4393,82} / \num{50} = \Eur{87,88}\);
+\end{itemize}
+quindi una perdita percentuale di:
+\begin{equation*}
+  100 \times{} \frac{\num{87,88} - \num{88,00}}{\num{88,00}} = \SI{-0.1364}{\percent}
+\end{equation*}
+nonostante il  \emph{prezzo medio  eseguito} sia maggiore  del \emph{prezzo  medio di
+   carico nel  saldo}: l'operazione può  andare in  perdita se il  \emph{prezzo medio
+   netto di vendita} risulta minore.
+
+Se si  considerano operazioni di vendita  che liquidano tutte le  quote possedute: si
+può cercare di recuperare una vendita in perdita con altre in guadagno.  Per esempio,
+si supponga di eseguire le operazioni:
 \begin{enumerate}
 \item acquisto di \num{20} quote al \emph{prezzo  medio di carico di acquisto} pari a
   \Eur{22,00};
@@ -725,24 +766,80 @@ Come altro esempio, si supponga di eseguire le operazioni:
 \item vendita  di \num{50}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
   \Eur{38,50};
 \end{enumerate}
-il \emph{prezzo medio di carico nel saldo} si calcola con la media ponderata:
+avendo eseguito  prima tutti  gli acquisti  e poi tutte  le vendite,  il \emph{prezzo
+   medio di carico nel saldo} si calcola con la media ponderata:
 \begin{equation*}
   \frac{\num{20} \times{} \num{22,00}
      + \num{30} \times{} \num{33,00}
      + \num{40} \times{} \num{44,00}}
   {\num{20} + \num{30} + \num{40}} = \Eur{35,44}
 \end{equation*}
-la media ponderata dei \emph{prezzi medi netti di vendita} risulta:
+l'operazione  di vendita  al prezzo  di \Eur{33,00}  è in  perdita, mentre  quella al
+prezzo di \Eur{38,50}  è in guadagno; la media ponderata  dei \emph{prezzi medi netti
+   di vendita} risulta:
 \begin{equation*}
   \frac{\num{40} \times{} \num{33,00} + \num{50} \times{} \num{38,50}}
   {40 + 50}
   = \Eur{36,06}
 \end{equation*}
-e            quindi            un            guadagno            totale            di
-\(\num{90} \times{}  (\num{36,06} - \num{35,44})  = \Eur{55,80}\).  Perciò ci  si può
-permettere di  vendere una parte delle  quote a un prezzo  inferiore del \emph{prezzo
-   medio di carico  nel saldo}, purché poi  si vendano le restanti quote  a un prezzo
-abbastanza alto da compensare.
+maggiore del \emph{prezzo medio di carico nel saldo} e quindi, alla fine, si realizza
+un guadagno di:
+\begin{equation*}
+  \num{90}  \times{} (\num{36,06}  -  \num{35,44}) =  \Eur{55,80}
+\end{equation*}
+
+La  domanda  fondamentale  è:  \textbf{possedendo  un numero  di  quote  a  un  certo
+   \emph{prezzo medio di carico nel saldo},  qual'è il \emph{prezzo medio eseguito di
+      vendita} che permette di andare in guadagno?}
+
+Come esempio, si posseggano \num{50} quote al \emph{prezzo medio di carico nel saldo}
+di \Eur{88,00}; si  vuole determinare il \emph{prezzo medio eseguito  di vendita} per
+tutte le quote che permette il guadagno.  Detto \(X\) tale valore, risulta:
+\begin{itemize}
+\item \emph{controvalore dell'operazione}: \(\num{50} \times{} X\);
+\item \emph{costo dell'operazione di vendita}:
+  \begin{align*}
+    \num{0,50} + \num{2,50} + \num{0,0024} \times{} (\num{50} \times{} X)
+    &= \num{3,00} + \num{0,0024} \times{} \num{50} \times{} X = \\
+    &= \num{3,00} + \num{0,12} \times{} X
+  \end{align*}
+\item \emph{tasse sul reddito da capitale}:
+  \begin{align*}
+    \num{0,26} \times{} \num{50} \times{} (X - \num{88,00})
+    &= \num{13} \times{} X - \num{13} \times{} \num{88,00} = \\
+    &= \num{13} \times{} X - \num{1144,00}
+  \end{align*}
+\item \emph{controvalore totale di vendita}:
+  \begin{align*}
+    (\num{50} \times{} X)
+    &- (\num{3,00} + \num{0,12} \times{} X)
+      - (\num{13} \times{} X - \num{1144,00})
+      = \\
+    &= \num{50} \times{} X
+      - \num{3,00} - \num{0,12} \times{} X
+      - \num{13} \times{} X + \num{1144,00}
+      = \\
+    &= (\num{50} - \num{0,12} - \num{13}) \times{} X + (\num{1144,00} - \num{3,00})
+      = \\
+    &= \num{36,88} \times{} X + \num{1141,00}
+  \end{align*}
+\item \emph{prezzo medio netto di vendita}:
+  \begin{equation*}
+    \frac{\num{36,88} \times{} X + \num{1141,00}}{50}
+  \end{equation*}
+\end{itemize}
+il pareggio si raggiungerebbe vendendo le quote a un \emph{prezzo medio netto} uguale
+al \emph{prezzo medio di carico nel saldo} di \Eur{88,00}; quindi:
+\begin{equation*}
+  \frac{\num{36,88} \times{} X + \num{1141,00}}{50} = \num{88,00}
+\end{equation*}
+risolvendo rispetto a \(X\):
+\begin{equation*}
+  X = \frac{\num{50} \times{} \num{88,00} - \num{1141,00}}{\num{36,88}}
+  = \Eur{88,37}
+\end{equation*}
+vendendo con un  \emph{prezzo medio eseguito} maggiore di \Eur{88,37}  si realizza un
+guadagno.
 
 %page
 %% ------------------------------------------------------------
