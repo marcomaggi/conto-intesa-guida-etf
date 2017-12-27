@@ -4,7 +4,10 @@ PROGRAMS	= \
 	conto-intesa-etf-esempio-1				\
 	\
 	conto-intesa--calcoli-esempio--operazione-acquisto	\
-	conto-intesa--calcoli-esempio--saldo-acquisto
+	conto-intesa--calcoli-esempio--operazione-vendita	\
+	conto-intesa--calcoli-esempio--saldo-acquisto		\
+	conto-intesa--calcoli-esempio--saldo-vendita
+
 
 DOCUMENTS	= \
 	conto-intesa-guida-etf.pdf
@@ -45,10 +48,20 @@ conto-intesa-etf-esempio-1: conto-intesa-etf-esempio-1.o conto-intesa-etf.o
 #page
 #### programmi per calcoli negli esempi della guida
 
-conto-intesa--calcoli-esempio--operazione-acquisto: conto-intesa--calcoli-esempio--operazione-acquisto.c
+conto-intesa--calcoli-esempio--operazione-acquisto:	\
+		conto-intesa--calcoli-esempio--operazione-acquisto.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
-conto-intesa--calcoli-esempio--saldo-acquisto: conto-intesa--calcoli-esempio--saldo-acquisto.c
+conto-intesa--calcoli-esempio--saldo-acquisto:		\
+		conto-intesa--calcoli-esempio--saldo-acquisto.c conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+conto-intesa--calcoli-esempio--operazione-vendita:	\
+		conto-intesa--calcoli-esempio--operazione-vendita.c conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+conto-intesa--calcoli-esempio--saldo-vendita:		\
+		 conto-intesa--calcoli-esempio--saldo-vendita.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 #page

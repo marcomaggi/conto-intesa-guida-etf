@@ -1,4 +1,4 @@
-/* conto-intesa--calcoli-esempio--saldo-acquisto.c -*- coding: utf-8-unix -*-
+/* conto-intesa--calcoli-esempio--saldo-vendita.c -*- coding: utf-8-unix -*-
 
    Part of: MMUX Personal Finance
    Contents: calcoli di esempio
@@ -7,7 +7,7 @@
    Abstract
 
 	Calcoli di  esempio nella  guida, per la  sezione "Aggiornamento
-	del saldo dopo un'operazione di acquisto".
+	del saldo dopo un'operazione di vendita".
 
    Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
 
@@ -40,39 +40,34 @@
 int
 main (void)
 {
+  operazione_acquisto_t		acquisto;
+  saldo_t			saldo_iniziale;
   double			numero_quote_1		= 100;
   double			numero_quote_2		= 200;
   double			numero_quote_3		= 300;
   double			prezzo_medio_eseguito_1	= 110.00;
   double			prezzo_medio_eseguito_2	= 120.00;
   double			prezzo_medio_eseguito_3	= 130.00;
-  operazione_acquisto_t		acquisto_1;
-  operazione_acquisto_t		acquisto_2;
-  operazione_acquisto_t		acquisto_3;
+  operazione_vendita_t		vendita_1;
+  operazione_vendita_t		vendita_2;
+  operazione_vendita_t		vendita_3;
   saldo_t			saldo_1;
   saldo_t			saldo_2;
   saldo_t			saldo_3;
 
-  printf("\n*** Calcoli  per gli esempi  nella guida: sezione  \"Aggiornamento del saldo dopo un'operazione di acquisto\"\n\n");
+  printf("\n*** Calcoli  per gli esempi  nella guida: sezione  \"Aggiornamento del saldo dopo un'operazione di vendita\"\n\n");
 
-  operazione_acquisto_init(&acquisto_1, "Operazione acquisto 1", numero_quote_1, prezzo_medio_eseguito_1);
-  saldo_acquisto_init (&saldo_1, "Saldo dopo l'operazione 1", &acquisto_1, &saldo_precedente_convenzionale);
+  operazione_acquisto_init(&acquisto, "Operazione acquisto preliminare", 100.0, 100.00);
+  saldo_acquisto_init(&saldo_iniziale, "Saldo iniziale", &acquisto, &saldo_precedente_convenzionale);
 
-  operazione_acquisto_init(&acquisto_2, "Operazione acquisto 2", numero_quote_2, prezzo_medio_eseguito_2);
-  saldo_acquisto_init (&saldo_2, "Saldo dopo l'operazione 2", &acquisto_2, &saldo_1);
+  operazione_vendita_init(&vendita_1, "Operazione vendita 1", numero_quote_1, prezzo_medio_eseguito_1, &saldo_iniziale);
+  saldo_vendita_init(&saldo_1, "Saldo dopo l'operazione 1", &vendita_1, &saldo_iniziale);
 
-  operazione_acquisto_init(&acquisto_3, "Operazione acquisto 3", numero_quote_3, prezzo_medio_eseguito_3);
-  saldo_acquisto_init (&saldo_3, "Saldo dopo l'operazione 3", &acquisto_3, &saldo_2);
+  operazione_vendita_init(&vendita_2, "Operazione vendita 2", numero_quote_2, prezzo_medio_eseguito_2, &saldo_1);
+  saldo_vendita_init(&saldo_2, "Saldo dopo l'operazione 2", &vendita_2, &saldo_1);
 
-  printf("\n-- Calcolo del totale dei costi\n");
-  {
-    double	costo_totale_1 = acquisto_1.costo_operazione + acquisto_2.costo_operazione + acquisto_3.costo_operazione;
-    double	costo_totale_2 = saldo_3.numero_quote * (saldo_3.prezzo_medio_carico - saldo_3.prezzo_medio_effettivo);
-
-    printf("%-30s= %10.2f EUR\n", "come somma dei costi",	costo_totale_1);
-    printf("%-30s= %10.2f EUR\n", "dai prezzi medi di carico",	costo_totale_2);
-    printf("%-30s= %10.2f EUR\n", "costo medio per quota",	costo_totale_2 / saldo_3.numero_quote);
-  }
+  operazione_vendita_init(&vendita_3, "Operazione vendita 3", numero_quote_3, prezzo_medio_eseguito_3, &saldo_2);
+  saldo_vendita_init (&saldo_3, "Saldo dopo l'operazione 3", &vendita_3, &saldo_2);
 
   fflush(stdout);
   exit(EXIT_SUCCESS);

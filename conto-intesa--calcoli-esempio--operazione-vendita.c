@@ -1,4 +1,4 @@
-/* conto-intesa--calcoli-esempio--operazione-acquisto.c -*- coding: utf-8-unix -*-
+/* conto-intesa--calcoli-esempio--operazione-vendita.c -*- coding: utf-8-unix -*-
 
    Part of: MMUX Personal Finance
    Contents: calcoli di esempio
@@ -7,7 +7,7 @@
    Abstract
 
 	Calcoli di esempio  nella guida, per la  sezione "Descrizione di
-	un'operazione di acquisto".
+	un'operazione di vendita".
 
    Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
 
@@ -40,54 +40,37 @@
 int
 main (void)
 {
-  double	numero_quote_fase_1	= 20.0;
-  double	numero_quote_fase_2	= 30.0;
-  double	numero_quote_fase_3	= 40.0;
-  double	numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
-  double	prezzo_medio_eseguito;
-  double	controvalore_operazione;
-  double	costo_operazione;
-  double	controvalore_totale;
-  double	prezzo_medio_carico;
+  operazione_acquisto_t		acquisto;
+  saldo_t			saldo_iniziale;
+  operazione_vendita_t		vendita;
+  saldo_t			saldo_vendita;
 
-  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di acquisto\"\n\n");
+  double	numero_quote;
+  double	prezzo_medio_eseguito;
+
+  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di vendita\"\n\n");
+
+  operazione_acquisto_init(&acquisto, "Operazione acquisto preliminare", 100.0, 100.00);
+  saldo_acquisto_init(&saldo_iniziale, "Saldo iniziale", &acquisto, &saldo_precedente_convenzionale);
 
   /* Calcolo  del  prezzo_medio_eseguido:   media  ponderata  prezzi  di
-     acquisto in piú fasi. */
+     vendita in piú fasi. */
   {
-    double	prezzo_fase_1		= 22.0;
-    double	prezzo_fase_2		= 33.0;
-    double	prezzo_fase_3		= 44.0;
+    double	numero_quote_fase_1	= 20.0;
+    double	numero_quote_fase_2	= 30.0;
+    double	numero_quote_fase_3	= 40.0;
+    double	prezzo_fase_1		= 102.0;
+    double	prezzo_fase_2		= 103.0;
+    double	prezzo_fase_3		= 104.0;
 
+    numero_quote = numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
     prezzo_medio_eseguito = media_ponderata_3(numero_quote_fase_1, prezzo_fase_1,
 					      numero_quote_fase_2, prezzo_fase_2,
 					      numero_quote_fase_3, prezzo_fase_3);
-    printf("%-30s= %10.2f EUR\n", "prezzo medio eseguito", prezzo_medio_eseguito);
   }
 
-  /* Calcolo del controvalore dell'operazione. */
-  {
-    controvalore_operazione = numero_quote * prezzo_medio_eseguito;
-    printf("%-30s= %10.2f EUR\n", "controvalore dell'operazione", controvalore_operazione);
-  }
-
-  /* Calcolo del costo dell'operazione. */
-  {
-    costo_operazione = 0.50 + 2.50 + 0.0024 * controvalore_operazione;
-    printf("%-30s= %10.2f EUR\n", "costo dell'operazione", costo_operazione);
-  }
-
-  /* Calcolo del controvalore totale dell'operazione. */
-  {
-    controvalore_totale = controvalore_operazione + costo_operazione;
-    printf("%-30s= %10.2f EUR\n", "controvalore totale", controvalore_totale);
-  }
-
-  /* Calcolo del prezzo medio di carico dell'operazione. */
-  {
-    prezzo_medio_carico = controvalore_totale / numero_quote;
-    printf("%-30s= %10.2f EUR\n", "prezzo medio di carico", prezzo_medio_carico);
-  }
+  operazione_vendita_init(&vendita, "Operazione vendita", numero_quote, prezzo_medio_eseguito, &saldo_iniziale);
+  saldo_vendita_init(&saldo_vendita, "Saldo dopo l'operazione", &vendita, &saldo_iniziale);
 
   fflush(stdout);
   exit(EXIT_SUCCESS);
