@@ -24,6 +24,11 @@
 
 \newcommand{\Eur}[1]{\SI{#1}{\text{\euro{}}}}
 
+\newcommand{\MediaPonderataDue}[4]{\frac{\num{#1} \times{} \num{#2} + \num{#3} \times{} \num{#4}}{\num{#1} + \num{#3}}}
+\newcommand{\MediaPonderataTre}[6]{\frac{\num{#1} \times{} \num{#2} + \num{#3} \times{} \num{#4} + \num{#5} \times{} \num{#6}}{\num{#1} + \num{#3} + \num{#5}}}
+
+\newcommand{\CostoOperazione}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{#1}}
+
 % \everytexdraw{
 %    \setgray 0 \linewd 0.01
 %    \arrowheadsize l:0.12 w:0.04 \arrowheadtype t:F
@@ -311,10 +316,7 @@ di acquisto per \num{90} quote è eseguito nelle tre fasi:
 \end{enumerate}
 allora il \emph{prezzo medio eseguito} risulta:
 \begin{equation*}
-  \frac{20 \times{} \num{22,00}
-     + 30 \times{} \num{33,00}
-     + 40 \times \num{44,00}}{20 + 30 + 40}
-  = \Eur{35,44}
+  \MediaPonderataTre{20}{22,00}{30}{33,00}{40}{44,00} = \Eur{35,44}
 \end{equation*}
 
 Il  \textbf{controvalore dell'operazione  di acquisto}  è il  prodotto tra  il numero
@@ -340,8 +342,7 @@ successive  si   paga  solo   la  commissione  percentuale.    Per  esempio,   s
 \emph{controvalore dell'operazione}  è \Eur{3189,60} il  \emph{costo dell'operazione}
 risulta:
 \begin{equation*}
-  \num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{3190,00}
-  = \Eur{10,66}
+  \CostoOperazione{3190,00} = \Eur{10,66}
 \end{equation*}
 
 Il  \textbf{controvalore totale  di un  acquisto} è  la somma  tra \emph{controvalore
@@ -386,56 +387,92 @@ dell'imponibile per la tassazione sui redditi da capitale.
 
 Per esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
-\item acquisto di  \num{2} quote al \emph{prezzo medio eseguito}  di \Eur{20,00} e al
-  \emph{prezzo medio di carico} di:
-  \begin{equation*}
-    \frac{(\num{2} \times{} \num{20,00}) + [\num{0,5} + \num{2,5}
-    + \num{0,0024} \times{} (\num{2} \times{} \num{20,00})]}{2} = \Eur{21,55}
-  \end{equation*}
-\item acquisto di  \num{3} quote al \emph{prezzo medio eseguito}  di \Eur{30,00} e al
-  \emph{prezzo medio di carico} di:
-  \begin{equation*}
-    \frac{(\num{3} \times{} \num{30,00}) + [\num{0,5} + \num{2,5}
-    + \num{0,0024} \times{} (\num{3} \times{} \num{30,00})]}{3} = \Eur{31,07}
-  \end{equation*}
-\item acquisto di  \num{4} quote al \emph{prezzo medio eseguito}  di \Eur{40,00} e al
-  \emph{prezzo medio di carico} di:
-  \begin{equation*}
-    \frac{(\num{4} \times{} \num{40,00}) + [\num{0,5} + \num{2,5}
-    + \num{0,0024} \times{} (\num{4} \times{} \num{40,00})]}{4} = \Eur{40,85}
-  \end{equation*}
+\item acquisto di \num{100} quote al \emph{prezzo medio eseguito} di \Eur{110,00};
+\item acquisto di \num{200} quote al \emph{prezzo medio eseguito} di \Eur{120,00};
+\item acquisto di \num{300} quote al \emph{prezzo medio eseguito} di \Eur{130,00}.
 \end{enumerate}
-all'inizio si  consideri un Conto  Titoli vuoto,  con saldo convenzionale  di \num{0}
-quote al prezzo di \Eur{0}.  L'aggiornamento del saldo avviene nel seguente modo.
-
+all'inizio si  consideri un Conto Titoli  vuoto, con saldo convenzionale  di: \num{0}
+quote;  \emph{prezzo medio  di  carico} di  \Eur{0}; \emph{NAV  del  prezzo medio  di
+   carico} di \Eur{0}.  L'aggiornamento del saldo avviene come segue.
 \begin{enumerate}
-\item  Dopo il  primo acquisto:  il numero  di  quote in  carico nel  Conto Titoli  è
-  \num{2}; il \emph{prezzo medio di carico nel saldo} è \Eur{21,55}; il \emph{NAV del
-     prezzo medio di carico nel saldo} è \Eur{20,00}.
+\item  Per il  primo acquisto,  \num{100} quote  al \emph{prezzo  medio eseguito}  di
+  \Eur{110,00}, risulta:
+  \begin{itemize}
+  \item controvalore dell'operazione: \Eur{11000,00};
+  \item costo dell'operazione: \Eur{29,40};
+  \item controvalore totale: \Eur{11029,40};
+  \item prezzo medio di carico: \Eur{110,29}.
+  \end{itemize}
 
-\item Dopo  il secondo  acquisto: il  numero di quote  in carico  nel Conto  Titoli è
-  \(2 + 3 = 5\); il \emph{prezzo medio di carico nel saldo} è la media ponderata:
-  \begin{equation*}
-    \frac{\num{2} \times{} \num{21,55} + \num{3} \times{} \num{31,07}}{2 + 3}
-    = \Eur{27,26}
-  \end{equation*}
- il \emph{NAV del prezzo medio di carico nel saldo} è la media ponderata:
-  \begin{equation*}
-    \frac{\num{2} \times{} \num{20,00} + \num{3} \times{} \num{30,00}}{2 + 3}
-    = \Eur{26,00}
-  \end{equation*}
+\item Dopo il primo acquisto:
+  \begin{itemize}
+  \item  il numero  quote nel  saldo è  uguale al  numero quote  del primo  acquisto:
+    \num{100};
+  \item il  \emph{prezzo medio carico  nel saldo} è  uguale al \emph{prezzo  medio di
+       carico} del primo acquisto: \Eur{110,29};
+  \item il \emph{NAV del prezzo medio carico nel saldo} è uguale al \emph{prezzo medio
+       eseguito} del primo acquisto: \Eur{110,00};
+  \item  il  \emph{controvalore totale  nel  saldo}  è uguale  al  \emph{controvalore
+       totale} del primo acquisto: \Eur{11029,40}.
+  \end{itemize}
 
-\item  Dopo il  terzo acquisto:  il numero  di  quote in  carico nel  Conto Titoli  è
-  \(5 + 4 = 9\); il \emph{prezzo medio di carico nel saldo} è la media ponderata:
-  \begin{equation*}
-    \frac{5 \times{} \num{27,26} + 4 \times{} \num{40,85}}{5 + 4}
-    = \Eur{33,30}
-  \end{equation*}
- il \emph{NAV del prezzo medio di carico nel saldo} è la media ponderata:
-  \begin{equation*}
-    \frac{\num{5} \times{} \num{26,00} + \num{4} \times{} \num{40}}{5 + 4}
-    = \Eur{32,22}
-  \end{equation*}
+\item Per  il secondo acquisto,  \num{200} quote  al \emph{prezzo medio  eseguito} di
+  \Eur{120,00}, risulta:
+  \begin{itemize}
+    \item controvalore dell'operazione: \Eur{24000,00};
+    \item costo dell'operazione: \Eur{60,60};
+    \item controvalore totale: \Eur{24060,60};
+    \item prezzo medio di carico: \Eur{120,30}.
+  \end{itemize}
+
+\item Dopo il secondo acquisto:
+  \begin{itemize}
+    \item numero quote nel saldo: \(100 + 200 = 300\);
+    \item il \emph{prezzo medio di carico carico  nel saldo} è la media ponderata dei
+      prezzi medi di carico del saldo precedente e del nuovo acquisto:
+      \begin{equation*}
+        \MediaPonderataDue{100}{110,29}{200}{120,30} = \Eur{116,97}
+      \end{equation*}
+    \item il \emph{NAV  del prezzo medio carico  nel saldo} è la  media ponderata dei
+      prezzi medi di carico del saldo precedente e del nuovo acquisto:
+      \begin{equation*}
+        \MediaPonderataDue{100}{110,00}{200}{120,00} = \Eur{116,67}
+      \end{equation*}
+    \item  il \emph{controvalore  totale nel  saldo} è  la somma  tra i  controvalori
+      totali del saldo precedente e del nuovo acquisto:
+      \begin{equation*}
+        \num{11029,40} + \num{24060,60} = \Eur{35090,00}
+      \end{equation*}
+  \end{itemize}
+
+\item  Per il  terzo acquisto,  \num{300} quote  al \emph{prezzo  medio eseguito}  di
+  \Eur{130,00}, risulta:
+  \begin{itemize}
+  \item controvalore dell'operazione: \Eur{39000,00};
+  \item costo dell'operazione: \Eur{96,60};
+  \item controvalore totale: \Eur{39096,60};
+  \item prezzo medio di carico: \Eur{130,32}.
+  \end{itemize}
+
+\item Dopo il terzo acquisto:
+  \begin{itemize}
+    \item numero quote nel saldo: \(300 + 300 = 600\);
+    \item il \emph{prezzo medio di carico carico  nel saldo} è la media ponderata dei
+      prezzi medi di carico del saldo precedente e del nuovo acquisto:
+      \begin{equation*}
+        \MediaPonderataDue{300}{116,97}{300}{130,32} = \Eur{123,64}
+      \end{equation*}
+    \item il \emph{NAV  del prezzo medio carico  nel saldo} è la  media ponderata dei
+      prezzi medi di carico del saldo precedente e del nuovo acquisto:
+      \begin{equation*}
+        \MediaPonderataDue{300}{116,67}{300}{130,00} = \Eur{123,33}
+      \end{equation*}
+    \item  il \emph{controvalore  totale nel  saldo} è  la somma  tra i  controvalori
+      totali del saldo precedente e del nuovo acquisto:
+      \begin{equation*}
+        \num{35090,00} + \num{39096,60} = \Eur{74186,60}
+      \end{equation*}
+  \end{itemize}
 \end{enumerate}
 
 Evidenziando il \emph{prezzo medio di carico  nel saldo}: ogni nuova quota acquistata
@@ -443,26 +480,18 @@ viene ``buttata nel secchio'' insieme  alle vecchie, indipendentemente dal suo p
 di acquisto; è come se ogni quota  fosse stata acquistata allo stesso prezzo, pari al
 \emph{prezzo medio di carico nel saldo}.
 
-Si osservi come i \emph{costi delle operazioni} di acquisto risultino:
+Si osservi come il costo totale di tutte le operazioni di acquisto si possa calcolare
+come somma di tutti i costi dei singoli acquisti:
 \begin{align*}
-  \num{0,5} + \num{2,5} + \num{0,0024} \times{} (\num{2} \times{} \num{20,00})
-  &= \Eur{3,096} \\
-  \num{0,5} + \num{2,5} + \num{0,0024} \times{} (\num{3} \times{} \num{30,00})
-  &= \Eur{3,216} \\
-  \num{0,5} + \num{2,5} + \num{0,0024} \times{} (\num{4} \times{} \num{40,00})
-  &= \Eur{3,384}
+  \num{29,40} + \num{60,60} + \num{96,60} = \Eur{186,60}
 \end{align*}
-in totale:
+ma anche a partire dalla differenza tra il \emph{prezzo medio di carico nel saldo} di
+\Eur{123,64} e il \emph{NAV del prezzo medio di carico nel saldo} di \Eur{123,33}:
 \begin{equation*}
-  \num{3,096} + \num{3,216} + \num{3,384} = \Eur{9,696}
+  \num{600} \times{} (\num{123,64} - \num{123,33}) = \Eur{186,60}
 \end{equation*}
-questo totale  si può calcolare anche  dalla differenza tra il  \emph{prezzo medio di
-   carico nel  saldo} e il \emph{NAV  del prezzo medio  di carico nel saldo}  (a meno
-degli arrotondamenti):
-\begin{equation*}
-  (\num{2} + \num{3} + \num{4}) \times{} (\num{33,30} - \Eur{32,22})
-  = \Eur{9,72}
-\end{equation*}
+in    cui    si     è    evidenziato    il    \emph{costo     medio    per    quota}:
+\(\num{123,64} - \num{123,33} = \Eur{0,31}\).
 
 %page
 \section{Descrizione di un'operazione di vendita}
