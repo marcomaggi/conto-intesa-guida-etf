@@ -1,7 +1,9 @@
 # Makefile --
 
 PROGRAMS	= \
-	conto-intesa-etf-esempio-1
+	conto-intesa-etf-esempio-1		\
+	\
+	conto-intesa--calcoli-esempio--operazione-acquisto
 
 DOCUMENTS	= \
 	conto-intesa-guida-etf.pdf
@@ -38,6 +40,12 @@ conto-intesa-etf-esempio-1.o: conto-intesa-etf-esempio-1.c conto-intesa-etf.h
 
 conto-intesa-etf-esempio-1: conto-intesa-etf-esempio-1.o conto-intesa-etf.o
 	$(CC) $(CFLAGS) -o $@ $^
+
+#page
+#### programmi per calcoli negli esempi della guida
+
+conto-intesa--calcoli-esempio--operazione-acquisto: conto-intesa--calcoli-esempio--operazione-acquisto.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 #page
 #### documenti

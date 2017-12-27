@@ -45,7 +45,6 @@ m4/
 autotools/
 compiled/
 meta/autotools/
-conto-intesa-etf-esempio-1
 *.aux
 *.log
 *.pdf
@@ -53,3 +52,9 @@ conto-intesa-etf-esempio-1
 *.dvi
 *.ps
 _region_.tex
+conto-intesa-etf-esempio-1
+conto-intesa--calcoli-esempio--operazione-acquisto
+conto-intesa--calcoli-esempio--saldo-acquisto
+conto-intesa--calcoli-esempio--operazione-vendita
+conto-intesa--calcoli-esempio--saldo-vendita
+
