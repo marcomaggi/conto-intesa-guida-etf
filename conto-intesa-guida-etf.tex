@@ -321,7 +321,7 @@ siano acquistate, nel qual caso ci interessa solo la parte ``eseguita'' dell'ord
 
 Il \textbf{prezzo  medio eseguito di  un acquisto} (nella terminologia  della Banca),
 anche  detto  \textbf{prezzo medio  effettivo  di  un acquisto}  (nella  terminologia
-dell'Agenzia delle Entrate), è la media  ponderata dei prezzi di acquisto rispetto al
+dell'Agenzia dell'Entrate), è  la media ponderata dei prezzi di  acquisto rispetto al
 numero  di quote  acquistate.  Per  esempio,  se un  singolo ordine  di acquisto  per
 \num{90} quote è eseguito nelle tre fasi:
 \begin{enumerate}
@@ -386,22 +386,22 @@ Dopo l'esecuzione  di ogni operazione di  acquisto occorre ricalcolare il  saldo
 saldo di un investimento in quote di ETF è rappresentato dalle tre quantità:
 \begin{itemize}
 \item numero di quote in carico nel Conto Titoli;
-\item  \textbf{prezzo  medio di  carico  nel  saldo}: è  il  prezzo  medio per  quota
-  acquistata, tutto incluso; si può calcolare come:
+\item \textbf{prezzo  medio di \underline{carico} nel  saldo}: è il prezzo  medio per
+  quota acquistata, tutto incluso; si può calcolare come:
   \begin{itemize}
   \item media  ponderata tra  tutti i \emph{prezzi  medi di  \underline{carico} degli
        acquisti};
   \item media ponderata  tra il \emph{prezzo medio di \underline{carico}  di un nuovo
-       acquisto} e il precedente \emph{prezzo medio di carico nel saldo};
+       acquisto} e il precedente \emph{prezzo medio di \underline{carico} nel saldo};
   \end{itemize}
-\item  \textbf{prezzo medio  effettivo  nel  saldo}: è  il  prezzo  medio, per  quota
-  acquistata, degli  ordini eseguiti  sulla Borsa di  negoziazione; si  può calcolare
-  come:
+\item \textbf{prezzo medio  \underline{effettivo} nel saldo}: è il  prezzo medio, per
+  quota  acquistata,  degli ordini  eseguiti  sulla  Borsa  di negoziazione;  si  può
+  calcolare come:
   \begin{itemize}
-  \item  media ponderata  tra tutti  i \emph{prezzi  medi \underline{eseguiti}  degli
+  \item media  ponderata tra  tutti i  \emph{prezzi medi  \underline{effettivi} degli
        acquisti};
-  \item media  ponderata tra il  \emph{prezzo medio \underline{eseguito} di  un nuovo
-       acquisto} e il precedente \emph{prezzo medio effettivo nel saldo};
+  \item media ponderata  tra il \emph{prezzo medio \underline{effettivo}  di un nuovo
+       acquisto} e il precedente \emph{prezzo medio \underline{effettivo} nel saldo};
   \end{itemize}
   nella documentazione della  Banca: questo valore è chiamato  \emph{Net Asset Value}
   (NAV)  del prezzo  medio di  carico  (da non  confondere con  il NAV  dell'attività
@@ -410,15 +410,15 @@ saldo di un investimento in quote di ETF è rappresentato dalle tre quantità:
 
 Per esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
-\item acquisto di \num{100} quote al \emph{prezzo medio eseguito} di \Eur{110,00};
-\item acquisto di \num{200} quote al \emph{prezzo medio eseguito} di \Eur{120,00};
-\item acquisto di \num{300} quote al \emph{prezzo medio eseguito} di \Eur{130,00}.
+\item acquisto di \num{100} quote al \emph{prezzo medio effettivo} di \Eur{110,00};
+\item acquisto di \num{200} quote al \emph{prezzo medio effettivo} di \Eur{120,00};
+\item acquisto di \num{300} quote al \emph{prezzo medio effettivo} di \Eur{130,00}.
 \end{enumerate}
 all'inizio si  consideri un Conto Titoli  vuoto, con saldo convenzionale  di: \num{0}
 quote; \emph{prezzo  medio di  carico} di \Eur{0};  \emph{prezzo medio  effettivo} di
 \Eur{0}.  L'aggiornamento del saldo avviene come segue.
 \begin{enumerate}
-\item  Per il  primo acquisto,  \num{100} quote  al \emph{prezzo  medio eseguito}  di
+\item Per  il primo  acquisto, \num{100}  quote al  \emph{prezzo medio  effettivo} di
   \Eur{110,00}, risulta:
   \begin{itemize}
   \item controvalore dell'operazione: \Eur{11000,00};
@@ -427,17 +427,17 @@ quote; \emph{prezzo  medio di  carico} di \Eur{0};  \emph{prezzo medio  effettiv
   \item prezzo medio di carico: \Eur{110,29}.
   \end{itemize}
 
-\item Dopo il primo acquisto:
+  Dopo il primo acquisto:
   \begin{itemize}
   \item  il numero  quote nel  saldo è  uguale al  numero quote  del primo  acquisto:
     \num{100};
   \item il  \emph{prezzo medio carico  nel saldo} è  uguale al \emph{prezzo  medio di
        carico} del primo acquisto: \Eur{110,29};
-  \item il \emph{prezzo medio effettivo} è uguale al \emph{prezzo medio eseguito} del
-    primo acquisto: \Eur{110,00};
+  \item il  \emph{prezzo medio effettivo  nel saldo}  è uguale al  \emph{prezzo medio
+       effettivo} del primo acquisto: \Eur{110,00}.
   \end{itemize}
 
-\item Per  il secondo acquisto,  \num{200} quote  al \emph{prezzo medio  eseguito} di
+\item Per  il secondo acquisto, \num{200}  quote al \emph{prezzo medio  effettivo} di
   \Eur{120,00}, risulta:
   \begin{itemize}
     \item controvalore dell'operazione: \Eur{24000,00};
@@ -446,22 +446,22 @@ quote; \emph{prezzo  medio di  carico} di \Eur{0};  \emph{prezzo medio  effettiv
     \item prezzo medio di carico: \Eur{120,30}.
   \end{itemize}
 
-\item Dopo il secondo acquisto:
+  Dopo il secondo acquisto:
   \begin{itemize}
     \item numero quote nel saldo: \(100 + 200 = 300\);
     \item il \emph{prezzo medio di carico carico  nel saldo} è la media ponderata dei
-      prezzi medi di carico del saldo precedente e del nuovo acquisto:
+      \emph{prezzi medi di carico} del saldo precedente e del nuovo acquisto:
       \begin{equation*}
         \MediaPonderataDue{100}{110,29}{200}{120,30} = \Eur{116,97}
       \end{equation*}
-    \item il \emph{prezzo medio effettivo nel  saldo} è la media ponderata dei prezzi
-      medi di carico del saldo precedente e del nuovo acquisto:
+    \item  il \emph{prezzo  medio  effettivo  nel saldo}  è  la  media ponderata  dei
+      \emph{prezzi medi effettivi} del saldo precedente e del nuovo acquisto:
       \begin{equation*}
         \MediaPonderataDue{100}{110,00}{200}{120,00} = \Eur{116,67}
       \end{equation*}
   \end{itemize}
 
-\item  Per il  terzo acquisto,  \num{300} quote  al \emph{prezzo  medio eseguito}  di
+\item Per  il terzo  acquisto, \num{300}  quote al  \emph{prezzo medio  effettivo} di
   \Eur{130,00}, risulta:
   \begin{itemize}
   \item controvalore dell'operazione: \Eur{39000,00};
@@ -470,16 +470,16 @@ quote; \emph{prezzo  medio di  carico} di \Eur{0};  \emph{prezzo medio  effettiv
   \item prezzo medio di carico: \Eur{130,32}.
   \end{itemize}
 
-\item Dopo il terzo acquisto:
+  Dopo il terzo acquisto:
   \begin{itemize}
     \item numero quote nel saldo: \(300 + 300 = 600\);
     \item il \emph{prezzo medio di carico carico  nel saldo} è la media ponderata dei
-      prezzi medi di carico del saldo precedente e del nuovo acquisto:
+      \emph{prezzi medi di carico} del saldo precedente e del nuovo acquisto:
       \begin{equation*}
         \MediaPonderataDue{300}{116,97}{300}{130,32} = \Eur{123,64}
       \end{equation*}
-    \item il \emph{prezzo medio effettivo nel  saldo} è la media ponderata dei prezzi
-      medi di carico del saldo precedente e del nuovo acquisto:
+    \item  il \emph{prezzo  medio  effettivo  nel saldo}  è  la  media ponderata  dei
+      \emph{prezzi medi effettivi} del saldo precedente e del nuovo acquisto:
       \begin{equation*}
         \MediaPonderataDue{300}{116,67}{300}{130,00} = \Eur{123,33}
       \end{equation*}
@@ -515,15 +515,17 @@ L'ordine può essere eseguito in piú fasi in cui solo una parte delle quote è 
 in ogni fase a  un prezzo diverso; è possibile che non tutte  le quote siano vendute,
 nel qual caso ci interessa solo la parte ``eseguita'' dell'ordine.
 
-Il \textbf{prezzo medio eseguito  di una vendita} è la media  ponderata dei prezzi di
-vendita rispetto al  numero di quote vendute.   Per esempio, se un  singolo ordine di
-vendita per \num{90} quote è eseguito nelle fasi:
+Il \textbf{prezzo  medio eseguito di  una vendita} (nella terminologia  della Banca),
+anche  detto   \textbf{prezzo  medio   effettivo  di  vendita}   (nella  terminologia
+dell'Agenzia dell'Entrate),  è la media ponderata  dei prezzi di vendita  rispetto al
+numero di quote vendute.   Per esempio, se un singolo ordine  di vendita per \num{90}
+quote è eseguito nelle fasi:
 \begin{enumerate}
 \item vendita di \num{20} quote al prezzo di \Eur{22,00};
 \item vendita di \num{30} quote al prezzo di \Eur{33,00};
 \item vendita di \num{40} quote al prezzo di \Eur{44,00};
 \end{enumerate}
-allora il \emph{prezzo medio eseguito} risulta:
+allora il \emph{prezzo medio effettivo} risulta:
 \begin{equation*}
   \frac{20 \times{} \num{22,00}
      + 30 \times{} \num{33,00}
@@ -532,9 +534,9 @@ allora il \emph{prezzo medio eseguito} risulta:
 \end{equation*}
 
 Il  \textbf{controvalore dell'operazione  di vendita}  è  il prodotto  tra il  numero
-totale  di quote  vendute e  il  \emph{prezzo medio  eseguito}.  Per  esempio, se  si
-vendono \num{90} quote al \emph{prezzo medio eseguito} di \Eur{35,44} il controvalore
-dell'operazione risulta:
+totale  di quote  vendute e  il \emph{prezzo  medio effettivo}.   Per esempio,  se si
+vendono  \num{90}   quote  al  \emph{prezzo   medio  effettivo}  di   \Eur{35,44}  il
+controvalore dell'operazione risulta:
 \begin{equation*}
   90 \times{} \num{35,44} = \Eur{3189,60}
 \end{equation*}
@@ -547,7 +549,7 @@ fondi che non contengono Titoli dello  Stato Italiano, e assimilati, l'aliquota 
 è del  \SI{26}{\percent}.  Il reddito da  capitale, cioè la base  imponibile, si deve
 calcolare  come descritto  dalla ``Circolare  dell'Agenzia dell'Entrate  21/E del  10
 Luglio  2014''.  Il  reddito  da capitale  per  ogni  quota è  la  differenza tra  il
-\emph{prezzo  medio eseguito  della vendita}  e il  \emph{prezzo medio  effettivo nel
+\emph{prezzo medio  effettivo della  vendita} e il  \emph{prezzo medio  effettivo nel
    saldo}  (che la  circolare chiama  \emph{prezzi effettivi}).   Per esempio,  se il
 numero di quote vendute è \num{90},  il \emph{prezzo medio eseguito} è di \Eur{35,44}
 e il \emph{prezzo medio effettivo nel saldo}  è \Eur{34,00} il calcolo delle tasse si
@@ -578,18 +580,18 @@ risulta:
 
 Da osservare  che: sia il  calcolo delle \emph{tasse sul  reddito da capitale}  che i
 calcoli del \emph{costo dell'operazione} di acquisto  e vendita si eseguono usando il
-\emph{prezzo medio  eseguito}; in pratica: si  pagano le tasse anche  sul \emph{costo
+\emph{prezzo medio effettivo};  in pratica: si pagano le tasse  anche sul \emph{costo
    dell'operazione} di  acquisto e vendita, che  però sono redditi di  qualcun altro,
 non dell'investitore!
 
-La ``Circolare dell'Agenzia dell'Entrate 21/E del 10 Luglio 2014'' specifica che
-il  \emph{costo delle  operazioni} origina  minusvalenze da  registrare come  redditi
+La ``Circolare dell'Agenzia  dell'Entrate 21/E del 10 Luglio 2014''  specifica che il
+\emph{costo  delle  operazioni}  origina  minusvalenze  da  registrare  come  redditi
 diversi.  Per  esempio, si supponga di  possedere \num{90} quote e  di venderle tutte
 con:
 \begin{itemize}
 \item \emph{prezzo medio di carico} è \Eur{34,50};
 \item \emph{prezzo medio effettivo}: \Eur{34,00};
-\item \emph{prezzo medio eseguito di vendita}: \Eur{35,44};
+\item \emph{prezzo medio effettivo di vendita}: \Eur{35,44};
 \item \emph{costo dell'operazione di vendita}: \Eur{10,65};
 \end{itemize}
 il \emph{costo medio delle operazioni di  acquisto} si calcola come differenza tra il
@@ -597,7 +599,7 @@ il \emph{costo medio delle operazioni di  acquisto} si calcola come differenza t
 \begin{equation*}
   \num{90} \times{} (\num{34,50} - \num{34,00}) = \Eur{45,00}
 \end{equation*}
-il reddito da capitale per una quota  è la differenza tra \emph{prezzo medio eseguito
+il reddito da capitale per una quota è la differenza tra \emph{prezzo medio effettivo
    di vendita} e \emph{prezzo medio effettivo}, quindi in totale:
 \begin{equation*}
   \num{90} \times{} (\num{35,44} - \num{34,00}) = \Eur{129,60}
