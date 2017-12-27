@@ -158,18 +158,23 @@ operazione_vendita_init (operazione_vendita_t * const O, char const * descrizion
 			 saldo_t const * const S_precedente)
 {
   double	costo_medio_operazioni_acquisto, redditi_diversi;
+  double	rendimento_percentuale, rendimento_in_valuta, utile_perdita_percentuale;
 
   O->numero_quote		= numero_quote;
   O->prezzo_medio_eseguito	= prezzo_medio_eseguito;
   O->controvalore_operazione	= O->numero_quote * O->prezzo_medio_eseguito;
   O->reddito_da_capitale	= O->numero_quote * (O->prezzo_medio_eseguito - S_precedente->prezzo_medio_effettivo);
-  O->tasse_sul_reddito		= 0.26 * O->reddito_da_capitale;
+  O->tasse_sul_reddito		= (O->reddito_da_capitale > 0.0)? (0.26 * O->reddito_da_capitale) : 0.0;
   O->costo_operazione		= 0.50 + 2.50 + 0.0024 * O->controvalore_operazione;
   O->controvalore_totale	= O->controvalore_operazione - O->costo_operazione - O->tasse_sul_reddito;
   O->prezzo_medio_netto		= O->controvalore_totale / O->numero_quote;
 
   costo_medio_operazioni_acquisto = O->numero_quote * (S_precedente->prezzo_medio_carico - S_precedente->prezzo_medio_effettivo);
   redditi_diversi = (O->reddito_da_capitale - (costo_medio_operazioni_acquisto + O->costo_operazione)) - O->reddito_da_capitale;
+
+  utile_perdita_percentuale	= 100 * (O->prezzo_medio_eseguito - S_precedente->prezzo_medio_carico) / S_precedente->prezzo_medio_carico;
+  rendimento_percentuale	= 100 * (O->prezzo_medio_netto - S_precedente->prezzo_medio_carico) / S_precedente->prezzo_medio_carico;
+  rendimento_in_valuta		= O->numero_quote * (O->prezzo_medio_netto - S_precedente->prezzo_medio_carico);
 
   printf("-- %s\n\n", descrizione);
   printf("%-40s= %10.0f\n",	"numero quote",				O->numero_quote);
@@ -182,6 +187,9 @@ operazione_vendita_init (operazione_vendita_t * const O, char const * descrizion
   printf("%-40s= %10.2f EUR\n", "redditi diversi",			redditi_diversi);
   printf("%-40s= %10.2f EUR\n", "controvalore totale",			O->controvalore_totale);
   printf("%-40s= %10.2f EUR\n", "prezzo medio netto",			O->prezzo_medio_netto);
+  printf("%-40s= %10.4f%%\n",	"Utile/Perdita percentuale",		utile_perdita_percentuale);
+  printf("%-40s= %10.4f%%\n",	"rendimento percentuale",		rendimento_percentuale);
+  printf("%-40s= %10.2f EUR\n",	"rendimento in valuta",			rendimento_in_valuta);
   printf("\n");
 }
 

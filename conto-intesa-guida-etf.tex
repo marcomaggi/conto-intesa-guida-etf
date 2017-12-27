@@ -29,6 +29,8 @@
 
 \newcommand{\CostoOperazione}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{#1}}
 
+\newcommand{\RendimentoPercentuale}[2]{\frac{\num{#1} - \num{#2}}{#2} \times{} \num{100}}
+
 % \everytexdraw{
 %    \setgray 0 \linewd 0.01
 %    \arrowheadsize l:0.12 w:0.04 \arrowheadtype t:F
@@ -666,39 +668,54 @@ e di venderne \num{90}, non importa a quale prezzo; il saldo finale risulta:
 \section{Rendimento indicato nel riepilogo del patrimonio}
 
 
-Nel sito  di \emph{home banking}  di Intesa Sanpaolo è  indicato, per ogni  fondo nel
-Conto Titoli, il  saldo costituito dal numero  di quote in carico  e dal \emph{prezzo
-   medio di  carico}; in piú è  visibile la stima dell'\emph{Utile  o Perdita} (U/P),
-nell'ipotesi di vendita  di tutte le quote al prezzo  dell'ultima quotazione rilevata
-sulla Borsa di  negoziazione del titolo.  L'\emph{Utile} mostrato è  al lordo sia dei
-costi di vendita che  delle tasse sui redditi; la \emph{Perdita}  mostrata è al lordo
-dei costi vendita.
-
-Si supponga  di avere in  carico \num{16}  quote di un  ETF al \emph{prezzo  medio di
-   carico nel saldo} di \Eur{128,98}:
+Nel sito di \emph{home banking} è indicato, per ogni fondo nel Conto Titoli, il saldo
+costituito dal numero di quote in carico  e dal \emph{prezzo medio di carico}; in piú
+è visibile  la stima dell'\emph{Utile  o Perdita}  (U/P), nell'ipotesi di  vendita di
+tutte le quote al prezzo dell'ultima  quotazione rilevata sulla Borsa di negoziazione
+del titolo:
 \begin{itemize}
-\item  se  l'ultima  quotazione  rilevata  per  il  prezzo  di  una  quota  fosse  di
-  \Eur{132,00},  l'\emph{Utile percentuale}  mostrato  nella  tabella del  patrimonio
-  risulterebbe:
+\item  l'\emph{Utile} mostrato  è al  lordo sia  del \emph{costo  dell'operazione} di
+  vendita che della tassa sul reddito da capitale;
+\item la \emph{Perdita} mostrata è al lordo del costo \emph{costo dell'operazione} di
+  vendita.
+\end{itemize}
+
+Si supponga di  possedere \num{100} quote al \emph{prezzo medio  di carico nel saldo}
+di \Eur{100,27}:
+\begin{itemize}
+\item  se l'ultimo  rilevamento per  il prezzo  di una  quota fosse  di \Eur{105,00},
+  l'\emph{Utile percentuale} mostrato nella tabella del patrimonio risulterebbe:
   \begin{equation*}
-    \frac{\num{132,00} - \num{128,98}}{\num{128,98}} \times{} 100 =
-    \SI{+2,3414}{\percent}
+    \RendimentoPercentuale{105,00}{100,27} = \SI{4,7173}{\percent}
   \end{equation*}
   mentre l'\emph{Utile in valuta} risulterebbe:
   \begin{equation*}
-    16 \times{} (\num{132,00} - \num{128,98}) = \Eur{48,32}
+    \num{100} \times{} (\num{105,00} - \num{100,27}) = \Eur{473,00}
   \end{equation*}
-\item  se  l'ultima  quotazione  rilevata  per  il  prezzo  di  una  quota  fosse  di
-  \Eur{120,00}, la  \emph{Perdita percentuale} mostrata nella  tabella del patrimonio
-  risulterebbe:
+  in  realtà,   vendendo  tutte  le   quote  al  \emph{prezzo  medio   effettivo}  di
+  \Eur{105,00}, risulta:
+  \begin{itemize}
+  \item prezzo medio netto: \Eur{103,42};
+  \item rendimento percentuale: \SI{3,1395}{\percent};
+  \item rendimento in valuta: \Eur{314,80};
+  \end{itemize}
+
+\item se  l'ultimo rilevamento per  il prezzo di una  quota fosse di  \Eur{98,00}, la
+  \emph{Perdita percentuale} mostrata nella tabella del patrimonio risulterebbe:
   \begin{equation*}
-    \frac{\num{120,00} - \num{128,98}}{\num{128,98}} \times{} 100 =
-    \SI{-6.9623}{\percent}
+    \RendimentoPercentuale{98,00}{100,27} = \SI{-2,2639}{\percent}
   \end{equation*}
   mentre la \emph{Perdita in valuta} risulterebbe:
   \begin{equation*}
-    16 \times{} (\num{120,00} - \num{128,98}) = \Eur{-143.68}
+    \num{100} \times{} (\num{98,00} - \num{100,27}) = \Eur{-227,00}
   \end{equation*}
+  in  realtà,   vendendo  tutte  le   quote  al  \emph{prezzo  medio   effettivo}  di
+  \Eur{98,00}, risulta:
+  \begin{itemize}
+  \item prezzo medio netto: \Eur{97,73};
+  \item perdita percentuale: \SI{-2,5284}{\percent};
+  \item perdita in valuta: \Eur{-253,52}.
+  \end{itemize}
 \end{itemize}
 
 %page

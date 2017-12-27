@@ -6,8 +6,8 @@ PROGRAMS	= \
 	conto-intesa--calcoli-esempio--operazione-acquisto	\
 	conto-intesa--calcoli-esempio--operazione-vendita	\
 	conto-intesa--calcoli-esempio--saldo-acquisto		\
-	conto-intesa--calcoli-esempio--saldo-vendita
-
+	conto-intesa--calcoli-esempio--saldo-vendita		\
+	conto-intesa--calcoli-esempio--rendimento-riepilogo
 
 DOCUMENTS	= \
 	conto-intesa-guida-etf.pdf
@@ -62,6 +62,10 @@ conto-intesa--calcoli-esempio--operazione-vendita:	\
 
 conto-intesa--calcoli-esempio--saldo-vendita:		\
 		 conto-intesa--calcoli-esempio--saldo-vendita.c conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+conto-intesa--calcoli-esempio--rendimento-riepilogo:		\
+		 conto-intesa--calcoli-esempio--rendimento-riepilogo.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 #page
