@@ -56,6 +56,12 @@ media_ponderata_3 (double peso_1, double valore_1,
   return (peso_1 * valore_1 + peso_2 * valore_2 + peso_3 * valore_3) / (peso_1 + peso_2 + peso_3);
 }
 
+double
+calcolo_rendimento_percentuale (double out, double in)
+{
+  return (100 * (out - in) / in);
+}
+
 
 /** --------------------------------------------------------------------
  ** Type definitions: saldo dopo compravendita.
@@ -76,6 +82,18 @@ saldo_t const saldo_precedente_convenzionale = {
   .prezzo_medio_effettivo	= 0.0,
   .controvalore_carico		= 0.0
 };
+
+void
+saldo_print_ascii (saldo_t const * const S, char const * const descrizione)
+{
+  printf("-- %s\n\n", descrizione);
+  printf("%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
+  printf("%-40s= %10.2f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
+  printf("%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
+  printf("%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
+  printf("\n");
+  fflush(stdout);
+}
 
 
 /** --------------------------------------------------------------------
@@ -126,12 +144,7 @@ saldo_acquisto_init (saldo_t * const S, char const * descrizione,
 						    S_precedente->numero_quote, S_precedente->prezzo_medio_effettivo);
   S->controvalore_carico	= S->numero_quote * S->prezzo_medio_carico;
 
-  printf("-- %s\n\n", descrizione);
-  printf("%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
-  printf("%-40s= %10.2f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
-  printf("%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
-  printf("%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
-  printf("\n");
+  saldo_print_ascii(S, descrizione);
 }
 
 
@@ -187,8 +200,8 @@ operazione_vendita_init (operazione_vendita_t * const O, char const * descrizion
   printf("%-40s= %10.2f EUR\n", "redditi diversi",			redditi_diversi);
   printf("%-40s= %10.2f EUR\n", "controvalore totale",			O->controvalore_totale);
   printf("%-40s= %10.2f EUR\n", "prezzo medio netto",			O->prezzo_medio_netto);
-  printf("%-40s= %10.4f%%\n",	"Utile/Perdita percentuale",		utile_perdita_percentuale);
-  printf("%-40s= %10.4f%%\n",	"rendimento percentuale",		rendimento_percentuale);
+  printf("%-40s= %12.4f%%\n",	"Utile/Perdita percentuale",		utile_perdita_percentuale);
+  printf("%-40s= %12.4f%%\n",	"rendimento percentuale",		rendimento_percentuale);
   printf("%-40s= %10.2f EUR\n",	"rendimento in valuta",			rendimento_in_valuta);
   printf("\n");
 }
@@ -199,16 +212,17 @@ saldo_vendita_init (saldo_t * const S, char const * descrizione,
 		    saldo_t const * const S_precedente)
 {
   S->numero_quote		= S_precedente->numero_quote - O->numero_quote;
-  S->prezzo_medio_carico	= S_precedente->prezzo_medio_carico;
-  S->prezzo_medio_effettivo	= S_precedente->prezzo_medio_effettivo;
-  S->controvalore_carico	= S->numero_quote * S->prezzo_medio_carico;
+  if (S->numero_quote > 0) {
+    S->prezzo_medio_carico	= S_precedente->prezzo_medio_carico;
+    S->prezzo_medio_effettivo	= S_precedente->prezzo_medio_effettivo;
+    S->controvalore_carico	= S->numero_quote * S->prezzo_medio_carico;
+  } else {
+    S->prezzo_medio_carico	= 0.0;
+    S->prezzo_medio_effettivo	= 0.0;
+    S->controvalore_carico	= 0.0;
+  }
 
-  printf("-- %s\n\n", descrizione);
-  printf("%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
-  printf("%-40s= %10.2f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
-  printf("%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
-  printf("%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
-  printf("\n");
+  saldo_print_ascii(S, descrizione);
 }
 
 
