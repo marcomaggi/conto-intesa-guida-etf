@@ -4,9 +4,8 @@ PROGRAMS	= \
 	conto-intesa-etf-esempio-1				\
 	\
 	conto-intesa--calcoli-esempio--operazione-acquisto	\
-	conto-intesa--calcoli-esempio--operazione-vendita	\
 	conto-intesa--calcoli-esempio--saldo-acquisto		\
-	conto-intesa--calcoli-esempio--saldo-vendita		\
+	conto-intesa--calcoli-esempio--operazione-vendita	\
 	conto-intesa--calcoli-esempio--rendimento-riepilogo	\
 	conto-intesa--calcoli-esempio--strategie-prezzi
 
@@ -19,7 +18,7 @@ RM		= /bin/rm --verbose --force --recursive
 
 ## --------------------------------------------------------------------
 
-.PHONY: all clean bootstrap-latex clean-latex
+.PHONY: all clean
 
 all: $(PROGRAMS) $(DOCUMENTS)
 
@@ -73,6 +72,13 @@ conto-intesa--calcoli-esempio--strategie-prezzi:		\
 		 conto-intesa--calcoli-esempio--strategie-prezzi.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
+## --------------------------------------------------------------------
+
+CLEANFILES	+= demo
+
+demo: demo.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $< && ./demo
+
 #page
 #### documenti
 
@@ -95,12 +101,14 @@ endif
 
 ## --------------------------------------------------------------------
 
-bootstrap-latex:
+.PHONY: bootstrap-latex latex-bootstrap clean-latex latex-clean
+
+bootstrap-latex latex-bootstrap:
 	$(LATEX) conto-intesa-guida-etf.tex
 	$(LATEX) conto-intesa-guida-etf.tex
 	$(LATEX) conto-intesa-guida-etf.tex
 
-clean-latex:
+clean-latex latex-clean:
 	if test -d "=auto" ; then /bin/chmod 0750 "=auto" ; fi
 
 ## --------------------------------------------------------------------

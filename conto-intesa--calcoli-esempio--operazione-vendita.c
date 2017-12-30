@@ -31,6 +31,7 @@
 /* ------------------------------------------------------------------ */
 
 #include "conto-intesa--calcoli-esempio.h"
+#include <locale.h>
 
 
 /** --------------------------------------------------------------------
@@ -40,21 +41,12 @@
 int
 main (void)
 {
-  operazione_acquisto_t		acquisto;
-  saldo_t			saldo_iniziale;
-  operazione_vendita_t		vendita;
-  saldo_t			saldo_vendita;
-
   double	numero_quote;
   double	prezzo_medio_eseguito;
 
+  setlocale(LC_ALL, "it_IT");
   printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di vendita\"\n\n");
 
-  operazione_acquisto_init(&acquisto, "Operazione acquisto preliminare", 100.0, 100.00);
-  saldo_acquisto_init(&saldo_iniziale, "Saldo iniziale", &acquisto, &saldo_precedente_convenzionale);
-
-  /* Calcolo  del  prezzo_medio_eseguido:   media  ponderata  prezzi  di
-     vendita in piú fasi. */
   {
     double	numero_quote_fase_1	= 20.0;
     double	numero_quote_fase_2	= 30.0;
@@ -63,14 +55,30 @@ main (void)
     double	prezzo_fase_2		= 103.0;
     double	prezzo_fase_3		= 104.0;
 
-    numero_quote = numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
-    prezzo_medio_eseguito = media_ponderata_3(numero_quote_fase_1, prezzo_fase_1,
-					      numero_quote_fase_2, prezzo_fase_2,
-					      numero_quote_fase_3, prezzo_fase_3);
+    numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
+    prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_fase_1,
+						    numero_quote_fase_2, prezzo_fase_2,
+						    numero_quote_fase_3, prezzo_fase_3);
   }
 
-  operazione_vendita_init(&vendita, "Operazione vendita", numero_quote, prezzo_medio_eseguito, &saldo_iniziale);
-  saldo_vendita_init(&saldo_vendita, "Saldo dopo l'operazione", &vendita, &saldo_iniziale);
+  {
+    operazione_t	O[2] = {
+      {
+	.numero_ordine		= 1,
+	.tipo			= ACQUISTO,
+	.numero_quote		= 100,
+	.prezzo_medio_eseguito	= 100.00,
+      },
+      {
+	.numero_ordine		= 2,
+	.tipo			= VENDITA,
+	.numero_quote		= numero_quote,
+	.prezzo_medio_eseguito	= prezzo_medio_eseguito,
+      }
+    };
+    saldo_t		S[2];
+    calcolo_storico(2, O, S);
+  }
 
   fflush(stdout);
   exit(EXIT_SUCCESS);

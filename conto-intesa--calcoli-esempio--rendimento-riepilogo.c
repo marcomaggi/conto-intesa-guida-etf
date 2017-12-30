@@ -31,6 +31,7 @@
 /* ------------------------------------------------------------------ */
 
 #include "conto-intesa--calcoli-esempio.h"
+#include <locale.h>
 
 
 /** --------------------------------------------------------------------
@@ -40,18 +41,55 @@
 int
 main (void)
 {
-  operazione_acquisto_t		acquisto;
-  saldo_t			saldo_iniziale;
-  operazione_vendita_t		vendita;
 
+  setlocale(LC_ALL, "it_IT");
   printf("\n*** Calcoli per gli esempi nella guida: sezione \"Rendimento indicato nel riepilogo del patrimonio\"\n\n");
 
-  operazione_acquisto_init(&acquisto, "Operazione acquisto preliminare", 100.0, 100.00);
-  saldo_acquisto_init(&saldo_iniziale, "Saldo iniziale", &acquisto, &saldo_precedente_convenzionale);
+  printf("** Vendita con guadagno\n");
+  {
+#undef NUMERO_OPERAZIONI
+#define NUMERO_OPERAZIONI	2
+    operazione_t	O[NUMERO_OPERAZIONI] = {
+      {
+	.numero_ordine		= 1,
+	.tipo			= ACQUISTO,
+	.numero_quote		= 100.00,
+	.prezzo_medio_eseguito	= 100.00,
+      },
+      {
+	.numero_ordine		= 2,
+	.tipo			= VENDITA,
+	.numero_quote		= 100.00,
+	.prezzo_medio_eseguito	= 105.00,
+      },
+    };
+    saldo_t	S[NUMERO_OPERAZIONI];
 
-  operazione_vendita_init(&vendita, "Operazione vendita a 105,00 EUR", 100.0, 105.00, &saldo_iniziale);
+    calcolo_storico(NUMERO_OPERAZIONI, O, S);
+  }
 
-  operazione_vendita_init(&vendita, "Operazione vendita a 98,00 EUR", 100.0, 98.00, &saldo_iniziale);
+  printf("** Vendita con perdita\n");
+  {
+#undef NUMERO_OPERAZIONI
+#define NUMERO_OPERAZIONI	2
+    operazione_t	O[NUMERO_OPERAZIONI] = {
+      {
+	.numero_ordine		= 1,
+	.tipo			= ACQUISTO,
+	.numero_quote		= 100.00,
+	.prezzo_medio_eseguito	= 100.00,
+      },
+      {
+	.numero_ordine		= 2,
+	.tipo			= VENDITA,
+	.numero_quote		= 100,
+	.prezzo_medio_eseguito	= 98.00,
+      }
+    };
+    saldo_t	S[NUMERO_OPERAZIONI];
+
+    calcolo_storico(NUMERO_OPERAZIONI, O, S);
+  }
 
   fflush(stdout);
   exit(EXIT_SUCCESS);

@@ -52,6 +52,8 @@ meta/autotools/
 *.dvi
 *.ps
 _region_.tex
+demo.c
+demo
 conto-intesa-etf-esempio-1
 conto-intesa--calcoli-esempio--operazione-acquisto
 conto-intesa--calcoli-esempio--saldo-acquisto

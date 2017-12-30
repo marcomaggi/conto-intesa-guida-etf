@@ -31,6 +31,7 @@
 /* ------------------------------------------------------------------ */
 
 #include "conto-intesa--calcoli-esempio.h"
+#include <locale.h>
 
 
 /** --------------------------------------------------------------------
@@ -40,53 +41,35 @@
 int
 main (void)
 {
-  double	numero_quote_fase_1	= 20.0;
-  double	numero_quote_fase_2	= 30.0;
-  double	numero_quote_fase_3	= 40.0;
-  double	numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
+  double	numero_quote;
   double	prezzo_medio_eseguito;
-  double	controvalore_operazione;
-  double	costo_operazione;
-  double	controvalore_totale;
-  double	prezzo_medio_carico;
 
+  setlocale(LC_ALL, "it_IT");
   printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di acquisto\"\n\n");
 
-  /* Calcolo  del  prezzo_medio_eseguido:   media  ponderata  prezzi  di
-     acquisto in piú fasi. */
   {
+    double	numero_quote_fase_1	= 20.0;
+    double	numero_quote_fase_2	= 30.0;
+    double	numero_quote_fase_3	= 40.0;
     double	prezzo_fase_1		= 22.0;
     double	prezzo_fase_2		= 33.0;
     double	prezzo_fase_3		= 44.0;
 
-    prezzo_medio_eseguito = media_ponderata_3(numero_quote_fase_1, prezzo_fase_1,
-					      numero_quote_fase_2, prezzo_fase_2,
-					      numero_quote_fase_3, prezzo_fase_3);
-    printf("%-30s= %10.2f EUR\n", "prezzo medio eseguito", prezzo_medio_eseguito);
+    numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
+    prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_fase_1,
+						    numero_quote_fase_2, prezzo_fase_2,
+						    numero_quote_fase_3, prezzo_fase_3);
   }
 
-  /* Calcolo del controvalore dell'operazione. */
   {
-    controvalore_operazione = numero_quote * prezzo_medio_eseguito;
-    printf("%-30s= %10.2f EUR\n", "controvalore dell'operazione", controvalore_operazione);
-  }
-
-  /* Calcolo del costo dell'operazione. */
-  {
-    costo_operazione = 0.50 + 2.50 + 0.0024 * controvalore_operazione;
-    printf("%-30s= %10.2f EUR\n", "costo dell'operazione", costo_operazione);
-  }
-
-  /* Calcolo del controvalore totale dell'operazione. */
-  {
-    controvalore_totale = controvalore_operazione + costo_operazione;
-    printf("%-30s= %10.2f EUR\n", "controvalore totale", controvalore_totale);
-  }
-
-  /* Calcolo del prezzo medio di carico dell'operazione. */
-  {
-    prezzo_medio_carico = controvalore_totale / numero_quote;
-    printf("%-30s= %10.2f EUR\n", "prezzo medio di carico", prezzo_medio_carico);
+    operazione_t	O = {
+      .numero_ordine		= 1,
+      .tipo			= ACQUISTO,
+      .numero_quote		= numero_quote,
+      .prezzo_medio_eseguito	= prezzo_medio_eseguito,
+    };
+    operazione_init(&O, &saldo_precedente_convenzionale);
+    operazione_print_ascii(stdout, &O);
   }
 
   fflush(stdout);

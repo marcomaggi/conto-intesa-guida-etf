@@ -31,6 +31,7 @@
 /* ------------------------------------------------------------------ */
 
 #include "conto-intesa--calcoli-esempio.h"
+#include <locale.h>
 
 
 /** --------------------------------------------------------------------
@@ -40,38 +41,45 @@
 int
 main (void)
 {
-  double			numero_quote_1		= 100;
-  double			numero_quote_2		= 200;
-  double			numero_quote_3		= 300;
-  double			prezzo_medio_eseguito_1	= 110.00;
-  double			prezzo_medio_eseguito_2	= 120.00;
-  double			prezzo_medio_eseguito_3	= 130.00;
-  operazione_acquisto_t		acquisto_1;
-  operazione_acquisto_t		acquisto_2;
-  operazione_acquisto_t		acquisto_3;
-  saldo_t			saldo_1;
-  saldo_t			saldo_2;
-  saldo_t			saldo_3;
+#define NUMERO_OPERAZIONI	3
+  operazione_t	O[NUMERO_OPERAZIONI] = {
+    {
+      .numero_ordine		= 1,
+      .tipo			= ACQUISTO,
+      .numero_quote		= 100,
+      .prezzo_medio_eseguito	= 110.00,
+    },
+    {
+      .numero_ordine		= 2,
+      .tipo			= ACQUISTO,
+      .numero_quote		= 200,
+      .prezzo_medio_eseguito	= 120.00,
+    },
+    {
+      .numero_ordine		= 3,
+      .tipo			= ACQUISTO,
+      .numero_quote		= 300,
+      .prezzo_medio_eseguito	= 130.00,
+    }
+  };
+  saldo_t	S[NUMERO_OPERAZIONI];
 
-  printf("\n*** Calcoli  per gli esempi  nella guida: sezione  \"Aggiornamento del saldo dopo un'operazione di acquisto\"\n\n");
+  setlocale(LC_ALL, "it_IT");
+  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Aggiornamento del saldo dopo un'operazione di acquisto\"\n\n");
 
-  operazione_acquisto_init(&acquisto_1, "Operazione acquisto 1", numero_quote_1, prezzo_medio_eseguito_1);
-  saldo_acquisto_init (&saldo_1, "Saldo dopo l'operazione 1", &acquisto_1, &saldo_precedente_convenzionale);
+  calcolo_storico(NUMERO_OPERAZIONI, O, S);
 
-  operazione_acquisto_init(&acquisto_2, "Operazione acquisto 2", numero_quote_2, prezzo_medio_eseguito_2);
-  saldo_acquisto_init (&saldo_2, "Saldo dopo l'operazione 2", &acquisto_2, &saldo_1);
-
-  operazione_acquisto_init(&acquisto_3, "Operazione acquisto 3", numero_quote_3, prezzo_medio_eseguito_3);
-  saldo_acquisto_init (&saldo_3, "Saldo dopo l'operazione 3", &acquisto_3, &saldo_2);
-
-  printf("\n-- Calcolo del totale dei costi\n");
+  printf("-- Calcolo del totale dei costi\n\n");
   {
-    double	costo_totale_1 = acquisto_1.costo_operazione + acquisto_2.costo_operazione + acquisto_3.costo_operazione;
-    double	costo_totale_2 = saldo_3.numero_quote * (saldo_3.prezzo_medio_carico - saldo_3.prezzo_medio_effettivo);
+    double	costo_totale_1 =
+      O[0].acquisto.costo_operazione_acquisto +
+      O[1].acquisto.costo_operazione_acquisto +
+      O[2].acquisto.costo_operazione_acquisto;
+    double	costo_totale_2 = S[2].numero_quote * S[2].costo_medio_acquisti;
 
     printf("%-30s= %10.2f EUR\n", "come somma dei costi",	costo_totale_1);
     printf("%-30s= %10.2f EUR\n", "dai prezzi medi di carico",	costo_totale_2);
-    printf("%-30s= %10.2f EUR\n", "costo medio per quota",	costo_totale_2 / saldo_3.numero_quote);
+    printf("%-30s= %10.2f EUR\n", "costo medio per quota",	costo_totale_2 / S[2].numero_quote);
   }
 
   fflush(stdout);
