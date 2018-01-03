@@ -555,52 +555,54 @@ nel qual caso ci interessa solo la parte ``eseguita'' dell'ordine.
 Il \textbf{prezzo  medio eseguito di  una vendita} (nella terminologia  della Banca),
 anche  detto   \textbf{prezzo  medio   effettivo  di  vendita}   (nella  terminologia
 dell'Agenzia dell'Entrate),  è la media ponderata  dei prezzi di vendita  rispetto al
-numero di quote vendute.   Per esempio, se un singolo ordine  di vendita per \num{90}
+numero di quote vendute.  Per esempio, se  un singolo ordine di vendita per \num{100}
 quote è eseguito nelle fasi:
 \begin{enumerate}
-\item vendita di \num{20} quote al prezzo di \Eur{102,00};
-\item vendita di \num{30} quote al prezzo di \Eur{103,00};
-\item vendita di \num{40} quote al prezzo di \Eur{104,00};
+\item vendita di \num{20} quote al prezzo di \Eur{52,00};
+\item vendita di \num{30} quote al prezzo di \Eur{53,00};
+\item vendita di \num{50} quote al prezzo di \Eur{55,00};
 \end{enumerate}
 allora il \emph{prezzo medio effettivo} risulta:
 \begin{equation*}
-  \MediaPonderataTre{20}{102,00}{30}{103,00}{40}{104,00} = \Eur{103,22}
+  \MediaPonderataTre{20}{52,00}{30}{53,00}{50}{55,00} = \Eur{53,80}
 \end{equation*}
 
 Il  \textbf{controvalore dell'operazione  di vendita}  è  il prodotto  tra il  numero
 totale  di quote  vendute e  il \emph{prezzo  medio effettivo}.   Per esempio,  se si
-vendono  \num{90}  quote   al  \emph{prezzo  medio  effettivo}   di  \Eur{103,22}  il
+vendono  \num{100}  quote   al  \emph{prezzo  medio  effettivo}   di  \Eur{53,80}  il
 controvalore dell'operazione risulta:
 \begin{equation*}
-  90 \times{} \num{103,22} = \Eur{9290,00}
+  \num{100} \times{} \num{53,80} = \Eur{5380,00}
 \end{equation*}
 
-Per ogni vendita occorre pagare le \textbf{tasse sul reddito da capitale}\footnote{Si
-   deve pagare  anche il bollo sull'estratto  conto trimestrale per il  Conto Titoli,
-   pari  allo \SI{0,2}{\percent}  all'anno; il  bollo è  addebitato direttamente  sul
-   Conto Corrente,  perciò in  questa guida  lo si  considera conteggiato  a parte.}.
-Secondo la circolare  dell'Agenzia dell'Entrate, il reddito da capitale  per quota si
-calcola  come   differenza  tra  \emph{prezzo   medio  effettivo  della   vendita}  e
-\emph{prezzo medio effettivo  nel saldo}.  Per esempio, se si  vendono \num{90} quote
-al  \emph{prezzo  medio  effettivo}  di   \Eur{103,22}  e  nel  saldo  precedente  il
-\emph{prezzo medio effettivo} è di \Eur{100,00}, il reddito da capitale risulta:
+La  circolare dell'Agenzia  dell'Entrate specifica  che il  \emph{reddito per  quota}
+derivante  da  un'operazione  di  vendita  è la  differenza  tra  \emph{prezzo  medio
+   effettivo della vendita} e \emph{prezzo medio effettivo nel saldo}; peculiarmente:
+\begin{itemize}
+\item quando la  differenza tra prezzi medi effettivi è  \textbf{positiva}: essa è da
+  considerarsi \emph{reddito da capitale}, quindi \textbf{non genera} una plusvalenza
+  utilizzabile per compensare precedenti minusvalenze da altri investimenti;
+\item quando la  differenza tra prezzi medi effettivi è  \textbf{negativa}: essa è da
+  considerarsi  un \emph{reddito  diverso}, quindi  \textbf{genera} una  minusvalenza
+  compensabile con successive plusvalenze da altri investimenti.
+\end{itemize}
+
+Quando il  reddito di  una vendita  è positivo: occorre  pagare la  \textbf{tassa sul
+   reddito da  capitale}\footnote{Si deve pagare  anche il bollo  sull'estratto conto
+   trimestrale per il Conto Titoli, pari allo \SI{0,2}{\percent} all'anno; il bollo è
+   addebitato direttamente sul Conto Corrente, perciò in questa guida lo si considera
+   conteggiato a parte.}.  Per esempio, se si vendono \num{100} quote al \emph{prezzo
+   medio  effettivo} di  \Eur{53,80} e  nel  saldo precedente  il \emph{prezzo  medio
+   effettivo} è di \Eur{50,00}, il \emph{reddito da capitale} risulta:
 \begin{equation*}
-  \num{90} \times{} (\num{103,22} - \num{100,00}) = \Eur{290,00}
+  \num{100} \times{} (\num{53,80} - \num{50,00}) = \Eur{380,00}
 \end{equation*}
 per fondi  che non contengono Titoli  dello Stato Italiano, e  assimilati, l'aliquota
 unica  è  del \SI{26}{\percent};  allora  la  \emph{tassa  sul reddito  da  capitale}
 risulta:
 \begin{equation*}
-  \num{0,26} \times{} \num{290,00} = \Eur{75,40}
+  \num{0,26} \times{} \num{380,00} = \Eur{98,80}
 \end{equation*}
-
-Peculiarmente, la circolare dell'Agenzia dell'Entrate specifica che:
-\begin{itemize}
-\item quando il reddito da capitale è \textbf{positivo}: esso \textbf{non genera} una
-  plusvalenza utilizzabile per compensare minusvalenze da altri investimenti;
-\item quando  il reddito  da capitale è  \textbf{negativo}: esso  \textbf{genera} una
-  minusvalenza compensabile con plusvalenze da altri investimenti.
-\end{itemize}
 
 Il  \textbf{costo  dell'operazione  di  vendita}  è  la  somma  tra  costi,  spese  e
 commissioni associate  all'operazione; per ogni  ordine di vendita  eseguito, occorre
@@ -614,61 +616,87 @@ pagare:
 se un  ordine non è  eseguito: si paga  nulla; se un ordine  è eseguito in  piú fasi:
 nella prima fase si  pagano i costi fissi piú la  commissione percentuale; nelle fasi
 successive  si   paga  solo   la  commissione  percentuale.    Per  esempio,   se  il
-\emph{controvalore dell'operazione}  è \Eur{9290,00} il  \emph{costo dell'operazione}
+\emph{controvalore dell'operazione}  è \Eur{5380,00} il  \emph{costo dell'operazione}
 risulta:
 \begin{equation*}
-  \CostoOperazione{9290,00} = \Eur{25,30}
+  \CostoOperazione{5380,00} = \Eur{15,91}
 \end{equation*}
 
-Da osservare  che: sia il  calcolo delle \emph{tasse sul  reddito da capitale}  che i
+Da osservare  che: sia il  calcolo della \emph{tassa sul  reddito da capitale}  che i
 calcoli del \emph{costo dell'operazione} di acquisto  e vendita si eseguono usando il
 \emph{prezzo medio effettivo};  in pratica: si pagano le tasse  anche sul \emph{costo
    dell'operazione} di  acquisto e vendita, che  però sono redditi di  qualcun altro,
 non dell'investitore!
 
 La circolare dell'Agenzia dell'Entrate specifica che il \emph{costo delle operazioni}
-origina minusvalenze da registrare come redditi diversi.  Per esempio, si supponga di
-possedere \num{90} quote e di venderle tutte con:
+genera un \emph{redditi  diverso}, da registrare come minusvalenza.   Per esempio, si
+supponga di possedere un Conto Titoli:
 \begin{itemize}
-\item \emph{prezzo medio effettivo nel saldo precedente}: \Eur{100,00};
-\item \emph{prezzo medio di carico nel saldo precedente}: \Eur{100,27};
-\item \emph{prezzo medio effettivo di vendita} \Eur{103,22};
-\item reddito da capitale: \Eur{290,00};
-\item \emph{costo dell'operazione di vendita}: \Eur{25,30};
-\item il costo  medio delle operazioni di  acquisto per le quote  vendute, si calcola
-  dalla differenza  tra il \emph{prezzo  medio di carico  nel saldo} precedente  e il
-  \emph{prezzo medio effettivo nel saldo} precedente:
-  \begin{equation*}
-    \num{90} \times{} (\num{100,27} - \num{100,00}) = \Eur{24,30}
-  \end{equation*}
+\item numero quote nel saldo precedente: \num{100};
+\item \emph{prezzo medio effettivo nel saldo precedente}: \Eur{50,00};
+\item \emph{prezzo medio di carico nel saldo precedente}: \Eur{50,15};
+\item \emph{costo medio per quota nel saldo precedente}: \Eur{0,15};
 \end{itemize}
-allo scopo di far risultare un numero negativo, la circolare specifica che il reddito
-diverso associato alla vendita deve essere calcolato come:
+si vendano tutte le quote; l'operazione di vendita sia descritta da:
+\begin{itemize}
+\item numero quote vendute: \num{100};
+\item \emph{prezzo medio effettivo di vendita} \Eur{53,80};
+\item \emph{reddito da capitale}: \Eur{380,00};
+\item \emph{costo dell'operazione di vendita}: \Eur{15,91};
+\end{itemize}
+ogni  quota venduta  era stata  acquistata  con un  \emph{costo medio  per quota}  di
+\Eur{0,15}; perciò il \emph{costo di acquisto delle quote vendute} risulta:
 \begin{equation*}
-  \left[\num{290,00} - \left(\num{25,30} + \num{24,30}\right)\right] - \num{290,00}
-  = - (\num{25,30} + \num{24,30}) = \Eur{-49,60}
+  \num{100} \times{} \num{0,15} = \Eur{15,00}
 \end{equation*}
-questa minusvalenza dovrebbe essere registrata  nel \emph{cassetto fiscale} del Conto
+allo  scopo di  far  risultare un  numero  negativo, la  circolare  specifica che  il
+\emph{reddito diverso} associato alla vendita deve essere calcolato come:
+\begin{equation*}
+  \left[\num{380,00} - \left(\num{15,91} + \num{15,00}\right)\right] - \num{380,00}
+  = - (\num{15,91} + \num{15,00}) = \Eur{-30,91}
+\end{equation*}
+questa  minusvalenza deve  essere  registrata nello  ``zainetto  fiscale'' del  Conto
 Titoli.
 
 Il \textbf{controvalore totale di vendita}  è la differenza tra il \emph{controvalore
-   dell'operazione} e  la somma  tra \emph{costo  dell'operazione} e  \emph{tasse sul
-   reddito da capitale}; è  la quantità di denaro in entrata nel  Conto Corrente e in
-uscita dal  Conto Titoli.  Per  esempio, se il \emph{controvalore  dell'operazione} è
-\Eur{9290,00}, il  \emph{costo dell'operazione}  è \Eur{25,30}  e la  \emph{tassa sul
-   reddito da capitale} è \Eur{75,40}, il \emph{controvalore totale} risulta:
+   dell'operazione} e  la somma  tra \emph{costo  dell'operazione} e  \emph{tassa sul
+   reddito da  capitale}; è la  quantità di  denaro in uscita  dal Conto Titoli  e in
+entrata nel Conto Corrente.  Per esempio, se il \emph{controvalore dell'operazione} è
+\Eur{5380,00}, il  \emph{costo dell'operazione}  è \Eur{15,91}  e la  \emph{tassa sul
+   reddito da capitale} è \Eur{98,80}, il \emph{controvalore totale} risulta:
 \begin{equation*}
-  \num{9290,00} - \num{25,30} - \num{75,40} = \Eur{9189,30}
+  \num{5380,00} - \num{15,91} - \num{98,80} = \Eur{5265,29}
 \end{equation*}
 
 Per un'operazione di  vendita: \textbf{non esiste} un \emph{prezzo  medio di carico};
 la vendita modifica solo il numero di quote in carico nel saldo.  Invece si definisce
 il \textbf{prezzo medio netto di vendita}  pari al rapporto tra il \emph{controvalore
-   totale} e il  numero di quote vendute.   Per esempio, se si  sono vendute \num{90}
-quote al \emph{controvalore totale} di  \Eur{9189,30}, il \emph{prezzo medio netto di
+   totale} e il numero  di quote vendute.  Per esempio, se  si sono vendute \num{100}
+quote al \emph{controvalore totale} di  \Eur{5265,29}, il \emph{prezzo medio netto di
    vendita} risulta:
 \begin{equation*}
-  \num{9189,30} / \num{90} = \Eur{102,10}
+  \num{5265,29} / \num{100} = \Eur{52,65}
+\end{equation*}
+
+Il \emph{rendimento  \underline{percentuale} dell'operazione  di vendita}  si calcola
+considerando il \emph{prezzo medio di carico  nel saldo precedente} e il \emph{prezzo
+   medio netto  di vendita}; in  caso di  guadagno è un  numero positivo, in  caso di
+perdita è un  numero negativo.  Per esempio,  se il \emph{prezzo medio  di carico nel
+   saldo  precedente} è  \Eur{50,15}  e il  \emph{prezzo medio  netto  di vendita}  è
+\Eur{52,65}, il \emph{rendimento percentuale} risulta:
+\begin{equation*}
+  \RendimentoPercentuale{52,65}{50,15} = \SI{+4,9908}{\percent}
+\end{equation*}
+
+Il  \emph{rendimento \underline{in  valuta}  dell'operazione di  vendita} si  calcola
+considerando il \emph{prezzo medio di carico  nel saldo precedente} e il \emph{prezzo
+   medio netto  di vendita}; in  caso di  guadagno è un  numero positivo, in  caso di
+perdita  è un  numero  negativo.  Per  esempio,  se si  vendono  \num{100} quote  con
+\emph{prezzo medio di carico nel saldo  precedente} pari a \Eur{50,15} e \emph{prezzo
+   medio  netto  di vendita}  pari  a  \Eur{52,65},  il \emph{rendimento  in  valuta}
+risulta:
+\begin{equation*}
+  \num{100} \times{} (\num{52,65} - \num{50,15}) = \Eur{250,29}
 \end{equation*}
 
 %page
@@ -857,7 +885,7 @@ si vendano \num{50} quote al \emph{prezzo medio eseguito} di \Eur{95,00}; risult
 \begin{itemize}
 \item \emph{controvalore dell'operazione}: \(\num{50} \times{} \num{95,00} = \Eur{4750}\);
 \item \emph{costo dell'operazione di vendita}: \(\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{4750} = \Eur{14,40}\);
-\item \emph{tasse sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{95,00} - \num{87,00}) = \Eur{104,00}\);
+\item \emph{tassa sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{95,00} - \num{87,00}) = \Eur{104,00}\);
 \item \emph{controvalore totale di vendita}: \(\num{4750} - \num{104,00} - \num{14,40} = \Eur{4631,60}\);
 \item \emph{prezzo medio netto di vendita}: \(\num{4631,60} / \num{50} = \Eur{92,632}\);
 \end{itemize}
@@ -872,7 +900,7 @@ si vendano \num{50} quote al \emph{prezzo medio eseguito} di \Eur{88,20}; risult
 \begin{itemize}
 \item \emph{controvalore dell'operazione}: \(\num{50} \times{} \num{88,20} = \Eur{4410,00}\);
 \item \emph{costo dell'operazione di vendita}: \(\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{4410,00} = \Eur{13,58}\);
-\item \emph{tasse sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{88,20} - \num{87,00}) = \Eur{15,60}\);
+\item \emph{tassa sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{88,20} - \num{87,00}) = \Eur{15,60}\);
 \item \emph{controvalore totale di vendita}: \(\num{4410,00} - \num{15,60} - \num{13,58} = \Eur{4380,82}\);
 \item \emph{prezzo medio netto di vendita}: \(\num{4380,82} / \num{50} = \Eur{87,62}\);
 \end{itemize}
@@ -938,7 +966,7 @@ permette il guadagno.  Detto \(X\) tale valore, risulta:
     &= \num{3,00} + \num{0,0024} \times{} \num{50} \times{} X = \\
     &= \num{3,00} + \num{0,12} \times{} X
   \end{align*}
-\item \emph{tasse sul reddito da capitale}:
+\item \emph{tassa sul reddito da capitale}:
   \begin{align*}
     \num{0,26} \times{} \num{50} \times{} (X - \num{87,00})
     &= \num{13} \times{} X - \num{13} \times{} \num{87,00} = \\

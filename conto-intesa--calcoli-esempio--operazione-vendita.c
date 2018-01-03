@@ -9,7 +9,7 @@
 	Calcoli di esempio  nella guida, per la  sezione "Descrizione di
 	un'operazione di vendita".
 
-   Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -50,15 +50,19 @@ main (void)
   {
     double	numero_quote_fase_1	= 20.0;
     double	numero_quote_fase_2	= 30.0;
-    double	numero_quote_fase_3	= 40.0;
-    double	prezzo_fase_1		= 102.0;
-    double	prezzo_fase_2		= 103.0;
-    double	prezzo_fase_3		= 104.0;
+    double	numero_quote_fase_3	= 50.0;
+    double	prezzo_eseguito_fase_1	= 52.0;
+    double	prezzo_eseguito_fase_2	= 53.0;
+    double	prezzo_eseguito_fase_3	= 55.0;
+
+    printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 1, numero_quote_fase_1, prezzo_eseguito_fase_1);
+    printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 2, numero_quote_fase_2, prezzo_eseguito_fase_2);
+    printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 3, numero_quote_fase_3, prezzo_eseguito_fase_3);
 
     numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
-    prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_fase_1,
-						    numero_quote_fase_2, prezzo_fase_2,
-						    numero_quote_fase_3, prezzo_fase_3);
+    prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_eseguito_fase_1,
+						    numero_quote_fase_2, prezzo_eseguito_fase_2,
+						    numero_quote_fase_3, prezzo_eseguito_fase_3);
   }
 
   {
@@ -67,7 +71,7 @@ main (void)
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
 	.numero_quote		= 100,
-	.prezzo_medio_eseguito	= 100.00,
+	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
