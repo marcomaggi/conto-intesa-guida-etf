@@ -9,7 +9,7 @@
 	Calcoli di esempio nella guida, per la sezione "Strategie per la
 	scelta dei prezzi di vendita".
 
-   Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -61,6 +61,8 @@ static void accoppiamento_acquisto_vendita (operazione_acquisto_t const * const 
 					    operazione_vendita_t  const * const vendita,
 					    accoppiamento_t * const accoppiamento);
 
+static void strategia_medie_ponderate (void);
+
 
 /** --------------------------------------------------------------------
  ** Main.
@@ -72,6 +74,7 @@ main (void)
   setlocale(LC_ALL, "it_IT");
   printf("\n*** Calcoli per gli esempi nella guida: sezione \"Strategie per la scelta dei prezzi di vendita\"\n\n");
   strategia_accoppiamento_diretto();
+  strategia_medie_ponderate();
   exit(EXIT_SUCCESS);
 }
 
@@ -80,8 +83,76 @@ main (void)
  ** Strategia di accoppiamento diretto tra acquisti e vendite.
  ** ----------------------------------------------------------------- */
 
+static void strategia_accoppiamento_diretto__acquisto (unsigned numero_ordine, double numero_quote,
+						       double prezzo_medio_carico_acquisto);
+static void strategia_accoppiamento_diretto__vendita (unsigned numero_ordine, double numero_quote,
+						      double prezzo_medio_carico_acquisto, double prezzo_medio_netto_vendita);
+
 void
 strategia_accoppiamento_diretto (void)
+{
+  double	numero_quote_1			= 101.0;
+  double	numero_quote_2			= 102.0;
+  double	numero_quote_3			= 103.0;
+  double	prezzo_medio_carico_acquisto_1	= 51.0;
+  double	prezzo_medio_carico_acquisto_2	= 52.0;
+  double	prezzo_medio_carico_acquisto_3	= 53.0;
+  double	prezzo_medio_netto_vendita_1	= 55.1;
+  double	prezzo_medio_netto_vendita_2	= 55.2;
+  double	prezzo_medio_netto_vendita_3	= 55.3;
+
+  printf("\n* Strategia di accoppiamento diretto tra acquisti e vendite\n\n");
+
+  strategia_accoppiamento_diretto__acquisto(1, numero_quote_1, prezzo_medio_carico_acquisto_1);
+  strategia_accoppiamento_diretto__acquisto(2, numero_quote_2, prezzo_medio_carico_acquisto_2);
+  strategia_accoppiamento_diretto__acquisto(3, numero_quote_3, prezzo_medio_carico_acquisto_3);
+
+  strategia_accoppiamento_diretto__vendita(4, numero_quote_1, prezzo_medio_carico_acquisto_1, prezzo_medio_netto_vendita_1);
+  strategia_accoppiamento_diretto__vendita(5, numero_quote_2, prezzo_medio_carico_acquisto_2, prezzo_medio_netto_vendita_2);
+  strategia_accoppiamento_diretto__vendita(6, numero_quote_3, prezzo_medio_carico_acquisto_3, prezzo_medio_netto_vendita_3);
+
+  printf("\n\n");
+  fflush(stdout);
+}
+
+void
+strategia_accoppiamento_diretto__acquisto (unsigned numero_ordine, double numero_quote,
+					   double prezzo_medio_carico_acquisto)
+{
+  double	controvalore_totale_acquisto	= numero_quote * prezzo_medio_carico_acquisto;
+
+  printf("\n-- Operazione %u: acquisto\n\n", numero_ordine);
+  printf("%-40s=%7.0f\n",	"numero quote",			numero_quote);
+  printf("%-40s=%10.2f EUR\n",	"prezzo medio carico",		prezzo_medio_carico_acquisto);
+  printf("%-40s=%10.2f EUR\n",	"controvalore totale",		controvalore_totale_acquisto);
+}
+
+void
+strategia_accoppiamento_diretto__vendita (unsigned numero_ordine, double numero_quote,
+					  double prezzo_medio_carico_acquisto, double prezzo_medio_netto_vendita)
+{
+  double	controvalore_totale_acquisto	= numero_quote * prezzo_medio_carico_acquisto;
+  double	controvalore_totale_vendita	= numero_quote * prezzo_medio_netto_vendita;
+
+  printf("\n-- Operazione %u: vendita\n\n", numero_ordine);
+  printf("%-40s=%7.0f\n",	"numero quote",			numero_quote);
+  printf("%-40s=%10.2f EUR\n",	"prezzo medio netto",		prezzo_medio_netto_vendita);
+  printf("%-40s=%10.2f EUR\n",	"controvalore totale",		controvalore_totale_vendita);
+  printf("%-40s=%10.2f%%\n",	"rendimento percentuale",
+	 calcolo_rendimento_percentuale(prezzo_medio_netto_vendita, prezzo_medio_carico_acquisto));
+  printf("%-40s=%10.2f EUR\n",	"rendimento in valuta dai prezzi medi",
+	 (numero_quote * (prezzo_medio_netto_vendita - prezzo_medio_carico_acquisto)));
+  printf("%-40s=%10.2f EUR\n",	"rendimento in valuta dai controvalori",
+	 controvalore_totale_vendita - controvalore_totale_acquisto);
+}
+
+
+/** --------------------------------------------------------------------
+ ** Metodo delle medie ponderate.
+ ** ----------------------------------------------------------------- */
+
+void
+strategia_medie_ponderate (void)
 {
 #define NUMERO_OPERAZIONI	6
   operazione_t	O[NUMERO_OPERAZIONI] = {

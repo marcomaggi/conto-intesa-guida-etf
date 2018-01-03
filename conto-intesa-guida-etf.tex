@@ -678,23 +678,24 @@ quote al \emph{controvalore totale} di  \Eur{5265,29}, il \emph{prezzo medio net
   \num{5265,29} / \num{100} = \Eur{52,65}
 \end{equation*}
 
-Il \emph{rendimento  \underline{percentuale} dell'operazione  di vendita}  si calcola
-considerando il \emph{prezzo medio di carico  nel saldo precedente} e il \emph{prezzo
-   medio netto  di vendita}; in  caso di  guadagno è un  numero positivo, in  caso di
-perdita è un  numero negativo.  Per esempio,  se il \emph{prezzo medio  di carico nel
-   saldo  precedente} è  \Eur{50,15}  e il  \emph{prezzo medio  netto  di vendita}  è
-\Eur{52,65}, il \emph{rendimento percentuale} risulta:
+Il  \emph{rendimento \underline{percentuale}  dell'operazione  di vendita},  rispetto
+alle quote  in carico nel saldo  precedente, si calcola considerando  il \emph{prezzo
+   medio di carico  nel saldo precedente} e il \emph{prezzo  medio netto di vendita};
+in caso di  guadagno è un numero positivo,  in caso di perdita è  un numero negativo.
+Per esempio, se il \emph{prezzo medio di carico nel saldo precedente} è \Eur{50,15} e
+il  \emph{prezzo  medio   netto  di  vendita}  è   \Eur{52,65},  il  \emph{rendimento
+   percentuale} risulta:
 \begin{equation*}
   \RendimentoPercentuale{52,65}{50,15} = \SI{+4,9908}{\percent}
 \end{equation*}
 
-Il  \emph{rendimento \underline{in  valuta}  dell'operazione di  vendita} si  calcola
-considerando il \emph{prezzo medio di carico  nel saldo precedente} e il \emph{prezzo
-   medio netto  di vendita}; in  caso di  guadagno è un  numero positivo, in  caso di
-perdita  è un  numero  negativo.  Per  esempio,  se si  vendono  \num{100} quote  con
-\emph{prezzo medio di carico nel saldo  precedente} pari a \Eur{50,15} e \emph{prezzo
-   medio  netto  di vendita}  pari  a  \Eur{52,65},  il \emph{rendimento  in  valuta}
-risulta:
+Il \emph{rendimento \underline{in valuta}  dell'operazione di vendita}, rispetto alle
+quote in carico  nel saldo precedente, si calcola considerando  il \emph{prezzo medio
+   di carico nel saldo precedente} e il \emph{prezzo medio netto di vendita}; in caso
+di guadagno  è un  numero positivo,  in caso di  perdita è  un numero  negativo.  Per
+esempio, se  si vendono \num{100}  quote con \emph{prezzo  medio di carico  nel saldo
+   precedente}  pari a  \Eur{50,15} e  \emph{prezzo medio  netto di  vendita} pari  a
+\Eur{52,65}, il \emph{rendimento in valuta} risulta:
 \begin{equation*}
   \num{100} \times{} (\num{52,65} - \num{50,15}) = \Eur{250,29}
 \end{equation*}
@@ -797,69 +798,54 @@ Si cerca  di vendere  ogni singola quota  a un \emph{prezzo  medio netto  di ven
 maggiore del suo \emph{prezzo medio di carico di acquisto}.  Per esempio, si supponga
 di eseguire le operazioni:
 \begin{enumerate}
-\item acquisto di \num{100} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{110,29};
-\item acquisto di \num{101} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{120,32};
+\item acquisto di \num{101} quote al \emph{prezzo medio di carico di acquisto} pari a
+  \Eur{51,00};
+\item acquisto di \num{102} quote al \emph{prezzo  medio di carico di acquisto} pari a
+  \Eur{52,00};
 \item acquisto di \num{103} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{130,34};
+  \Eur{53,00};
 \item vendita  di \num{101}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{113,70};
+  \Eur{55,10};
 \item vendita  di \num{102}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{122,65};
+  \Eur{55,20};
 \item vendita  di \num{103}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{132,24};
+  \Eur{55,30};
 \end{enumerate}
-per ogni gruppo di quote acquistate e poi vendute si realizzano i guadagni:
+per ogni gruppo di quote acquistate e poi vendute:
 \begin{itemize}
-\item accoppiando le operazioni \num{1} e \num{4}:
+\item accoppiando le operazioni \num{1} e \num{4}, il rendimento percentuale risulta:
   \begin{equation*}
-    \num{100} \times (\num{113,70} - \num{110,29}) = \Eur{340,24}
+    \RendimentoPercentuale{55,10}{51,00} = \SI{8,04}{\percent}
+  \end{equation*}
+  il rendimento in valuta risulta:
+  \begin{equation*}
+    \num{101} \times (\num{55,10} - \num{51,00}) = \Eur{414,10}
   \end{equation*}
 
-\item accoppiando le operazioni \num{2} e \num{5}:
+\item accoppiando le operazioni \num{2} e \num{5}, il rendimento percentuale risulta:
   \begin{equation*}
-    \num{101} \times (\num{122,65} - \num{120,32}) = \Eur{235,55}
+    \RendimentoPercentuale{55,20}{52,00} = \SI{6,15}{\percent}
+  \end{equation*}
+  il rendimento in valuta risulta:
+  \begin{equation*}
+    \num{102} \times (\num{55,20} - \num{52,00}) = \Eur{326,40}
   \end{equation*}
 
-\item accoppiando le operazioni \num{3} e \num{6}:
+\item accoppiando le operazioni \num{3} e \num{6}, il rendimento percentuale risulta:
   \begin{equation*}
-    \num{100} \times (\num{132,24} - \num{130,34}) = \Eur{193,55}
+    \RendimentoPercentuale{55,30}{53,00} = \SI{4,34}{\percent}
+  \end{equation*}
+  il rendimento in valuta risulta:
+  \begin{equation*}
+    \num{103} \times (\num{55,30} - \num{53,00}) = \Eur{236,90}
   \end{equation*}
 \end{itemize}
-in  cui i  risultati  rappresentano uscite  dal  Conto Titoli  ed  entrate nel  Conto
-Corrente.  Quindi il rendimento totale in valuta risulta:
-\begin{align*}
-  \num{340,24} + \num{235,55} + \num{193,55} = \Eur{769,34}
-\end{align*}
-e in percentuale:
-\begin{align*}
-  100 \times{} \frac{\num{769,34}}
-  {\num{100} \times{} \num{110,29} + \num{101} \times{} \num{120,32} + \num{102} \times{} \num{130,34}}
-  = \SI{2,1091}{\percent}
-\end{align*}
-Siccome  si sono  eseguiti  prima tutti  gli  acquisti  e poi  tutte  le vendite,  il
-\emph{prezzo medio di carico nel saldo} risulta:
-\begin{equation*}
-  \MediaPonderataTre{100}{110,29}{101}{120,32}{102}{130,34} = \Eur{120,38}
-\end{equation*}
-la media ponderata dei \emph{prezzi medi netti di vendita} risulta:
-\begin{equation*}
-  \MediaPonderataTre{100}{113,70}{101}{122,65}{102}{132,24} = \Eur{122,92}
-\end{equation*}
-quindi il rendimento totale in valuta si può calcolare anche come:
-\begin{align*}
-  (100 + 101 + 102) \times{} (\num{120,38} - \num{122,92}) = \Eur{769,34}
-\end{align*}
-e il rendimento totale percentuale come:
-\begin{align*}
-  \RendimentoPercentuale{120,38}{122,92} = \SI{2,1091}{\percent}
-\end{align*}
 
-Si osserva  che: pur  avendo venduto le  quote del primo  acquisto a  un \emph{prezzo
-   medio netto} di \Eur{113,70} minore del \emph{prezzo medio di carico nel saldo} di
-\Eur{120,38},  l'accoppiamento tra  le operazioni  di acquisto  1 e  di vendita  3 ha
-comunque realizzato un rendimento positivo.
+Con questo  metodo, i  dati del saldo  sono usati per  calcolare: le  \emph{tasse sui
+   redditi da  capitale}, le minusvalenze accumulate  e i \emph{prezzi medi  netti di
+   vendita};  quindi tutti  i calcoli  \textbf{devono} essere  eseguiti.  Però,  ogni
+operazione di acquisto è considerata separatamente dalle altre per quanto riguarda la
+scelta del prezzo di vendita e la determinazione del conseguente rendimento.
 
 %page
 \subsection{Metodo delle medie ponderate}
