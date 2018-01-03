@@ -9,7 +9,7 @@
 	Calcoli  di  esempio nella  guida,  per  la sezione  "Rendimento
 	indicato nel riepilogo del patrimonio".
 
-   Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -54,13 +54,13 @@ main (void)
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
 	.numero_quote		= 100.00,
-	.prezzo_medio_eseguito	= 100.00,
+	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
 	.numero_quote		= 100.00,
-	.prezzo_medio_eseguito	= 105.00,
+	.prezzo_medio_eseguito	= 52.00,
       },
     };
     saldo_t	S[NUMERO_OPERAZIONI];
@@ -77,13 +77,13 @@ main (void)
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
 	.numero_quote		= 100.00,
-	.prezzo_medio_eseguito	= 100.00,
+	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
 	.numero_quote		= 100,
-	.prezzo_medio_eseguito	= 98.00,
+	.prezzo_medio_eseguito	= 48.00,
       }
     };
     saldo_t	S[NUMERO_OPERAZIONI];
