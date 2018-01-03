@@ -280,13 +280,21 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
 /* I  seguenti  campi della  struttura  O  devono essere  inizializzati:
    numero_ordine, numero_quote, prezzo_medio_eseguito. */
 {
+  double	reddito_vendita;
+
   assert(O->numero_ordine > 0);
   assert(O->numero_quote > 0);
   assert(O->prezzo_medio_eseguito > 0.0);
   O->tipo				= VENDITA;
   O->controvalore_operazione		= O->numero_quote * O->prezzo_medio_eseguito;
-  O->reddito_da_capitale		= O->numero_quote * (O->prezzo_medio_eseguito - S_precedente->prezzo_medio_effettivo);
-  O->tassa_sul_reddito			= (O->reddito_da_capitale > 0.0)? (0.26 * O->reddito_da_capitale) : 0.0;
+  reddito_vendita			= O->numero_quote * (O->prezzo_medio_eseguito - S_precedente->prezzo_medio_effettivo);
+  if (reddito_vendita > 0.0) {
+    O->reddito_da_capitale		= reddito_vendita;
+    O->tassa_sul_reddito		= (O->reddito_da_capitale > 0.0)? (0.26 * O->reddito_da_capitale) : 0.0;
+  } else {
+    O->reddito_da_capitale		= 0.0;
+    O->tassa_sul_reddito		= 0.0;
+  }
   O->costo_convenzionale_acquisto	= O->numero_quote * (S_precedente->prezzo_medio_carico - S_precedente->prezzo_medio_effettivo);
   O->costo_operazione_vendita		= 0.50 + 2.50 + 0.0024 * O->controvalore_operazione;
   O->controvalore_totale		= O->controvalore_operazione - (O->costo_operazione_vendita + O->tassa_sul_reddito);
@@ -299,7 +307,8 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
   O->rendimento_in_valuta		= O->numero_quote * (O->prezzo_medio_netto - S_precedente->prezzo_medio_carico);
 
   O->redditi_diversi			=
-    (O->reddito_da_capitale - (O->costo_convenzionale_acquisto + O->costo_operazione_vendita)) - O->reddito_da_capitale;
+    ((O->reddito_da_capitale - (O->costo_convenzionale_acquisto + O->costo_operazione_vendita)) - O->reddito_da_capitale)
+    + (reddito_vendita > 0.0)? 0.0 : reddito_vendita;
 }
 
 void
