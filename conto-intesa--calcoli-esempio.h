@@ -307,8 +307,8 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
   O->rendimento_in_valuta		= O->numero_quote * (O->prezzo_medio_netto - S_precedente->prezzo_medio_carico);
 
   O->redditi_diversi			=
-    ((O->reddito_da_capitale - (O->costo_convenzionale_acquisto + O->costo_operazione_vendita)) - O->reddito_da_capitale)
-    + (reddito_vendita > 0.0)? 0.0 : reddito_vendita;
+    ((reddito_vendita - (O->costo_convenzionale_acquisto + O->costo_operazione_vendita)) - reddito_vendita)
+    + ((reddito_vendita > 0.0)? 0.0 : reddito_vendita);
 }
 
 void
@@ -324,7 +324,7 @@ operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * cons
   fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito da capitale",			O->reddito_da_capitale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"tasse sul reddito",			O->tassa_sul_reddito);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo dell'operazione di vendita",	O->costo_operazione_vendita);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"costo medio operazioni acquisto",	O->costo_convenzionale_acquisto);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"costo convenzionale di acquisto",	O->costo_convenzionale_acquisto);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"redditi diversi",			O->redditi_diversi);
   fprintf(stream, "\n");
   fprintf(stream, "%-40s= %12.4f%%\n",		"Utile/Perdita percentuale",		O->utile_perdita_percentuale);

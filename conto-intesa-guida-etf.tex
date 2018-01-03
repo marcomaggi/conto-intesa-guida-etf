@@ -584,8 +584,10 @@ derivante  da  un'operazione  di  vendita  è la  differenza  tra  \emph{prezzo 
   utilizzabile per compensare precedenti minusvalenze da altri investimenti;
 \item quando la  differenza tra prezzi medi effettivi è  \textbf{negativa}: essa è da
   considerarsi  un \emph{reddito  diverso}, quindi  \textbf{genera} una  minusvalenza
-  compensabile con successive plusvalenze da altri investimenti.
+  compensabile con successive plusvalenze da altri investimenti;
 \end{itemize}
+da notare che \textbf{le minusvalenze sono  registrate nello zainetto fiscale solo al
+   momento della vendita di quote}.
 
 Quando il  reddito di  una vendita  è positivo: occorre  pagare la  \textbf{tassa sul
    reddito da  capitale}\footnote{Si deve pagare  anche il bollo  sull'estratto conto
@@ -865,76 +867,112 @@ che, recuperati i costi e pagate le tasse, si realizza un guadagno.
      carico  nel saldo}:  tolti i  costi di  acquisto e  vendita ed  eventualmente le
   tasse, l'operazione genera una perdita.
 \end{itemize}
+In ogni caso, restano le minusvalenze accumulate che, se e quando possibile, potranno
+essere  usate per  ridurre  le tasse  da  pagare in  future  operazioni che  generano
+\emph{redditi diversi}.
 
-Come esempio  di guadagno,  si posseggano  \num{100} quote  al \emph{prezzo  medio di
-   carico nel saldo} di \Eur{88,00} con \emph{prezzo medio effettivo} di \Eur{87,00};
-si vendano \num{50} quote al \emph{prezzo medio eseguito} di \Eur{95,00}; risulta:
+Si supponga di avere un Conto Titoli con il seguente saldo:
 \begin{itemize}
-\item \emph{controvalore dell'operazione}: \(\num{50} \times{} \num{95,00} = \Eur{4750}\);
-\item \emph{costo dell'operazione di vendita}: \(\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{4750} = \Eur{14,40}\);
-\item \emph{tassa sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{95,00} - \num{87,00}) = \Eur{104,00}\);
-\item \emph{controvalore totale di vendita}: \(\num{4750} - \num{104,00} - \num{14,40} = \Eur{4631,60}\);
-\item \emph{prezzo medio netto di vendita}: \(\num{4631,60} / \num{50} = \Eur{92,632}\);
+\item numero quote: \num{100};
+\item prezzo medio effettivo: \Eur{50,00};
+\item costo medio per quota: \Eur{0,15};
+\item prezzo medio carico: \Eur{50,15};
+\item controvalore di carico: \Eur{5015,00};
+\item minusvalenze accumulate: \Eur{0,00};
 \end{itemize}
-quindi un rendimento percentuale di:
-\begin{equation*}
-  100 \times{} \frac{\num{92,632} - \num{88,00}}{\num{88,00}} = \SI{+5,26}{\percent}
-\end{equation*}
+si vogliano vendere tutte le quote.
 
-Come  esempio di  perdita, si  posseggano \num{100}  quote al  \emph{prezzo medio  di
-   carico nel saldo} di \Eur{88,00} con \emph{prezzo medio effettivo} di \Eur{87,00};
-si vendano \num{50} quote al \emph{prezzo medio eseguito} di \Eur{88,20}; risulta:
+%% ------------------------------------------------------------------------
+
+Come esempio di guadagno, si venda come segue:
 \begin{itemize}
-\item \emph{controvalore dell'operazione}: \(\num{50} \times{} \num{88,20} = \Eur{4410,00}\);
-\item \emph{costo dell'operazione di vendita}: \(\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{4410,00} = \Eur{13,58}\);
-\item \emph{tassa sul reddito da capitale}: \(\num{0,26} \times{} \num{50} \times{} (\num{88,20} - \num{87,00}) = \Eur{15,60}\);
-\item \emph{controvalore totale di vendita}: \(\num{4410,00} - \num{15,60} - \num{13,58} = \Eur{4380,82}\);
-\item \emph{prezzo medio netto di vendita}: \(\num{4380,82} / \num{50} = \Eur{87,62}\);
-\end{itemize}
-quindi una perdita percentuale di:
-\begin{equation*}
-  100 \times{} \frac{\num{87,62} - \num{88,00}}{\num{88,00}} = \SI{-0.43}{\percent}
-\end{equation*}
-nonostante il  \emph{prezzo medio  eseguito} sia maggiore  del \emph{prezzo  medio di
-   carico nel  saldo}: l'operazione può  andare in  perdita se il  \emph{prezzo medio
-   netto di vendita} risulta minore.
+\item numero quote: \num{100};
+\item prezzo medio eseguito: \Eur{52,00};
+\item controvalore dell'operazione: \Eur{5200,00};
+\item controvalore totale: \Eur{5132,52};
+\item prezzo medio netto di vendita: \Eur{51,33};
 
-Se si  considerano operazioni di vendita  che liquidano tutte le  quote possedute: si
-può cercare di recuperare una vendita in perdita con altre in guadagno.  Per esempio,
-si supponga di eseguire le operazioni:
-\begin{enumerate}
-\item acquisto di \num{20} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{22,00};
-\item acquisto di \num{30} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{33,00};
-\item acquisto di \num{40} quote al \emph{prezzo  medio di carico di acquisto} pari a
-  \Eur{44,00};
-\item vendita  di \num{40}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{33,00};
-\item vendita  di \num{50}  quote a un  \emph{prezzo medio netto  di vendita}  pari a
-  \Eur{38,50};
-\end{enumerate}
-avendo eseguito  prima tutti  gli acquisti  e poi tutte  le vendite,  il \emph{prezzo
-   medio di carico nel saldo} si calcola con la media ponderata:
-\begin{equation*}
-  \frac{\num{20} \times{} \num{22,00}
-     + \num{30} \times{} \num{33,00}
-     + \num{40} \times{} \num{44,00}}
-  {\num{20} + \num{30} + \num{40}} = \Eur{35,44}
-\end{equation*}
-l'operazione  di vendita  al prezzo  di \Eur{33,00}  è in  perdita, mentre  quella al
-prezzo di \Eur{38,50}  è in guadagno; la media ponderata  dei \emph{prezzi medi netti
-   di vendita} risulta:
-\begin{equation*}
-  \frac{\num{40} \times{} \num{33,00} + \num{50} \times{} \num{38,50}}
-  {40 + 50}
-  = \Eur{36,06}
-\end{equation*}
-maggiore del \emph{prezzo medio di carico nel saldo} e quindi, alla fine, si realizza
-un guadagno di:
-\begin{equation*}
-  \num{90}  \times{} (\num{36,06}  -  \num{35,44}) =  \Eur{55,80}
-\end{equation*}
+\item reddito da capitale: \Eur{200,00};
+\item tasse sul reddito: \Eur{52,00};
+\item costo dell'operazione di vendita: \Eur{15,48};
+\item costo convenzionale di acquisto delle quote vendute: \Eur{15,00};
+\item reddito diverso: \Eur{-30,48};
+
+\item rendimento percentuale: \SI{2,3434}{\percent};
+\item rendimento in valuta: \Eur{117,52};
+\end{itemize}
+il \emph{prezzo medio netto di vendita} pari a\Eur{51,33} è maggiore del \emph{prezzo
+   medio di carico  nel saldo} pari a \Eur{50,15}, quindi,  recuperati costi e tasse,
+si realizza  un guadagno;  il reddito  diverso è una  minusvalenza da  compensare con
+future operazioni.
+
+%% ------------------------------------------------------------------------
+
+Come esempio di perdita, si venda come segue:
+\begin{itemize}
+\item numero quote: \num{100};
+\item prezzo medio eseguito: \Eur{50,30};
+\item controvalore dell'operazione: \Eur{5030,00};
+\item controvalore totale: \Eur{5007,13};
+\item prezzo medio netto di vendita: \Eur{50,07};
+
+\item reddito da capitale: \Eur{30,00};
+\item tasse sul reddito: \Eur{7,80};
+\item costo dell'operazione di vendita: \Eur{15,07};
+\item costo convenzionale di acquisto delle quote vendute: \Eur{15,00};
+\item reddito diverso: \Eur{-30,07};
+
+\item rendimento percentuale: \SI{-0,1570}{\percent};
+\item rendimento in valuta: \Eur{-7,87};
+\end{itemize}
+nonostante  il \emph{prezzo  medio  eseguito}  pari a  \Eur{50,30}  sia maggiore  del
+\emph{prezzo medio  di carico nel  saldo} pari  a \Eur{50,15}, il  \emph{prezzo medio
+   netto  di vendita}  di  \Eur{50,07} è  minore,  quindi, tolti  costi  e tasse,  si
+realizza un perdita;  il reddito diverso è una minusvalenza  da compensare con future
+operazioni.
+
+%% ------------------------------------------------------------------------
+
+Come ulteriore esempio di perdita, si venda come segue:
+\begin{itemize}
+\item numero quote: \num{100};
+\item prezzo medio eseguito: \Eur{48,00};
+\item controvalore dell'operazione: \Eur{4800,00};
+\item controvalore totale: \Eur{4785,48};
+\item prezzo medio netto di vendita: \Eur{47,85};
+
+\item reddito da capitale: \Eur{0,00};
+\item tasse sul reddito: \Eur{0,00};
+\item costo dell'operazione di vendita: \Eur{14,52};
+\item costo convenzionale di acquisto delle quote vendute: \Eur{15,00};
+\item redditi diversi: \Eur{-229,52};
+
+\item rendimento percentuale: \SI{-4,5767}{\percent};
+\item rendimento in valuta: \Eur{-229,52};
+\end{itemize}
+il \emph{prezzo medio netto di vendita}  pari a \Eur{47,85} è minore del \emph{prezzo
+   medio di carico nel saldo} pari a  \Eur{50,15}, quindi si realizza una perdita; si
+osserva che:
+\begin{itemize}
+\item il \emph{reddito da capitale} è zero e le tasse sono nulle;
+\item  la differenza  tra  il  \emph{controvalore dell'operazione  di  vendita} e  il
+  \emph{controvalore di carico nel saldo}:
+  \begin{equation*}
+    \num{4800,00} - \num{5015,00} = \Eur{-215,00}
+  \end{equation*}
+  rappresenta la perdita  di reddito dovuta alla vendita, è  negativa ed è registrata
+  come reddito diverso;
+\item   la  differenza   tra  il   \emph{controvalore   totale  di   vendita}  e   il
+  \emph{controvalore di carico nel saldo}:
+  \begin{equation*}
+    \num{4785,48} - \num{5015,00} = \Eur{-229,52}
+  \end{equation*}
+  è negativa  e rappresenta l'intero  reddito diverso,  includendo sia la  perdita di
+  reddito dovuta alla vendita che il costo delle operazioni;
+\end{itemize}
+il reddito diverso è una minusvalenza da compensare con future operazioni.
+
+%% ------------------------------------------------------------------------
 
 La  domanda  fondamentale  è:  \textbf{possedendo  un numero  di  quote  a  un  certo
    \emph{prezzo medio di carico nel saldo}  e un certo \emph{prezzo medio effettivo},
