@@ -9,7 +9,7 @@
 	Calcoli di  esempio nella  guida, per la  sezione "Aggiornamento
 	del saldo dopo un'operazione di acquisto".
 
-   Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -120,9 +120,9 @@ saldo_print_ascii (FILE * stream, saldo_t const * const S)
 {
   fprintf(stream, "%-40s= %10u\n",	"numero d'ordine",		S->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
-  fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
-  fprintf(stream, "%-40s= %10.2f EUR\n", "costo medio acquisti",	S->costo_medio_acquisti);
+  fprintf(stream, "%-40s= %12.4f EUR\n", "costo medio per quota",	S->costo_medio_acquisti);
+  fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "minusvalenze accumulate",	S->minusvalenze_accumulate);
 }

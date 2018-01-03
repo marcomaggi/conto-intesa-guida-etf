@@ -9,7 +9,7 @@
 	Calcoli di  esempio nella  guida, per la  sezione "Aggiornamento
 	del saldo dopo un'operazione di acquisto".
 
-   Copyright (C) 2017 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -46,20 +46,20 @@ main (void)
     {
       .numero_ordine		= 1,
       .tipo			= ACQUISTO,
-      .numero_quote		= 100,
-      .prezzo_medio_eseguito	= 110.00,
+      .numero_quote		= 101,
+      .prezzo_medio_eseguito	= 51.00,
     },
     {
       .numero_ordine		= 2,
       .tipo			= ACQUISTO,
-      .numero_quote		= 200,
-      .prezzo_medio_eseguito	= 120.00,
+      .numero_quote		= 102,
+      .prezzo_medio_eseguito	= 52.00,
     },
     {
       .numero_ordine		= 3,
       .tipo			= ACQUISTO,
-      .numero_quote		= 300,
-      .prezzo_medio_eseguito	= 130.00,
+      .numero_quote		= 103,
+      .prezzo_medio_eseguito	= 53.00,
     }
   };
   saldo_t	S[NUMERO_OPERAZIONI];
@@ -78,8 +78,8 @@ main (void)
     double	costo_totale_2 = S[2].numero_quote * S[2].costo_medio_acquisti;
 
     printf("%-30s= %10.2f EUR\n", "come somma dei costi",	costo_totale_1);
-    printf("%-30s= %10.2f EUR\n", "dai prezzi medi di carico",	costo_totale_2);
-    printf("%-30s= %10.2f EUR\n", "costo medio per quota",	costo_totale_2 / S[2].numero_quote);
+    printf("%-30s= %10.2f EUR\n", "dal costo medio per quota",	costo_totale_2);
+    printf("%-30s= %12.4f EUR\n", "costo medio per quota",	costo_totale_2 / S[2].numero_quote);
   }
 
   fflush(stdout);
