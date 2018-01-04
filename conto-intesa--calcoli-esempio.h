@@ -33,10 +33,12 @@
 /* Headers.                                                           */
 /* ------------------------------------------------------------------ */
 
+#include <assert.h>
+#include <locale.h>	/* per setlocale(LC_ALL, "it_IT") */
+#include <math.h>	/* per nan("") e fabs() */
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <assert.h>
 
 typedef enum tipo_operazione_t { ACQUISTO, VENDITA } tipo_operazione_t;
 
@@ -63,6 +65,12 @@ double
 calcolo_rendimento_percentuale (double out, double in)
 {
   return (100 * (out - in) / in);
+}
+
+bool
+compare_double (double A, double B)
+{
+  return ((fabs(A - B) < 0.01)? true : false);
 }
 
 
@@ -122,7 +130,7 @@ saldo_print_ascii (FILE * stream, saldo_t const * const S)
   fprintf(stream, "%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
   fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
   fprintf(stream, "%-40s= %12.4f EUR\n", "costo medio per quota",	S->costo_medio_acquisti);
-  fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
+  fprintf(stream, "%-40s= %12.4f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "minusvalenze accumulate",	S->minusvalenze_accumulate);
 }
@@ -237,7 +245,7 @@ struct operazione_vendita_t {
   double		redditi_diversi;
 
   /* Tassa sul reddito da capitale. */
-  double		tassa_sul_reddito;
+  double		tassa_sul_reddito_da_capitale;
 
   /* Costo  convenzionale   dell'operazione  di  acquisto   delle  quote
      vendute: prodotto  tra quote vendute  e costo medio  degli acquisti
@@ -290,14 +298,14 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
   reddito_vendita			= O->numero_quote * (O->prezzo_medio_eseguito - S_precedente->prezzo_medio_effettivo);
   if (reddito_vendita > 0.0) {
     O->reddito_da_capitale		= reddito_vendita;
-    O->tassa_sul_reddito		= (O->reddito_da_capitale > 0.0)? (0.26 * O->reddito_da_capitale) : 0.0;
+    O->tassa_sul_reddito_da_capitale	= (O->reddito_da_capitale > 0.0)? (0.26 * O->reddito_da_capitale) : 0.0;
   } else {
     O->reddito_da_capitale		= 0.0;
-    O->tassa_sul_reddito		= 0.0;
+    O->tassa_sul_reddito_da_capitale	= 0.0;
   }
   O->costo_convenzionale_acquisto	= O->numero_quote * (S_precedente->prezzo_medio_carico - S_precedente->prezzo_medio_effettivo);
   O->costo_operazione_vendita		= 0.50 + 2.50 + 0.0024 * O->controvalore_operazione;
-  O->controvalore_totale		= O->controvalore_operazione - (O->costo_operazione_vendita + O->tassa_sul_reddito);
+  O->controvalore_totale		= O->controvalore_operazione - (O->costo_operazione_vendita + O->tassa_sul_reddito_da_capitale);
   O->prezzo_medio_netto			= O->controvalore_totale / O->numero_quote;
 
   O->utile_perdita_percentuale		= calcolo_rendimento_percentuale(O->prezzo_medio_eseguito, S_precedente->prezzo_medio_carico);
@@ -322,7 +330,7 @@ operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * cons
   fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio netto",			O->prezzo_medio_netto);
   fprintf(stream, "\n");
   fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito da capitale",			O->reddito_da_capitale);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"tasse sul reddito",			O->tassa_sul_reddito);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"tasse sul reddito",			O->tassa_sul_reddito_da_capitale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo dell'operazione di vendita",	O->costo_operazione_vendita);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo convenzionale di acquisto",	O->costo_convenzionale_acquisto);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"redditi diversi",			O->redditi_diversi);
@@ -402,6 +410,227 @@ saldo_init (saldo_t * const S, operazione_t const * const O, saldo_t const * con
   } else {
     saldo_vendita_init  (S, &(O->vendita),  S_precedente);
   }
+}
+
+
+/** --------------------------------------------------------------------
+ ** Type definition: nota di ordine eseguito.
+ ** ----------------------------------------------------------------- */
+
+typedef struct nota_eseguito_t		nota_eseguito_t;
+
+/* Dopo ogni  operazione di  compravendita: nella sezione  documenti del
+ * sito  di home  banking  è  disponibile una  "Nota  di eseguito",  che
+ * riporta tutti i  dati dell'operazione.  È utile  confrontare i valori
+ * calcolati nella  struttura "oprazione_t"  con i dati  riportati nella
+ * nota.
+ *
+ * Una  nota   di  eseguito  per   un'ordine  di  acquisto   può  essere
+ * inizializzata come:
+ *
+ *    nota_eseguito_t N = {
+ *      .numero_ordine			= 1,
+ *      .tipo				= ACQUISTO,
+ *      .numero_quote			= 105.0,
+ *      .prezzo_medio_eseguito		= +47.46,
+ *      .controvalore_operazione	= +4983.30,
+ *      .costo_operazione		= 0.50 + 2.50 + 11.96,
+ *      .tassa_sul_reddito_da_capitale	= nan(""),
+ *      .controvalore_totale		= +4998.26,
+ *      .nav_prezzo_medio_carico	= nan(""),
+ *    };
+ *
+ * Una  nota   di  eseguito   per  un'ordine   di  vendita   può  essere
+ * inizializzata come:
+ *
+ *    nota_eseguito_t N = {
+ *      .numero_ordine			= 6,
+ *      .tipo				= VENDITA,
+ *      .numero_quote			= 105.0,
+ *      .prezzo_medio_eseguito		= 50.13,
+ *      .controvalore_operazione	= 5263.65,
+ *      .costo_operazione		= 0.50 + 2.50 + 12.63,
+ *      .tassa_sul_reddito_da_capitale	= 73.20,
+ *      .controvalore_totale		= 5174.82,
+ *      .nav_prezzo_medio_carico	= 47.4487,
+ *   };
+ */
+struct nota_eseguito_t {
+  /* Numero  d'ordine  dell'operazione:  1,  2,  3,  ...;  è  un  intero
+     strettamente   positivo   che    identifica   univocamente   questa
+     compravendita.  È obbligatorio  mantenere correttamente l'ordine in
+     cui le compravendite sono eseguite. */
+  unsigned		numero_ordine;
+
+  tipo_operazione_t	tipo;
+
+  /* Numero  quote  acquistate  o  vendute;  è  un  intero  strettamente
+     positivo.  La rappresentazione come "double" è per comodità. */
+  double		numero_quote;
+
+  /* Prezzo medio di una singola  quota dell'ordine eseguito di acquisto
+     o vendita. */
+  double		prezzo_medio_eseguito;
+
+  /* Controvalore dell'operazione.  Prodotto tra il numero di quote e il
+     prezzo medio eseguito per ogni quota. */
+  double		controvalore_operazione;
+
+  /* Costo dell'operazione.   Costi, spese  e commissioni da  pagare per
+     eseguire l'acquisto o la vendita. */
+  double		costo_operazione;
+
+  /* Se  l'operazione è  una vendita:  tasse  da pagare  sul reddito  da
+     capitale.
+
+     Se  l'operazione è  un'acquisto: il  valore di  questo campo  è non
+     specificato e non è presente nelle note di eseguito. */
+  double		tassa_sul_reddito_da_capitale;
+
+  /* Controvalore totale dell'operazione.
+   *
+   * - Se  l'operazione  è  un'acquisto:  il controvalore  totale  è  la
+   *   quantità di denaro che esce dal Conto Corrente ed entra nel Conto
+   *   Titoli.   È pari  al  controvalore dell'operazione  piú il  costo
+   *   dell'operazione.
+   *
+   * - Se  l'operazione  è una  vendita:  il  controvalore totale  è  la
+   *   quantità di denaro  che esce dal Conto Titoli ed  entra nel Conto
+   *   Corrente.  È  pari al controvalore dell'operazione  meno il costo
+   *   dell'operazione, meno le tasse sul reddito da capitale.
+   */
+  double		controvalore_totale;
+
+  /* Se l'operazione è una vendita: il  NAV del prezzo medio di carico è
+     la  media  ponderata dei  prezzi  medi  di  eseguito di  tutti  gli
+     acquisti precedenti  il saldo; è usato  nel calcolo dell'imponibile
+     su cui pagare le tasse sui redditi.
+
+     Se l'operazione è un acquisto: il valore non è riportato nelle note
+     di eseguito. */
+  double		nav_prezzo_medio_carico;
+};
+
+bool nota_eseguito_confronto__acquisto (nota_eseguito_t const * N, operazione_acquisto_t const * O, saldo_t const * S);
+bool nota_eseguito_confronto__vendita  (nota_eseguito_t const * N, operazione_vendita_t  const * O, saldo_t const * S);
+
+bool
+nota_eseguito_confronto (nota_eseguito_t const * N, operazione_t const * O, saldo_t const * S)
+{
+  if (N->numero_ordine != O->numero_ordine) {
+    fprintf(stderr, "%s: nota %u, differenti numeri d'ordine tra nota (%u) e operazione (%u)\n",
+	    __func__, N->numero_ordine,
+	    N->numero_ordine, O->numero_ordine);
+    return false;
+  }
+
+  if (N->numero_ordine != S->numero_ordine) {
+    fprintf(stderr, "%s: nota %u, differenti numeri d'ordine tra nota (%u) e saldo (%u)\n",
+	    __func__, N->numero_ordine,
+	    N->numero_ordine, S->numero_ordine);
+    return false;
+  }
+
+  if (N->tipo != O->tipo) {
+    fprintf(stderr, "%s: nota %u, la nota è di %s, mentre la operazione è %s\n",
+	    __func__, N->numero_ordine,
+	    (ACQUISTO == N->tipo)? "un acquisto" : "una vendita",
+	    (ACQUISTO == O->tipo)? "un acquisto" : "una vendita");
+    return false;
+  }
+
+  if (N->numero_quote != O->numero_quote) {
+    fprintf(stderr, "%s: nota %u, differenti numeri di quote tra nota (%.0f) e operazione (%.0f)\n",
+	    __func__, N->numero_ordine,
+	    N->numero_quote, O->numero_quote);
+    return false;
+  }
+
+  if (N->prezzo_medio_eseguito != O->prezzo_medio_eseguito) {
+    fprintf(stderr, "%s: nota %u, differenti prezzi medi eseguiti tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->prezzo_medio_eseguito, O->prezzo_medio_eseguito);
+    return false;
+  }
+
+  if (ACQUISTO == N->tipo) {
+    return nota_eseguito_confronto__acquisto (N, &(O->acquisto), S);
+  } else {
+    return nota_eseguito_confronto__vendita  (N, &(O->vendita),  S);
+  }
+}
+
+bool
+nota_eseguito_confronto__acquisto (nota_eseguito_t const * N, operazione_acquisto_t const * O, saldo_t const * S)
+{
+  assert(ACQUISTO == N->tipo);
+
+  if (! compare_double(N->controvalore_operazione, O->controvalore_operazione)) {
+    fprintf(stderr, "%s: nota %u, differenti controvalori operazione tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->controvalore_operazione, O->controvalore_operazione);
+    return false;
+  }
+
+  if (! compare_double(N->costo_operazione, O->costo_operazione_acquisto)) {
+    fprintf(stderr, "%s: nota %u, differenti costi operazione tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->costo_operazione, O->costo_operazione_acquisto);
+  }
+
+  if (! compare_double(N->controvalore_totale, O->controvalore_totale)) {
+    fprintf(stderr, "%s: nota %u, differenti controvalori totali tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->controvalore_totale, O->controvalore_totale);
+    return false;
+  }
+
+  printf("Corretto confronto fra nota di eseguito %u, operazione di acquisto e saldo.\n", N->numero_ordine);
+  return true;
+}
+
+bool
+nota_eseguito_confronto__vendita  (nota_eseguito_t const * N, operazione_vendita_t  const * O, saldo_t const * S)
+{
+  assert(VENDITA == N->tipo);
+
+  if (! compare_double(N->controvalore_operazione, O->controvalore_operazione)) {
+    fprintf(stderr, "%s: nota %u, differenti controvalori operazione tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->controvalore_operazione, O->controvalore_operazione);
+    return false;
+  }
+
+  if (! compare_double(N->costo_operazione, O->costo_operazione_vendita)) {
+    fprintf(stderr, "%s: nota %u, differenti costi operazione tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->costo_operazione, O->costo_operazione_vendita);
+  }
+
+  if (! compare_double(N->tassa_sul_reddito_da_capitale, O->tassa_sul_reddito_da_capitale)) {
+    fprintf(stderr, "%s: nota %u, differenti tasse sul reddito tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->tassa_sul_reddito_da_capitale, O->tassa_sul_reddito_da_capitale);
+    return false;
+  }
+
+  if (! compare_double(N->controvalore_totale, O->controvalore_totale)) {
+    fprintf(stderr, "%s: nota %u, differenti controvalori totali tra nota (%.4f) e operazione (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->controvalore_totale, O->controvalore_totale);
+    return false;
+  }
+
+
+  if (! compare_double(N->nav_prezzo_medio_carico, S->prezzo_medio_effettivo)) {
+    fprintf(stderr, "%s: nota %u, differenti NAV del prezzo medio di carico tra nota (%.4f) e saldo (%.4f)\n",
+	    __func__, N->numero_ordine,
+	    N->nav_prezzo_medio_carico, S->prezzo_medio_effettivo);
+    return false;
+  }
+
+  printf("Corretto confronto fra nota di eseguito %u, operazione di vendita e saldo.\n", N->numero_ordine);
+  return true;
 }
 
 

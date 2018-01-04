@@ -1,7 +1,7 @@
 # Makefile --
 
 PROGRAMS	= \
-	conto-intesa-etf-esempio-1				\
+	conto-intesa--calcoli-esempio--etf-abcd			\
 	\
 	conto-intesa--calcoli-esempio--operazione-acquisto	\
 	conto-intesa--calcoli-esempio--saldo-acquisto		\
@@ -26,7 +26,7 @@ clean: clean-latex
 	$(RM) $(CLEANFILES)
 
 #page
-#### programmi
+#### programmi per calcoli negli esempi della guida
 
 CLEANFILES	+= *.o
 
@@ -36,17 +36,11 @@ CPPFLAGS	= -I.
 
 ## --------------------------------------------------------------------
 
-conto-intesa-etf.o: conto-intesa-etf.c conto-intesa-etf.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+conto-intesa--calcoli-esempio--etf-abcd:		\
+		conto-intesa--calcoli-esempio--etf-abcd.c  conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
-conto-intesa-etf-esempio-1.o: conto-intesa-etf-esempio-1.c conto-intesa-etf.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
-
-conto-intesa-etf-esempio-1: conto-intesa-etf-esempio-1.o conto-intesa-etf.o
-	$(CC) $(CFLAGS) -o $@ $^
-
-#page
-#### programmi per calcoli negli esempi della guida
+## --------------------------------------------------------------------
 
 conto-intesa--calcoli-esempio--operazione-acquisto:	\
 		conto-intesa--calcoli-esempio--operazione-acquisto.c conto-intesa--calcoli-esempio.h
