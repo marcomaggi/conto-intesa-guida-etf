@@ -2,6 +2,7 @@
 
 PROGRAMS	= \
 	conto-intesa--calcoli-esempio--etf-abcd			\
+	conto-intesa--calcoli-esempio--etf-xyz			\
 	\
 	conto-intesa--calcoli-esempio--operazione-acquisto	\
 	conto-intesa--calcoli-esempio--saldo-acquisto		\
@@ -37,7 +38,11 @@ CPPFLAGS	= -I.
 ## --------------------------------------------------------------------
 
 conto-intesa--calcoli-esempio--etf-abcd:		\
-		conto-intesa--calcoli-esempio--etf-abcd.c  conto-intesa--calcoli-esempio.h
+		conto-intesa--calcoli-esempio--etf-abcd.c conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+conto-intesa--calcoli-esempio--etf-xyz:		\
+		conto-intesa--calcoli-esempio--etf-xyz.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 ## --------------------------------------------------------------------
