@@ -6,7 +6,7 @@
 
    Abstract
 
-	Esempio di compravendite.
+	Esempio di compravendite e confronto con note di acquisto.
 
    Copyright (C) 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
 
