@@ -41,18 +41,21 @@ operazione_t		O[NUMERO_OPERAZIONI] = {
   {
     .numero_ordine			= 1,
     .tipo				= ACQUISTO,
+    .data_operazione			= "2020 gennaio 01",
     .numero_quote			= 39.0,
     .prezzo_medio_eseguito		= +130.0,
   },
   {
     .numero_ordine			= 2,
     .tipo				= ACQUISTO,
+    .data_operazione			= "2020 febbraio 02",
     .numero_quote			= 39.0,
     .prezzo_medio_eseguito		= +131.75,
   },
   {
     .numero_ordine			= 3,
     .tipo				= ACQUISTO,
+    .data_operazione			= "2020 marzo 03",
     .numero_quote			= 76.0,
     .prezzo_medio_eseguito		= 131.70,
   },
@@ -68,6 +71,7 @@ nota_eseguito_t const	N[NUMERO_OPERAZIONI] = {
   {
     .numero_ordine			= 1,
     .tipo				= ACQUISTO,
+    .data_operazione			= "2020 gennaio 01",
     .numero_quote			= 39.0,
     .prezzo_medio_eseguito		= +130.0,
     .controvalore_operazione		= +5070.00,
@@ -79,6 +83,7 @@ nota_eseguito_t const	N[NUMERO_OPERAZIONI] = {
   {
     .numero_ordine			= 2,
     .tipo				= ACQUISTO,
+    .data_operazione			= "2020 febbraio 02",
     .numero_quote			= 39.0,
     .prezzo_medio_eseguito		= +131.75,
     .controvalore_operazione		= 5138.25,
@@ -90,6 +95,7 @@ nota_eseguito_t const	N[NUMERO_OPERAZIONI] = {
   {
     .numero_ordine			= 3,
     .tipo				= ACQUISTO,
+    .data_operazione			= "2020 marzo 03",
     .numero_quote			= 76.0,
     .prezzo_medio_eseguito		= 131.70,
     .controvalore_operazione		= 10009.20,

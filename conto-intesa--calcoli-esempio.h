@@ -84,6 +84,11 @@ struct saldo_t {
   /* Numero d'ordine dell'operazione precedente a questo saldo. */
   unsigned	numero_ordine;
 
+  /* Data  dell'ultima   operazione  prima  del  saldo.    È  usata  per
+     arricchire  la descrizione.   Questo campo  può essere  impostata a
+     NULL se non si vuole specificare una data. */
+  char const *	data_operazione;
+
   /* Totale del numero quote in carico. */
   double	numero_quote;
 
@@ -113,6 +118,7 @@ struct saldo_t {
 
 saldo_t const saldo_precedente_convenzionale = {
   .numero_ordine		= 0,
+  .data_operazione		= "2000 dicembre 31",
   .numero_quote			= 0.0,
   .prezzo_medio_effettivo	= 0.0,
   .costo_medio_acquisti		= 0.0,
@@ -126,6 +132,8 @@ saldo_t const saldo_precedente_convenzionale = {
 void
 saldo_print_ascii (FILE * stream, saldo_t const * const S)
 {
+  fprintf(stream, "-- Saldo %u (%s)\n\n", S->numero_ordine,
+	  ((S->data_operazione)? S->data_operazione : "nessuna data"));
   fprintf(stream, "%-40s= %10u\n",	"numero d'ordine",		S->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
   fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
@@ -133,6 +141,7 @@ saldo_print_ascii (FILE * stream, saldo_t const * const S)
   fprintf(stream, "%-40s= %12.4f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "minusvalenze accumulate",	S->minusvalenze_accumulate);
+  fprintf(stream, "\n");
 }
 
 
@@ -147,6 +156,11 @@ struct operazione_acquisto_t {
   unsigned		numero_ordine;
 
   tipo_operazione_t	tipo;
+
+  /* Data  dell'operazione  di  acquisto.   È usata  per  arricchire  la
+     descrizione.  Questo  campo può essere  impostata a NULL se  non si
+     vuole specificare una data. */
+  char const *		data_operazione;
 
   /* Totale del numero quote in carico. */
   double		numero_quote;
@@ -189,6 +203,8 @@ operazione_acquisto_init (operazione_acquisto_t * const O)
 void
 operazione_acquisto_print_ascii (FILE * stream, operazione_acquisto_t const * const O)
 {
+  fprintf(stream, "-- Operazione %u (%s): acquisto\n\n", O->numero_ordine,
+	  ((O->data_operazione)? O->data_operazione : "nessuna data"));
   fprintf(stream, "%-40s= %10u\n",		"numero d'ordine",		O->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",		"numero quote",			O->numero_quote);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio eseguito",	O->prezzo_medio_eseguito);
@@ -196,6 +212,7 @@ operazione_acquisto_print_ascii (FILE * stream, operazione_acquisto_t const * co
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo dell'operazione",	O->costo_operazione_acquisto);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore totale",		O->controvalore_totale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio di carico",	O->prezzo_medio_carico);
+  fprintf(stream, "\n");
 }
 
 void
@@ -203,6 +220,7 @@ saldo_acquisto_init (saldo_t * const S, operazione_acquisto_t const * const O, s
 {
   S->numero_ordine		= O->numero_ordine;
   S->numero_quote		= O->numero_quote + S_precedente->numero_quote;
+  S->data_operazione		= O->data_operazione;
   S->prezzo_medio_effettivo	= media_ponderata_2(O->numero_quote, O->prezzo_medio_eseguito,
 						    S_precedente->numero_quote, S_precedente->prezzo_medio_effettivo);
   S->prezzo_medio_carico	= media_ponderata_2(O->numero_quote, O->prezzo_medio_carico,
@@ -224,6 +242,11 @@ struct operazione_vendita_t {
   unsigned		numero_ordine;
 
   tipo_operazione_t	tipo;
+
+  /* Data  dell'operazione  di  vendita.   È  usata  per  arricchire  la
+     descrizione.  Questo  campo può essere  impostata a NULL se  non si
+     vuole specificare una data. */
+  char const *		data_operazione;
 
   /* Numero quote vendute. */
   double		numero_quote;
@@ -322,6 +345,8 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
 void
 operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * const O)
 {
+  fprintf(stream, "-- Operazione %u (%s): vendita\n\n", O->numero_ordine,
+	  ((O->data_operazione)? O->data_operazione : "nessuna data"));
   fprintf(stream, "%-40s= %10u\n",		"numero d'ordine",			O->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",		"numero quote",				O->numero_quote);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio eseguito",		O->prezzo_medio_eseguito);
@@ -339,6 +364,7 @@ operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * cons
   fprintf(stream, "%-40s= %10.2f EUR\n",	"Utile/Perdita in valuta",		O->utile_perdita_in_valuta);
   fprintf(stream, "%-40s= %12.4f%%\n",		"rendimento percentuale",		O->rendimento_percentuale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"rendimento in valuta",			O->rendimento_in_valuta);
+  fprintf(stream, "\n");
 }
 
 void
@@ -346,6 +372,7 @@ saldo_vendita_init (saldo_t * const S, operazione_vendita_t const * const O, sal
 {
   S->numero_ordine		= O->numero_ordine;
   S->numero_quote		= S_precedente->numero_quote - O->numero_quote;
+  S->data_operazione		= O->data_operazione;
   if (S->numero_quote > 0) {
     S->prezzo_medio_effettivo	= S_precedente->prezzo_medio_effettivo;
     S->prezzo_medio_carico	= S_precedente->prezzo_medio_carico;
@@ -373,6 +400,7 @@ union operazione_t {
   struct {
     unsigned		numero_ordine;
     tipo_operazione_t	tipo;
+    char const *	data_operazione;
     double		numero_quote;
     double		prezzo_medio_eseguito;
   };
@@ -463,6 +491,11 @@ struct nota_eseguito_t {
   unsigned		numero_ordine;
 
   tipo_operazione_t	tipo;
+
+  /* Data  dell'operazione  descritta  da  questa  nota.   È  usata  per
+     arricchire  la descrizione.   Questo campo  può essere  impostata a
+     NULL se non si vuole specificare una data. */
+  char const *		data_operazione;
 
   /* Numero  quote  acquistate  o  vendute;  è  un  intero  strettamente
      positivo.  La rappresentazione come "double" è per comodità. */
@@ -585,7 +618,12 @@ nota_eseguito_confronto__acquisto (nota_eseguito_t const * N, operazione_acquist
     return false;
   }
 
-  printf("Corretto confronto fra nota di eseguito %u, operazione di acquisto e saldo.\n", N->numero_ordine);
+  if (NULL == N->data_operazione) {
+    printf("Corretto confronto fra nota di eseguito %u, operazione di acquisto e saldo.\n", N->numero_ordine);
+  } else {
+    printf("Corretto confronto fra nota di eseguito %u (%s), operazione di acquisto e saldo.\n",
+	   N->numero_ordine, N->data_operazione);
+  }
   return true;
 }
 
@@ -629,7 +667,12 @@ nota_eseguito_confronto__vendita  (nota_eseguito_t const * N, operazione_vendita
     return false;
   }
 
-  printf("Corretto confronto fra nota di eseguito %u, operazione di vendita e saldo.\n", N->numero_ordine);
+  if (NULL == N->data_operazione) {
+    printf("Corretto confronto fra nota di eseguito %u, operazione di vendita e saldo.\n", N->numero_ordine);
+  } else {
+    printf("Corretto confronto fra nota di eseguito %u (%s), operazione di vendita e saldo.\n",
+	   N->numero_ordine, N->data_operazione);
+  }
   return true;
 }
 
@@ -644,21 +687,14 @@ operazione_e_saldo (operazione_t * O, saldo_t * S, saldo_t const * const S_prece
   operazione_init(O, S_precedente);
   saldo_init(S, O, S_precedente);
 
-  printf("-- Operazione %u: %s\n\n", O->numero_ordine, (ACQUISTO == O->tipo)? "acquisto" : "vendita");
   operazione_print_ascii(stdout, O);
-  printf("\n");
-  printf("-- Saldo %u\n\n", S->numero_ordine);
   saldo_print_ascii(stdout, S);
-  printf("\n");
 }
 
 void
 calcolo_storico (unsigned numero_operazioni, operazione_t * O, saldo_t * S)
 {
-  printf("-- Saldo iniziale\n\n");
   saldo_print_ascii(stdout, &saldo_precedente_convenzionale);
-  printf("\n");
-
   operazione_e_saldo(&O[0], &S[0], &saldo_precedente_convenzionale);
   for (unsigned i=1; i<numero_operazioni; ++i) {
     operazione_e_saldo(&O[i], &S[i], &S[i-1]);

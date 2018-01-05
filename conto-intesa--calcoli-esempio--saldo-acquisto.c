@@ -46,18 +46,21 @@ main (void)
     {
       .numero_ordine		= 1,
       .tipo			= ACQUISTO,
+      .data_operazione		= NULL,
       .numero_quote		= 101,
       .prezzo_medio_eseguito	= 51.00,
     },
     {
       .numero_ordine		= 2,
       .tipo			= ACQUISTO,
+      .data_operazione		= NULL,
       .numero_quote		= 102,
       .prezzo_medio_eseguito	= 52.00,
     },
     {
       .numero_ordine		= 3,
       .tipo			= ACQUISTO,
+      .data_operazione		= NULL,
       .numero_quote		= 103,
       .prezzo_medio_eseguito	= 53.00,
     }

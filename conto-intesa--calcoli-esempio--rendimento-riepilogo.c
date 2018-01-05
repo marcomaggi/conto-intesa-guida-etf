@@ -53,12 +53,14 @@ main (void)
       {
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
+	.data_operazione	= NULL,
 	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
+	.data_operazione	= NULL,
 	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 52.00,
       },
@@ -76,12 +78,14 @@ main (void)
       {
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
+	.data_operazione	= NULL,
 	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
+	.data_operazione	= NULL,
 	.numero_quote		= 100,
 	.prezzo_medio_eseguito	= 48.00,
       }
