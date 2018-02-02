@@ -660,11 +660,13 @@ nota_eseguito_confronto__vendita  (nota_eseguito_t const * N, operazione_vendita
   }
 
 
-  if (! compare_double(N->nav_prezzo_medio_carico, S->prezzo_medio_effettivo)) {
-    fprintf(stderr, "%s: nota %u, differenti NAV del prezzo medio di carico tra nota (%.4f) e saldo (%.4f)\n",
-	    __func__, N->numero_ordine,
-	    N->nav_prezzo_medio_carico, S->prezzo_medio_effettivo);
-    return false;
+  if (0 < S->numero_quote) {
+    if (! compare_double(N->nav_prezzo_medio_carico, S->prezzo_medio_effettivo)) {
+      fprintf(stderr, "%s: nota %u, differenti NAV del prezzo medio di carico tra nota (%.4f) e saldo (%.4f)\n",
+	      __func__, N->numero_ordine,
+	      N->nav_prezzo_medio_carico, S->prezzo_medio_effettivo);
+      return false;
+    }
   }
 
   if (NULL == N->data_operazione) {
