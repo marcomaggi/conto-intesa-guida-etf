@@ -136,9 +136,9 @@ saldo_print_ascii (FILE * stream, saldo_t const * const S)
 	  ((S->data_operazione)? S->data_operazione : "nessuna data"));
   fprintf(stream, "%-40s= %10u\n",	"numero d'ordine",		S->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",	"numero quote",			S->numero_quote);
-  fprintf(stream, "%-40s= %10.2f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
-  fprintf(stream, "%-40s= %12.4f EUR\n", "costo medio per quota",	S->costo_medio_acquisti);
+  fprintf(stream, "%-40s= %12.4f EUR\n", "prezzo medio effettivo",	S->prezzo_medio_effettivo);
   fprintf(stream, "%-40s= %12.4f EUR\n", "prezzo medio carico",		S->prezzo_medio_carico);
+  fprintf(stream, "%-40s= %12.4f EUR\n", "costo medio per quota",	S->costo_medio_acquisti);
   fprintf(stream, "%-40s= %10.2f EUR\n", "controvalore di carico",	S->controvalore_carico);
   fprintf(stream, "%-40s= %10.2f EUR\n", "minusvalenze accumulate",	S->minusvalenze_accumulate);
   fprintf(stream, "\n");
@@ -207,11 +207,11 @@ operazione_acquisto_print_ascii (FILE * stream, operazione_acquisto_t const * co
 	  ((O->data_operazione)? O->data_operazione : "nessuna data"));
   fprintf(stream, "%-40s= %10u\n",		"numero d'ordine",		O->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",		"numero quote",			O->numero_quote);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio eseguito",	O->prezzo_medio_eseguito);
+  fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio eseguito",	O->prezzo_medio_eseguito);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore dell'operazione",	O->controvalore_operazione);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo dell'operazione",	O->costo_operazione_acquisto);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore totale",		O->controvalore_totale);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio di carico",	O->prezzo_medio_carico);
+  fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio di carico",	O->prezzo_medio_carico);
   fprintf(stream, "\n");
 }
 
@@ -349,10 +349,10 @@ operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * cons
 	  ((O->data_operazione)? O->data_operazione : "nessuna data"));
   fprintf(stream, "%-40s= %10u\n",		"numero d'ordine",			O->numero_ordine);
   fprintf(stream, "%-40s= %10.0f\n",		"numero quote",				O->numero_quote);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio eseguito",		O->prezzo_medio_eseguito);
+  fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio eseguito",		O->prezzo_medio_eseguito);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore dell'operazione",		O->controvalore_operazione);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore totale",			O->controvalore_totale);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"prezzo medio netto",			O->prezzo_medio_netto);
+  fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio netto",			O->prezzo_medio_netto);
   fprintf(stream, "\n");
   fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito da capitale",			O->reddito_da_capitale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"tasse sul reddito",			O->tassa_sul_reddito_da_capitale);
