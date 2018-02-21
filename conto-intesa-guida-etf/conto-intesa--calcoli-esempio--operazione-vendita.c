@@ -58,6 +58,7 @@ main (void)
     printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 1, numero_quote_fase_1, prezzo_eseguito_fase_1);
     printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 2, numero_quote_fase_2, prezzo_eseguito_fase_2);
     printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 3, numero_quote_fase_3, prezzo_eseguito_fase_3);
+    printf("\n");
 
     numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
     prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_eseguito_fase_1,

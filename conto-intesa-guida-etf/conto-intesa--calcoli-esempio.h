@@ -265,15 +265,14 @@ struct operazione_vendita_t {
 
   /* Redditi  diversi  dovuti  alla  vendita  di  quote.   È  un  numero
      negativo. */
-  double		redditi_diversi;
+  double		reddito_diverso;
 
   /* Tassa sul reddito da capitale. */
   double		tassa_sul_reddito_da_capitale;
 
-  /* Costo  convenzionale   dell'operazione  di  acquisto   delle  quote
-     vendute: prodotto  tra quote vendute  e costo medio  degli acquisti
-     nel saldo. */
-  double		costo_convenzionale_acquisto;
+  /* Costo di acquisto delle quote vendute: prodotto tra numero di quote
+     vendute e costo medio di una quota in carico nel saldo. */
+  double		costo_acquisto_quote_vendute;
 
   /* Costo dell'operazione di vendita. */
   double		costo_operazione_vendita;
@@ -326,7 +325,7 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
     O->reddito_da_capitale		= 0.0;
     O->tassa_sul_reddito_da_capitale	= 0.0;
   }
-  O->costo_convenzionale_acquisto	= O->numero_quote * (S_precedente->prezzo_medio_carico - S_precedente->prezzo_medio_effettivo);
+  O->costo_acquisto_quote_vendute	= O->numero_quote * (S_precedente->prezzo_medio_carico - S_precedente->prezzo_medio_effettivo);
   O->costo_operazione_vendita		= 0.50 + 2.50 + 0.0024 * O->controvalore_operazione;
   O->controvalore_totale		= O->controvalore_operazione - (O->costo_operazione_vendita + O->tassa_sul_reddito_da_capitale);
   O->prezzo_medio_netto			= O->controvalore_totale / O->numero_quote;
@@ -337,8 +336,8 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
   O->rendimento_percentuale		= calcolo_rendimento_percentuale(O->prezzo_medio_netto, S_precedente->prezzo_medio_carico);
   O->rendimento_in_valuta		= O->numero_quote * (O->prezzo_medio_netto - S_precedente->prezzo_medio_carico);
 
-  O->redditi_diversi			=
-    ((reddito_vendita - (O->costo_convenzionale_acquisto + O->costo_operazione_vendita)) - reddito_vendita)
+  O->reddito_diverso			=
+    ((reddito_vendita - (O->costo_acquisto_quote_vendute + O->costo_operazione_vendita)) - reddito_vendita)
     + ((reddito_vendita > 0.0)? 0.0 : reddito_vendita);
 }
 
@@ -351,15 +350,16 @@ operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * cons
   fprintf(stream, "%-40s= %10.0f\n",		"numero quote",				O->numero_quote);
   fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio eseguito",		O->prezzo_medio_eseguito);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore dell'operazione",		O->controvalore_operazione);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore totale",			O->controvalore_totale);
-  fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio netto",			O->prezzo_medio_netto);
   fprintf(stream, "\n");
   fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito da capitale",			O->reddito_da_capitale);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"tasse sul reddito",			O->tassa_sul_reddito_da_capitale);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"tassa sul reddito da capitale",	O->tassa_sul_reddito_da_capitale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo dell'operazione di vendita",	O->costo_operazione_vendita);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"costo convenzionale di acquisto",	O->costo_convenzionale_acquisto);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"redditi diversi",			O->redditi_diversi);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"costo di acquisto quote vendute",	O->costo_acquisto_quote_vendute);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito diverso",			O->reddito_diverso);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"minusvalenza",				-(O->reddito_diverso));
   fprintf(stream, "\n");
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore totale",			O->controvalore_totale);
+  fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio netto",			O->prezzo_medio_netto);
   fprintf(stream, "%-40s= %12.4f%%\n",		"Utile/Perdita percentuale",		O->utile_perdita_percentuale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"Utile/Perdita in valuta",		O->utile_perdita_in_valuta);
   fprintf(stream, "%-40s= %12.4f%%\n",		"rendimento percentuale",		O->rendimento_percentuale);
@@ -384,7 +384,7 @@ saldo_vendita_init (saldo_t * const S, operazione_vendita_t const * const O, sal
     S->costo_medio_acquisti	= 0.0;
     S->controvalore_carico	= 0.0;
   }
-  S->minusvalenze_accumulate	= S_precedente->minusvalenze_accumulate - O->redditi_diversi;
+  S->minusvalenze_accumulate	= S_precedente->minusvalenze_accumulate - O->reddito_diverso;
 }
 
 
