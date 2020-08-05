@@ -1,4 +1,4 @@
-/* conto-intesa--calcoli-esempio--operazione-vendita.c -*- coding: utf-8-unix -*-
+/* conto-intesa--calcoli-esempio--rendimento-riepilogo.c -*- coding: utf-8-unix -*-
 
    Part of: MMUX Personal Finance
    Contents: calcoli di esempio
@@ -6,10 +6,10 @@
 
    Abstract
 
-	Calcoli di esempio  nella guida, per la  sezione "Descrizione di
-	un'operazione di vendita".
+	Calcoli  di  esempio nella  guida,  per  la sezione  "Rendimento
+	indicato nel riepilogo del patrimonio".
 
-   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -41,50 +41,58 @@
 int
 main (void)
 {
-  double	numero_quote;
-  double	prezzo_medio_eseguito;
 
   setlocale(LC_ALL, "it_IT");
-  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di vendita\"\n\n");
+  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Rendimento indicato nel riepilogo del patrimonio\"\n\n");
 
+  printf("** Vendita con guadagno\n");
   {
-    double	numero_quote_fase_1	= 20.0;
-    double	numero_quote_fase_2	= 30.0;
-    double	numero_quote_fase_3	= 50.0;
-    double	prezzo_eseguito_fase_1	= 52.0;
-    double	prezzo_eseguito_fase_2	= 53.0;
-    double	prezzo_eseguito_fase_3	= 55.0;
-
-    printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 1, numero_quote_fase_1, prezzo_eseguito_fase_1);
-    printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 2, numero_quote_fase_2, prezzo_eseguito_fase_2);
-    printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 3, numero_quote_fase_3, prezzo_eseguito_fase_3);
-    printf("\n");
-
-    numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
-    prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_eseguito_fase_1,
-						    numero_quote_fase_2, prezzo_eseguito_fase_2,
-						    numero_quote_fase_3, prezzo_eseguito_fase_3);
-  }
-
-  {
-    operazione_t	O[2] = {
+#undef NUMERO_OPERAZIONI
+#define NUMERO_OPERAZIONI	2
+    operazione_t	O[NUMERO_OPERAZIONI] = {
       {
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
 	.data_operazione	= NULL,
-	.numero_quote		= 100,
+	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
 	.data_operazione	= NULL,
-	.numero_quote		= numero_quote,
-	.prezzo_medio_eseguito	= prezzo_medio_eseguito,
+	.numero_quote		= 100.00,
+	.prezzo_medio_eseguito	= 52.00,
+      },
+    };
+    saldo_t	S[NUMERO_OPERAZIONI];
+
+    calcolo_storico(NUMERO_OPERAZIONI, O, S);
+  }
+
+  printf("** Vendita con perdita\n");
+  {
+#undef NUMERO_OPERAZIONI
+#define NUMERO_OPERAZIONI	2
+    operazione_t	O[NUMERO_OPERAZIONI] = {
+      {
+	.numero_ordine		= 1,
+	.tipo			= ACQUISTO,
+	.data_operazione	= NULL,
+	.numero_quote		= 100.00,
+	.prezzo_medio_eseguito	= 50.00,
+      },
+      {
+	.numero_ordine		= 2,
+	.tipo			= VENDITA,
+	.data_operazione	= NULL,
+	.numero_quote		= 100,
+	.prezzo_medio_eseguito	= 48.00,
       }
     };
-    saldo_t		S[2];
-    calcolo_storico(2, O, S);
+    saldo_t	S[NUMERO_OPERAZIONI];
+
+    calcolo_storico(NUMERO_OPERAZIONI, O, S);
   }
 
   fflush(stdout);

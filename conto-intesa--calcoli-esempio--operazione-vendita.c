@@ -1,4 +1,4 @@
-/* conto-intesa--calcoli-esempio--operazione-acquisto.c -*- coding: utf-8-unix -*-
+/* conto-intesa--calcoli-esempio--operazione-vendita.c -*- coding: utf-8-unix -*-
 
    Part of: MMUX Personal Finance
    Contents: calcoli di esempio
@@ -7,9 +7,9 @@
    Abstract
 
 	Calcoli di esempio  nella guida, per la  sezione "Descrizione di
-	un'operazione di acquisto".
+	un'operazione di vendita".
 
-   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -45,7 +45,7 @@ main (void)
   double	prezzo_medio_eseguito;
 
   setlocale(LC_ALL, "it_IT");
-  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di acquisto\"\n\n");
+  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Descrizione di un'operazione di vendita\"\n\n");
 
   {
     double	numero_quote_fase_1	= 20.0;
@@ -58,6 +58,7 @@ main (void)
     printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 1, numero_quote_fase_1, prezzo_eseguito_fase_1);
     printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 2, numero_quote_fase_2, prezzo_eseguito_fase_2);
     printf("Fase %u: numero quote=%.0f, prezzo eseguito=%.2f\n", 3, numero_quote_fase_3, prezzo_eseguito_fase_3);
+    printf("\n");
 
     numero_quote		= numero_quote_fase_1 + numero_quote_fase_2 + numero_quote_fase_3;
     prezzo_medio_eseguito	= media_ponderata_3(numero_quote_fase_1, prezzo_eseguito_fase_1,
@@ -66,15 +67,24 @@ main (void)
   }
 
   {
-    operazione_t	O = {
-      .numero_ordine		= 1,
-      .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
-      .numero_quote		= numero_quote,
-      .prezzo_medio_eseguito	= prezzo_medio_eseguito,
+    operazione_t	O[2] = {
+      {
+	.numero_ordine		= 1,
+	.tipo			= ACQUISTO,
+	.data_operazione	= NULL,
+	.numero_quote		= 100,
+	.prezzo_medio_eseguito	= 50.00,
+      },
+      {
+	.numero_ordine		= 2,
+	.tipo			= VENDITA,
+	.data_operazione	= NULL,
+	.numero_quote		= numero_quote,
+	.prezzo_medio_eseguito	= prezzo_medio_eseguito,
+      }
     };
-    operazione_init(&O, &saldo_precedente_convenzionale);
-    operazione_print_ascii(stdout, &O);
+    saldo_t		S[2];
+    calcolo_storico(2, O, S);
   }
 
   fflush(stdout);

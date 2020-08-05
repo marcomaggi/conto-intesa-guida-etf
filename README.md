@@ -1,27 +1,36 @@
-# MMUX Personal Finance
+# Pericolosa e incompleta guida agli investimenti in ETF con Banca Intesa Sanpaolo
 
 
 ## Introduzione
 
-Questo  progetto  raccoglie   vari  strumenti  per  la   gestione  e  la
-comprensione delle finanze personali.
+Questa guida è un aiuto per  chi volesse ricostruire i calcoli di tenuta
+del  Conto Titoli  di  Banca  Intesa Sanpaolo  per  gli investimenti  in
+Exchange Traded Fund (ETF).  Questa  guida è incompleta: non copre tutto
+ciò  che c'è  da sapere  sugli ETF,  né l'operatività  del sito  di home
+banking di Banca Intesa Sanpaolo.   Questa guida è pericolosa: ognuno la
+usa a suo rischio e pericolo.
 
-Il progetto è disponibile in Rete all'indirizzo:
+Come accompagnamento: alcuni programmi in linguaggio C11 servono sia per
+calcolare i  numeri per gli esempi  nella guida, che come  strumento per
+provare i calcoli.
 
-[https://github.com/marcomaggi/mmux-personal-finance](https://github.com/marcomaggi/mmux-personal-finance)
+Il codice sorgente di questa guida è disponibile in Rete all'indirizzo:
+
+[https://github.com/marcomaggi/conto-intesa-guida-etf](https://github.com/marcomaggi/conto-intesa-guida-etf)
 
 con backup all'indirizzo:
 
-[https://bitbucket.org/marcomaggi/mmux-personal-finance/](https://bitbucket.org/marcomaggi/mmux-personal-finance/)
+[https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/](https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/)
 
-i documenti in formato PDF sono disponibili all'indirizzo:
+una  versione della  guida  precompilata in  formato  PDF è  disponibile
+all'indirizzo:
 
-[https://bitbucket.org/marcomaggi/mmux-personal-finance/downloads](https://bitbucket.org/marcomaggi/mmux-personal-finance/downloads)
+[https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/downloads](https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/downloads)
 
 
-## Licenza dei testi
+## Licenza del testo
 
-Copyright (c) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it><br/>
+Copyright (c) 2017, 2018, 2020 Marco Maggi <mrc.mgg@gmail.com><br/>
 All rights reserved.
 
 Permission is  granted to copy,  distribute and/or modify  this document
@@ -34,7 +43,7 @@ Documentation License''.
 
 ## Licenza del codice sorgente
 
-Copyright (c) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it><br/>
+Copyright (c) 2017, 2018 Marco Maggi <mrc.mgg@gmail.com><br/>
 All rights reserved.
 
 This program is free software: you  can redistribute it and/or modify it

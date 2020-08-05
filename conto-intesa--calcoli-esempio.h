@@ -9,7 +9,7 @@
 	Calcoli di  esempio nella  guida, per la  sezione "Aggiornamento
 	del saldo dopo un'operazione di acquisto".
 
-   Copyright (C) 2017, 2018 Marco Maggi <marco.maggi-ipsu@poste.it>
+   Copyright (C) 2017, 2018 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
