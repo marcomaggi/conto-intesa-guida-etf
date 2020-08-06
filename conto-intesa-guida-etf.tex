@@ -38,13 +38,19 @@
 
 \newcommand{\CalcoloRendimentoPercentuale}[2]{\frac{\num{#1} - \num{#2}}{#2} \times{} \num{100}}
 
+\newcommand{\Parentesi}[1]{(#1)}
+\newcommand{\Virgolette}[1]{``#1''}
+\newcommand{\Etf}[1]{\textsc{etf}}
+
+\newcommand{\Pma}{\emph{prezzo medio di acquisto}}
+
 %page
 %% ------------------------------------------------------------
 %% Intestazione
 %% ------------------------------------------------------------
 
 \author{Marco Maggi}
-\title{Pericolosa e incompleta guida agli investimenti in ETF con \emph{Banca Intesa Sanpaolo}}
+\title{Pericolosa e incompleta guida agli investimenti in \Etf{} con \emph{Banca Intesa Sanpaolo}}
 
 \begin{document}
 
@@ -52,12 +58,12 @@
 
 \begin{abstract}
   \noindent
-  Questa guida è un  aiuto per chi volesse ricostruire i calcoli  di tenuta del Conto
-  Titoli  di \emph{Banca  Intesa  Sanpaolo} per  gli  investimenti in  \emph{Exchange
-     Traded Funds} (ETF).  Questa guida è incompleta:  non copre tutto ciò che c'è da
-  sapere sugli ETF,  né l'operatività del sito di \emph{home  banking} di \emph{Banca
-     Intesa Sanpaolo}.   Questa guida  è pericolosa:  ognuno la usa  a suo  rischio e
-  pericolo.
+  Questa guida è  un aiuto per chi  volesse ricostruire i calcoli  di contabilità del
+  Conto Titoli di \emph{Banca Intesa Sanpaolo} per gli investimenti in \emph{Exchange
+     Traded Funds}  \Parentesi{\Etf{}}.  Questa guida  è incompleta: non  copre tutto
+  ciò  che c'è  da  sapere sugli  \Etf{},  né l'operatività  del  sito di  \emph{home
+     banking} di \emph{Banca Intesa Sanpaolo}.   Questa guida è pericolosa: ognuno la
+  usa a suo rischio e pericolo.
 
   In questa guida si tenta di mantenere il testo matematicamente ``facile''; si evita
   l'utilizzo di simboli matematici nelle formule;  chi ha frequentato le Scuole Medie
@@ -88,10 +94,10 @@ Il codice sorgente di questa guida è disponibile in Rete all'indirizzo:
 \section{Introduzione}
 
 
-Il calcolo dei redditi da capitale e dei redditi diversi per investimenti in ETF deve
-essere eseguito come specificato nella ``Circolare dell'Agenzia dell'Entrate 21/E del
-10 Luglio  2014''.  Il calcolo di  questi redditi permette sia  la determinazione dei
-rendimenti che il calcolo delle tasse.
+Il calcolo dei redditi  da capitale e dei redditi diversi  per investimenti in \Etf{}
+deve  essere eseguito  come specificato  nella ``Circolare  dell'Agenzia dell'Entrate
+21/E  del  10  Luglio  2014''.   Il   calcolo  di  questi  redditi  permette  sia  la
+determinazione dei rendimenti che il calcolo delle tasse.
 
 Per  ogni  operazione di  compravendita  eseguita  sul  Conto Titoli:  nella  sezione
 documenti del sito  di \emph{home banking} è disponibile una  \emph{nota di eseguito}
@@ -111,7 +117,7 @@ maggiore.
 \section{Media aritmetica e media ponderata}
 
 
-Nei  calcoli  di tenuta  Conto  Titoli  si  usa  spesso l'operazione  di  \emph{media
+Nei calcoli  di contabilità Conto  Titoli si  usa spesso l'operazione  di \emph{media
    aritmetica} e  in particolare  la sua riscrittura  come \emph{media  ponderata}; è
 utile richiamare queste idee e alcune delle loro proprietà.
 
@@ -120,7 +126,8 @@ Si  ricorda che  la  \textbf{media  aritmetica} tra  i  numeri  \num{11}, \num{2
 \begin{equation*}
   \frac{\num{11} + \num{22} + \num{33}}{3} = \num{22}
 \end{equation*}
-il denominatore è \num{3} perché al numeratore ci sono \num{3} numeri.
+il denominatore è \num{3} perché al numeratore ci sono \num{3} numeri; la \emph{media
+   aritmetica} è una procedura di calcolo il cui risultato è il \emph{valore medio}.
 
 L'operazione si  costruisce nello stesso  modo se qualche  numero compare piú  di una
 volta;  la media  aritmetica tra  i numeri:  \num{11}, \num{11},  \num{11}, \num{22},
@@ -137,8 +144,8 @@ il denominatore è \num{6} perché:
 \end{itemize}
 quindi \(\num{3} + \num{1} + \num{2} = \num{6}\).
 
-Il ``numero  di volte  in cui  un numero  compare'' si  chiama \textbf{molteplicità};
-allora si può dire che:
+Il   \Virgolette{numero   di   volte   in   cui  un   numero   compare}   si   chiama
+\textbf{molteplicità}; allora si può dire che:
 \begin{itemize}
 \item \num{11} compare con \emph{molteplicità} \num{3};
 \item \num{22} compare con \emph{molteplicità} \num{1};
@@ -178,19 +185,68 @@ In questo modo: la \emph{media aritmetica} tra i numeri \num{11}, \num{11}, \num
 numeri \num{11}, \num{22} e \num{33} rispetto alle loro molteplicità \num{3}, \num{1}
 e \num{2}.
 
-Nei  calcoli di  tenuta  Conto Titoli:  si  eseguono medie  ponderate  tra prezzi  di
-acquisto o vendita  di quote di fondi,  rispetto al numero di  quote acquistate; tale
-numero di quote assume il ruolo di ``molteplicità di un prezzo''.
+Il significato  del \emph{valore  medio} si  può evidenziare  osservando che  se vale
+l'identità:
+\begin{align*}
+  \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22}
+  + \num{2} \times{} \num{33}}{\num{6}}
+  \simeq \num{20,17}
+\end{align*}
+allora vale anche l'identità:
+\begin{align*}
+  \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22}
+  + \num{2} \times{} \num{33}}{\num{6}}
+  \simeq \frac{\num{6} \times{} \num{20,17}}{\num{6}}
+\end{align*}
+perciò la \emph{media ponderata} tra: \num{11} con molteplicità \num{3}, \num{22} con
+molteplicità  \num{1},   \num{33}  con  molteplicità  \num{2},   è  equivalente  alla
+\emph{media ponderata} del \emph{valore medio} \num{20,17} con molteplicità \num{6}.
+
+%page
+\subsection{Interpretazione della media ponderata come prezzo medio}
+
+Nei calcoli di contabilità del Conto Titoli: si eseguono medie ponderate tra i prezzi
+di  acquisto  \Parentesi{\textbf{non} di  vendita}  di  quote  di uno  stesso  \Etf{}
+rispetto al numero di quote acquistate.
+
+Negli  esempi   precedenti:  i  numeri   \num{11},  \num{22},  \num{33}   si  possono
+interpretare  come prezzi  di acquisto  di quote;  le molteplicità  \num{3}, \num{1},
+\num{2} si possono interpretare come il numero di quote acquistate; cioè:
+\begin{itemize}
+\item \num{3} quote acquistate al prezzo di \Eur{11,00};
+\item \num{1} quota acquistata al prezzo di \Eur{22,00};
+\item \num{2} quote acquistate al prezzo di \Eur{33,00}.
+\end{itemize}
+
+Affermare che  la \emph{media ponderata}  dei prezzi  è pari a  \Eur{20,17} significa
+affermare che:  acquistare \num{3} quote  di un fondo  al prezzo di  \Eur{11,00}, poi
+acquistare \num{1} quota a \Eur{22,00}, infine acquistare \num{2} quote a \Eur{33,00}
+è equivalente  ad acquistare \num{6}  quote al  \textbf{prezzo medio di  acquisto} di
+\Eur{20,17}.
+
+Il numero totale di  quote acquistate \(\num{6} = \num{3} + \num{1}  + \num{2}\) è la
+\emph{molteplicità equivalente} del \Pma{} \Eur{20,17}, infatti si può scrivere:
+\begin{align*}
+  \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22} + \num{2} \times{} \num{33}}{\num{6}}
+  \simeq \frac{\num{6} \times{} \num{20,17}}{\num{6}}
+  = \num{20,17}
+\end{align*}
 
 %page
 \subsection{Calcolo incrementale della media ponderata}
 
 
-L'attività di investimento  in un ETF è  costituita da una sequenza  di operazioni di
-acquisto e vendita di quote del fondo; acquisti e vendite possono essere intercalati;
-il  prezzo  del  totale  delle   quote  possedute  viene  calcolato  aggiornando  una
-\emph{media ponderata} dopo  ogni operazione.  È utile richiamare come  il calcolo di
-una \emph{media ponderata} possa essere eseguito passo dopo passo.
+L'attività  di  investimento  in  un  \Etf{} \Parentesi{cosí  come  in  altri  titoli
+   finanziari  quotati} è  costituita da  una sequenza  di operazioni  di acquisto  e
+vendita  di  quote   del  fondo;  acquisti  e  vendite   possono  essere  intercalati
+\Parentesi{prima  un acquisto,  poi  una  vendita parziale,  poi  un altro  acquisto,
+   eccetera}.  Dopo ogni acquisto: le nuove  quote vengono messe insieme alle vecchie
+già possedute.   Invece di conservare  tutta la storia  della sequenza di  acquisti e
+vendite: si  tiene la  contabilità conservando  solo il  numero di  quote attualmente
+possedute e il loro \Pma{}.
+
+È  utile richiamare  come  il  calcolo di  una  \emph{media  ponderata} possa  essere
+eseguito passo dopo passo.
 
 Si considerino  ancora i  numeri \num{11}, \num{11},  \num{11}, \num{22},  \num{33} e
 \num{33}; si  è calcolato che  la loro  \emph{media aritmetica} può  essere riscritta
@@ -202,26 +258,36 @@ come \emph{media ponderata} e risulta:
      + \num{2} \times{} \num{33}}
   {6} \simeq \num{20,17}
 \end{equation*}
-si considerino  prima i  numeri \num{11},  \num{22} e \num{33};  poi si  aggiungano i
-numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
+Si esegua  lo stesso calcolo  in piú passi: si  considerino prima i  numeri \num{11},
+\num{22}  e \num{33};  poi si  aggiungano  i numeri  \num{11} e  \num{11}; infine  si
+aggiunga il numero \num{33}.
 \begin{enumerate}
-\item la \emph{media ponderata} tra i numeri \num{11}, \num{22} e \num{33} risulta:
+\item La \emph{media ponderata} tra i  numeri \num{11}, \num{22} e \num{33}, ciascuno
+  con molteplicità \num{1}, risulta:
   \begin{equation*}
     \frac{\num{1} \times{} \num{11}
        + \num{1} \times{} \num{22}
        + \num{1} \times{} \num{33}}{\num{3}}
     = \num{22}
   \end{equation*}
+  il  numero  totale di  numeri  \(\num{3}  = \num{1}  +  \num{1}  + \num{1}\)  è  la
+  \emph{molteplicità equivalente} del \emph{valore medio} \num{22}.
 
-\item  ora si  aggiungano  i numeri  \num{11} e  \num{11};  la \emph{media  ponderata
-     aggiornata} risulta:
+\item Ora si aggiungano i numeri \num{11} e \num{11}; in totale: \num{11} compare con
+  molteplicità \num{3};  \num{22} compare con molteplicità  \num{1}; \num{33} compare
+  con molteplicità \num{1}.  La \emph{media ponderata aggiornata} risulta:
   \begin{equation*}
     \frac{\num{3} \times{} \num{11}
        + \num{1} \times{} \num{22}
        + \num{1} \times{} \num{33}}{\num{5}}
     = \frac{\num{88}}{\num{5}} \simeq \num{17,6}
   \end{equation*}
-  e si può scrivere:
+  il  numero  totale di  numeri  \(\num{5}  = \num{3}  +  \num{1}  + \num{1}\)  è  la
+  \emph{molteplicità equivalente} del \emph{valore medio} \num{17,6}.
+
+  È possibile  calcolare questo  risultato partendo dalla  media ponderata  del passo
+  precedente,  cioè \num{22},  combinandola con  in numeri  \num{11} e  \num{11}?  La
+  media ponderata aggiornata si può scrivere:
   \begin{align*}
     \frac{\num{3} \times{} \num{11}
     + \num{1} \times{} \num{22}
@@ -231,7 +297,8 @@ numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
     + \num{1} \times{} \num{22}
     + \num{1} \times{} \num{33}}{\num{5}}
   \end{align*}
-  la seconda frazione al membro di destra si può riscrivere:
+  la seconda  frazione al membro  di destra \Parentesi{il  cui numeratore è  uguale a
+     quello della media ponderata al passo precedente} si può riscrivere:
   \begin{align*}
     \frac{\num{3}}{\num{5}} \times \frac{\num{5}}{\num{3}} \times
     \frac{\num{1} \times{} \num{11}
@@ -240,25 +307,27 @@ numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
     &= \frac{\num{3}}{\num{5}} \times
       \frac{\num{1} \times{} \num{11}
       + \num{1} \times{} \num{22}
-      + \num{1} \times{} \num{33}}{\num{3}} \\
-    &\simeq \frac{\num{3}}{\num{5}} \times{} \num{20,17}
-      = \frac{\num{3} \times{} \num{20,17}}{\num{5}}
+      + \num{1} \times{} \num{33}}{\num{3}}
   \end{align*}
-  e quindi la \emph{media ponderata aggiornata} risulta:
+  in cui  il secondo  termine della moltiplicazione  al membro di  destra è  la media
+  ponderata  del  passo  precedente;  quindi  la  \emph{media  ponderata}  aggiornata
+  risulta:
   \begin{align*}
     \frac{\num{2} \times{} \num{11}}{\num{5}}
-    + \frac{\num{3} \times{} \num{20,17}}{\num{5}}
-    = \frac{\num{2} \times{} \num{11} + \num{3} \times{} \num{20,17}}{\num{5}}
+    + \frac{\num{3} \times{} \num{22}}{\num{5}}
+    = \frac{\num{2} \times{} \num{11} + \num{3} \times{} \num{22}}{\num{5}}
     \simeq \num{17,6}
   \end{align*}
-  cioè la \emph{media ponderata aggiornata} è pari alla \emph{media ponderata} tra:
+  cioè  il  \emph{valore  medio}  aggiornato   \num{17,6}  è  pari  alla  \emph{media
+     ponderata} tra:
   \begin{itemize}
-  \item la \emph{media ponderata precedente}, con la sua molteplicità;
-  \item il nuovo numero aggiunto, con la sua molteplicità;
+  \item il  \emph{valore medio}  precedente \num{22},  con la  sua \emph{molteplicità
+       equivalente} \num{3};
+  \item il nuovo numero aggiunto \num{11}, con la sua molteplicità \num{2}.
   \end{itemize}
 
-\item  infine  si  aggiunga  il  numero  \num{33};  la  nuova  \emph{media  ponderata
-     aggiornata} è la \emph{media ponderata totale} e procedendo come prima risulta:
+\item  Infine  si  aggiunga  il  numero \num{33};  la  nuova  \emph{media  ponderata}
+  aggiornata è la \emph{media ponderata} totale e procedendo come prima risulta:
   \begin{equation*}
     \frac{\num{1} \times{} \num{33}
        + \num{5} \times{} \num{17,6}}{\num{6}}
@@ -266,16 +335,32 @@ numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}:
   \end{equation*}
 \end{enumerate}
 
-Nei calcoli  di tenuta  Conto Titoli:  dopo ogni acquisto  di quote  di un  fondo, si
-calcola  il  prezzo  medio  di   ogni  quota  posseduta  come  \emph{media  ponderata
-   aggiornata} tra:
+%page
+\subsection{Intepretazione del calcolo incrementale della media ponderata}
+
+Nei calcoli di contabilità del Conto Titoli: dopo ogni acquisto di quote di un fondo,
+si calcola il \Pma{} aggiornato, di ogni quota posseduta, come \emph{media ponderata}
+tra:
 \begin{itemize}
-\item  la  \emph{media ponderata  precedente},  con  il  precedente numero  di  quote
-  possedute come molteplicità;
+\item  il  \Pma{} precedente,  con  il  precedente  numero  di quote  possedute  come
+  molteplicità;
 \item il prezzo delle nuove quote acquistate,  con il numero di quote acquistate come
   molteplicità.
 \end{itemize}
 
+Come si  aggiorna il  \Pma{} se si  vendono delle quote?   Esso resta  invariato!  Si
+considerino  ancora  i numeri  \num{11},  \num{11},  \num{11}, \num{22},  \num{33}  e
+\num{33}; si è calcolato che la loro \emph{media ponderata} risulta:
+\begin{equation*}
+  \frac{\num{11} + \num{11} + \num{11} + \num{22} + \num{33} + \num{33}}{6}
+  = \frac{\num{3} \times{} \num{11}
+     + \num{1} \times{} \num{22}
+     + \num{2} \times{} \num{33}}
+  {6} \simeq \num{20,17}
+\end{equation*}
+in cui \num{20,17} può essere interpretato come \Pma{} di \num{6} quote.  Si supponga
+di togliere \num{2} quote vendendole al  prezzo di \num{44}: il \Pma{} delle restanti
+\num{4} quote è ancora \num{20,17}.
 
 %page
 \section{Direzione dei trasferimenti di denaro}
@@ -404,7 +489,7 @@ incluso.   Per  esempio,  se  si   sono  acquistate  \num{\OneNumeroQuote}  quot
 
 
 Dopo l'esecuzione  di ogni operazione  di acquisto  occorre ricalcolare il  saldo del
-Conto  Titoli;  per un  investimento  in  quote di  ETF,  la  parte da  aggiornare  è
+Conto  Titoli; per  un investimento  in quote  di \Etf{},  la parte  da aggiornare  è
 rappresentata dalle tre quantità:
 \begin{itemize}
 \item numero di quote in carico nel Conto Titoli;
@@ -765,7 +850,7 @@ Per esempio, se si vendono \num{\NumeroQuote}  quote con \emph{prezzo medio di c
 
 
 Dopo l'esecuzione  di ogni operazione  di vendita  occorre ricalcolare il  saldo.  Il
-saldo di un investimento in quote di ETF è rappresentato dalle tre quantità:
+saldo di un investimento in quote di \Etf{} è rappresentato dalle tre quantità:
 \begin{itemize}
 \item numero di quote in carico nel Conto Titoli;
 \item \emph{prezzo medio effettivo nel saldo};
