@@ -58,16 +58,15 @@
 
 \begin{abstract}
   \noindent
-  Questa guida è  un aiuto per chi  volesse ricostruire i calcoli  di contabilità del
-  Conto Titoli di \emph{Banca Intesa Sanpaolo} per gli investimenti in \emph{Exchange
-     Traded Funds}  \Parentesi{\Etf{}}.  Questa guida  è incompleta: non  copre tutto
-  ciò  che c'è  da  sapere sugli  \Etf{},  né l'operatività  del  sito di  \emph{home
-     banking} di \emph{Banca Intesa Sanpaolo}.   Questa guida è pericolosa: ognuno la
-  usa a suo rischio e pericolo.
+  Questa guida è un  aiuto per chi volesse ricostruire i calcoli di  contabilità del Conto Titoli di
+  \emph{Banca   Intesa   Sanpaolo}   per   gli  investimenti   in   \emph{Exchange   Traded   Funds}
+  \Parentesi{\Etf{}}.   Questa guida  è incompleta:  non copre  tutto ciò  che c'è  da sapere  sugli
+  \Etf{}, né l'operatività del sito di  \emph{home banking} di \emph{Banca Intesa Sanpaolo}.  Questa
+  guida è pericolosa: ognuno la usa a suo rischio e pericolo.
 
-  In questa guida si tenta di mantenere il testo matematicamente ``facile''; si evita
-  l'utilizzo di simboli matematici nelle formule;  chi ha frequentato le Scuole Medie
-  Inferiori, e ne ricorda le basi del programma di matematica, dovrebbe farcela.
+  In questa guida si tenta di mantenere  il testo matematicamente ``facile''; si evita l'utilizzo di
+  simboli matematici nelle  formule; chi ha frequentato  le Scuole Medie Inferiori, e  ne ricorda le
+  basi del programma di matematica, dovrebbe farcela.
 \end{abstract}
 
 \tableofcontents
@@ -75,13 +74,12 @@
 \newpage{}
 
 \noindent
-Copyright \copyright{} 2017, 2018 Marco Maggi \texttt{<mrc.mgg@gmail.com>}.
+Copyright \copyright{} 2017, 2018, 2020 Marco Maggi \texttt{<mrc.mgg@gmail.com>}.
 
-Permission is granted to copy, distribute and/or modify this document under the terms
-of the GNU Free Documentation License, Version  1.3 or any later version published by
-the Free Software  Foundation; with no Invariant Sections, no  Front-Cover Texts, and
-no Back-Cover Texts.  A copy of the license is included in the section entitled ``GNU
-Free Documentation License''.
+Permission is  granted to copy, distribute  and/or modify this document  under the terms of  the GNU
+Free  Documentation License,  Version  1.3 or  any  later  version published  by  the Free  Software
+Foundation; with no  Invariant Sections, no Front-Cover  Texts, and no Back-Cover Texts.   A copy of
+the license is included in the section entitled ``GNU Free Documentation License''.
 
 Il codice sorgente di questa guida è disponibile in Rete all'indirizzo:
 \begin{center}
@@ -94,44 +92,39 @@ Il codice sorgente di questa guida è disponibile in Rete all'indirizzo:
 \section{Introduzione}
 
 
-Il calcolo dei redditi  da capitale e dei redditi diversi  per investimenti in \Etf{}
-deve  essere eseguito  come specificato  nella ``Circolare  dell'Agenzia dell'Entrate
-21/E  del  10  Luglio  2014''.   Il   calcolo  di  questi  redditi  permette  sia  la
-determinazione dei rendimenti che il calcolo delle tasse.
+Il calcolo  dei redditi da  capitale e dei  redditi diversi per  investimenti in \Etf{}  deve essere
+eseguito come specificato nella ``Circolare dell'Agenzia dell'Entrate 21/E del 10 Luglio 2014''.  Il
+calcolo di questi redditi permette sia la determinazione dei rendimenti che il calcolo delle tasse.
 
-Per  ogni  operazione di  compravendita  eseguita  sul  Conto Titoli:  nella  sezione
-documenti del sito  di \emph{home banking} è disponibile una  \emph{nota di eseguito}
-con  tutti  i  dati  dell'operazione.   Nei calcoli  qui  illustrati:  alcuni  valori
-riportati  nelle note  di eseguito  sono  i dati  di  partenza; altri  valori sono  i
-risultati ricalcolati per verifica.
+Per ogni operazione di compravendita eseguita sul  Conto Titoli: nella sezione documenti del sito di
+\emph{home banking} è disponibile una \emph{nota di eseguito} con tutti i dati dell'operazione.  Nei
+calcoli qui  illustrati: alcuni valori  riportati nelle  note di eseguito  sono i dati  di partenza;
+altri valori sono i risultati ricalcolati per verifica.
 
-Questa guida  utilizza sia  la terminologia  della Banca  che quella  della circolare
-dell'Agenzia dell'Entrate.  Da notare che i  prezzi di acquisto e vendita sulle Borse
-di negoziazione sono chiamati \emph{effettivi} dalla circolare.
+Questa  guida utilizza  sia la  terminologia  della Banca  che quella  della circolare  dell'Agenzia
+dell'Entrate.   Da notare  che i  prezzi di  acquisto  e vendita  sulle Borse  di negoziazione  sono
+chiamati \emph{effettivi} dalla circolare.
 
-Tutti i  numeri in questa  guida sono presentati arrotondati,  il piú delle  volte al
-centesimo  di  Euro;  l'esecuzione  dei  calcoli è  invece  eseguita  con  precisione
-maggiore.
+Tutti i numeri in questa guida sono presentati arrotondati, il piú delle volte al centesimo di Euro;
+l'esecuzione dei calcoli è invece eseguita con precisione maggiore.
 
 %page
 \section{Media aritmetica e media ponderata}
 
 
-Nei calcoli  di contabilità Conto  Titoli si  usa spesso l'operazione  di \emph{media
-   aritmetica} e  in particolare  la sua riscrittura  come \emph{media  ponderata}; è
-utile richiamare queste idee e alcune delle loro proprietà.
+Nei calcoli di contabilità  Conto Titoli si usa spesso l'operazione di  \emph{media aritmetica} e in
+particolare la sua riscrittura come \emph{media ponderata};  è utile richiamare queste idee e alcune
+delle loro proprietà.
 
-Si  ricorda che  la  \textbf{media  aritmetica} tra  i  numeri  \num{11}, \num{22}  e
-\num{33} si scrive:
+Si ricorda che la \textbf{media aritmetica} tra i numeri \num{11}, \num{22} e \num{33} si scrive:
 \begin{equation*}
   \frac{\num{11} + \num{22} + \num{33}}{3} = \num{22}
 \end{equation*}
-il denominatore è \num{3} perché al numeratore ci sono \num{3} numeri; la \emph{media
-   aritmetica} è una procedura di calcolo il cui risultato è il \emph{valore medio}.
+il denominatore è \num{3} perché al numeratore  ci sono \num{3} numeri; la \emph{media aritmetica} è
+una procedura di calcolo il cui risultato è il \emph{valore medio}.
 
-L'operazione si  costruisce nello stesso  modo se qualche  numero compare piú  di una
-volta;  la media  aritmetica tra  i numeri:  \num{11}, \num{11},  \num{11}, \num{22},
-\num{33} e \num{33} si scrive:
+L'operazione si costruisce  nello stesso modo se qualche  numero compare piú di una  volta; la media
+aritmetica tra i numeri: \num{11}, \num{11}, \num{11}, \num{22}, \num{33} e \num{33} si scrive:
 \begin{equation*}
   \frac{\num{11} + \num{11} + \num{11} + \num{22} + \num{33} + \num{33}}{6}
   = \frac{121}{6} \simeq \num{20,17}
@@ -144,8 +137,8 @@ il denominatore è \num{6} perché:
 \end{itemize}
 quindi \(\num{3} + \num{1} + \num{2} = \num{6}\).
 
-Il   \Virgolette{numero   di   volte   in   cui  un   numero   compare}   si   chiama
-\textbf{molteplicità}; allora si può dire che:
+Il \Virgolette{numero di volte in cui un  numero compare} si chiama \textbf{molteplicità}; allora si
+può dire che:
 \begin{itemize}
 \item \num{11} compare con \emph{molteplicità} \num{3};
 \item \num{22} compare con \emph{molteplicità} \num{1};
@@ -180,13 +173,11 @@ in cui si evidenzia come:
 \item il numero \num{33} compaia con ``peso'' \num{2} rispetto al totale \num{6}.
 \end{itemize}
 
-In questo modo: la \emph{media aritmetica} tra i numeri \num{11}, \num{11}, \num{11},
-\num{22}, \num{33} e  \num{33} è riscritta come media \textbf{media  ponderata} tra i
-numeri \num{11}, \num{22} e \num{33} rispetto alle loro molteplicità \num{3}, \num{1}
-e \num{2}.
+In questo  modo: la  \emph{media aritmetica}  tra i numeri  \num{11}, \num{11},  \num{11}, \num{22},
+\num{33} e \num{33} è riscritta come media  \textbf{media ponderata} tra i numeri \num{11}, \num{22}
+e \num{33} rispetto alle loro molteplicità \num{3}, \num{1} e \num{2}.
 
-Il significato  del \emph{valore  medio} si  può evidenziare  osservando che  se vale
-l'identità:
+Il significato del \emph{valore medio} si può evidenziare osservando che se vale l'identità:
 \begin{align*}
   \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22}
   + \num{2} \times{} \num{33}}{\num{6}}
@@ -198,33 +189,33 @@ allora vale anche l'identità:
   + \num{2} \times{} \num{33}}{\num{6}}
   \simeq \frac{\num{6} \times{} \num{20,17}}{\num{6}}
 \end{align*}
-perciò la \emph{media ponderata} tra: \num{11} con molteplicità \num{3}, \num{22} con
-molteplicità  \num{1},   \num{33}  con  molteplicità  \num{2},   è  equivalente  alla
-\emph{media ponderata} del \emph{valore medio} \num{20,17} con molteplicità \num{6}.
+perciò la \emph{media  ponderata} tra: \num{11} con molteplicità \num{3},  \num{22} con molteplicità
+\num{1},  \num{33}  con  molteplicità  \num{2},   è  equivalente  alla  \emph{media  ponderata}  del
+\emph{valore medio} \num{20,17} con molteplicità \num{6}.
 
 %page
 \subsection{Interpretazione della media ponderata come prezzo medio}
 
-Nei calcoli di contabilità del Conto Titoli: si eseguono medie ponderate tra i prezzi
-di  acquisto  \Parentesi{\textbf{non} di  vendita}  di  quote  di uno  stesso  \Etf{}
-rispetto al numero di quote acquistate.
 
-Negli  esempi   precedenti:  i  numeri   \num{11},  \num{22},  \num{33}   si  possono
-interpretare  come prezzi  di acquisto  di quote;  le molteplicità  \num{3}, \num{1},
-\num{2} si possono interpretare come il numero di quote acquistate; cioè:
+Nei calcoli di  contabilità del Conto Titoli: si  eseguono medie ponderate tra i  prezzi di acquisto
+\Parentesi{\textbf{non}  di vendita}  di quote  di uno  stesso \Etf{}  rispetto al  numero di  quote
+acquistate.
+
+Negli esempi precedenti:  i numeri \num{11}, \num{22}, \num{33} si  possono interpretare come prezzi
+di acquisto  di quote;  le molteplicità \num{3},  \num{1}, \num{2} si  possono interpretare  come il
+numero di quote acquistate; cioè:
 \begin{itemize}
 \item \num{3} quote acquistate al prezzo di \Eur{11,00};
 \item \num{1} quota acquistata al prezzo di \Eur{22,00};
 \item \num{2} quote acquistate al prezzo di \Eur{33,00}.
 \end{itemize}
 
-Affermare che  la \emph{media ponderata}  dei prezzi  è pari a  \Eur{20,17} significa
-affermare che:  acquistare \num{3} quote  di un fondo  al prezzo di  \Eur{11,00}, poi
-acquistare \num{1} quota a \Eur{22,00}, infine acquistare \num{2} quote a \Eur{33,00}
-è equivalente  ad acquistare \num{6}  quote al  \textbf{prezzo medio di  acquisto} di
-\Eur{20,17}.
+Affermare che  la \emph{media ponderata}  dei prezzi è pari  a \Eur{20,17} significa  affermare che:
+acquistare  \num{3} quote  di un  fondo al  prezzo di  \Eur{11,00}, poi  acquistare \num{1}  quota a
+\Eur{22,00}, infine acquistare \num{2} quote a \Eur{33,00} è equivalente ad acquistare \num{6} quote
+al \textbf{prezzo medio di acquisto} di \Eur{20,17}.
 
-Il numero totale di  quote acquistate \(\num{6} = \num{3} + \num{1}  + \num{2}\) è la
+Il  numero  totale   di  quote  acquistate  \(\num{6}   =  \num{3}  +  \num{1}  +   \num{2}\)  è  la
 \emph{molteplicità equivalente} del \Pma{} \Eur{20,17}, infatti si può scrivere:
 \begin{align*}
   \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22} + \num{2} \times{} \num{33}}{\num{6}}
@@ -236,21 +227,19 @@ Il numero totale di  quote acquistate \(\num{6} = \num{3} + \num{1}  + \num{2}\)
 \subsection{Calcolo incrementale della media ponderata}
 
 
-L'attività  di  investimento  in  un  \Etf{} \Parentesi{cosí  come  in  altri  titoli
-   finanziari  quotati} è  costituita da  una sequenza  di operazioni  di acquisto  e
-vendita  di  quote   del  fondo;  acquisti  e  vendite   possono  essere  intercalati
-\Parentesi{prima  un acquisto,  poi  una  vendita parziale,  poi  un altro  acquisto,
-   eccetera}.  Dopo ogni acquisto: le nuove  quote vengono messe insieme alle vecchie
-già possedute.   Invece di conservare  tutta la storia  della sequenza di  acquisti e
-vendite: si  tiene la  contabilità conservando  solo il  numero di  quote attualmente
-possedute e il loro \Pma{}.
+L'attività di investimento in  un \Etf{} \Parentesi{cosí come in altri  titoli finanziari quotati} è
+costituita da  una sequenza  di operazioni  di acquisto  e vendita  di quote  del fondo;  acquisti e
+vendite possono  essere intercalati \Parentesi{prima un  acquisto, poi una vendita  parziale, poi un
+   altro acquisto, eccetera}.  Dopo ogni acquisto: le nuove quote vengono messe insieme alle vecchie
+già possedute.  Invece di conservare tutta la storia  della sequenza di acquisti e vendite: si tiene
+la contabilità conservando solo il numero di quote attualmente possedute e il loro \Pma{}.
 
-È  utile richiamare  come  il  calcolo di  una  \emph{media  ponderata} possa  essere
-eseguito passo dopo passo.
+È utile richiamare  come il calcolo di  una \emph{media ponderata} possa essere  eseguito passo dopo
+passo.
 
-Si considerino  ancora i  numeri \num{11}, \num{11},  \num{11}, \num{22},  \num{33} e
-\num{33}; si  è calcolato che  la loro  \emph{media aritmetica} può  essere riscritta
-come \emph{media ponderata} e risulta:
+Si considerino  ancora i numeri  \num{11}, \num{11}, \num{11}, \num{22},  \num{33} e \num{33};  si è
+calcolato che  la loro \emph{media  aritmetica} può essere  riscritta come \emph{media  ponderata} e
+risulta:
 \begin{equation*}
   \frac{\num{11} + \num{11} + \num{11} + \num{22} + \num{33} + \num{33}}{6}
   = \frac{\num{3} \times{} \num{11}
@@ -258,36 +247,35 @@ come \emph{media ponderata} e risulta:
      + \num{2} \times{} \num{33}}
   {6} \simeq \num{20,17}
 \end{equation*}
-Si esegua  lo stesso calcolo  in piú passi: si  considerino prima i  numeri \num{11},
-\num{22}  e \num{33};  poi si  aggiungano  i numeri  \num{11} e  \num{11}; infine  si
-aggiunga il numero \num{33}.
+Si  esegua lo  stesso calcolo  in piú  passi: si  considerino prima  i numeri  \num{11}, \num{22}  e
+\num{33}; poi si aggiungano i numeri \num{11} e \num{11}; infine si aggiunga il numero \num{33}.
 \begin{enumerate}
-\item La \emph{media ponderata} tra i  numeri \num{11}, \num{22} e \num{33}, ciascuno
-  con molteplicità \num{1}, risulta:
+\item  La  \emph{media  ponderata}  tra  i  numeri  \num{11},  \num{22}  e  \num{33},  ciascuno  con
+  molteplicità \num{1}, risulta:
   \begin{equation*}
     \frac{\num{1} \times{} \num{11}
        + \num{1} \times{} \num{22}
        + \num{1} \times{} \num{33}}{\num{3}}
     = \num{22}
   \end{equation*}
-  il  numero  totale di  numeri  \(\num{3}  = \num{1}  +  \num{1}  + \num{1}\)  è  la
-  \emph{molteplicità equivalente} del \emph{valore medio} \num{22}.
+  il numero  totale di  numeri \(\num{3}  = \num{1} +  \num{1} +  \num{1}\) è  la \emph{molteplicità
+     equivalente} del \emph{valore medio} \num{22}.
 
-\item Ora si aggiungano i numeri \num{11} e \num{11}; in totale: \num{11} compare con
-  molteplicità \num{3};  \num{22} compare con molteplicità  \num{1}; \num{33} compare
-  con molteplicità \num{1}.  La \emph{media ponderata aggiornata} risulta:
+\item Ora si aggiungano  i numeri \num{11} e \num{11}; in totale:  \num{11} compare con molteplicità
+  \num{3}; \num{22} compare con molteplicità \num{1}; \num{33} compare con molteplicità \num{1}.  La
+  \emph{media ponderata aggiornata} risulta:
   \begin{equation*}
     \frac{\num{3} \times{} \num{11}
        + \num{1} \times{} \num{22}
        + \num{1} \times{} \num{33}}{\num{5}}
     = \frac{\num{88}}{\num{5}} \simeq \num{17,6}
   \end{equation*}
-  il  numero  totale di  numeri  \(\num{5}  = \num{3}  +  \num{1}  + \num{1}\)  è  la
-  \emph{molteplicità equivalente} del \emph{valore medio} \num{17,6}.
+  il numero  totale di  numeri \(\num{5}  = \num{3} +  \num{1} +  \num{1}\) è  la \emph{molteplicità
+     equivalente} del \emph{valore medio} \num{17,6}.
 
-  È possibile  calcolare questo  risultato partendo dalla  media ponderata  del passo
-  precedente,  cioè \num{22},  combinandola con  in numeri  \num{11} e  \num{11}?  La
-  media ponderata aggiornata si può scrivere:
+  È possibile calcolare  questo risultato partendo dalla media ponderata  del passo precedente, cioè
+  \num{22}, combinandola con  in numeri \num{11} e  \num{11}?  La media ponderata  aggiornata si può
+  scrivere:
   \begin{align*}
     \frac{\num{3} \times{} \num{11}
     + \num{1} \times{} \num{22}
@@ -297,8 +285,8 @@ aggiunga il numero \num{33}.
     + \num{1} \times{} \num{22}
     + \num{1} \times{} \num{33}}{\num{5}}
   \end{align*}
-  la seconda  frazione al membro  di destra \Parentesi{il  cui numeratore è  uguale a
-     quello della media ponderata al passo precedente} si può riscrivere:
+  la seconda frazione al membro di destra \Parentesi{il cui numeratore è uguale a quello della media
+     ponderata al passo precedente} si può riscrivere:
   \begin{align*}
     \frac{\num{3}}{\num{5}} \times \frac{\num{5}}{\num{3}} \times
     \frac{\num{1} \times{} \num{11}
@@ -309,25 +297,23 @@ aggiunga il numero \num{33}.
       + \num{1} \times{} \num{22}
       + \num{1} \times{} \num{33}}{\num{3}}
   \end{align*}
-  in cui  il secondo  termine della moltiplicazione  al membro di  destra è  la media
-  ponderata  del  passo  precedente;  quindi  la  \emph{media  ponderata}  aggiornata
-  risulta:
+  in cui il secondo termine della moltiplicazione al membro di destra è la media ponderata del passo
+  precedente; quindi la \emph{media ponderata} aggiornata risulta:
   \begin{align*}
     \frac{\num{2} \times{} \num{11}}{\num{5}}
     + \frac{\num{3} \times{} \num{22}}{\num{5}}
     = \frac{\num{2} \times{} \num{11} + \num{3} \times{} \num{22}}{\num{5}}
     \simeq \num{17,6}
   \end{align*}
-  cioè  il  \emph{valore  medio}  aggiornato   \num{17,6}  è  pari  alla  \emph{media
-     ponderata} tra:
+  cioè il \emph{valore medio} aggiornato \num{17,6} è pari alla \emph{media ponderata} tra:
   \begin{itemize}
-  \item il  \emph{valore medio}  precedente \num{22},  con la  sua \emph{molteplicità
-       equivalente} \num{3};
+  \item  il \emph{valore  medio} precedente  \num{22},  con la  sua \emph{molteplicità  equivalente}
+    \num{3};
   \item il nuovo numero aggiunto \num{11}, con la sua molteplicità \num{2}.
   \end{itemize}
 
-\item  Infine  si  aggiunga  il  numero \num{33};  la  nuova  \emph{media  ponderata}
-  aggiornata è la \emph{media ponderata} totale e procedendo come prima risulta:
+\item  Infine si  aggiunga il  numero  \num{33}; la  nuova  \emph{media ponderata}  aggiornata è  la
+  \emph{media ponderata} totale e procedendo come prima risulta:
   \begin{equation*}
     \frac{\num{1} \times{} \num{33}
        + \num{5} \times{} \num{17,6}}{\num{6}}
@@ -338,19 +324,16 @@ aggiunga il numero \num{33}.
 %page
 \subsection{Intepretazione del calcolo incrementale della media ponderata}
 
-Nei calcoli di contabilità del Conto Titoli: dopo ogni acquisto di quote di un fondo,
-si calcola il \Pma{} aggiornato, di ogni quota posseduta, come \emph{media ponderata}
-tra:
+Nei calcoli di contabilità del Conto Titoli: dopo ogni  acquisto di quote di un fondo, si calcola il
+\Pma{} aggiornato, di ogni quota posseduta, come \emph{media ponderata} tra:
 \begin{itemize}
-\item  il  \Pma{} precedente,  con  il  precedente  numero  di quote  possedute  come
-  molteplicità;
-\item il prezzo delle nuove quote acquistate,  con il numero di quote acquistate come
-  molteplicità.
+\item il \Pma{} precedente, con il precedente numero di quote possedute come molteplicità;
+\item il prezzo delle nuove quote acquistate, con il numero di quote acquistate come molteplicità.
 \end{itemize}
 
-Come si  aggiorna il  \Pma{} se si  vendono delle quote?   Esso resta  invariato!  Si
-considerino  ancora  i numeri  \num{11},  \num{11},  \num{11}, \num{22},  \num{33}  e
-\num{33}; si è calcolato che la loro \emph{media ponderata} risulta:
+Come si aggiorna il \Pma{} se si vendono  delle quote?  Esso resta invariato!  Si considerino ancora
+i numeri  \num{11}, \num{11}, \num{11}, \num{22},  \num{33} e \num{33};  si è calcolato che  la loro
+\emph{media ponderata} risulta:
 \begin{equation*}
   \frac{\num{11} + \num{11} + \num{11} + \num{22} + \num{33} + \num{33}}{6}
   = \frac{\num{3} \times{} \num{11}
@@ -358,43 +341,42 @@ considerino  ancora  i numeri  \num{11},  \num{11},  \num{11}, \num{22},  \num{3
      + \num{2} \times{} \num{33}}
   {6} \simeq \num{20,17}
 \end{equation*}
-in cui \num{20,17} può essere interpretato come \Pma{} di \num{6} quote.  Si supponga
-di togliere \num{2} quote vendendole al  prezzo di \num{44}: il \Pma{} delle restanti
-\num{4} quote è ancora \num{20,17}.
+in cui \num{20,17}  può essere interpretato come  \Pma{} di \num{6} quote.  Si  supponga di togliere
+\num{2} quote  vendendole al prezzo  di \num{44}:  il \Pma{} delle  restanti \num{4} quote  è ancora
+\num{20,17}.
 
 %page
 \section{Direzione dei trasferimenti di denaro}
 
 
-Con  abusiva  semplificazione, le  somme  di  denaro  descritte  in questa  guida  si
-ritengono scambiate tra il Conto Corrente e il Conto Titoli:
+Con abusiva semplificazione, le somme di denaro descritte in questa guida si ritengono scambiate tra
+il Conto Corrente e il Conto Titoli:
 \begin{itemize}
-\item le somme di denaro \emph{investite} in  quote di fondi sono in \emph{uscita dal
-     Conto Corrente} e in \emph{entrata nel Conto Titoli};
-\item le somme di denaro \emph{disinvestite}  da quote di fondi sono in \emph{entrata
-     nel Conto Corrente} e in \emph{uscita dal Conto Titoli}.
+\item le somme di denaro \emph{investite} in quote di fondi sono in \emph{uscita dal Conto Corrente}
+  e in \emph{entrata nel Conto Titoli};
+\item le  somme di  denaro \emph{disinvestite}  da quote di  fondi sono  in \emph{entrata  nel Conto
+     Corrente} e in \emph{uscita dal Conto Titoli}.
 \end{itemize}
 
-Per esempio,  si supponga  di acquistare  quote di un  fondo per  \Eur{1000,00} tutto
-incluso; questa quantità di denaro esce dal Conto Corrente ed entra nel Conto Titoli;
-si considerino i due casi:
+Per esempio,  si supponga di acquistare  quote di un  fondo per \Eur{1000,00} tutto  incluso; questa
+quantità di denaro esce dal Conto Corrente ed entra nel Conto Titoli; si considerino i due casi:
 \begin{itemize}
-\item si vendono le quote al prezzo netto di \Eur{1200,00}; questa quantità di denaro
-  esce dal Conto Titoli ed entra nel  Conto Corrente; il bilancio delle operazioni si
-  esprime con la differenza algebrica:
+\item si vendono le quote al prezzo netto di \Eur{1200,00}; questa quantità di denaro esce dal Conto
+  Titoli ed  entra nel Conto  Corrente; il  bilancio delle operazioni  si esprime con  la differenza
+  algebrica:
   \begin{equation*}
     \num{1200,00} - \num{1000,00} = \Eur{+200,00}
   \end{equation*}
-  cioè, nel  saldo finale, \Eur{200,00} ``appaiono''  nel Conto Titoli, vi  escono ed
-  entrano nel Conto Corrente: un guadagno;
-\item si vendono le quote al prezzo  netto di \Eur{900,00}; questa quantità di denaro
-  esce dal Conto Titoli ed entra nel  Conto Corrente; il bilancio delle operazioni si
-  esprime con la differenza algebrica:
+  cioè, nel saldo finale, \Eur{200,00} \Virgolette{appaiono}  nel Conto Titoli, vi escono ed entrano
+  nel Conto Corrente: un guadagno;
+\item si vendono le quote al prezzo netto  di \Eur{900,00}; questa quantità di denaro esce dal Conto
+  Titoli ed  entra nel Conto  Corrente; il  bilancio delle operazioni  si esprime con  la differenza
+  algebrica:
   \begin{equation*}
     \num{900,00} - \num{1000,00} = \Eur{-100,00}
   \end{equation*}
-  cioè, nel saldo finale, \Eur{100,00} escono dal Conto Corrente ed entrano nel Conto
-  Titoli in cui poi ``spariscono'': una perdita;
+  cioè, nel saldo finale, \Eur{100,00} escono dal Conto  Corrente ed entrano nel Conto Titoli in cui
+  poi \Virgolette{spariscono}: una perdita;
 \end{itemize}
 le differenze algebriche hanno due interpretazioni:
 \begin{itemize}
@@ -414,12 +396,12 @@ le differenze algebriche hanno due interpretazioni:
 \newcommand{\OnePrezzoMedioCarico}{53,96}
 
 
-Scelta la strategia di  acquisto con prezzo limite: in una certa data,  e a una certa
-ora, si inserisce  l'ordine di acquisto per un  numero di quote del fondo  a un certo
-prezzo massimo (si può acquistare a qualsiasi prezzo al di sotto del limite fissato).
-L'ordine  può essere  eseguito  in piú  fasi  in cui  solo una  parte  delle quote  è
-acquistata, in  ogni fase a  un prezzo  diverso; è possibile  che non tutte  le quote
-siano acquistate, nel qual caso ci interessa solo la parte ``eseguita'' dell'ordine.
+Scelta  la strategia  di acquisto  con prezzo  limite: in  una certa  data, e  a una  certa ora,  si
+inserisce l'ordine di  acquisto per un numero di quote  del fondo a un certo prezzo  massimo (si può
+acquistare a qualsiasi prezzo al di sotto del  limite fissato).  L'ordine può essere eseguito in piú
+fasi in cui solo una  parte delle quote è acquistata, in ogni fase a  un prezzo diverso; è possibile
+che  non   tutte  le  quote   siano  acquistate,   nel  qual  caso   ci  interessa  solo   la  parte
+\Virgolette{eseguita} dell'ordine.
 
 Il \textbf{prezzo  medio eseguito di  un acquisto} (nella terminologia  della Banca),
 anche  detto  \textbf{prezzo medio  effettivo  di  un acquisto}  (nella  terminologia
@@ -602,9 +584,9 @@ quote; \emph{prezzo  medio di  carico} di \Eur{0};  \emph{prezzo medio  effettiv
   \end{equation*}
 \end{enumerate}
 
-Evidenziando i prezzi medi: ogni nuova quota acquistata viene ``buttata nel secchio''
-insieme alle  vecchie, indipendentemente dal suo  prezzo di acquisto; è  come se ogni
-quota fosse stata acquistata allo stesso prezzo, pari al prezzo medio.
+Evidenziando  i prezzi  medi: ogni  nuova quota  acquistata viene  \Virgolette{buttata nel  secchio}
+insieme alle vecchie, indipendentemente dal suo prezzo di acquisto; è come se ogni quota fosse stata
+acquistata allo stesso prezzo, pari al prezzo medio.
 
 Si  osservi come,  \textbf{solo quando  si sono  eseguiti degli  acquisti ma  nessuna
    vendita}:
@@ -663,12 +645,11 @@ dopo la prima operazione di vendita: queste proprietà non valgono piú!
 \Define{\RendimentoInValuta}{250,29}
 
 
-Scelta la strategia  di vendita con prezzo limite:  in una certa data, e  a una certa
-ora, si  inserisce l'ordine di vendita  per un numero di  quote del fondo a  un certo
-prezzo minimo  (si può vendere  a qualsiasi prezzo al  di sopra del  limite fissato).
-L'ordine può essere eseguito in piú fasi in cui solo una parte delle quote è venduta,
-in ogni fase a  un prezzo diverso; è possibile che non tutte  le quote siano vendute,
-nel qual caso ci interessa solo la parte ``eseguita'' dell'ordine.
+Scelta la strategia di vendita con prezzo limite: in una certa data, e a una certa ora, si inserisce
+l'ordine di  vendita per un numero  di quote del  fondo a un certo  prezzo minimo (si può  vendere a
+qualsiasi prezzo al di  sopra del limite fissato).  L'ordine può essere eseguito  in piú fasi in cui
+solo una parte delle quote è venduta, in ogni fase a un prezzo diverso; è possibile che non tutte le
+quote siano vendute, nel qual caso ci interessa solo la parte \Virgolette{eseguita} dell'ordine.
 
 Il \textbf{prezzo medio eseguito di  vendita} (nella terminologia della Banca), anche
 detto  \textbf{prezzo medio  effettivo di  vendita} (nella  terminologia dell'Agenzia
@@ -789,10 +770,10 @@ allo  scopo di  far  risultare un  numero  negativo, la  circolare  specifica ch
   = - \left( \num{\CostoOperazione} + \num{\CostoAcquistoQuoteVendute} \right)
   = \Eur{\RedditoDiverso}
 \end{equation*}
-questa minusvalenza  viene automaticamente  registrata dalla Banca  nella ``Posizione
-Fiscale'' del Conto Titoli; da notare che \textbf{le minusvalenze derivanti dai costi
-   di acquisto  e vendita  sono registrate  nella Posizione  Fiscale solo  al momento
-   della vendita di quote}, al momento dell'acquisto nulla viene registrato.
+questa  minusvalenza  viene  automaticamente  registrata  dalla  Banca  nella  \Virgolette{Posizione
+   Fiscale} del Conto Titoli; da notare che  \textbf{le minusvalenze derivanti dai costi di acquisto
+   e vendita  sono registrate nella Posizione  Fiscale solo al  momento della vendita di  quote}, al
+momento dell'acquisto nulla viene registrato.
 
 Il \textbf{controvalore totale di vendita}  è la differenza tra il \emph{controvalore
    dell'operazione} e  la somma  tra \emph{costo  dell'operazione} e  \emph{tassa sul
@@ -807,14 +788,13 @@ entrata nel Conto Corrente.  Per esempio, se il \emph{controvalore dell'operazio
   = \Eur{\ControvaloreTotale}
 \end{equation*}
 
-In  un'operazione di  vendita le  quote vengono  ``scaricate'' dal  Conto Titoli:  la
-vendita modifica solo il  numero di quote in carico nel  saldo, il \emph{prezzo medio
-   di carico nel  saldo} resta invariato da  prima a dopo la vendita.   Allo scopo di
-calcolare il rendimento  dell'operazione, si definisce il  \textbf{prezzo medio netto
-   di vendita}  pari al  rapporto tra  il \emph{controvalore totale}  e il  numero di
-quote  vendute.   Per  esempio,  se  si  sono  vendute  \num{\NumeroQuote}  quote  al
-\emph{controvalore totale} di \Eur{\ControvaloreTotale},  il \emph{prezzo medio netto
-   di vendita} risulta:
+In un'operazione  di vendita le  quote vengono \Virgolette{scaricate}  dal Conto Titoli:  la vendita
+modifica solo  il numero di quote  in carico nel saldo,  il \emph{prezzo medio di  carico nel saldo}
+resta invariato da prima a dopo la  vendita.  Allo scopo di calcolare il rendimento dell'operazione,
+si definisce il  \textbf{prezzo medio netto di  vendita} pari al rapporto  tra il \emph{controvalore
+   totale} e il numero  di quote vendute.  Per esempio, se si  sono vendute \num{\NumeroQuote} quote
+al \emph{controvalore totale} di \Eur{\ControvaloreTotale},  il \emph{prezzo medio netto di vendita}
+risulta:
 \begin{equation*}
   \num{\ControvaloreTotale} / \num{\NumeroQuote} = \Eur{\PrezzoMedioNetto}
 \end{equation*}
@@ -1190,8 +1170,6 @@ guadagno.
 %%% end of file
 % Local Variables:
 % mode: latex
-% page-delimiter: "^%page"
 % TeX-master: t
 % ispell-local-dictionary: "italiano"
-% fill-column: 85
 % End:
