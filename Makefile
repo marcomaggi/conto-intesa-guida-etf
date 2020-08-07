@@ -100,9 +100,9 @@ endif
 
 ## --------------------------------------------------------------------
 
-.PHONY: bootstrap-latex latex-bootstrap clean-latex latex-clean
+.PHONY: bootstrap clean-latex latex-clean
 
-bootstrap-latex latex-bootstrap:
+bootstrap:
 	$(LATEX) conto-intesa-guida-etf.tex
 	$(LATEX) conto-intesa-guida-etf.tex
 	$(LATEX) conto-intesa-guida-etf.tex
