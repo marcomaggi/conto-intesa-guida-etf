@@ -1,14 +1,15 @@
 # Makefile --
 
 PROGRAMS	= \
-	conto-intesa--calcoli-esempio--etf-abcd			\
-	conto-intesa--calcoli-esempio--etf-xyz			\
+	conto-intesa--calcoli-esempio--etf-abcd						\
+	conto-intesa--calcoli-esempio--etf-xyz						\
 	\
-	conto-intesa--calcoli-esempio--operazione-acquisto	\
-	conto-intesa--calcoli-esempio--saldo-acquisto		\
-	conto-intesa--calcoli-esempio--operazione-vendita	\
-	conto-intesa--calcoli-esempio--rendimento-riepilogo	\
-	conto-intesa--calcoli-esempio--strategie-prezzi
+	conto-intesa--calcoli-esempio--operazione-acquisto				\
+	conto-intesa--calcoli-esempio--saldo-acquisto					\
+	conto-intesa--calcoli-esempio--operazione-vendita				\
+	conto-intesa--calcoli-esempio--rendimento-riepilogo				\
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata		\
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento
 
 DOCUMENTS	= \
 	conto-intesa-guida-etf.pdf
@@ -26,7 +27,7 @@ all: $(PROGRAMS) $(DOCUMENTS)
 clean: clean-latex
 	$(RM) $(CLEANFILES)
 
-#page
+
 #### programmi per calcoli negli esempi della guida
 
 CLEANFILES	+= *.o
@@ -67,8 +68,14 @@ conto-intesa--calcoli-esempio--rendimento-riepilogo:		\
 		 conto-intesa--calcoli-esempio--rendimento-riepilogo.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
-conto-intesa--calcoli-esempio--strategie-prezzi:		\
-		 conto-intesa--calcoli-esempio--strategie-prezzi.c conto-intesa--calcoli-esempio.h
+conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata:			\
+		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.c	\
+		conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+
+conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento:		        \
+		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.c	\
+		conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
 
 ## --------------------------------------------------------------------
@@ -78,7 +85,7 @@ CLEANFILES	+= demo
 demo: demo.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $< && ./demo
 
-#page
+
 #### documenti
 
 CLEANFILES	+= \

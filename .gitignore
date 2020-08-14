@@ -60,4 +60,5 @@ conto-intesa--calcoli-esempio--saldo-acquisto
 conto-intesa--calcoli-esempio--operazione-vendita
 conto-intesa--calcoli-esempio--saldo-vendita
 conto-intesa--calcoli-esempio--rendimento-riepilogo
-conto-intesa--calcoli-esempio--strategie-prezzi
+conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata
+conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento
