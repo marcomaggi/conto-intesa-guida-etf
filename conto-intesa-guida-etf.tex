@@ -44,6 +44,54 @@
 
 \newcommand{\Pma}{\emph{prezzo medio di acquisto}}
 
+\newcommand{\PrezzoMedioEseguitoAcquisto}{\emph{prezzo medio eseguito di acquisto}}
+\newcommand{\PrezzoMedioEseguitoVendita}{\emph{prezzo medio eseguito di vendita}}
+
+\newcommand{\PrezzoMedioEffettivoAcquisto}{\emph{prezzo medio effettivo di acquisto}}
+\newcommand{\PrezzoMedioEffettivoVendita}{\emph{prezzo medio effettivo di vendita}}
+
+\newcommand{\PrezzoMedioCaricoAcquisto}{\emph{prezzo medio di carico di acquisto}}
+\newcommand{\PrezzoMedioEffettivoNelSaldo}{\emph{prezzo medio effettivo nel saldo}}
+\newcommand{\PrezzoMedioCaricoSaldo}{\emph{prezzo medio di carico nel saldo}}
+
+\newcommand{\PrezzoMedioNettoVendita}{\emph{prezzo medio netto di vendita}}
+
+\newcommand{\ControvaloreTotaleVendita}{\emph{controvalore totale di vendita}}
+\newcommand{\ControvaloreTotaleAcquisto}{\emph{controvalore totale di acquisto}}
+
+\newcommand{\RedditoCapitale}{\emph{reddito da capitale}}
+\newcommand{\RedditoDiverso}{\emph{reddito diverso}}
+\newcommand{\TasseRedditoCapitale}{\emph{tasse sul reddito da capitale}}
+\newcommand{\UtilePercentuale}{\emph{utile percentuale}}
+\newcommand{\UtileValuta}{\emph{utile in valuta}}
+\newcommand{\PerditaPercentuale}{\emph{perdita percentuale}}
+\newcommand{\PerditaValuta}{\emph{perdita in valuta}}
+\newcommand{\RendimentoPercentuale}{\emph{rendimento percentuale}}
+\newcommand{\RendimentoValuta}{\emph{rendimento in valuta}}
+
+%% ------------------------------------------------------------------------
+
+% Prezzo medio di effettivo, prezzo medio eseguito
+\newcommand{\Pme}[1]{P_{\mathrm{me}#1}}
+
+% Prezzo medio effettivo di acquisto
+\newcommand{\Pmea}[1]{\Pme{\mathrm{a}#1}}
+
+% Prezzo medio effettivo di vendita
+\newcommand{\Pmev}[1]{\Pme{\mathrm{v}#1}}
+
+% Prezzo medio effettivo nel saldo
+\newcommand{\Pmes}[1]{\Pme{\mathrm{s}#1}}
+
+% Prezzo medio di carico
+\newcommand{\Pmc}[1]{P_{\mathrm{mc}#1}}
+
+% Prezzo medio di carico di acquisto
+\newcommand{\Pmca}[1]{\Pmc{\mathrm{a}#1}}
+
+% Prezzo medio di carico nel saldo
+\newcommand{\Pmcs}[1]{\Pmc{\mathrm{s}#1}}
+
 %page
 %% ------------------------------------------------------------
 %% Intestazione
@@ -1109,71 +1157,212 @@ risolvendo rispetto a \(X\):
 vendendo con un \emph{prezzo medio eseguito} maggiore di \Eur{50,4067} si realizza un guadagno.
 
 %page
-\subsection{Accoppiamento delle linee di investimento}
+\subsection{Metodo delle linee di investimento}
 
 
 Si è visto  come, dal punto di  vista contabile: tutte le quote  di uno stesso \Etf{}  in carico nel
-Conto Titoli, sono  parte dello stesso insieme;  in particolare, per ogni operazione  di vendita: le
-\emph{tasse sul reddito da capitale} si calcolano  rispetto al valore attuale del \emph{prezzo medio
-   effettivo nel  saldo}, indipendentemente da  quanti acquisti si siano  eseguiti in passato  e dal
-loro \emph{prezzo medio effettivo di acquisto}.
+Conto Titoli siano  parte dello stesso insieme;  in particolare, per ogni operazione  di vendita: le
+\emph{tasse   sul   reddito  da   capitale}   si   calcolano   rispetto   al  valore   attuale   del
+\PrezzoMedioEffettivoNelSaldo{}, indipendentemente da quanti acquisti si siano eseguiti in passato e
+dal loro \PrezzoMedioEffettivoAcquisto{}.
 
 Nonostante ciò, si immagini questo scenario:
 \begin{itemize}
-\item si dispone di un capitale di \Eur{15000,00};
-\item si vogliono  definire tre \Virgolette{linee di investimento} formalmente  separate, dal nostro
-  punto di vista; a ciascuna linea si allocano \Eur{5000,00};
-\item come primo investimento, per ciascuna linea, si acquistano quote dello stesso \Etf{};
-\item  in futuro  si prevede  di  vendere queste  quote  e acquistare  prodotti diversi,  mantenendo
-  separato il destino di ognuno dei tre capitali iniziali da \Eur{5000,00};
-\item ciò che vogliamo è che ogni linea di investimento risulti redditizia.
+\item si disponga di un capitale di \Eur{15000,00};
+\item si vogliano  definire tre \Virgolette{linee di investimento} formalmente  separate, dal nostro
+  punto di vista; a ciascuna linea si allochino \Eur{5000,00};
+\item come primo investimento, per ciascuna linea, si acquistino quote dello stesso \Etf{};
+\item in futuro si  prevede di vendere queste quote e acquistare, per  ogni linea, prodotti diversi,
+  mantenendo separato il destino di ognuno dei tre capitali iniziali da \Eur{5000,00};
+\item si vuole che ogni linea di investimento risulti redditizia.
 \end{itemize}
 
-Si cerca di  vendere ogni singola quota a  un \emph{prezzo medio netto di vendita}  maggiore del suo
-\emph{prezzo medio di carico di acquisto}.  Per esempio, si supponga di eseguire le operazioni:
+Le operazioni di acquisto siano come segue:
 \begin{enumerate}
-\item acquisto di \num{101} quote al \emph{prezzo medio di carico di acquisto} pari a \Eur{51,00};
-\item acquisto di \num{102} quote al \emph{prezzo medio di carico di acquisto} pari a \Eur{52,00};
-\item acquisto di \num{103} quote al \emph{prezzo medio di carico di acquisto} pari a \Eur{53,00};
-\item vendita di \num{101} quote a un \emph{prezzo medio netto di vendita} pari a \Eur{55,10};
-\item vendita di \num{102} quote a un \emph{prezzo medio netto di vendita} pari a \Eur{55,20};
-\item vendita di \num{103} quote a un \emph{prezzo medio netto di vendita} pari a \Eur{55,30};
+\item per la prima  linea di investimento si acquisti quando il prezzo  di mercato è \Eur{40,00} per
+  quota; il numero di quote acquistabili risulta:
+  \begin{equation*}
+    \num{5000,00} / \num{40,00} = \num{125}
+  \end{equation*}
+  il riassunto dell'operazione di acquisto per la prima linea è:
+  \begin{itemize}
+  \item numero quote \num{125};
+  \item prezzo medio eseguito di acquisto \Eur{40,00};
+  \item controvalore dell'operazione \Eur{5000,00};
+  \item costo dell'operazione di acquisto \Eur{15,00};
+  \item controvalore totale \Eur{5015,00};
+  \item prezzo medio di carico di acquisto \Eur{40,12};
+  \end{itemize}
+\item per la seconda linea di investimento si acquisti quando il prezzo di mercato è \Eur{50,00} per
+  quota; il numero di quote acquistabili risulta:
+  \begin{equation*}
+    \num{5000,00} / \num{50,00} = \num{100}
+  \end{equation*}
+  il riassunto dell'operazione di acquisto per la seconda linea è:
+  \begin{itemize}
+  \item numero quote \num{100};
+  \item prezzo medio eseguito di acquisto \Eur{50,00};
+  \item controvalore dell'operazione \Eur{5000,00};
+  \item costo dell'operazione di acquisto \Eur{15,00};
+  \item controvalore totale \Eur{5015,00};
+  \item prezzo medio di carico di acquisto \Eur{50,15};
+  \end{itemize}
+\item per la terza  linea di investimento si acquisti quando il prezzo  di mercato è \Eur{60,00} per
+  quota; il numero di quote acquistabili risulta:
+  \begin{equation*}
+    \num{5000,00} / \num{60,00} \simeq{} \num{83,33}
+  \end{equation*}
+  arrotondato a \num{83}, da cui un capitale effettivamente investito pari a:
+  \begin{equation*}
+    \num{83} \times{} \num{60,00} = \Eur{4980,00}
+  \end{equation*}
+  il riassunto dell'operazione di acquisto per la terza linea è:
+  \begin{itemize}
+  \item numero quote \num{83};
+  \item prezzo medio eseguito di acquisto \Eur{60,00};
+  \item controvalore dell'operazione \Eur{4980,00};
+  \item costo dell'operazione di acquisto \Eur{14,95};
+  \item controvalore totale \Eur{4994,95};
+  \item prezzo medio di carico di acquisto \Eur{60,18}.
+  \end{itemize}
 \end{enumerate}
-per ogni gruppo di quote acquistate e poi vendute:
+
+Nel Conto Titoli compare il saldo per il numero totale di quote acquistate:
+\begin{equation*}
+  \num{125} + \num{100} + \num{83} = \num{308}
+\end{equation*}
+il  \emph{prezzo medio  effettivo nel  saldo} risulta  dalla media  ponderata dei  \emph{prezzi medi
+   effettivi di acquisto}:
+\begin{equation*}
+  \frac{\num{125} \times{} \num{40,00} + \num{100} \times{} \num{50,00} + \num{83} \times{} \num{60}}
+  {\num{125} + \num{100} + \num{83}} = \Eur{48,6364}
+\end{equation*}
+il \emph{prezzo medio  di carico nel saldo}  risulta dalla media ponderata dei  \emph{prezzi medi di
+   carico di acquisto}:
+\begin{equation*}
+  \frac{\num{125} \times{} \num{40,12} + \num{100} \times{} \num{50,15} + \num{83} \times{} \num{60,18}}
+  {\num{125} + \num{100} + \num{83}} = \Eur{48,7823}
+\end{equation*}
+
+Si è osservato  in precedenza che quando si  esegue una vendita parziale delle quote  in carico: nel
+saldo del  Conto Titoli l'unico numero  che cambia è il  numero di quote in  carico, il \emph{prezzo
+   medio effettivo nel saldo}  e il \emph{prezzo medio di carico nel  saldo} restano invariati!  Ciò
+significa che  \textbf{l'ordine con  cui si  liquidano le quote  delle tre  linee di  investimento è
+   ininfluente ai fini dei rendimenti ottenuti}.
+
+%page
+\paragraph{Vendita delle quote della prima linea di investimento.}
+Si liquidino le \num{125} quote della  prima linea di investimento al \PrezzoMedioEffettivoVendita{}
+di \Eur{46,00}, maggiore del \PrezzoMedioCaricoAcquisto{}  delle quote stesse \Eur{40,12}, ma minore
+del \PrezzoMedioCaricoSaldo{} \Eur{48,7823}.  Il riassunto  della contabilità fiscale come calcolato
+dalla Banca è il seguente:
 \begin{itemize}
-\item accoppiando le operazioni \num{1} e \num{4}, il rendimento percentuale risulta:
-  \begin{equation*}
-    \CalcoloRendimentoPercentuale{55,10}{51,00} = \SI{8,04}{\percent}
-  \end{equation*}
-  il rendimento in valuta risulta:
-  \begin{equation*}
-    \num{101} \times (\num{55,10} - \num{51,00}) = \Eur{414,10}
-  \end{equation*}
-
-\item accoppiando le operazioni \num{2} e \num{5}, il rendimento percentuale risulta:
-  \begin{equation*}
-    \CalcoloRendimentoPercentuale{55,20}{52,00} = \SI{6,15}{\percent}
-  \end{equation*}
-  il rendimento in valuta risulta:
-  \begin{equation*}
-    \num{102} \times (\num{55,20} - \num{52,00}) = \Eur{326,40}
-  \end{equation*}
-
-\item accoppiando le operazioni \num{3} e \num{6}, il rendimento percentuale risulta:
-  \begin{equation*}
-    \CalcoloRendimentoPercentuale{55,30}{53,00} = \SI{4,34}{\percent}
-  \end{equation*}
-  il rendimento in valuta risulta:
-  \begin{equation*}
-    \num{103} \times (\num{55,30} - \num{53,00}) = \Eur{236,90}
-  \end{equation*}
+\item numero quote \num{125};
+\item prezzo medio effettivo di vendita \Eur{46,00};
+\item controvalore dell'operazione di vendita \Eur{5750,00};
+\item reddito da capitale da plusvalenza sul capitale \Eur{0,00};
+\item tassa sul reddito da capitale \Eur{0,00};
+\item costo dell'operazione di vendita \Eur{16,80};
+\item costo di acquisto delle quote vendute \Eur{18,24};
+\item reddito diverso da minusvalenza sul capitale \Eur{-329,55};
+\item reddito diverso da pagamento commissioni \Eur{-35,04};
+\item reddito diverso totale \Eur{-364,59};
+\item minusvalenza registrata nella posizione fiscale \Eur{364,59};
+\item controvalore totale di vendita \Eur{5733,20}, sono i soldi che tornano sul Conto Corrente;
+\item prezzo medio netto di vendita \Eur{45,8656};
+\item rendimento percentuale rispetto al \PrezzoMedioCaricoSaldo{} \SI{-5,9790}{\percent};
+\item rendimento in valuta rispetto al \PrezzoMedioCaricoSaldo{} \Eur{-364,59}.
 \end{itemize}
+Il risultato di  questa operazione dal punto di  vista della prima linea di  investimento può essere
+calcolato in due modi:
+\begin{enumerate}
+\item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
+  \emph{controvalore totale  di acquisto} \Eur{5015,00},  e la quantità  di soldi entrata  nel Conto
+  Corrente dopo la vendita delle quote, cioè il \emph{controvalore totale di vendita} \Eur{5733,20};
+\item con il \emph{prezzo medio di carico di  acquisto} \Eur{40,12} e il \emph{prezzo medio netto di
+     vendita} \Eur{45,8656};
+\end{enumerate}
+il rendimento della compravendita risulta:
+\begin{equation*}
+  \CalcoloRendimentoPercentuale{5733,20}{5015,00} =
+  \CalcoloRendimentoPercentuale{45,8656}{40,12} = \SI{14,32}{\percent}
+\end{equation*}
 
-Con  questo metodo,  i dati  del  saldo sono  usati per  calcolare:  le \emph{tasse  sui redditi  da
-   capitale}, le  minusvalenze accumulate e  i \emph{prezzi medi netti  di vendita}; quindi  tutti i
-calcoli  \textbf{devono}  essere  eseguiti.   Però,   ogni  operazione  di  acquisto  è  considerata
-separatamente dalle altre  per quanto riguarda la  scelta del prezzo di vendita  e la determinazione
-del conseguente rendimento.
+%page
+\paragraph{Vendita delle quote della seconda linea di investimento.}
+Si    liquidino    le    \num{100}    quote    della    seconda    linea    di    investimento    al
+\PrezzoMedioEffettivoVendita{} di  \Eur{49,50}, minore del \PrezzoMedioCaricoAcquisto{}  delle quote
+stesse \Eur{50,00},  ma maggiore  del \PrezzoMedioCaricoSaldo{}  \Eur{48,7823}.  Il  riassunto della
+contabilità fiscale come calcolato dalla Banca è il seguente:
+\begin{itemize}
+\item numero quote \num{100};
+\item prezzo medio effettivo di vendita \Eur{49,50};
+\item controvalore dell'operazione di vendita \Eur{4950,00};
+\item reddito da capitale da plusvalenza sul capitale \Eur{86,36};
+\item tassa sul reddito da capitale \Eur{22,45};
+\item costo dell'operazione di vendita \Eur{14,88};
+\item costo di acquisto delle quote vendute \Eur{14,59};
+\item reddito diverso da minusvalenza sul capitale \Eur{0,00};
+\item reddito diverso da pagamento commissioni \Eur{-29,47};
+\item reddito diverso totale \Eur{-29,47};
+\item minusvalenza registrata nella posizione fiscale \Eur{29,47};
+\item controvalore totale di vendita \Eur{4912,67}, sono i soldi che tornano sul Conto Corrente;
+\item prezzo medio netto di vendita \Eur{49,1267};
+\item rendimento percentuale rispetto al \PrezzoMedioCaricoSaldo{} \SI{0,7059}{\percent};
+\item rendimento in valuta rispetto al \PrezzoMedioCaricoSaldo{} \Eur{34,43}.
+\end{itemize}
+Il risultato di questa operazione dal punto di  vista della seconda linea di investimento può essere
+calcolato in due modi:
+\begin{enumerate}
+\item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
+  \emph{controvalore totale  di acquisto} \Eur{5000,00},  e la quantità  di soldi entrata  nel Conto
+  Corrente dopo la vendita delle quote, cioè il \emph{controvalore totale di vendita} \Eur{4912,67};
+\item con il \emph{prezzo medio di carico di  acquisto} \Eur{40,12} e il \emph{prezzo medio netto di
+     vendita} \Eur{45,8656};
+\end{enumerate}
+il rendimento della compravendita risulta:
+\begin{equation*}
+  \CalcoloRendimentoPercentuale{4912,67}{5000,00} =
+  \CalcoloRendimentoPercentuale{49,13}{50,15} = \SI{-2,04}{\percent}
+\end{equation*}
+
+%page
+\paragraph{Vendita delle quote della terza linea di investimento.}
+Si liquidino le  \num{83} quote della terza linea di  investimento al \PrezzoMedioEffettivoVendita{}
+di \Eur{65,00}, maggiore del \PrezzoMedioCaricoAcquisto{}  delle quote stesse \Eur{60,00} e maggiore
+del \PrezzoMedioCaricoSaldo{} \Eur{48,7823}.  Il riassunto  della contabilità fiscale come calcolato
+dalla Banca è il seguente:
+\begin{itemize}
+\item numero quote \num{83};
+\item prezzo medio effettivo di vendita \Eur{65,00};
+\item controvalore dell'operazione di vendita \Eur{5395,00};
+\item reddito da capitale da plusvalenza sul capitale \Eur{1358,18};
+\item tassa sul reddito da capitale \Eur{353,13};
+\item costo dell'operazione di vendita \Eur{15,95};
+\item costo di acquisto delle quote vendute \Eur{12,11};
+\item reddito diverso da minusvalenza sul capitale \Eur{0,00};
+\item reddito diverso da pagamento commissioni \Eur{-28,06};
+\item reddito diverso totale \Eur{-28,06};
+\item minusvalenza registrata nella posizione fiscale \Eur{28,06};
+\item controvalore totale di vendita \Eur{5025,92}, sono i soldi che tornano sul Conto Corrente;
+\item prezzo medio netto di vendita \Eur{60,5533};
+\item rendimento percentuale rispetto al \PrezzoMedioCaricoSaldo{} {\SI{24,1296}{\percent}};
+\item rendimento in valuta rispetto al \PrezzoMedioCaricoSaldo{} \Eur{976,99}.
+\end{itemize}
+Il risultato di  questa operazione dal punto di  vista della terza linea di  investimento può essere
+calcolato in due modi:
+\begin{enumerate}
+\item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
+  \ControvaloreTotaleAcquisto{} \Eur{4994,95},  e la  quantità di soldi  entrata nel  Conto Corrente
+  dopo la vendita delle quote, cioè il \ControvaloreTotaleVendita{} \Eur{5025,92};
+\item   con   il   \PrezzoMedioCaricoAcquisto{}  \Eur{60,1801}   e   il   \PrezzoMedioNettoVendita{}
+  \Eur{60,5533};
+\end{enumerate}
+il rendimento della compravendita risulta:
+\begin{equation*}
+  \CalcoloRendimentoPercentuale{5733,20}{4994,95} =
+  \CalcoloRendimentoPercentuale{60,5533}{60,1801} = \SI{0,62}{\percent}
+\end{equation*}
 
 %page
 %% ------------------------------------------------------------

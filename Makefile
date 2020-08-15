@@ -35,55 +35,56 @@ CLEANFILES	+= *.o
 CC		= gcc -std=c11
 CFLAGS		= -Wall
 CPPFLAGS	= -I.
+LDFLAGS		= -lm
 
 ## --------------------------------------------------------------------
 
 conto-intesa--calcoli-esempio--etf-abcd:		\
 		conto-intesa--calcoli-esempio--etf-abcd.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--etf-xyz:		\
 		conto-intesa--calcoli-esempio--etf-xyz.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 ## --------------------------------------------------------------------
 
 conto-intesa--calcoli-esempio--operazione-acquisto:	\
 		conto-intesa--calcoli-esempio--operazione-acquisto.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--saldo-acquisto:		\
 		conto-intesa--calcoli-esempio--saldo-acquisto.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--operazione-vendita:	\
 		conto-intesa--calcoli-esempio--operazione-vendita.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--saldo-vendita:		\
 		 conto-intesa--calcoli-esempio--saldo-vendita.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--rendimento-riepilogo:		\
 		 conto-intesa--calcoli-esempio--rendimento-riepilogo.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata:			\
 		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.c	\
 		conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento:		        \
 		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.c	\
 		conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
 ## --------------------------------------------------------------------
 
 CLEANFILES	+= demo
 
 demo: demo.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ $< && ./demo
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $< && ./demo
 
 
 #### documenti

@@ -9,7 +9,7 @@
 	Calcoli di  esempio nella  guida, per la  sezione "Aggiornamento
 	del saldo dopo un'operazione di acquisto".
 
-   Copyright (C) 2017, 2018 Marco Maggi <mrc.mgg@gmail.com>
+   Copyright (C) 2017, 2018, 2020 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -263,9 +263,18 @@ struct operazione_vendita_t {
      medio effettivo nel saldo. */
   double		reddito_da_capitale;
 
-  /* Redditi  diversi  dovuti  alla  vendita  di  quote.   È  un  numero
-     negativo. */
-  double		reddito_diverso;
+  /* Reddito diverso  dovuto a una  minusvalenza sul  capitale dopo la  vendita delle
+     quote.  Se la vendita genera una plusvalenza: questo valore è zero. */
+  double		reddito_diverso_minusvalenza_capitale;
+
+  /* Reddito diverso  dovuto al  pagamento di  commissioni di  compravendita.  Questo
+     valore è sempre strettamente negativo. */
+  double		reddito_diverso_pagamento_commissioni;
+
+  /* Reddito diverso totale dovuto alla vendita di quote.  È un numero negativo somma
+     tra il reddito diverso da minusvalenza  sul capitale e il reddito diverso dovuto
+     al pagamento delle commissioni. */
+  double		reddito_diverso_totale;
 
   /* Tassa sul reddito da capitale. */
   double		tassa_sul_reddito_da_capitale;
@@ -336,9 +345,9 @@ operazione_vendita_init (operazione_vendita_t * const O, saldo_t const * const S
   O->rendimento_percentuale		= calcolo_rendimento_percentuale(O->prezzo_medio_netto, S_precedente->prezzo_medio_carico);
   O->rendimento_in_valuta		= O->numero_quote * (O->prezzo_medio_netto - S_precedente->prezzo_medio_carico);
 
-  O->reddito_diverso			=
-    ((reddito_vendita - (O->costo_acquisto_quote_vendute + O->costo_operazione_vendita)) - reddito_vendita)
-    + ((reddito_vendita > 0.0)? 0.0 : reddito_vendita);
+  O->reddito_diverso_minusvalenza_capitale = ((reddito_vendita > 0.0)? 0.0 : reddito_vendita);
+  O->reddito_diverso_pagamento_commissioni = (reddito_vendita - (O->costo_acquisto_quote_vendute + O->costo_operazione_vendita)) - reddito_vendita;
+  O->reddito_diverso_totale		= O->reddito_diverso_pagamento_commissioni + O->reddito_diverso_minusvalenza_capitale;
 }
 
 void
@@ -355,8 +364,10 @@ operazione_vendita_print_ascii (FILE * stream, operazione_vendita_t const * cons
   fprintf(stream, "%-40s= %10.2f EUR\n",	"tassa sul reddito da capitale",	O->tassa_sul_reddito_da_capitale);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo dell'operazione di vendita",	O->costo_operazione_vendita);
   fprintf(stream, "%-40s= %10.2f EUR\n",	"costo di acquisto quote vendute",	O->costo_acquisto_quote_vendute);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito diverso",			O->reddito_diverso);
-  fprintf(stream, "%-40s= %10.2f EUR\n",	"minusvalenza",				-(O->reddito_diverso));
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito diverso da minusvalenza sul capitale", O->reddito_diverso_minusvalenza_capitale);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito diverso da pagamento commissioni", O->reddito_diverso_pagamento_commissioni);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"reddito diverso totale",		O->reddito_diverso_totale);
+  fprintf(stream, "%-40s= %10.2f EUR\n",	"minusvalenza",				-(O->reddito_diverso_totale));
   fprintf(stream, "\n");
   fprintf(stream, "%-40s= %10.2f EUR\n",	"controvalore totale",			O->controvalore_totale);
   fprintf(stream, "%-40s= %12.4f EUR\n",	"prezzo medio netto",			O->prezzo_medio_netto);
@@ -384,7 +395,7 @@ saldo_vendita_init (saldo_t * const S, operazione_vendita_t const * const O, sal
     S->costo_medio_acquisti	= 0.0;
     S->controvalore_carico	= 0.0;
   }
-  S->minusvalenze_accumulate	= S_precedente->minusvalenze_accumulate - O->reddito_diverso;
+  S->minusvalenze_accumulate	= S_precedente->minusvalenze_accumulate - O->reddito_diverso_totale;
 }
 
 
