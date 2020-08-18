@@ -42,33 +42,6 @@
 \newcommand{\Virgolette}[1]{``#1''}
 \newcommand{\Etf}[1]{\textsc{etf}}
 
-\newcommand{\Pma}{\emph{prezzo medio di acquisto}}
-
-\newcommand{\PrezzoMedioEseguitoAcquisto}{\emph{prezzo medio eseguito di acquisto}}
-\newcommand{\PrezzoMedioEseguitoVendita}{\emph{prezzo medio eseguito di vendita}}
-
-\newcommand{\PrezzoMedioEffettivoAcquisto}{\emph{prezzo medio effettivo di acquisto}}
-\newcommand{\PrezzoMedioEffettivoVendita}{\emph{prezzo medio effettivo di vendita}}
-
-\newcommand{\PrezzoMedioCaricoAcquisto}{\emph{prezzo medio di carico di acquisto}}
-\newcommand{\PrezzoMedioEffettivoNelSaldo}{\emph{prezzo medio effettivo nel saldo}}
-\newcommand{\PrezzoMedioCaricoSaldo}{\emph{prezzo medio di carico nel saldo}}
-
-\newcommand{\PrezzoMedioNettoVendita}{\emph{prezzo medio netto di vendita}}
-
-\newcommand{\ControvaloreTotaleVendita}{\emph{controvalore totale di vendita}}
-\newcommand{\ControvaloreTotaleAcquisto}{\emph{controvalore totale di acquisto}}
-
-\newcommand{\RedditoCapitale}{\emph{reddito da capitale}}
-\newcommand{\RedditoDiverso}{\emph{reddito diverso}}
-\newcommand{\TasseRedditoCapitale}{\emph{tasse sul reddito da capitale}}
-\newcommand{\UtilePercentuale}{\emph{utile percentuale}}
-\newcommand{\UtileValuta}{\emph{utile in valuta}}
-\newcommand{\PerditaPercentuale}{\emph{perdita percentuale}}
-\newcommand{\PerditaValuta}{\emph{perdita in valuta}}
-\newcommand{\RendimentoPercentuale}{\emph{rendimento percentuale}}
-\newcommand{\RendimentoValuta}{\emph{rendimento in valuta}}
-
 %% ------------------------------------------------------------------------
 
 % Prezzo medio di effettivo, prezzo medio eseguito
@@ -91,6 +64,9 @@
 
 % Prezzo medio di carico nel saldo
 \newcommand{\Pmcs}[1]{\Pmc{\mathrm{s}#1}}
+
+% Prezzo medio netto di vendita
+\newcommand{\Pmnv}[1]{P_{\mathrm{mnv}#1}}
 
 %page
 %% ------------------------------------------------------------
@@ -264,7 +240,7 @@ acquistare  \num{3} quote  di un  fondo al  prezzo di  \Eur{11,00}, poi  acquist
 al \textbf{prezzo medio di acquisto} di \Eur{20,17}.
 
 Il  numero  totale   di  quote  acquistate  \(\num{6}   =  \num{3}  +  \num{1}  +   \num{2}\)  è  la
-\emph{molteplicità equivalente} del \Pma{} \Eur{20,17}, infatti si può scrivere:
+\emph{molteplicità equivalente} del \emph{prezzo medio di acquisto} \Eur{20,17}, infatti si può scrivere:
 \begin{align*}
   \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22} + \num{2} \times{} \num{33}}{\num{6}}
   \simeq \frac{\num{6} \times{} \num{20,17}}{\num{6}}
@@ -280,7 +256,7 @@ costituita da  una sequenza  di operazioni  di acquisto  e vendita  di quote  de
 vendite possono  essere intercalati \Parentesi{prima un  acquisto, poi una vendita  parziale, poi un
    altro acquisto, eccetera}.  Dopo ogni acquisto: le nuove quote vengono messe insieme alle vecchie
 già possedute.  Invece di conservare tutta la storia  della sequenza di acquisti e vendite: si tiene
-la contabilità conservando solo il numero di quote attualmente possedute e il loro \Pma{}.
+la contabilità conservando solo il numero di quote attualmente possedute e il loro \emph{prezzo medio di acquisto}.
 
 È utile richiamare  come il calcolo di  una \emph{media ponderata} possa essere  eseguito passo dopo
 passo.
@@ -373,15 +349,17 @@ Si  esegua lo  stesso calcolo  in piú  passi: si  considerino prima  i numeri  
 \subsection{Intepretazione del calcolo incrementale della media ponderata}
 
 Nei calcoli di contabilità del Conto Titoli: dopo ogni  acquisto di quote di un fondo, si calcola il
-\Pma{} aggiornato, di ogni quota posseduta, come \emph{media ponderata} tra:
+\emph{prezzo medio  di acquisto} aggiornato,  di ogni  quota posseduta, come  \emph{media ponderata}
+tra:
 \begin{itemize}
-\item il \Pma{} precedente, con il precedente numero di quote possedute come molteplicità;
+\item il  \emph{prezzo medio di  acquisto} precedente, con il  precedente numero di  quote possedute
+  come molteplicità;
 \item il prezzo delle nuove quote acquistate, con il numero di quote acquistate come molteplicità.
 \end{itemize}
 
-Come si aggiorna il \Pma{} se si vendono  delle quote?  Esso resta invariato!  Si considerino ancora
-i numeri  \num{11}, \num{11}, \num{11}, \num{22},  \num{33} e \num{33};  si è calcolato che  la loro
-\emph{media ponderata} risulta:
+Come  si aggiorna  il  \emph{prezzo  medio di  acquisto}  se si  vendono  delle  quote?  Esso  resta
+invariato!   Si considerino  ancora  i numeri  \num{11}, \num{11},  \num{11},  \num{22}, \num{33}  e
+\num{33}; si è calcolato che la loro \emph{media ponderata} risulta:
 \begin{equation*}
   \frac{\num{11} + \num{11} + \num{11} + \num{22} + \num{33} + \num{33}}{6}
   = \frac{\num{3} \times{} \num{11}
@@ -389,121 +367,51 @@ i numeri  \num{11}, \num{11}, \num{11}, \num{22},  \num{33} e \num{33};  si è c
      + \num{2} \times{} \num{33}}
   {6} \simeq \num{20,17}
 \end{equation*}
-in cui \num{20,17}  può essere interpretato come  \Pma{} di \num{6} quote.  Si  supponga di togliere
-\num{2} quote  vendendole al prezzo  di \num{44}:  il \Pma{} delle  restanti \num{4} quote  è ancora
-\num{20,17}.
-
-%page
-\section{Direzione dei trasferimenti di denaro}
-
-
-Con abusiva semplificazione, le somme di denaro descritte in questa guida si ritengono scambiate tra
-il Conto Corrente e il  Conto Titoli.  In realtà il Conto Titoli è  solo uno strumento contabile: un
-registro in cui sono  annotate le quote di titoli finanziari che abbiamo  comprato e quindi sono nel
-nostro \Virgolette{portafoglio  finanziario}.  Invece, in questa  guida, il Conto Titoli  è trattato
-come un \Virgolette{contenitore} in cui vanno a finire i soldi che spendiamo per acquistare quote di
-titoli  finanziari; questo  contenitore  \textbf{non}  conserva i  soldi:  quando estraiamo  denaro,
-vendendo quote,  la quantità estratta  può essere  uguale, minore o  maggiore di quella  che abbiano
-immesso al momento dell'acquisto.
-
-Con questo sistema di idee:
-\begin{itemize}
-\item le somme di denaro \emph{investite} in quote di fondi sono in \emph{uscita dal Conto Corrente}
-  e in \emph{entrata nel Conto Titoli};
-\item le  somme di  denaro \emph{disinvestite}  da quote di  fondi sono  in \emph{entrata  nel Conto
-     Corrente} e in \emph{uscita dal Conto Titoli}.
-\end{itemize}
-
-Per esempio,  si supponga di acquistare  quote di un  fondo per \Eur{1000,00} tutto  incluso; questa
-quantità di denaro esce  dal Conto Corrente e viene utilizzata per comprare  le quote, le quote sono
-\Virgolette{messe in  carico} nel Conto  Titoli con  valore pari al  loro prezzo totale  di acquisto
-\Eur{1000,00}.  Si considerino i due casi:
-\begin{enumerate}
-\item si vendano le quote al prezzo netto di \Eur{1200,00}; questa quantità di denaro esce dal Conto
-  Titoli ed entra nel Conto Corrente;
-  \begin{itemize}
-  \item  dal punto  di vista  del  Conto Titoli  \Eur{1000,00}  entrano e  \Eur{1200,00} escono,  il
-    bilancio risulta:
-    \begin{equation*}
-      + \num{1000,00} - \num{1200,00} = \Eur{+200,00}
-    \end{equation*}
-  \item dal  punto di  vista del  Conto Corrente  \Eur{1000,00} escono  e \Eur{1200,00}  entrano, il
-    bilancio risulta:
-    \begin{equation*}
-      - \num{1000,00} + \num{1200,00} = \Eur{+200,00}
-    \end{equation*}
-  \end{itemize}
-
-
-  il bilancio delle operazioni,  dal punto di vista  del Conto
-  Corrente, si esprime con la differenza algebrica:
-  \begin{equation*}
-    \num{1200,00} - \num{1000,00} = \Eur{+200,00}
-  \end{equation*}
-  cioè, nel saldo finale, \Eur{1000,00} inizialmente usciti rientrano
-
-\Eur{200,00} entrano \Virgolette{appaiono} nel Conto Titoli, vi escono ed entrano
-  nel Conto Corrente insieme ai \num{1000,00} iniziali: un guadagno;
-\item si vendano le quote al prezzo netto  di \Eur{900,00}; questa quantità di denaro esce dal Conto
-  Titoli ed  entra nel Conto  Corrente; il  bilancio delle operazioni  si esprime con  la differenza
-  algebrica:
-  \begin{equation*}
-    \num{900,00} - \num{1000,00} = \Eur{-100,00}
-  \end{equation*}
-  cioè, nel saldo finale, \Eur{100,00} escono dal Conto  Corrente ed entrano nel Conto Titoli in cui
-  poi \Virgolette{spariscono}: una perdita;
-\end{enumerate}
-le differenze algebriche hanno due interpretazioni:
-\begin{itemize}
-\item \emph{uscite dal Conto Titoli} meno \emph{entrate nel Conto Titoli};
-\item \emph{entrate nel Conto Corrente} meno \emph{uscite dal Conto Corrente}.
-\end{itemize}
+in cui \num{20,17}  può essere interpretato come  \emph{prezzo medio di acquisto}  di \num{6} quote.
+Si supponga  di togliere \num{2} quote  vendendole al prezzo  di \num{44}: il \emph{prezzo  medio di
+   acquisto} delle restanti \num{4} quote è ancora \num{20,17}.
 
 %page
 \section{Descrizione di un'operazione di acquisto}
 
-
-\newcommand{\OneNumeroQuote}{100}
-\newcommand{\OnePrezzoMedioEseguito}{53,80}
-\newcommand{\OneControvaloreOperazione}{5380,00}
-\newcommand{\OneCostoOperazione}{15,91}
-\newcommand{\OneControvaloreTotale}{5395,91}
-\newcommand{\OnePrezzoMedioCarico}{53,96}
+\input{conto-intesa--calcoli-esempio--operazione-acquisto.inc}
 
 
 Quando  si  acquistano  quote di  un  titolo  \Parentesi{anche  non  \Etf{}} è  generalmente  meglio
 specificare la strategia di acquisto \Virgolette{con  prezzo limite} e selezionare esplicitamente il
 mercato su cui si  vogliono eseguire le operazioni, per esempio, nel  caso degli \Etf{}: \emph{Borsa
-   Italiana segmento ETFplus}.
+   Italiana, segmento ETFplus}.
 
-Perciò in  una certa data, e  a una certa  ora, si inserisce l'ordine  di acquisto per un  numero di
+Quando  l'operazione è  di  \textbf{acquisto}:  il \Virgolette{prezzo  limite}  è un  \textbf{prezzo
+   massimo a cui si acquistano le quote}.  Perciò si inserisce l'ordine di acquisto per un numero di
 quote del  fondo a un certo  prezzo massimo: per essere  conforme all'ordine inserito, la  banca che
 agisce da intermediario può eseguire l'ordine  acquistando a qualsiasi prezzo \emph{minore o uguale}
-al limite fissato.   L'ordine può essere eseguito  in piú fasi in  cui solo una parte  delle quote è
-acquistata, in ogni fase  a un prezzo diverso; è possibile che non  tutte le quote siano acquistate,
-nel qual caso ci interessa solo la frazione \Virgolette{eseguita} dell'ordine.
+al limite fissato.
 
-Il  \textbf{prezzo medio  eseguito di  un acquisto}  (nella terminologia  della Banca),  anche detto
-\textbf{prezzo medio effettivo di un acquisto}  (nella terminologia dell'Agenzia dell'Entrate), è la
-media ponderata dei prezzi  di acquisto rispetto al numero di quote acquistate.   Per esempio, se un
-singolo ordine di acquisto per \num{\OneNumeroQuote} quote è eseguito nelle tre fasi:
+L'ordine può essere  eseguito in piú fasi  in cui solo una  parte delle quote è  acquistata, in ogni
+fase a  un prezzo diverso; è  possibile che non  tutte le quote  siano acquistate, nel qual  caso ci
+interessa solo la  frazione \Virgolette{eseguita} dell'ordine.  Il \textbf{prezzo  medio eseguito di
+   un acquisto} (nella  terminologia della Banca), anche detto \textbf{prezzo  medio effettivo di un
+   acquisto} (nella  terminologia dell'Agenzia  dell'Entrate), è  la media  ponderata dei  prezzi di
+acquisto rispetto al numero di quote acquistate.  Per  esempio, se un singolo ordine di acquisto per
+\num{\unoEsAcqAcquistoNumeroQuote} quote è eseguito nelle tre fasi:
 \begin{enumerate}
 \item acquisto di \num{20} quote al prezzo di \Eur{52,00};
 \item acquisto di \num{30} quote al prezzo di \Eur{53,00};
 \item acquisto di \num{50} quote al prezzo di \Eur{55,00};
 \end{enumerate}
-allora il \emph{prezzo medio eseguito} risulta:
+allora il \emph{prezzo medio eseguito di acquisto} risulta:
 \begin{equation*}
-  \MediaPonderataTre{20}{52,00}{30}{53,00}{50}{55,00} = \Eur{\OnePrezzoMedioEseguito{}}
+  \MediaPonderataTre{20}{52,00}{30}{53,00}{50}{55,00} = \Eur{\unoEsAcqAcquistoPrezzoMedioEffettivo{}}
 \end{equation*}
 
 Il \textbf{controvalore  dell'operazione di acquisto}  è il prodotto tra  il numero totale  di quote
-acquistate e il  \emph{prezzo medio eseguito}.  Per esempio, se  si acquistano \num{\OneNumeroQuote}
-quote   al   \emph{prezzo  medio   eseguito}   di   \Eur{\OnePrezzoMedioEseguito}  il   controvalore
+acquistate e il  \emph{prezzo medio eseguito}.  Per esempio, se  si acquistano \num{\unoEsAcqAcquistoNumeroQuote}
+quote   al   \emph{prezzo  medio   eseguito}   di   \Eur{\unoEsAcqAcquistoPrezzoMedioEffettivo}  il   controvalore
 dell'operazione risulta:
 \begin{equation*}
-  \num{\OneNumeroQuote} \times{} \num{\OnePrezzoMedioEseguito{}}
-  = \Eur{\OneControvaloreOperazione}
+  \num{\unoEsAcqAcquistoNumeroQuote} \times{} \num{\unoEsAcqAcquistoPrezzoMedioEffettivo{}}
+  = \Eur{\unoEsAcqAcquistoControvaloreOperazione}
 \end{equation*}
 
 Il \textbf{costo dell'operazione  di acquisto} è la  somma tra costi, spese  e commissioni associate
@@ -519,31 +427,37 @@ all'operazione; per ogni ordine di acquisto eseguito, occorre pagare:
 Se un ordine non è  eseguito: si paga nulla.  Se un ordine è eseguito in  piú fasi: nella prima fase
 si pagano  i costi  fissi piú  la commissione  percentuale; nelle  fasi successive  si paga  solo la
 commissione   percentuale.     Per   esempio,   se   il    \emph{controvalore   dell'operazione}   è
-\Eur{\OneControvaloreOperazione} il \emph{costo dell'operazione} risulta:
+\Eur{\unoEsAcqAcquistoControvaloreOperazione} il \emph{costo dell'operazione} risulta:
 \begin{equation*}
-  \CalcoloCostoOperazione{\OneControvaloreOperazione} = \Eur{\OneCostoOperazione}
+  \CalcoloCostoOperazione{\unoEsAcqAcquistoControvaloreOperazione}
+  = \Eur{\unoEsAcqAcquistoCostoOperazione}
 \end{equation*}
 
 Il \textbf{controvalore totale di un acquisto}  è la somma tra \emph{controvalore dell'operazione} e
-\emph{costo dell'operazione} ed è  la quantità di denaro in uscita dal  Conto Corrente; per esempio,
-se  il \emph{controvalore  dell'operazione}  è \Eur{\OneControvaloreOperazione{}}  e il  \emph{costo
-   dell'operazione} è pari a \Eur{\OneCostoOperazione}, il \emph{controvalore totale} risulta:
+\emph{costo dell'operazione} ed è la quantità di  denaro addebitata sul Conto Corrente; per esempio,
+se  il \emph{controvalore  dell'operazione} è  \Eur{\unoEsAcqAcquistoControvaloreOperazione{}} e  il
+\emph{costo dell'operazione} è pari  a \Eur{\unoEsAcqAcquistoCostoOperazione}, il \emph{controvalore
+   totale} risulta:
 \begin{equation*}
-  \num{\OneControvaloreOperazione} + \num{\OneCostoOperazione}
-  = \Eur{\OneControvaloreTotale}
+  \num{\unoEsAcqAcquistoControvaloreOperazione} +
+  \num{\unoEsAcqAcquistoCostoOperazione}
+  = \Eur{\unoEsAcqAcquistoControvaloreTotale}
 \end{equation*}
 
 Il \textbf{prezzo medio di carico di un acquisto}  é il rapporto tra il \emph{controvalore totale} e
 il numero di  quote acquistate ed è  usato per l'aggiornamento del  saldo: è il prezzo  medio di una
-singola quota acquistata,  tutto incluso.  Per esempio, se si  sono acquistate \num{\OneNumeroQuote}
-quote  al  \emph{controvalore totale}  di  \Eur{\OneControvaloreTotale},  il \emph{prezzo  medio  di
-   carico} risulta:
+singola   quota    acquistata,   tutto    incluso.    Per   esempio,    se   si    sono   acquistate
+\num{\unoEsAcqAcquistoNumeroQuote}      quote       al      \emph{controvalore       totale}      di
+\Eur{\unoEsAcqAcquistoControvaloreTotale}, il \emph{prezzo medio di carico} risulta:
 \begin{equation*}
-  \num{\OneControvaloreTotale} / \num{\OneNumeroQuote} = \Eur{\OnePrezzoMedioCarico}
+  \num{\unoEsAcqAcquistoControvaloreTotale} / \num{\unoEsAcqAcquistoNumeroQuote}
+  = \Eur{\unoEsAcqAcquistoPrezzoMedioCarico}
 \end{equation*}
 
 %page
-\section{Aggiornamento del saldo dopo un'operazione di acquisto}
+\section{Aggiornamento del saldo dopo un acquisto}
+
+\input{conto-intesa--calcoli-esempio--saldo-acquisto.inc}
 
 
 Dopo l'esecuzione di ogni operazione di acquisto  occorre ricalcolare il saldo del Conto Titoli; per
@@ -554,22 +468,25 @@ un investimento in quote di \Etf{}, la parte da aggiornare è rappresentata dall
   acquistata, degli ordini eseguiti sulla Borsa di negoziazione; si calcola come media ponderata tra
   il \emph{prezzo  medio \underline{effettivo} di  un nuovo  acquisto} e il  precedente \emph{prezzo
      medio  \underline{effettivo} nel  saldo}; nella  documentazione  della Banca:  questo valore  è
-  chiamato \emph{Net  Asset Value} (NAV) del  prezzo medio di carico  (da non confondere con  il NAV
-  dell'attività sottostante il fondo);
+  chiamato \emph{Net Asset Value}  (\textsc{nav}) del prezzo medio di carico  (da non confondere con
+  il \textsc{nav} dell'attività sottostante il fondo);
 \item \textbf{prezzo medio di \underline{carico} nel saldo}: è il prezzo medio per quota acquistata,
   tutto incluso; si calcola come media ponderata  tra il \emph{prezzo medio di \underline{carico} di
      un nuovo acquisto} e il precedente \emph{prezzo medio di \underline{carico} nel saldo}.
 \end{itemize}
 
-Dai valori nel saldo  si può calcolare il \textbf{costo medio per quota  nel saldo}: si calcola come
-differenza  tra il  \emph{prezzo medio  di  \underline{carico} nel  saldo} e  il \emph{prezzo  medio
-   \underline{effettivo} nel saldo}.
+Dai valori nel saldo si può calcolare il  \textbf{costo medio di acquisto per ogni quota in carico}:
+si  calcola  come differenza  tra  il  \emph{prezzo medio  di  \underline{carico}  nel saldo}  e  il
+\emph{prezzo medio \underline{effettivo} nel saldo}.
 
 Per esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
-\item acquisto di \num{101} quote al \emph{prezzo medio effettivo} di \Eur{51,00};
-\item acquisto di \num{102} quote al \emph{prezzo medio effettivo} di \Eur{52,00};
-\item acquisto di \num{103} quote al \emph{prezzo medio effettivo} di \Eur{53,00}.
+\item acquisto di \num{\unoEsSaldoAcqAcquistoNumeroQuote} quote  al \emph{prezzo medio effettivo} di
+  \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo};
+\item acquisto di \num{\dueEsSaldoAcqAcquistoNumeroQuote} quote  al \emph{prezzo medio effettivo} di
+  \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo};
+\item acquisto di \num{\treEsSaldoAcqAcquistoNumeroQuote} quote  al \emph{prezzo medio effettivo} di
+  \Eur{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo};
 \end{enumerate}
 all'inizio  si consideri  un  Conto Titoli  vuoto,  con  saldo convenzionale  di:  \num{0} quote  di
 quell'\Etf{}; \emph{prezzo  medio di carico} di  \Eur{0}; \emph{prezzo medio effettivo}  di \Eur{0}.
@@ -577,111 +494,143 @@ L'aggiornamento del saldo avviene come segue.
 \begin{enumerate}
 \item Per la prima operazione:
   \begin{itemize}
-  \item numero di quote acquistate: \num{101};
-  \item \emph{prezzo medio effettivo}: \Eur{51,00};
-  \item \emph{controvalore dell'operazione}: \Eur{5151,00};
-  \item \emph{costo dell'operazione}: \Eur{15,36};
-  \item \emph{controvalore totale}: \Eur{5166,36};
-  \item \emph{prezzo medio di carico}: \Eur{51,1521}.
+  \item numero di quote acquistate: \num{\unoEsSaldoAcqAcquistoNumeroQuote};
+  \item \emph{prezzo medio effettivo}: \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo};
+  \item \emph{controvalore dell'operazione}: \Eur{\unoEsSaldoAcqAcquistoControvaloreOperazione};
+  \item \emph{costo dell'operazione}: \Eur{\unoEsSaldoAcqAcquistoCostoOperazione};
+  \item \emph{controvalore totale}: \Eur{\unoEsSaldoAcqAcquistoControvaloreTotale};
+  \item \emph{prezzo medio di carico}: \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioCarico}.
   \end{itemize}
 
   Dopo la prima operazione:
   \begin{itemize}
-  \item numero quote nel saldo: \num{101}; uguale al numero quote del primo acquisto;
-  \item  \emph{prezzo  medio  effettivo  nel  saldo}:  \Eur{51,00};  uguale  al  \emph{prezzo  medio
-       effettivo} del primo acquisto;
-  \item \emph{prezzo medio carico nel saldo}: \Eur{51,1521}; uguale al \emph{prezzo medio di carico}
-    del primo acquisto;
+  \item numero  quote nel  saldo: \num{\unoEsSaldoAcqSaldoNumeroQuote}; uguale  al numero  quote del
+    primo acquisto;
+  \item \emph{prezzo  medio di effettivo nel  saldo}: \Eur{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo};
+    uguale al \emph{prezzo medio effettivo} del primo acquisto;
+  \item \emph{prezzo medio di  carico nel saldo}: \Eur{\unoEsSaldoAcqSaldoPrezzoMedioCarico}; uguale
+    al \emph{prezzo medio di carico} del primo acquisto;
   \end{itemize}
   il \emph{costo medio per quota nel saldo} risulta:
   \begin{equation*}
-    \num{51,1521} - \num{51,00} = \Eur{0,1521}
+    \num{\unoEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo}
+    = \Eur{\unoEsSaldoAcqSaldoCostoMedio}
   \end{equation*}
 
 \item Per la seconda operazione:
   \begin{itemize}
-  \item numero di quote acquistate: \num{102};
-  \item \emph{prezzo medio effettivo}: \Eur{52,00};
-  \item \emph{controvalore dell'operazione}: \Eur{5304,00};
-  \item \emph{costo dell'operazione}: \Eur{15,73};
-  \item \emph{controvalore totale}: \Eur{5319,73};
-  \item \emph{prezzo medio di carico}: \Eur{52,1542}.
+  \item numero di quote acquistate: \num{\dueEsSaldoAcqAcquistoNumeroQuote};
+  \item \emph{prezzo medio effettivo}: \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo};
+  \item \emph{controvalore dell'operazione}: \Eur{\dueEsSaldoAcqAcquistoControvaloreOperazione};
+  \item \emph{costo dell'operazione}: \Eur{\dueEsSaldoAcqAcquistoCostoOperazione};
+  \item \emph{controvalore totale}: \Eur{\dueEsSaldoAcqAcquistoControvaloreTotale};
+  \item \emph{prezzo medio di carico}: \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}.
   \end{itemize}
 
   Dopo la seconda operazione:
   \begin{itemize}
-  \item numero quote nel saldo: \(101 + 102 = 203\);
+  \item                  numero                   quote                  nel                  saldo:
+    \(\num{\unoEsSaldoAcqSaldoNumeroQuote}      +     \num{\dueEsSaldoAcqAcquistoNumeroQuote}      =
+    \num{\dueEsSaldoAcqSaldoNumeroQuote}\);
   \item  il \emph{prezzo  medio effettivo  nel saldo}  è la  media ponderata  dei \emph{prezzi  medi
        effettivi} del saldo precedente e del nuovo acquisto:
     \begin{equation*}
-      \MediaPonderataDue{101}{51,00}{102}{52,00} = \Eur{51,5025}
+      \MediaPonderataDue
+      {\unoEsSaldoAcqSaldoNumeroQuote}{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo}
+      {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo}
+      = \Eur{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
     \end{equation*}
   \item il  \emph{prezzo medio di carico  nel saldo} è la  media ponderata dei \emph{prezzi  medi di
        carico} del saldo precedente e del nuovo acquisto:
     \begin{equation*}
-      \MediaPonderataDue{101}{51,1521}{102}{52,1542} = \Eur{51,6556}
+      \MediaPonderataDue
+      {\unoEsSaldoAcqSaldoNumeroQuote}{\unoEsSaldoAcqSaldoPrezzoMedioCarico}
+      {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}
+      = \Eur{\dueEsSaldoAcqSaldoPrezzoMedioCarico}
     \end{equation*}
   \end{itemize}
   il \emph{costo medio per quota nel saldo} risulta:
   \begin{equation*}
-    \num{51,6556} - \num{51,5025} = \Eur{0,1532}
+    \num{\dueEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
+    = \Eur{\dueEsSaldoAcqSaldoCostoMedio}
   \end{equation*}
 
 \item Per la terza operazione:
   \begin{itemize}
-  \item numero di quote acquistate: \num{103};
-  \item \emph{prezzo medio effettivo}: \Eur{53,00};
-  \item \emph{controvalore dell'operazione}: \Eur{5459,00};
-  \item \emph{costo dell'operazione}: \Eur{16,10};
-  \item \emph{controvalore totale}: \Eur{5475,10};
-  \item \emph{prezzo medio di carico}: \Eur{53,1563}.
+  \item numero di quote acquistate: \num{\treEsSaldoAcqAcquistoNumeroQuote};
+  \item \emph{prezzo medio effettivo}: \Eur{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo};
+  \item \emph{controvalore dell'operazione}: \Eur{\treEsSaldoAcqAcquistoControvaloreOperazione};
+  \item \emph{costo dell'operazione}: \Eur{\treEsSaldoAcqAcquistoCostoOperazione};
+  \item \emph{controvalore totale}: \Eur{\treEsSaldoAcqAcquistoControvaloreTotale};
+  \item \emph{prezzo medio di carico}: \Eur{\treEsSaldoAcqAcquistoPrezzoMedioCarico}.
   \end{itemize}
 
   Dopo la terza operazione:
   \begin{itemize}
-  \item numero quote nel saldo: \(203 + 103 = 306\);
+  \item                  numero                   quote                  nel                  saldo:
+    \(\num{\dueEsSaldoAcqSaldoNumeroQuote}      +     \num{\treEsSaldoAcqAcquistoNumeroQuote}      =
+    \num{\treEsSaldoAcqSaldoNumeroQuote}\);
   \item  il \emph{prezzo  medio effettivo  nel saldo}  è la  media ponderata  dei \emph{prezzi  medi
        effettivi} del saldo precedente e del nuovo acquisto:
     \begin{equation*}
-      \MediaPonderataDue{203}{51,5025}{103}{53,00} = \Eur{52,0065}
+      \MediaPonderataDue
+      {\dueEsSaldoAcqSaldoNumeroQuote}{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
+      {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo}
+      = \Eur{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
     \end{equation*}
-  \item il \emph{prezzo medio di carico carico nel saldo} è la media ponderata dei \emph{prezzi medi
-       di carico} del saldo precedente e del nuovo acquisto:
+  \item il  \emph{prezzo medio di carico  nel saldo} è la  media ponderata dei \emph{prezzi  medi di
+       carico} del saldo precedente e del nuovo acquisto:
     \begin{equation*}
-      \MediaPonderataDue{203}{51,6556}{103}{53,1563} = \Eur{52,1608}
+      \MediaPonderataDue
+      {\dueEsSaldoAcqSaldoNumeroQuote}{\dueEsSaldoAcqSaldoPrezzoMedioCarico}
+      {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioCarico}
+      = \Eur{\treEsSaldoAcqSaldoPrezzoMedioCarico}
     \end{equation*}
   \end{itemize}
   il \emph{costo medio per quota nel saldo} risulta:
   \begin{equation*}
-    \num{52,1608} - \num{52,0065} = \Eur{0,1542}
+    \num{\treEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
+    = \Eur{\treEsSaldoAcqSaldoCostoMedio}
   \end{equation*}
 \end{enumerate}
 
 Evidenziando  i prezzi  medi: ogni  nuova quota  acquistata viene  \Virgolette{buttata nel  secchio}
-insieme alle vecchie, indipendentemente dal suo prezzo di acquisto; è come se ogni quota fosse stata
-acquistata allo stesso prezzo, pari al prezzo medio.
+insieme alle vecchie, indipendentemente  dal suo prezzo di acquisto; è come se  ogni quota in carico
+fosse stata acquistata allo stesso prezzo, pari al prezzo medio.
 
-Si  osservi come,  \textbf{solo quando  si sono  eseguiti degli  acquisti ma  nessuna
-   vendita}:
+Si osservi come, \textbf{solo quando si sono eseguiti degli acquisti ma nessuna vendita}:
 \begin{itemize}
 \item il \emph{prezzo medio effettivo nel saldo} si possa calcolare anche come media ponderata tra i
   \emph{prezzi medi effettivi degli acquisti}:
   \begin{equation*}
-    \MediaPonderataTre{101}{51,00}{102}{52,00}{103}{53,00} = \Eur{52,01}
+    \MediaPonderataTre
+    {\unoEsSaldoAcqAcquistoNumeroQuote}{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo}
+    {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo}
+    {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo}
+    = \Eur{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
   \end{equation*}
 \item il \emph{prezzo medio di carico nel saldo} si possa calcolare anche come media ponderata tra i
   \emph{prezzi medi di carico degli acquisti}:
   \begin{equation*}
-    \MediaPonderataTre{101}{51,1521}{102}{52,1542}{103}{53,1563} = \Eur{52,1608}
+    \MediaPonderataTre
+    {\unoEsSaldoAcqAcquistoNumeroQuote}{\unoEsSaldoAcqAcquistoPrezzoMedioCarico}
+    {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}
+    {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioCarico}
+    = \Eur{\treEsSaldoAcqSaldoPrezzoMedioCarico}
   \end{equation*}
 \item il costo totale di tutte le operazioni si possa calcolare sia come somma tra tutti i costi:
   \begin{equation*}
-    \num{15,36} + \num{15,73} + \num{16,10} = \Eur{47,19}
+    \num{\unoEsSaldoAcqAcquistoCostoOperazione} +
+    \num{\dueEsSaldoAcqAcquistoCostoOperazione} +
+    \num{\treEsSaldoAcqAcquistoCostoOperazione}
+    = \Eur{\treEsSaldoAcqSaldoCostoTotaleQuote}
   \end{equation*}
-  che come  prodotto tra  il numero  di quote nel  saldo e  il \emph{costo  medio per
-     quota}:
+  che come prodotto tra il numero di quote nel saldo e il \emph{costo medio di acquisto per quota in
+     carico}:
   \begin{equation*}
-    \num{306} \times{} \num{0,1542} = \Eur{47,19}
+    \num{\treEsSaldoAcqSaldoNumeroQuote} \times{}
+    \num{\treEsSaldoAcqSaldoCostoMedio}
+    = \Eur{\treEsSaldoAcqSaldoCostoTotaleQuote}
   \end{equation*}
 \end{itemize}
 dopo la prima operazione di vendita: queste proprietà non valgono piú!
@@ -689,6 +638,7 @@ dopo la prima operazione di vendita: queste proprietà non valgono piú!
 %page
 \section{Descrizione di un'operazione di vendita}
 
+\input{conto-intesa--calcoli-esempio--operazione-vendita.inc}
 
 \Define{\UnoNumeroQuote}{20}
 \Define{\DueNumeroQuote}{30}
@@ -697,42 +647,25 @@ dopo la prima operazione di vendita: queste proprietà non valgono piú!
 \Define{\DuePrezzoEseguito}{53,00}
 \Define{\TrePrezzoEseguito}{55,00}
 
-\Define{\NumeroQuote}{100}
-\Define{\PrezzoMedioEffettivo}{53,80}
-\Define{\ControvaloreOperazione}{5380,00}
-
-\Define{\PrezzoMedioEffettivoNelSaldoPrecedente}{50,00}
-\Define{\PrezzoMedioCaricoNelSaldoPrecedente}{50,15}
-\Define{\RedditoDaCapitale}{380,00}
-\Define{\TassaSulRedditoDaCapitale}{98,80}
-
-\Define{\CostoOperazione}{15,91}
-\Define{\CostoMedioPerQuotaNelSaldoPrecedente}{0,15}
-\Define{\CostoAcquistoQuoteVendute}{15,00}
-\Define{\RedditoDiverso}{-30,91}
-
-\Define{\ControvaloreTotale}{5265,29}
-\Define{\PrezzoMedioNetto}{52,6529}
-\Define{\RendimentoPercentuale}{+4,9908}
-\Define{\RendimentoInValuta}{250,29}
-
 
 Quando si vendono quote di un titolo  \Parentesi{anche non \Etf{}} è generalmente meglio specificare
 la strategia di  acquisto \Virgolette{con prezzo limite} e selezionare  esplicitamente il mercato su
-cui si  vogliono eseguire le  operazioni, per esempio, nel  caso degli \Etf{}:  \emph{Borsa Italiana
+cui si vogliono  eseguire le operazioni, per  esempio, nel caso degli  \Etf{}: \emph{Borsa Italiana,
    segmento ETFplus}.
 
-Perciò in una certa data, e a una certa ora, si inserisce l'ordine di vendita per un numero di quote
-del fondo a un certo prezzo minimo: per  essere conforme all'ordine inserito, la banca che agisce da
+Quando l'operazione è di \textbf{vendita}: il  \Virgolette{prezzo limite} è un \textbf{prezzo minimo
+   a cui si vendono le  quote}.  Perciò si inserisce l'ordine di vendita per  un numero di quote del
+fondo a  un certo prezzo  minimo: per essere  conforme all'ordine inserito,  la banca che  agisce da
 intermediario può eseguire  l'ordine vendendo a qualsiasi prezzo \emph{maggiore  o uguale} al limite
-fissato.  L'ordine può essere eseguito  in piú fasi in cui solo una parte  delle quote è venduta, in
-ogni fase a  un prezzo diverso; è possibile che  non tutte le quote siano vendute,  nel qual caso ci
-interessa solo la frazione \Virgolette{eseguita} dell'ordine.
+fissato.
 
-Il  \textbf{prezzo  medio  eseguito  di  vendita} (nella  terminologia  della  Banca),  anche  detto
-\textbf{prezzo  medio effettivo  di vendita}  (nella terminologia  dell'Agenzia dell'Entrate),  è la
-media ponderata  dei prezzi  di vendita rispetto  al numero  di quote vendute.   Per esempio,  se un
-singolo ordine di vendita per \num{\NumeroQuote} quote è eseguito nelle fasi:
+L'ordine può essere eseguito in piú fasi in cui solo una parte delle quote è venduta, in ogni fase a
+un prezzo diverso; è possibile che non tutte le quote siano vendute, nel qual caso ci interessa solo
+la frazione \Virgolette{eseguita} dell'ordine.  Il  \textbf{\emph{prezzo medio eseguito di vendita}}
+(nella  terminologia della  Banca), anche  detto \textbf{\emph{prezzo  medio effettivo  di vendita}}
+(nella terminologia dell'Agenzia dell'Entrate), è la  media ponderata dei prezzi di vendita rispetto
+al   numero   di  quote   vendute.    Per   esempio,  se   un   singolo   ordine  di   vendita   per
+\num{\dueEsVenVenditaNumeroQuote{}} quote è eseguito nelle fasi:
 \begin{enumerate}
 \item vendita di \num{\UnoNumeroQuote} quote al prezzo di \Eur{\UnoPrezzoEseguito};
 \item vendita di \num{\DueNumeroQuote} quote al prezzo di \Eur{\DuePrezzoEseguito};
@@ -740,22 +673,26 @@ singolo ordine di vendita per \num{\NumeroQuote} quote è eseguito nelle fasi:
 \end{enumerate}
 allora il \emph{prezzo medio effettivo} risulta:
 \begin{equation*}
-  \MediaPonderataTre{\UnoNumeroQuote}{\UnoPrezzoEseguito}{\DueNumeroQuote}{\DuePrezzoEseguito}{\TreNumeroQuote}{\TrePrezzoEseguito}
-  = \Eur{\PrezzoMedioEffettivo}
+  \MediaPonderataTre
+  {\UnoNumeroQuote}{\UnoPrezzoEseguito}
+  {\DueNumeroQuote}{\DuePrezzoEseguito}
+  {\TreNumeroQuote}{\TrePrezzoEseguito}
+  = \Eur{\dueEsVenVenditaPrezzoMedioEffettivo}
 \end{equation*}
 
 Il \textbf{controvalore  dell'operazione di  vendita} è il  prodotto tra il  numero totale  di quote
-vendute e il \emph{prezzo medio effettivo}.  Per  esempio, se si vendono \num{\NumeroQuote} quote al
-\emph{prezzo  medio  effettivo}  di   \Eur{\PrezzoMedioEffettivo}  il  controvalore  dell'operazione
-risulta:
+vendute    e    il    \emph{prezzo    medio    effettivo};    per    esempio,    se    si    vendono
+\num{\dueEsVenVenditaNumeroQuote{}}     quote     al     \emph{prezzo    medio     effettivo}     di
+\Eur{\dueEsVenVenditaPrezzoMedioEffettivo{}} il controvalore dell'operazione risulta:
 \begin{equation*}
-  \num{\NumeroQuote} \times{} \num{\PrezzoMedioEffettivo}
-  = \Eur{\ControvaloreOperazione}
+  \num{\dueEsVenVenditaNumeroQuote{}} \times{}
+  \num{\dueEsVenVenditaPrezzoMedioEffettivo{}}
+  = \Eur{\dueEsVenVenditaControvaloreOperazione{}}
 \end{equation*}
 
-La  circolare dell'Agenzia  dell'Entrate  specifica che  il \emph{reddito  per  quota} derivante  da
-un'operazione  di  vendita  è la  differenza  tra  \emph{prezzo  medio  effettivo della  vendita}  e
-\emph{prezzo medio effettivo nel saldo}; peculiarmente:
+La  circolare  dell'Agenzia dell'Entrate  specifica  che  il  \emph{reddito finanziario  per  quota}
+derivante da un'operazione di vendita è la differenza tra \emph{prezzo medio effettivo di vendita} e
+\emph{prezzo medio effettivo nel saldo} precedente la vendita stessa; peculiarmente:
 \begin{itemize}
 \item quando  la differenza tra  prezzi medi effettivi è  \textbf{positiva}: essa è  da considerarsi
   \emph{reddito da capitale}, quindi \textbf{non genera} una plusvalenza utilizzabile per compensare
@@ -770,18 +707,19 @@ Quando  il reddito  di  una vendita  è  positivo: occorre  pagare la  \textbf{t
    Titoli,  pari allo  \SI{0,2}{\percent} all'anno,  cioè  lo \SI{0,05}{\percent}  al trimestre  del
    controvalore alla data di chiusura dei conti  trimestrali; il bollo è addebitato direttamente sul
    Conto Corrente, perciò in questa guida lo si considera conteggiato a parte.}.  Per esempio, se si
-vendono \num{\NumeroQuote} quote  al \emph{prezzo medio effettivo}  di \Eur{\PrezzoMedioEffettivo} e
-il      \emph{prezzo       medio      effettivo      nel      saldo}       precedente      è      di
-\Eur{\PrezzoMedioEffettivoNelSaldoPrecedente}, il \emph{reddito da capitale} risulta:
+vendono   \num{\dueEsVenVenditaNumeroQuote{}}   quote   al    \emph{prezzo   medio   effettivo}   di
+\Eur{\dueEsVenVenditaPrezzoMedioEffettivo} e il \emph{prezzo medio effettivo nel saldo} precedente è
+di \Eur{\unoEsVenSaldoPrezzoMedioEffettivo}, il \emph{reddito da capitale} risulta:
 \begin{equation*}
-  \num{\NumeroQuote} \times{} \left(
-    \num{\PrezzoMedioEffettivo} - \num{\PrezzoMedioEffettivoNelSaldoPrecedente}
-  \right) = \Eur{\RedditoDaCapitale}
+  \num{\dueEsVenVenditaNumeroQuote} \times{} \left(
+    \num{\dueEsVenVenditaPrezzoMedioEffettivo} - \num{\unoEsVenSaldoPrezzoMedioEffettivo}
+  \right) = \Eur{\dueEsVenVenditaRedditoCapitale}
 \end{equation*}
 per fondi  che non  contengono Titoli  dello Stato Italiano,  e assimilati,  l'aliquota unica  è del
 \SI{26}{\percent}; allora la \emph{tassa sul reddito da capitale} risulta:
 \begin{equation*}
-  \num{0,26} \times{} \num{\RedditoDaCapitale} = \Eur{\TassaSulRedditoDaCapitale}
+  \num{0,26} \times{} \num{\dueEsVenVenditaRedditoCapitale}
+  = \Eur{\dueEsVenVenditaTassaRedditoCapitale}
 \end{equation*}
 
 Il \textbf{costo  dell'operazione di vendita}  è la somma tra  costi, spese e  commissioni associate
@@ -797,9 +735,10 @@ all'operazione; per ogni ordine di vendita eseguito, occorre pagare:
 se un ordine non è eseguito: si paga nulla; se un ordine è eseguito in piú fasi: nella prima fase si
 pagano  i costi  fissi  piú  la commissione  percentuale;  nelle fasi  successive  si  paga solo  la
 commissione   percentuale.     Per   esempio,   se   il    \emph{controvalore   dell'operazione}   è
-\Eur{\ControvaloreOperazione} il \emph{costo dell'operazione} risulta:
+\Eur{\dueEsVenVenditaControvaloreOperazione} il \emph{costo dell'operazione} risulta:
 \begin{equation*}
-  \CalcoloCostoOperazione{\ControvaloreOperazione} = \Eur{\CostoOperazione}
+  \CalcoloCostoOperazione{\dueEsVenVenditaControvaloreOperazione}
+  = \Eur{\dueEsVenVenditaCostoOperazione}
 \end{equation*}
 
 Da osservare  che: sia  il calcolo  della \emph{tassa  sul reddito  da capitale}  che i  calcoli del
@@ -807,42 +746,40 @@ Da osservare  che: sia  il calcolo  della \emph{tassa  sul reddito  da capitale}
    effettivo}; in pratica: si  pagano le tasse anche sul \emph{costo  dell'operazione} di acquisto e
 vendita, che però sono redditi di qualcun altro, non dell'investitore!
 
-La circolare  dell'Agenzia dell'Entrate  specifica che  il \emph{costo  delle operazioni}  genera un
+La  circolare  dell'Agenzia  dell'Entrate  specifica  che   il  costo  delle  operazioni  genera  un
 \emph{reddito diverso}, da  registrare come minusvalenza.  Per esempio, si  supponga di possedere un
 Conto Titoli con:
 \begin{itemize}
-\item numero quote nel saldo precedente alla vendita: \num{\NumeroQuote};
-\item     \emph{prezzo     medio     effettivo     nel    saldo}     precedente     alla     vendita
-  \Eur{\PrezzoMedioEffettivoNelSaldoPrecedente};
-\item    \emph{prezzo     medio    di    carico     nel    saldo}    precedente     alla    vendita:
-  \Eur{\PrezzoMedioCaricoNelSaldoPrecedente};
-\item    \emph{costo     medio    per     quota    nel     saldo}    precedente     alla    vendita:
-  \Eur{\CostoMedioPerQuotaNelSaldoPrecedente};
+\item numero di quote in carico: \num{\dueEsVenVenditaNumeroQuote};
+\item \emph{prezzo medio effettivo}: \Eur{\unoEsVenSaldoPrezzoMedioEffettivo{}};
+\item \emph{prezzo medio di carico}: \Eur{\unoEsVenSaldoPrezzoMedioCarico{}};
+\item \emph{costo medio di acquisto per ogni quota in carico}: \Eur{\unoEsVenSaldoCostoMedio{}};
 \end{itemize}
 si vendano tutte le quote; l'operazione di vendita sia descritta da:
 \begin{itemize}
-\item numero quote vendute: \num{\NumeroQuote};
-\item \emph{prezzo medio effettivo di vendita} \Eur{\PrezzoMedioEffettivo};
-\item \emph{reddito da capitale}: \Eur{\RedditoDaCapitale};
-\item \emph{costo dell'operazione di vendita}: \Eur{\CostoOperazione};
+\item numero di quote vendute: \num{\dueEsVenVenditaNumeroQuote};
+\item \emph{prezzo medio effettivo di vendita}: \Eur{\dueEsVenVenditaControvaloreOperazione{}};
+\item \emph{reddito da capitale}: \Eur{\dueEsVenVenditaRedditoCapitale{}};
+\item \emph{costo dell'operazione di vendita}: \Eur{\dueEsVenVenditaCostoOperazione{}};
 \end{itemize}
 ogni   quota   venduta   era  stata   acquistata   con   un   \emph{costo   medio  per   quota}   di
-\Eur{\CostoMedioPerQuotaNelSaldoPrecedente}, perciò il \emph{costo  di acquisto delle quote vendute}
-risulta:
+\Eur{\unoEsVenSaldoCostoMedio}, perciò il \emph{costo di acquisto delle quote vendute} risulta:
 \begin{equation*}
-  \num{\NumeroQuote} \times{} \num{\CostoMedioPerQuotaNelSaldoPrecedente}
-  = \Eur{\CostoAcquistoQuoteVendute}
+  \num{\dueEsVenVenditaNumeroQuote} \times{} \num{\unoEsVenSaldoCostoMedio}
+  = \Eur{\dueEsVenVenditaCostoAcquistoQuoteVendute}
 \end{equation*}
 allo scopo di far risultare un numero negativo, la circolare specifica che il \emph{reddito diverso}
 associato alla vendita deve essere calcolato come:
 \begin{equation*}
   \left[
-    \num{\RedditoDaCapitale} - \left(
-      \num{\CostoOperazione} + \num{\CostoAcquistoQuoteVendute}
+    \num{\dueEsVenVenditaRedditoCapitale} - \left(
+      \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaCostoAcquistoQuoteVendute}
     \right)
-  \right] - \num{\RedditoDaCapitale}
-  = - \left( \num{\CostoOperazione} + \num{\CostoAcquistoQuoteVendute} \right)
-  = \Eur{\RedditoDiverso}
+  \right] - \num{\dueEsVenVenditaRedditoCapitale}
+  = - \left(
+    \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaCostoAcquistoQuoteVendute}
+  \right)
+  = \Eur{\dueEsVenVenditaRedditoDiversoTotale}
 \end{equation*}
 questa  minusvalenza  viene  automaticamente  registrata  dalla  Banca  nella  \Virgolette{Posizione
    Fiscale} del Conto Titoli; da notare che  \textbf{le minusvalenze derivanti dai costi di acquisto
@@ -851,53 +788,54 @@ momento dell'acquisto nulla viene registrato.
 
 Il   \textbf{controvalore  totale   di  vendita}   è   la  differenza   tra  il   \emph{controvalore
    dell'operazione}  e la  somma  tra  \emph{costo dell'operazione}  e  \emph{tassa  sul reddito  da
-   capitale};  è  la  quantità di  denaro  in  entrata  nel  Conto  Corrente.  Per  esempio,  se  il
-\emph{controvalore dell'operazione} è \Eur{\ControvaloreOperazione}, il \emph{costo dell'operazione}
-è     \Eur{\CostoOperazione}    e     la    \emph{tassa     sul    reddito     da    capitale}     è
-\Eur{\TassaSulRedditoDaCapitale}, il \emph{controvalore totale} risulta:
+   capitale};  è  la  quantità di  denaro  accreditata  sul  Conto  Corrente.  Per  esempio,  se  il
+\emph{controvalore dell'operazione}  è \Eur{\dueEsVenVenditaControvaloreOperazione},  il \emph{costo
+   dell'operazione}  è  \Eur{\dueEsVenVenditaCostoOperazione}  e   la  \emph{tassa  sul  reddito  da
+   capitale} è \Eur{\dueEsVenVenditaTassaRedditoCapitale}, il \emph{controvalore totale} risulta:
 \begin{equation*}
-  \num{\ControvaloreOperazione} -
-  \left( \num{\CostoOperazione} + \num{\TassaSulRedditoDaCapitale} \right)
-  = \Eur{\ControvaloreTotale}
+  \num{\dueEsVenVenditaControvaloreOperazione} -
+  \left( \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaTassaRedditoCapitale} \right)
+  = \Eur{\dueEsVenVenditaControvaloreTotale}
 \end{equation*}
 
 In un'operazione  di vendita le  quote vengono \Virgolette{scaricate}  dal Conto Titoli:  la vendita
 modifica solo  il numero di quote  in carico nel saldo,  il \emph{prezzo medio di  carico nel saldo}
 resta invariato da prima a dopo la  vendita.  Allo scopo di calcolare il rendimento dell'operazione,
 si definisce il  \textbf{prezzo medio netto di  vendita} pari al rapporto  tra il \emph{controvalore
-   totale} e il numero  di quote vendute.  Per esempio, se si  sono vendute \num{\NumeroQuote} quote
-al \emph{controvalore totale} di \Eur{\ControvaloreTotale},  il \emph{prezzo medio netto di vendita}
-risulta:
+   totale}   e    il   numero   di   quote    vendute.    Per   esempio,   se    si   sono   vendute
+\num{\dueEsVenVenditaNumeroQuote}       quote      al       \emph{controvalore      totale}       di
+\Eur{\dueEsVenVenditaControvaloreTotale}, il \emph{prezzo medio netto di vendita} risulta:
 \begin{equation*}
-  \num{\ControvaloreTotale} / \num{\NumeroQuote} = \Eur{\PrezzoMedioNetto}
+  \num{\dueEsVenVenditaControvaloreTotale} / \num{\dueEsVenVenditaNumeroQuote}
+  = \Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}
 \end{equation*}
 
 Il \textbf{rendimento  \underline{percentuale} dell'operazione di  vendita}, rispetto alle  quote in
 carico nel  saldo precedente,  si calcola  considerando il  \emph{prezzo medio  di carico  nel saldo
    precedente} e il \emph{prezzo medio netto di vendita};  in caso di guadagno è un numero positivo,
 in caso di perdita è un numero negativo.  Per  esempio, se il \emph{prezzo medio di carico nel saldo
-   precedente}  è  \Eur{\PrezzoMedioCaricoNelSaldoPrecedente}  e  il  \emph{prezzo  medio  netto  di
-   vendita} è \Eur{\PrezzoMedioNetto}, il \emph{rendimento percentuale} risulta:
+   precedente} è \Eur{\unoEsVenSaldoPrezzoMedioCarico}  e il \emph{prezzo medio netto  di vendita} è
+\Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}, il \emph{rendimento percentuale} risulta:
 \begin{equation*}
-  \CalcoloRendimentoPercentuale{\PrezzoMedioNetto}{\PrezzoMedioCaricoNelSaldoPrecedente}
-  = \Perc{\RendimentoPercentuale}
+  \CalcoloRendimentoPercentuale{\dueEsVenVenditaPrezzoMedioNettoVendita}{\unoEsVenSaldoPrezzoMedioCarico}
+  = \Perc{\dueEsVenVenditaRendimentoPercentuale}
 \end{equation*}
 
 Il  \textbf{rendimento \underline{in  valuta} dell'operazione  di vendita},  rispetto alle  quote in
 carico nel  saldo precedente,  si calcola  considerando il  \emph{prezzo medio  di carico  nel saldo
    precedente} e il \emph{prezzo medio netto di vendita};  in caso di guadagno è un numero positivo,
-in caso di  perdita è un numero negativo.   Per esempio, se si vendono  \num{\NumeroQuote} quote con
-\emph{prezzo medio di carico nel saldo precedente} pari a \Eur{\PrezzoMedioCaricoNelSaldoPrecedente}
-e  \emph{prezzo medio  netto  di vendita}  pari a  \Eur{\PrezzoMedioNetto},  il \emph{rendimento  in
-   valuta} risulta:
+in    caso   di    perdita    è   un    numero    negativo.    Per    esempio,    se   si    vendono
+\num{\dueEsVenVenditaNumeroQuote} quote con \emph{prezzo medio  di carico nel saldo precedente} pari
+a   \Eur{\unoEsVenSaldoPrezzoMedioCarico}  e   \emph{prezzo   medio  netto   di   vendita}  pari   a
+\Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}, il \emph{rendimento in valuta} risulta:
 \begin{equation*}
-  \num{\NumeroQuote} \times{} \left(
-    \num{\PrezzoMedioNetto} - \num{\PrezzoMedioCaricoNelSaldoPrecedente}
-  \right) = \Eur{\RendimentoInValuta}
+  \num{\dueEsVenVenditaNumeroQuote} \times{} \left(
+    \num{\dueEsVenVenditaPrezzoMedioNettoVendita} - \num{\unoEsVenSaldoPrezzoMedioCarico}
+  \right) = \Eur{\dueEsVenVenditaRendimentoInValuta}
 \end{equation*}
 
 %page
-\section{Aggiornamento del saldo dopo un'operazione di vendita}
+\section{Aggiornamento del saldo dopo una vendita}
 
 
 Dopo  l'esecuzione di  ogni operazione  di vendita  occorre ricalcolare  il saldo.   Il saldo  di un
@@ -1159,103 +1097,125 @@ vendendo con un \emph{prezzo medio eseguito} maggiore di \Eur{50,4067} si realiz
 %page
 \subsection{Metodo delle linee di investimento}
 
+\input{conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc}
 
 Si è visto  come, dal punto di  vista contabile: tutte le quote  di uno stesso \Etf{}  in carico nel
 Conto Titoli siano  parte dello stesso insieme;  in particolare, per ogni operazione  di vendita: le
-\emph{tasse   sul   reddito  da   capitale}   si   calcolano   rispetto   al  valore   attuale   del
-\PrezzoMedioEffettivoNelSaldo{}, indipendentemente da quanti acquisti si siano eseguiti in passato e
-dal loro \PrezzoMedioEffettivoAcquisto{}.
+\emph{tasse sul reddito da capitale} si calcolano  rispetto al valore attuale del \emph{prezzo medio
+   effettivo nel  saldo}, indipendentemente da  quanti acquisti si siano  eseguiti in passato  e dal
+loro \emph{prezzo medio effettivo di acquisto}.
 
 Nonostante ciò, si immagini questo scenario:
 \begin{itemize}
 \item si disponga di un capitale di \Eur{15000,00};
 \item si vogliano  definire tre \Virgolette{linee di investimento} formalmente  separate, dal nostro
-  punto di vista; a ciascuna linea si allochino \Eur{5000,00};
+  punto di vista; a ciascuna linea si allochino \Eur{\unoStratInvLineeCapitaleIniziale{}};
 \item come primo investimento, per ciascuna linea, si acquistino quote dello stesso \Etf{};
 \item in futuro si  prevede di vendere queste quote e acquistare, per  ogni linea, prodotti diversi,
-  mantenendo separato il destino di ognuno dei tre capitali iniziali da \Eur{5000,00};
+  mantenendo    separato    il    destino    di    ognuno   dei    tre    capitali    iniziali    da
+  \Eur{\unoStratInvLineeCapitaleIniziale{}};
 \item si vuole che ogni linea di investimento risulti redditizia.
 \end{itemize}
 
 Le operazioni di acquisto siano come segue:
 \begin{enumerate}
-\item per la prima  linea di investimento si acquisti quando il prezzo  di mercato è \Eur{40,00} per
-  quota; il numero di quote acquistabili risulta:
+\item  per   la  prima  linea  di   investimento  si  acquisti   quando  il  prezzo  di   mercato  è
+  \Eur{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}} per  quota; il numero di  quote acquistabili
+  risulta:
   \begin{equation*}
-    \num{5000,00} / \num{40,00} = \num{125}
+    \num{\unoStratInvLineeCapitaleIniziale{}} /
+    \num{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}}
+    = \num{\unoStratInvLineeAcquistoNumeroQuote{}}
   \end{equation*}
   il riassunto dell'operazione di acquisto per la prima linea è:
   \begin{itemize}
-  \item numero quote \num{125};
-  \item prezzo medio eseguito di acquisto \Eur{40,00};
-  \item controvalore dell'operazione \Eur{5000,00};
-  \item costo dell'operazione di acquisto \Eur{15,00};
-  \item controvalore totale \Eur{5015,00};
-  \item prezzo medio di carico di acquisto \Eur{40,12};
+  \item numero quote \num{\unoStratInvLineeAcquistoNumeroQuote{}};
+  \item prezzo medio eseguito di acquisto \Eur{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}};
+  \item controvalore dell'operazione \Eur{\unoStratInvLineeAcquistoControvaloreOperazione{}};
+  \item costo dell'operazione di acquisto \Eur{\unoStratInvLineeAcquistoCostoOperazione{}};
+  \item controvalore totale \Eur{\unoStratInvLineeAcquistoControvaloreTotale};
+  \item prezzo medio di carico di acquisto \Eur{\unoStratInvLineeAcquistoPrezzoMedioCarico};
   \end{itemize}
-\item per la seconda linea di investimento si acquisti quando il prezzo di mercato è \Eur{50,00} per
-  quota; il numero di quote acquistabili risulta:
+
+\item  per  la  seconda   linea  di  investimento  si  acquisti  quando  il   prezzo  di  mercato  è
+  \Eur{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}} per  quota; il numero di  quote acquistabili
+  risulta:
   \begin{equation*}
-    \num{5000,00} / \num{50,00} = \num{100}
+    \num{\dueStratInvLineeCapitaleIniziale{}} /
+    \num{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}}
+    = \num{\dueStratInvLineeAcquistoNumeroQuote{}}
   \end{equation*}
   il riassunto dell'operazione di acquisto per la seconda linea è:
   \begin{itemize}
-  \item numero quote \num{100};
-  \item prezzo medio eseguito di acquisto \Eur{50,00};
-  \item controvalore dell'operazione \Eur{5000,00};
-  \item costo dell'operazione di acquisto \Eur{15,00};
-  \item controvalore totale \Eur{5015,00};
-  \item prezzo medio di carico di acquisto \Eur{50,15};
+  \item numero quote \num{\dueStratInvLineeAcquistoNumeroQuote{}};
+  \item prezzo medio eseguito di acquisto \Eur{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}};
+  \item controvalore dell'operazione \Eur{\dueStratInvLineeAcquistoControvaloreOperazione{}};
+  \item costo dell'operazione di acquisto \Eur{\dueStratInvLineeAcquistoCostoOperazione{}};
+  \item controvalore totale \Eur{\dueStratInvLineeAcquistoControvaloreTotale};
+  \item prezzo medio di carico di acquisto \Eur{\dueStratInvLineeAcquistoPrezzoMedioCarico};
   \end{itemize}
-\item per la terza  linea di investimento si acquisti quando il prezzo  di mercato è \Eur{60,00} per
-  quota; il numero di quote acquistabili risulta:
+
+\item  per   la  terza  linea  di   investimento  si  acquisti   quando  il  prezzo  di   mercato  è
+  \Eur{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}} per  quota; il numero di  quote acquistabili
+  risulta:
   \begin{equation*}
-    \num{5000,00} / \num{60,00} \simeq{} \num{83,33}
-  \end{equation*}
-  arrotondato a \num{83}, da cui un capitale effettivamente investito pari a:
-  \begin{equation*}
-    \num{83} \times{} \num{60,00} = \Eur{4980,00}
+    \num{\unoStratInvLineeCapitaleIniziale{}} /
+    \num{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}}
+    \simeq{} \num{\treStratInvLineeNumeroQuoteNonArrotondato{}}
+    = \num{\treStratInvLineeAcquistoNumeroQuote{}}
   \end{equation*}
   il riassunto dell'operazione di acquisto per la terza linea è:
   \begin{itemize}
-  \item numero quote \num{83};
-  \item prezzo medio eseguito di acquisto \Eur{60,00};
-  \item controvalore dell'operazione \Eur{4980,00};
-  \item costo dell'operazione di acquisto \Eur{14,95};
-  \item controvalore totale \Eur{4994,95};
-  \item prezzo medio di carico di acquisto \Eur{60,18}.
+  \item numero quote \num{\treStratInvLineeAcquistoNumeroQuote{}};
+  \item prezzo medio eseguito di acquisto \Eur{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}};
+  \item controvalore dell'operazione \Eur{\treStratInvLineeAcquistoControvaloreOperazione{}};
+  \item costo dell'operazione di acquisto \Eur{\treStratInvLineeAcquistoCostoOperazione{}};
+  \item controvalore totale \Eur{\treStratInvLineeAcquistoControvaloreTotale};
+  \item prezzo medio di carico di acquisto \Eur{\treStratInvLineeAcquistoPrezzoMedioCarico};
   \end{itemize}
 \end{enumerate}
 
 Nel Conto Titoli compare il saldo per il numero totale di quote acquistate:
 \begin{equation*}
-  \num{125} + \num{100} + \num{83} = \num{308}
+  \num{\unoStratInvLineeAcquistoNumeroQuote{}} +
+  \num{\dueStratInvLineeAcquistoNumeroQuote{}} +
+  \num{\treStratInvLineeAcquistoNumeroQuote{}} =
+  \num{\treStratInvLineeSaldoNumeroQuote{}}
 \end{equation*}
 il  \emph{prezzo medio  effettivo nel  saldo} risulta  dalla media  ponderata dei  \emph{prezzi medi
    effettivi di acquisto}:
 \begin{equation*}
-  \frac{\num{125} \times{} \num{40,00} + \num{100} \times{} \num{50,00} + \num{83} \times{} \num{60}}
-  {\num{125} + \num{100} + \num{83}} = \Eur{48,6364}
+  \frac{
+     \num{\unoStratInvLineeAcquistoNumeroQuote{}} \times{} \num{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}} +
+     \num{\dueStratInvLineeAcquistoNumeroQuote{}} \times{} \num{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}} +
+     \num{\treStratInvLineeAcquistoNumeroQuote{}} \times{} \num{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}}}
+  {\treStratInvLineeSaldoNumeroQuote{}}
+  = \Eur{\treStratInvLineeSaldoPrezzoMedioEffettivo{}}
 \end{equation*}
 il \emph{prezzo medio  di carico nel saldo}  risulta dalla media ponderata dei  \emph{prezzi medi di
    carico di acquisto}:
 \begin{equation*}
-  \frac{\num{125} \times{} \num{40,12} + \num{100} \times{} \num{50,15} + \num{83} \times{} \num{60,18}}
-  {\num{125} + \num{100} + \num{83}} = \Eur{48,7823}
+  \frac{
+     \num{\unoStratInvLineeAcquistoNumeroQuote{}} \times{} \num{\unoStratInvLineeAcquistoPrezzoMedioCarico{}} +
+     \num{\dueStratInvLineeAcquistoNumeroQuote{}} \times{} \num{\dueStratInvLineeAcquistoPrezzoMedioCarico{}} +
+     \num{\treStratInvLineeAcquistoNumeroQuote{}} \times{} \num{\treStratInvLineeAcquistoPrezzoMedioCarico{}}}
+  {\treStratInvLineeSaldoNumeroQuote{}}
+  = \Eur{\treStratInvLineeSaldoPrezzoMedioCarico{}}
 \end{equation*}
 
 Si è osservato  in precedenza che quando si  esegue una vendita parziale delle quote  in carico: nel
 saldo del  Conto Titoli l'unico numero  che cambia è il  numero di quote in  carico, il \emph{prezzo
    medio effettivo nel saldo}  e il \emph{prezzo medio di carico nel  saldo} restano invariati!  Ciò
-significa che  \textbf{l'ordine con  cui si  liquidano le quote  delle tre  linee di  investimento è
-   ininfluente ai fini dei rendimenti ottenuti}.
+significa che: se si eseguono prima tutti gli  acquisti e poi tutte le vendite, \textbf{l'ordine con
+   cui si liquidano  le quote delle tre linee  di investimento è ininfluente ai  fini dei rendimenti
+   ottenuti}.
 
 %page
 \paragraph{Vendita delle quote della prima linea di investimento.}
-Si liquidino le \num{125} quote della  prima linea di investimento al \PrezzoMedioEffettivoVendita{}
-di \Eur{46,00}, maggiore del \PrezzoMedioCaricoAcquisto{}  delle quote stesse \Eur{40,12}, ma minore
-del \PrezzoMedioCaricoSaldo{} \Eur{48,7823}.  Il riassunto  della contabilità fiscale come calcolato
-dalla Banca è il seguente:
+Si liquidino le \num{125} quote della prima linea di investimento al \emph{prezzo medio effettivo di
+   vendita}  di \Eur{46,00},  maggiore del  \emph{prezzo medio  di carico  di acquisto}  delle quote
+stesse  \Eur{40,12}, ma  minore  del \emph{prezzo  medio  di carico  nel  saldo} \Eur{48,7823}.   Il
+riassunto della contabilità fiscale come calcolato dalla Banca è il seguente:
 \begin{itemize}
 \item numero quote \num{125};
 \item prezzo medio effettivo di vendita \Eur{46,00};
@@ -1270,8 +1230,8 @@ dalla Banca è il seguente:
 \item minusvalenza registrata nella posizione fiscale \Eur{364,59};
 \item controvalore totale di vendita \Eur{5733,20}, sono i soldi che tornano sul Conto Corrente;
 \item prezzo medio netto di vendita \Eur{45,8656};
-\item rendimento percentuale rispetto al \PrezzoMedioCaricoSaldo{} \SI{-5,9790}{\percent};
-\item rendimento in valuta rispetto al \PrezzoMedioCaricoSaldo{} \Eur{-364,59}.
+\item rendimento percentuale rispetto al \emph{prezzo medio di carico nel saldo} \SI{-5,9790}{\percent};
+\item rendimento in valuta rispetto al \emph{prezzo medio di carico nel saldo} \Eur{-364,59}.
 \end{itemize}
 Il risultato di  questa operazione dal punto di  vista della prima linea di  investimento può essere
 calcolato in due modi:
@@ -1291,8 +1251,8 @@ il rendimento della compravendita risulta:
 %page
 \paragraph{Vendita delle quote della seconda linea di investimento.}
 Si    liquidino    le    \num{100}    quote    della    seconda    linea    di    investimento    al
-\PrezzoMedioEffettivoVendita{} di  \Eur{49,50}, minore del \PrezzoMedioCaricoAcquisto{}  delle quote
-stesse \Eur{50,00},  ma maggiore  del \PrezzoMedioCaricoSaldo{}  \Eur{48,7823}.  Il  riassunto della
+\emph{prezzo medio effettivo di vendita} di  \Eur{49,50}, minore del \emph{prezzo medio di carico di acquisto}  delle quote
+stesse \Eur{50,00},  ma maggiore  del \emph{prezzo medio di carico nel saldo}  \Eur{48,7823}.  Il  riassunto della
 contabilità fiscale come calcolato dalla Banca è il seguente:
 \begin{itemize}
 \item numero quote \num{100};
@@ -1308,8 +1268,8 @@ contabilità fiscale come calcolato dalla Banca è il seguente:
 \item minusvalenza registrata nella posizione fiscale \Eur{29,47};
 \item controvalore totale di vendita \Eur{4912,67}, sono i soldi che tornano sul Conto Corrente;
 \item prezzo medio netto di vendita \Eur{49,1267};
-\item rendimento percentuale rispetto al \PrezzoMedioCaricoSaldo{} \SI{0,7059}{\percent};
-\item rendimento in valuta rispetto al \PrezzoMedioCaricoSaldo{} \Eur{34,43}.
+\item rendimento percentuale rispetto al \emph{prezzo medio di carico nel saldo} \SI{0,7059}{\percent};
+\item rendimento in valuta rispetto al \emph{prezzo medio di carico nel saldo} \Eur{34,43}.
 \end{itemize}
 Il risultato di questa operazione dal punto di  vista della seconda linea di investimento può essere
 calcolato in due modi:
@@ -1328,10 +1288,10 @@ il rendimento della compravendita risulta:
 
 %page
 \paragraph{Vendita delle quote della terza linea di investimento.}
-Si liquidino le  \num{83} quote della terza linea di  investimento al \PrezzoMedioEffettivoVendita{}
-di \Eur{65,00}, maggiore del \PrezzoMedioCaricoAcquisto{}  delle quote stesse \Eur{60,00} e maggiore
-del \PrezzoMedioCaricoSaldo{} \Eur{48,7823}.  Il riassunto  della contabilità fiscale come calcolato
-dalla Banca è il seguente:
+Si liquidino le \num{83} quote della terza  linea di investimento al \emph{prezzo medio effettivo di
+   vendita}  di \Eur{65,00},  maggiore del  \emph{prezzo medio  di carico  di acquisto}  delle quote
+stesse  \Eur{60,00} e  maggiore  del \emph{prezzo  medio  di carico  nel  saldo} \Eur{48,7823}.   Il
+riassunto della contabilità fiscale come calcolato dalla Banca è il seguente:
 \begin{itemize}
 \item numero quote \num{83};
 \item prezzo medio effettivo di vendita \Eur{65,00};
@@ -1346,17 +1306,17 @@ dalla Banca è il seguente:
 \item minusvalenza registrata nella posizione fiscale \Eur{28,06};
 \item controvalore totale di vendita \Eur{5025,92}, sono i soldi che tornano sul Conto Corrente;
 \item prezzo medio netto di vendita \Eur{60,5533};
-\item rendimento percentuale rispetto al \PrezzoMedioCaricoSaldo{} {\SI{24,1296}{\percent}};
-\item rendimento in valuta rispetto al \PrezzoMedioCaricoSaldo{} \Eur{976,99}.
+\item rendimento percentuale rispetto al \emph{prezzo medio di carico nel saldo} {\SI{24,1296}{\percent}};
+\item rendimento in valuta rispetto al \emph{prezzo medio di carico nel saldo} \Eur{976,99}.
 \end{itemize}
 Il risultato di  questa operazione dal punto di  vista della terza linea di  investimento può essere
 calcolato in due modi:
 \begin{enumerate}
 \item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
-  \ControvaloreTotaleAcquisto{} \Eur{4994,95},  e la  quantità di soldi  entrata nel  Conto Corrente
-  dopo la vendita delle quote, cioè il \ControvaloreTotaleVendita{} \Eur{5025,92};
-\item   con   il   \PrezzoMedioCaricoAcquisto{}  \Eur{60,1801}   e   il   \PrezzoMedioNettoVendita{}
-  \Eur{60,5533};
+  \emph{controvalore totale  di acquisto} \Eur{4994,95},  e la quantità  di soldi entrata  nel Conto
+  Corrente dopo la vendita delle quote, cioè il \emph{controvalore totale di vendita} \Eur{5025,92};
+\item con il \emph{prezzo  medio di carico di acquisto} \Eur{60,1801} e  il \emph{prezzo medio netto
+     di vendita} \Eur{60,5533};
 \end{enumerate}
 il rendimento della compravendita risulta:
 \begin{equation*}

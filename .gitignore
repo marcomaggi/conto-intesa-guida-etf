@@ -53,6 +53,7 @@ meta/autotools/
 _region_.tex
 demo.c
 demo
+*.inc
 conto-intesa--calcoli-esempio--etf-abcd
 conto-intesa--calcoli-esempio--etf-xyz
 conto-intesa--calcoli-esempio--operazione-acquisto

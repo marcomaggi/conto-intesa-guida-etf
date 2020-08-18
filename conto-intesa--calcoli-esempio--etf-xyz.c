@@ -8,7 +8,7 @@
 
 	Esempio di compravendite e confronto con note di acquisto.
 
-   Copyright (C) 2018 Marco Maggi <mrc.mgg@gmail.com>
+   Copyright (C) 2018, 2020 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -41,70 +41,23 @@ operazione_t		O[NUMERO_OPERAZIONI] = {
   {
     .numero_ordine			= 1,
     .tipo				= ACQUISTO,
-    .data_operazione			= "2020 gennaio 01",
     .numero_quote			= 39.0,
     .prezzo_medio_eseguito		= +130.0,
   },
   {
     .numero_ordine			= 2,
     .tipo				= ACQUISTO,
-    .data_operazione			= "2020 febbraio 02",
     .numero_quote			= 39.0,
     .prezzo_medio_eseguito		= +131.75,
   },
   {
     .numero_ordine			= 3,
     .tipo				= ACQUISTO,
-    .data_operazione			= "2020 marzo 03",
     .numero_quote			= 76.0,
     .prezzo_medio_eseguito		= 131.70,
   },
 };
 saldo_t		S[NUMERO_OPERAZIONI];
-
-
-/** --------------------------------------------------------------------
- ** Tabella note di ordine eseguito.
- ** ----------------------------------------------------------------- */
-
-nota_eseguito_t const	N[NUMERO_OPERAZIONI] = {
-  {
-    .numero_ordine			= 1,
-    .tipo				= ACQUISTO,
-    .data_operazione			= "2020 gennaio 01",
-    .numero_quote			= 39.0,
-    .prezzo_medio_eseguito		= +130.0,
-    .controvalore_operazione		= +5070.00,
-    .costo_operazione			= 0.50 + 2.50 + 12.17,
-    .tassa_sul_reddito_da_capitale	= nan(""),
-    .controvalore_totale		= +5085.17,
-    .nav_prezzo_medio_carico		= nan(""),
-  },
-  {
-    .numero_ordine			= 2,
-    .tipo				= ACQUISTO,
-    .data_operazione			= "2020 febbraio 02",
-    .numero_quote			= 39.0,
-    .prezzo_medio_eseguito		= +131.75,
-    .controvalore_operazione		= 5138.25,
-    .costo_operazione			= 0.50 + 2.50 + 12.33,
-    .tassa_sul_reddito_da_capitale	= nan(""),
-    .controvalore_totale		= 5153.58,
-    .nav_prezzo_medio_carico		= nan(""),
-  },
-  {
-    .numero_ordine			= 3,
-    .tipo				= ACQUISTO,
-    .data_operazione			= "2020 marzo 03",
-    .numero_quote			= 76.0,
-    .prezzo_medio_eseguito		= 131.70,
-    .controvalore_operazione		= 10009.20,
-    .costo_operazione			= 0.50 + 2.50 + 24.02,
-    .tassa_sul_reddito_da_capitale	= nan(""),
-    .controvalore_totale		= 10036.22,
-    .nav_prezzo_medio_carico		= nan(""),
-  },
-};
 
 
 /** --------------------------------------------------------------------
@@ -118,15 +71,7 @@ main (void)
   printf("\n*** Calcoli di esempio: ETF XYZ\n\n");
 
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
-  fflush(stdout);
-
-  printf("\n");
-
-  for (int i=0; i<NUMERO_OPERAZIONI; ++i) {
-    nota_eseguito_confronto(&N[i], &O[i], &S[i]);
-  }
-
-  fflush(stdout);
+  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
   exit(EXIT_SUCCESS);
 }
 

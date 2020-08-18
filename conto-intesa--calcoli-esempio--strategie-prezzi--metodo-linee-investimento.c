@@ -39,6 +39,8 @@
  ** Function prototypes.
  ** ----------------------------------------------------------------- */
 
+static bool print_latex_output = false;
+
 static void strategia_linee_investimento (void);
 static void risultato_compravendita_linea_di_investimento (char const * descr, operazione_t * _acq, operazione_t * _ven);
 
@@ -48,10 +50,13 @@ static void risultato_compravendita_linea_di_investimento (char const * descr, o
  ** ----------------------------------------------------------------- */
 
 int
-main (void)
+main (int argc, const char *const argv[])
 {
   setlocale(LC_ALL, "it_IT");
-  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Strategie per la scelta dei prezzi di vendita\"\n\n");
+  printf("\n%%%%%% Calcoli per gli esempi nella guida: sezione \"Strategie per la scelta dei prezzi di vendita, linee di investimento\"\n\n");
+  if (2 == argc) {
+    print_latex_output = true;
+  }
   strategia_linee_investimento();
   exit(EXIT_SUCCESS);
 }
@@ -64,9 +69,9 @@ main (void)
 void
 strategia_linee_investimento (void)
 {
-  double	capitale_1	= 5000.00;
-  double	capitale_2	= 5000.00;
-  double	capitale_3	= 5000.00;
+  double	capitale_iniziale_1	= 5000.00;
+  double	capitale_iniziale_2	= 5000.00;
+  double	capitale_iniziale_3	= 5000.00;
 
   double	prezzo_medio_effettivo_acquisto_1	= 40.0;
   double	prezzo_medio_effettivo_acquisto_2	= 50.0;
@@ -76,23 +81,57 @@ strategia_linee_investimento (void)
   double	prezzo_medio_effettivo_vendita_2	= 49.50;
   double	prezzo_medio_effettivo_vendita_3	= 65.0;
 
-  double	numero_quote_1	= capitale_1 / prezzo_medio_effettivo_acquisto_1;
-  double	numero_quote_2	= capitale_2 / prezzo_medio_effettivo_acquisto_2;
-  double	numero_quote_3	= capitale_3 / prezzo_medio_effettivo_acquisto_3;
+  double	numero_quote_non_arrotondato_1	= capitale_iniziale_1 / prezzo_medio_effettivo_acquisto_1;
+  double	numero_quote_non_arrotondato_2	= capitale_iniziale_2 / prezzo_medio_effettivo_acquisto_2;
+  double	numero_quote_non_arrotondato_3	= capitale_iniziale_3 / prezzo_medio_effettivo_acquisto_3;
 
-  printf("numero quote non arrotondato 1: %f/%f=%f\n", capitale_1, prezzo_medio_effettivo_acquisto_1, numero_quote_1);
-  printf("numero quote non arrotondato 2: %f/%f=%f\n", capitale_2, prezzo_medio_effettivo_acquisto_2, numero_quote_2);
-  printf("numero quote non arrotondato 3: %f/%f=%f\n", capitale_3, prezzo_medio_effettivo_acquisto_3, numero_quote_3);
+  double	numero_quote_1	= floor(numero_quote_non_arrotondato_1);
+  double	numero_quote_2	= floor(numero_quote_non_arrotondato_2);
+  double	numero_quote_3	= floor(numero_quote_non_arrotondato_3);
 
-  numero_quote_1	= floor(numero_quote_1);
-  numero_quote_2	= floor(numero_quote_2);
-  numero_quote_3	= floor(numero_quote_3);
+  if (print_latex_output) {
+    latex_output_config_t	config = {
+      .stream	= stdout,
+      .prefisso	= "StratInvLinee",
+      .oggetto	= "",
+    };
 
-  printf("numero quote arrotondato 1: %f\n", numero_quote_1);
-  printf("numero quote arrotondato 2: %f\n", numero_quote_2);
-  printf("numero quote arrotondato 3: %f\n", numero_quote_3);
-
-  printf("\n");
+    {
+      config.ordine = "uno",
+      print_latex_newcommand_double_4(&config, "CapitaleIniziale", capitale_iniziale_1);
+      config.ordine = "due";
+      print_latex_newcommand_double_4(&config, "CapitaleIniziale", capitale_iniziale_2);
+      config.ordine = "tre";
+      print_latex_newcommand_double_4(&config, "CapitaleIniziale", capitale_iniziale_3);
+    }
+    print_latex_newline(&config);
+    {
+      config.ordine = "uno",
+      print_latex_newcommand_double_4(&config, "NumeroQuoteNonArrotondato", numero_quote_non_arrotondato_1);
+      config.ordine = "due";
+      print_latex_newcommand_double_4(&config, "NumeroQuoteNonArrotondato", numero_quote_non_arrotondato_2);
+      config.ordine = "tre";
+      print_latex_newcommand_double_4(&config, "NumeroQuoteNonArrotondato", numero_quote_non_arrotondato_3);
+    }
+    print_latex_newline(&config);
+    {
+      config.ordine = "uno";
+      print_latex_newcommand_double_0(&config, "NumeroQuoteArrotondato", numero_quote_1);
+      config.ordine = "due";
+      print_latex_newcommand_double_0(&config, "NumeroQuoteArrotondato", numero_quote_2);
+      config.ordine = "tre";
+      print_latex_newcommand_double_0(&config, "NumeroQuoteArrotondato", numero_quote_3);
+    }
+    print_latex_newline(&config);
+  } else {
+    printf("numero quote non arrotondato 1: %f/%f=%f\n", capitale_iniziale_1, prezzo_medio_effettivo_acquisto_1, numero_quote_non_arrotondato_1);
+    printf("numero quote non arrotondato 2: %f/%f=%f\n", capitale_iniziale_2, prezzo_medio_effettivo_acquisto_2, numero_quote_non_arrotondato_2);
+    printf("numero quote non arrotondato 3: %f/%f=%f\n", capitale_iniziale_3, prezzo_medio_effettivo_acquisto_3, numero_quote_non_arrotondato_3);
+    printf("numero quote arrotondato 1: %f\n", numero_quote_1);
+    printf("numero quote arrotondato 2: %f\n", numero_quote_2);
+    printf("numero quote arrotondato 3: %f\n", numero_quote_3);
+    printf("\n");
+  }
 
 #undef NUMERO_OPERAZIONI
 #define NUMERO_OPERAZIONI	6
@@ -100,42 +139,36 @@ strategia_linee_investimento (void)
     {
       .numero_ordine		= 1,
       .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
       .numero_quote		= numero_quote_1,
       .prezzo_medio_eseguito	= prezzo_medio_effettivo_acquisto_1,
     },
     {
       .numero_ordine		= 2,
       .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
       .numero_quote		= numero_quote_2,
       .prezzo_medio_eseguito	= prezzo_medio_effettivo_acquisto_2,
     },
     {
       .numero_ordine		= 3,
       .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
       .numero_quote		= numero_quote_3,
       .prezzo_medio_eseguito	= prezzo_medio_effettivo_acquisto_3,
     },
     {
       .numero_ordine		= 4,
       .tipo			= VENDITA,
-      .data_operazione		= NULL,
       .numero_quote		= numero_quote_1,
       .prezzo_medio_eseguito	= prezzo_medio_effettivo_vendita_1,
     },
     {
       .numero_ordine		= 5,
       .tipo			= VENDITA,
-      .data_operazione		= NULL,
       .numero_quote		= numero_quote_2,
       .prezzo_medio_eseguito	= prezzo_medio_effettivo_vendita_2,
     },
     {
       .numero_ordine		= 6,
       .tipo			= VENDITA,
-      .data_operazione		= NULL,
       .numero_quote		= numero_quote_3,
       .prezzo_medio_eseguito	= prezzo_medio_effettivo_vendita_3,
     },
@@ -143,8 +176,11 @@ strategia_linee_investimento (void)
   saldo_t	S[NUMERO_OPERAZIONI];
 
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
-  printf("\n\n");
-  fflush(stdout);
+  if (print_latex_output) {
+    calcolo_storico_print_latex(stdout, "StratInvLinee", NUMERO_OPERAZIONI, O, S);
+  } else {
+    calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  }
 
   risultato_compravendita_linea_di_investimento("prima",   &(O[0]), &(O[3]));
   risultato_compravendita_linea_di_investimento("seconda", &(O[1]), &(O[4]));
@@ -157,15 +193,28 @@ risultato_compravendita_linea_di_investimento (char const * descr, operazione_t 
   operazione_acquisto_t	*acq = (operazione_acquisto_t *)_acq;
   operazione_vendita_t	*ven = (operazione_vendita_t  *)_ven;
 
-  printf("Rendimento %s linea di investimento (calcolo con i controvalori): 100 * (%.2f - %.2f) / %.2f = %.2f%%\n",
-	 descr,
-	 ven->controvalore_totale, acq->controvalore_totale, acq->controvalore_totale,
-	 calcolo_rendimento_percentuale(ven->controvalore_totale, acq->controvalore_totale));
-  printf("Rendimento %s linea di investimento (calcolo con i prezzi medi):  100 * (%.2f - %.2f) / %.2f = %.2f%%\n",
-	 descr,
-	 ven->prezzo_medio_netto, acq->prezzo_medio_carico, acq->prezzo_medio_carico,
-	 calcolo_rendimento_percentuale(ven->prezzo_medio_netto, acq->prezzo_medio_carico));
-  printf("\n");
+  double	rendimento_percentuale_linea	 = calcolo_rendimento_percentuale(ven->controvalore_totale, acq->controvalore_totale);
+
+  if (print_latex_output) {
+    latex_output_config_t	config = {
+      .stream	= stdout,
+      .ordine	= numero_ordine_parola(ven->numero_ordine),
+      .prefisso	= "StratInvLinee",
+      .oggetto	= "",
+    };
+
+    print_latex_newcommand_double_4(&config, "RendimentoPercentualeLinea", rendimento_percentuale_linea);
+  } else {
+    printf("Rendimento %s linea di investimento (calcolo con i controvalori): 100 * (%.2f - %.2f) / %.2f = %.2f%%\n",
+	   descr,
+	   ven->controvalore_totale, acq->controvalore_totale, acq->controvalore_totale,
+	   rendimento_percentuale_linea);
+    printf("Rendimento %s linea di investimento (calcolo con i prezzi medi):  100 * (%.2f - %.2f) / %.2f = %.2f%%\n",
+	   descr,
+	   ven->prezzo_medio_netto, acq->prezzo_medio_carico, acq->prezzo_medio_carico,
+	   calcolo_rendimento_percentuale(ven->prezzo_medio_netto, acq->prezzo_medio_carico));
+    printf("\n");
+  }
 }
 
 /* end of file */

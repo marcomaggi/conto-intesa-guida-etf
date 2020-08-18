@@ -30,7 +30,7 @@ clean: clean-latex
 
 #### programmi per calcoli negli esempi della guida
 
-CLEANFILES	+= *.o
+CLEANFILES	+= *.o *.inc
 
 CC		= gcc -std=c11
 CFLAGS		= -Wall
@@ -89,6 +89,12 @@ demo: demo.c
 
 #### documenti
 
+PREREQUISITES	= \
+	conto-intesa--calcoli-esempio--operazione-acquisto.inc				\
+	conto-intesa--calcoli-esempio--saldo-acquisto.inc				\
+	conto-intesa--calcoli-esempio--operazione-vendita.inc				\
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc
+
 CLEANFILES	+= \
 	*.aux *.log *.toc *.dvi *.ps* *.pdf *.eps *.bbl *.blg \
 	*.idx *.out *.texdraw _region_.tex "=auto"
@@ -110,7 +116,7 @@ endif
 
 .PHONY: bootstrap clean-latex latex-clean
 
-bootstrap:
+bootstrap: $(PREREQUISITES)
 	$(LATEX) conto-intesa-guida-etf.tex
 	$(LATEX) conto-intesa-guida-etf.tex
 	$(LATEX) conto-intesa-guida-etf.tex
@@ -120,7 +126,25 @@ clean-latex latex-clean:
 
 ## --------------------------------------------------------------------
 
-conto-intesa-guida-etf.dvi: conto-intesa-guida-etf.tex fdl-1.3.tex
+conto-intesa-guida-etf.dvi: conto-intesa-guida-etf.tex fdl-1.3.tex $(PREREQUISITES)
+
+## --------------------------------------------------------------------
+
+conto-intesa--calcoli-esempio--operazione-acquisto.inc: \
+		conto-intesa--calcoli-esempio--operazione-acquisto
+	./conto-intesa--calcoli-esempio--operazione-acquisto latex >$(@)
+
+conto-intesa--calcoli-esempio--saldo-acquisto.inc: \
+		conto-intesa--calcoli-esempio--saldo-acquisto
+	./conto-intesa--calcoli-esempio--saldo-acquisto latex >$(@)
+
+conto-intesa--calcoli-esempio--operazione-vendita.inc: \
+		conto-intesa--calcoli-esempio--operazione-vendita
+	./conto-intesa--calcoli-esempio--operazione-vendita latex >$(@)
+
+conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc: \
+		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento
+	./conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento latex >$(@)
 
 ## --------------------------------------------------------------------
 

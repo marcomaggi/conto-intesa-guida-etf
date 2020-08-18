@@ -9,7 +9,7 @@
 	Calcoli  di  esempio nella  guida,  per  la sezione  "Rendimento
 	indicato nel riepilogo del patrimonio".
 
-   Copyright (C) 2017, 2018 Marco Maggi <mrc.mgg@gmail.com>
+   Copyright (C) 2017, 2018, 2020 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software:  you can redistribute it and/or modify
    it under the terms of the  GNU General Public License as published by
@@ -53,14 +53,12 @@ main (void)
       {
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
-	.data_operazione	= NULL,
 	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
-	.data_operazione	= NULL,
 	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 52.00,
       },
@@ -78,14 +76,12 @@ main (void)
       {
 	.numero_ordine		= 1,
 	.tipo			= ACQUISTO,
-	.data_operazione	= NULL,
 	.numero_quote		= 100.00,
 	.prezzo_medio_eseguito	= 50.00,
       },
       {
 	.numero_ordine		= 2,
 	.tipo			= VENDITA,
-	.data_operazione	= NULL,
 	.numero_quote		= 100,
 	.prezzo_medio_eseguito	= 48.00,
       }
@@ -93,6 +89,7 @@ main (void)
     saldo_t	S[NUMERO_OPERAZIONI];
 
     calcolo_storico(NUMERO_OPERAZIONI, O, S);
+    calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
   }
 
   fflush(stdout);

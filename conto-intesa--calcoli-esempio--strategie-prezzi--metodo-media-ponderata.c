@@ -81,14 +81,12 @@ strategia_medie_ponderate__esempio_guadagno (void)
     {
       .numero_ordine		= 1,
       .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
       .numero_quote		= 100,
       .prezzo_medio_eseguito	= 50.00,
     },
     {
       .numero_ordine		= 2,
       .tipo			= VENDITA,
-      .data_operazione		= NULL,
       .numero_quote		= 100,
       .prezzo_medio_eseguito	= 52.00,
     }
@@ -97,6 +95,7 @@ strategia_medie_ponderate__esempio_guadagno (void)
 
   printf("\n* Metodo delle medie ponderate: esempio di guadagno\n\n");
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
+  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
 }
 
 void
@@ -108,14 +107,12 @@ strategia_medie_ponderate__esempio_perdita_1 (void)
     {
       .numero_ordine		= 1,
       .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
       .numero_quote		= 100,
       .prezzo_medio_eseguito	= 50.00,
     },
     {
       .numero_ordine		= 2,
       .tipo			= VENDITA,
-      .data_operazione		= NULL,
       .numero_quote		= 100,
       .prezzo_medio_eseguito	= 50.30,
     }
@@ -124,6 +121,7 @@ strategia_medie_ponderate__esempio_perdita_1 (void)
 
   printf("\n* Metodo delle medie ponderate: esempio di perdita 1\n\n");
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
+  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
 }
 
 void
@@ -135,14 +133,12 @@ strategia_medie_ponderate__esempio_perdita_2 (void)
     {
       .numero_ordine		= 1,
       .tipo			= ACQUISTO,
-      .data_operazione		= NULL,
       .numero_quote		= 100,
       .prezzo_medio_eseguito	= 50.00,
     },
     {
       .numero_ordine		= 2,
       .tipo			= VENDITA,
-      .data_operazione		= NULL,
       .numero_quote		= 100,
       .prezzo_medio_eseguito	= 48.00,
     }
@@ -151,6 +147,7 @@ strategia_medie_ponderate__esempio_perdita_2 (void)
 
   printf("\n* Metodo delle medie ponderate: esempio di perdita 2\n\n");
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
+  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
 }
 
 /* end of file */
