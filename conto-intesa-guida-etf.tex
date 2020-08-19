@@ -40,7 +40,8 @@
 \newcommand{\CalcoloCostoOperazione}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{#1}}
 \newcommand{\CalcoloCostoOperazioneSim}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} #1}
 
-\newcommand{\CalcoloRendimentoPercentuale}[2]{\frac{\num{#1} - \num{#2}}{#2} \times{} \num{100}}
+\newcommand{\CalcoloRendimentoPercentuale}[2]{\frac{\num{#1} - \num{#2}}{\num{#2}} \times{} \num{100}}
+\newcommand{\CalcoloRendimentoPercentualeSim}[2]{\frac{#1 - #2}{#2} \times{} \num{100}}
 
 \newcommand{\Parentesi}[1]{(#1)}
 \newcommand{\Virgolette}[1]{``#1''}
@@ -104,10 +105,10 @@
 \newcommand{\Rdiv}[1]{\mathcal{R}_{\mathrm{div}#1}}
 
 % Reddito diverso da minusvalenza sul capitale.
-\newcommand{\Rdivmin}[1]{\mathcal{R}_{\mathrm{dm}#1}}
+\newcommand{\Rdivmin}[1]{\mathcal{R}_{\mathrm{div,min}#1}}
 
 % Reddito diverso da pagamento di commissioni.
-\newcommand{\Rdivcom}[1]{\mathcal{R}_{\mathrm{df}#1}}
+\newcommand{\Rdivcom}[1]{\mathcal{R}_{\mathrm{div,com}#1}}
 
 % Tassa sul reddito da capitale.
 \newcommand{\Tredcap}[1]{\mathcal{T}_{\mathrm{red}#1}}
@@ -128,10 +129,10 @@
 \newcommand{\Fmcs}[1]{\mathcal{F}_{\mathrm{mcs}#1}}
 
 % Rendimento percentuale.
-\newcommand{\Rperc}[1]{\eta_{\percent{}#1}}
+\newcommand{\Rperc}[1]{\eta_{\%#1}}
 
 % Rendimento in valuta.
-\newcommand{\Rval}[1]{\eta_{\euro{}#1}}
+\newcommand{\Rval}[1]{\eta_{\textrm{\euro{}}#1}}
 
 %page
 %% ------------------------------------------------------------
@@ -771,26 +772,28 @@ la frazione \Virgolette{eseguita} dell'ordine.  Il  \textbf{\emph{prezzo medio e
 al   numero   di  quote   vendute.    Per   esempio,  se   un   singolo   ordine  di   vendita   per
 \num{\dueEsVenVenditaNumeroQuote{}} quote è eseguito nelle fasi:
 \begin{enumerate}
-\item vendita di \num{\UnoNumeroQuote} quote al prezzo di \Eur{\UnoPrezzoEseguito};
-\item vendita di \num{\DueNumeroQuote} quote al prezzo di \Eur{\DuePrezzoEseguito};
-\item vendita di \num{\TreNumeroQuote} quote al prezzo di \Eur{\TrePrezzoEseguito};
+\item vendita di \(\Nquo{1} = \num{\UnoNumeroQuote}\) quote al prezzo di \(\Pven{1} = \Eur{\UnoPrezzoEseguito}\);
+\item vendita di \(\Nquo{2} = \num{\DueNumeroQuote}\) quote al prezzo di \(\Pven{2} = \Eur{\DuePrezzoEseguito}\);
+\item vendita di \(\Nquo{3} = \num{\TreNumeroQuote}\) quote al prezzo di \(\Pven{3} = \Eur{\TrePrezzoEseguito}\);
 \end{enumerate}
-allora il \emph{prezzo medio effettivo} risulta:
-\begin{equation*}
-  \MediaPonderataTre
+allora il \emph{prezzo medio effettivo di vendita} \(\Pmev{}\) risulta:
+\begin{align*}
+  \Pmev{}
+  &= \MediaPonderataTreSim{\Nquo{1}}{\Pven{1}}{\Nquo{2}}{\Pven{2}}{\Nquo{3}}{\Pven{3}} \\
+  &= \MediaPonderataTre
   {\UnoNumeroQuote}{\UnoPrezzoEseguito}
   {\DueNumeroQuote}{\DuePrezzoEseguito}
   {\TreNumeroQuote}{\TrePrezzoEseguito}
   = \Eur{\dueEsVenVenditaPrezzoMedioEffettivo}
-\end{equation*}
+\end{align*}
 
-Il \textbf{controvalore  dell'operazione di  vendita} è il  prodotto tra il  numero totale  di quote
-vendute    e    il    \emph{prezzo    medio    effettivo};    per    esempio,    se    si    vendono
-\num{\dueEsVenVenditaNumeroQuote{}}     quote     al     \emph{prezzo    medio     effettivo}     di
-\Eur{\dueEsVenVenditaPrezzoMedioEffettivo{}} il controvalore dell'operazione risulta:
+Il \textbf{controvalore dell'operazione  di vendita} \(\Cven{}\) è il prodotto  tra il numero totale
+di   quote   vendute  e   il   \emph{prezzo   medio  effettivo};   per   esempio,   se  si   vendono
+\(\Nven{}  =  \num{\dueEsVenVenditaNumeroQuote{}}\)  quote   al  \emph{prezzo  medio  effettivo}  di
+\(\Pmev{} = \Eur{\dueEsVenVenditaPrezzoMedioEffettivo{}}\) il controvalore dell'operazione risulta:
 \begin{equation*}
-  \num{\dueEsVenVenditaNumeroQuote{}} \times{}
-  \num{\dueEsVenVenditaPrezzoMedioEffettivo{}}
+  \Cven{} = \Nven{} \times{} \Pmev{}
+  = \num{\dueEsVenVenditaNumeroQuote{}} \times{} \num{\dueEsVenVenditaPrezzoMedioEffettivo{}}
   = \Eur{\dueEsVenVenditaControvaloreOperazione{}}
 \end{equation*}
 
@@ -803,31 +806,37 @@ derivante da un'operazione di vendita è la differenza tra \emph{prezzo medio ef
   precedenti minusvalenze da altri investimenti;
 \item quando la differenza tra prezzi medi  effettivi è \textbf{negativa}: essa è da considerarsi un
   \emph{reddito  diverso},  quindi  \textbf{genera}  una minusvalenza  compensabile  con  successive
-  plusvalenze da altri investimenti.
+  plusvalenze da altri investimenti;
 \end{itemize}
+per esempio, se  si vendono \(\Nven{} = \num{\dueEsVenVenditaNumeroQuote{}}\)  quote al \emph{prezzo
+   medio effettivo}  di \(\Pmev{}  = \Eur{\dueEsVenVenditaPrezzoMedioEffettivo}\) e  il \emph{prezzo
+   medio          effettivo          nel           saldo}          precedente          è          di
+\(\Pmes{} =  \Eur{\unoEsVenSaldoPrezzoMedioEffettivo}\), il  \emph{reddito da  capitale} \(\Rcap{}\)
+risulta:
+\begin{align*}
+  \Rcap{}
+  = \Nven{} \times{} \left(\Pmev{} - \Pmes{} \right)
+  = \num{\dueEsVenVenditaNumeroQuote} \times{} \left(
+    \num{\dueEsVenVenditaPrezzoMedioEffettivo} - \num{\unoEsVenSaldoPrezzoMedioEffettivo}
+  \right) = \Eur{\dueEsVenVenditaRedditoCapitale}
+\end{align*}
 
 Quando  il reddito  di  una vendita  è  positivo: occorre  pagare la  \textbf{tassa  sul reddito  da
    capitale}\footnote{Si deve  pagare anche il  bollo sull'estratto  conto trimestrale per  il Conto
    Titoli,  pari allo  \SI{0,2}{\percent} all'anno,  cioè  lo \SI{0,05}{\percent}  al trimestre  del
    controvalore alla data di chiusura dei conti  trimestrali; il bollo è addebitato direttamente sul
-   Conto Corrente, perciò in questa guida lo si considera conteggiato a parte.}.  Per esempio, se si
-vendono   \num{\dueEsVenVenditaNumeroQuote{}}   quote   al    \emph{prezzo   medio   effettivo}   di
-\Eur{\dueEsVenVenditaPrezzoMedioEffettivo} e il \emph{prezzo medio effettivo nel saldo} precedente è
-di \Eur{\unoEsVenSaldoPrezzoMedioEffettivo}, il \emph{reddito da capitale} risulta:
-\begin{equation*}
-  \num{\dueEsVenVenditaNumeroQuote} \times{} \left(
-    \num{\dueEsVenVenditaPrezzoMedioEffettivo} - \num{\unoEsVenSaldoPrezzoMedioEffettivo}
-  \right) = \Eur{\dueEsVenVenditaRedditoCapitale}
-\end{equation*}
-per fondi  che non  contengono Titoli  dello Stato Italiano,  e assimilati,  l'aliquota unica  è del
+   Conto Corrente, perciò in questa guida lo si considera conteggiato a parte.} \(\Tredcap{}\).  Per
+fondi  che  non contengono  Titoli  dello  Stato Italiano,  e  assimilati,  l'aliquota unica  è  del
 \SI{26}{\percent}; allora la \emph{tassa sul reddito da capitale} risulta:
 \begin{equation*}
-  \num{0,26} \times{} \num{\dueEsVenVenditaRedditoCapitale}
+  \Tredcap{}
+  = \num{0,26} \times{} \Rcap{}
+  = \num{0,26} \times{} \num{\dueEsVenVenditaRedditoCapitale}
   = \Eur{\dueEsVenVenditaTassaRedditoCapitale}
 \end{equation*}
 
-Il \textbf{costo  dell'operazione di vendita}  è la somma tra  costi, spese e  commissioni associate
-all'operazione; per ogni ordine di vendita eseguito, occorre pagare:
+Il \textbf{costo dell'operazione di  vendita} \(\Fven{}\) è la somma tra  costi, spese e commissioni
+associate all'operazione; per ogni ordine di vendita eseguito, occorre pagare:
 \begin{itemize}
 \item  le commissioni  per  l'intermediario, fissate  a  \Eur{2,50} quale  che  sia il  controvalore
   dell'operazione eseguita  \Parentesi{la Borsa  di negoziazione  su cui  si eseguono  le operazioni
@@ -839,11 +848,13 @@ all'operazione; per ogni ordine di vendita eseguito, occorre pagare:
 se un ordine non è eseguito: si paga nulla; se un ordine è eseguito in piú fasi: nella prima fase si
 pagano  i costi  fissi  piú  la commissione  percentuale;  nelle fasi  successive  si  paga solo  la
 commissione   percentuale.     Per   esempio,   se   il    \emph{controvalore   dell'operazione}   è
-\Eur{\dueEsVenVenditaControvaloreOperazione} il \emph{costo dell'operazione} risulta:
-\begin{equation*}
-  \CalcoloCostoOperazione{\dueEsVenVenditaControvaloreOperazione}
+\(\Cven{} = \Eur{\dueEsVenVenditaControvaloreOperazione}\) il \emph{costo dell'operazione} risulta:
+\begin{align*}
+  \Fven{}
+  &= \CalcoloCostoOperazioneSim{\Cven{}} \\
+  &= \CalcoloCostoOperazione{\dueEsVenVenditaControvaloreOperazione}
   = \Eur{\dueEsVenVenditaCostoOperazione}
-\end{equation*}
+\end{align*}
 
 Da osservare  che: sia  il calcolo  della \emph{tassa  sul reddito  da capitale}  che i  calcoli del
 \emph{costo  dell'operazione}  di acquisto  e  vendita  si  eseguono  usando il  \emph{prezzo  medio
@@ -854,86 +865,103 @@ La  circolare  dell'Agenzia  dell'Entrate  specifica  che   il  costo  delle  op
 \emph{reddito diverso}, da  registrare come minusvalenza.  Per esempio, si  supponga di possedere un
 Conto Titoli con:
 \begin{itemize}
-\item numero di quote in carico: \num{\dueEsVenVenditaNumeroQuote};
-\item \emph{prezzo medio effettivo}: \Eur{\unoEsVenSaldoPrezzoMedioEffettivo{}};
-\item \emph{prezzo medio di carico}: \Eur{\unoEsVenSaldoPrezzoMedioCarico{}};
-\item \emph{costo medio di acquisto per ogni quota in carico}: \Eur{\unoEsVenSaldoCostoMedio{}};
+\item numero di quote in carico: \(\Nsal{} = \num{\dueEsVenVenditaNumeroQuote}\);
+\item \emph{prezzo medio effettivo}: \(\Pmes{} = \Eur{\unoEsVenSaldoPrezzoMedioEffettivo{}}\);
+\item \emph{prezzo medio di carico}: \(\Pmcs{} = \Eur{\unoEsVenSaldoPrezzoMedioCarico{}}\);
+\item \emph{costo medio di acquisto per ogni quota in carico}: \(\Fmcs{} = \Eur{\unoEsVenSaldoCostoMedio{}}\);
 \end{itemize}
 si vendano tutte le quote; l'operazione di vendita sia descritta da:
 \begin{itemize}
-\item numero di quote vendute: \num{\dueEsVenVenditaNumeroQuote};
-\item \emph{prezzo medio effettivo di vendita}: \Eur{\dueEsVenVenditaControvaloreOperazione{}};
-\item \emph{reddito da capitale}: \Eur{\dueEsVenVenditaRedditoCapitale{}};
-\item \emph{costo dell'operazione di vendita}: \Eur{\dueEsVenVenditaCostoOperazione{}};
+\item numero di quote vendute: \(\Nven{} = \num{\dueEsVenVenditaNumeroQuote}\);
+\item \emph{prezzo medio effettivo di vendita}: \(\Pmev{} = \Eur{\dueEsVenVenditaControvaloreOperazione{}}\);
+\item \emph{reddito da capitale}: \(\Rcap{} = \Eur{\dueEsVenVenditaRedditoCapitale{}}\);
+\item \emph{costo dell'operazione di vendita}: \(\Fven{} = \Eur{\dueEsVenVenditaCostoOperazione{}}\);
 \end{itemize}
 ogni   quota   venduta   era  stata   acquistata   con   un   \emph{costo   medio  per   quota}   di
-\Eur{\unoEsVenSaldoCostoMedio}, perciò il \emph{costo di acquisto delle quote vendute} risulta:
+\(\Fmcs{} = \Eur{\unoEsVenSaldoCostoMedio}\), perciò il \emph{costo di acquisto delle quote vendute}
+risulta:
 \begin{equation*}
-  \num{\dueEsVenVenditaNumeroQuote} \times{} \num{\unoEsVenSaldoCostoMedio}
+  \Facq{}
+  = \Nven{} \times{} \Fmcs{}
+  = \num{\dueEsVenVenditaNumeroQuote} \times{} \num{\unoEsVenSaldoCostoMedio}
   = \Eur{\dueEsVenVenditaCostoAcquistoQuoteVendute}
 \end{equation*}
-allo scopo di far risultare un numero negativo, la circolare specifica che il \emph{reddito diverso}
-associato alla vendita deve essere calcolato come:
-\begin{equation*}
-  \left[
+allo scopo di far risultare un numero  negativo, la circolare specifica che il \emph{reddito diverso
+   dovuto al pagamento delle commissioni} deve essere calcolato come:
+\begin{align*}
+  \Rdivcom{}
+  &= \left[\Rcap{} - \left(\Fven{} + \Facq{}\right)\right] - \Rcap{} \\
+  &= \left[
     \num{\dueEsVenVenditaRedditoCapitale} - \left(
-      \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaCostoAcquistoQuoteVendute}
-    \right)
-  \right] - \num{\dueEsVenVenditaRedditoCapitale}
-  = - \left(
     \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaCostoAcquistoQuoteVendute}
-  \right)
-  = \Eur{\dueEsVenVenditaRedditoDiversoTotale}
-\end{equation*}
+    \right)
+    \right] - \num{\dueEsVenVenditaRedditoCapitale} \\
+  &= - \left(
+    \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaCostoAcquistoQuoteVendute}
+    \right)
+    = \Eur{\dueEsVenVenditaRedditoDiversoTotale}
+\end{align*}
 questa  minusvalenza  viene  automaticamente  registrata  dalla  Banca  nella  \Virgolette{Posizione
    Fiscale} del Conto Titoli; da notare che  \textbf{le minusvalenze derivanti dai costi di acquisto
    e vendita  sono registrate nella Posizione  Fiscale solo al  momento della vendita di  quote}, al
 momento dell'acquisto nulla viene registrato.
 
-Il   \textbf{controvalore  totale   di  vendita}   è   la  differenza   tra  il   \emph{controvalore
+Il \textbf{controvalore totale di vendita} \(\Ctotven{}\)  è la differenza tra il \emph{controvalore
    dell'operazione}  e la  somma  tra  \emph{costo dell'operazione}  e  \emph{tassa  sul reddito  da
    capitale};  è  la  quantità di  denaro  accreditata  sul  Conto  Corrente.  Per  esempio,  se  il
-\emph{controvalore dell'operazione}  è \Eur{\dueEsVenVenditaControvaloreOperazione},  il \emph{costo
-   dell'operazione}  è  \Eur{\dueEsVenVenditaCostoOperazione}  e   la  \emph{tassa  sul  reddito  da
-   capitale} è \Eur{\dueEsVenVenditaTassaRedditoCapitale}, il \emph{controvalore totale} risulta:
-\begin{equation*}
-  \num{\dueEsVenVenditaControvaloreOperazione} -
+\emph{controvalore dell'operazione} è \(\Cven{} = \Eur{\dueEsVenVenditaControvaloreOperazione}\), il
+\emph{costo dell'operazione} è \(\Fven{}  = \Eur{\dueEsVenVenditaCostoOperazione}\) e la \emph{tassa
+   sul  reddito  da  capitale}  è \(\Tredcap{}  =  \Eur{\dueEsVenVenditaTassaRedditoCapitale}\),  il
+\emph{controvalore totale} risulta:
+\begin{align*}
+  \Ctotven{}
+  &= \Cven{} - \left( \Fven{} + \Tredcap{} \right) \\
+  &= \num{\dueEsVenVenditaControvaloreOperazione} -
   \left( \num{\dueEsVenVenditaCostoOperazione} + \num{\dueEsVenVenditaTassaRedditoCapitale} \right)
   = \Eur{\dueEsVenVenditaControvaloreTotale}
-\end{equation*}
+\end{align*}
 
 In un'operazione  di vendita le  quote vengono \Virgolette{scaricate}  dal Conto Titoli:  la vendita
 modifica solo  il numero di quote  in carico nel saldo,  il \emph{prezzo medio di  carico nel saldo}
 resta invariato da prima a dopo la  vendita.  Allo scopo di calcolare il rendimento dell'operazione,
-si definisce il  \textbf{prezzo medio netto di  vendita} pari al rapporto  tra il \emph{controvalore
-   totale}   e    il   numero   di   quote    vendute.    Per   esempio,   se    si   sono   vendute
-\num{\dueEsVenVenditaNumeroQuote}       quote      al       \emph{controvalore      totale}       di
-\Eur{\dueEsVenVenditaControvaloreTotale}, il \emph{prezzo medio netto di vendita} risulta:
+si  definisce  il \textbf{prezzo  medio  netto  di vendita}  \(\Pmnv{}\)  pari  al rapporto  tra  il
+\emph{controvalore  totale}  e  il numero  di  quote  vendute.   Per  esempio, se  si  sono  vendute
+\(\Nven{}   =   \num{\dueEsVenVenditaNumeroQuote}\)   quote   al   \emph{controvalore   totale}   di
+\(\Ctotven{} =  \Eur{\dueEsVenVenditaControvaloreTotale}\), il \emph{prezzo medio  netto di vendita}
+risulta:
 \begin{equation*}
-  \num{\dueEsVenVenditaControvaloreTotale} / \num{\dueEsVenVenditaNumeroQuote}
+  \Pmnv{}
+  = \Ctotven{} / \Nven{}
+  = \num{\dueEsVenVenditaControvaloreTotale} / \num{\dueEsVenVenditaNumeroQuote}
   = \Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}
 \end{equation*}
 
-Il \textbf{rendimento  \underline{percentuale} dell'operazione di  vendita}, rispetto alle  quote in
-carico nel  saldo precedente,  si calcola  considerando il  \emph{prezzo medio  di carico  nel saldo
-   precedente} e il \emph{prezzo medio netto di vendita};  in caso di guadagno è un numero positivo,
-in caso di perdita è un numero negativo.  Per  esempio, se il \emph{prezzo medio di carico nel saldo
-   precedente} è \Eur{\unoEsVenSaldoPrezzoMedioCarico}  e il \emph{prezzo medio netto  di vendita} è
-\Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}, il \emph{rendimento percentuale} risulta:
+Il  \textbf{rendimento \underline{percentuale}  dell'operazione di  vendita} \(\Rperc{}\),  rispetto
+alle quote in carico  nel saldo precedente, si calcola considerando il  \emph{prezzo medio di carico
+   nel saldo precedente} e il \emph{prezzo medio netto  di vendita}; in caso di guadagno è un numero
+positivo, in caso di perdita è un numero  negativo.  Per esempio, se il \emph{prezzo medio di carico
+   nel saldo  precedente} è  \(\Pmcs{} =  \Eur{\unoEsVenSaldoPrezzoMedioCarico}\) e  il \emph{prezzo
+   medio  netto  di  vendita}  è  \(\Pmnv{}  =  \Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}\),  il
+\emph{rendimento percentuale} risulta:
 \begin{equation*}
-  \CalcoloRendimentoPercentuale{\dueEsVenVenditaPrezzoMedioNettoVendita}{\unoEsVenSaldoPrezzoMedioCarico}
+  \Rperc{}
+  = \CalcoloRendimentoPercentualeSim{\Pmnv{}}{\Pmcs{}}
+  = \CalcoloRendimentoPercentuale{\dueEsVenVenditaPrezzoMedioNettoVendita}{\unoEsVenSaldoPrezzoMedioCarico}
   = \Perc{\dueEsVenVenditaRendimentoPercentuale}
 \end{equation*}
 
-Il  \textbf{rendimento \underline{in  valuta} dell'operazione  di vendita},  rispetto alle  quote in
-carico nel  saldo precedente,  si calcola  considerando il  \emph{prezzo medio  di carico  nel saldo
-   precedente} e il \emph{prezzo medio netto di vendita};  in caso di guadagno è un numero positivo,
-in    caso   di    perdita    è   un    numero    negativo.    Per    esempio,    se   si    vendono
-\num{\dueEsVenVenditaNumeroQuote} quote con \emph{prezzo medio  di carico nel saldo precedente} pari
-a   \Eur{\unoEsVenSaldoPrezzoMedioCarico}  e   \emph{prezzo   medio  netto   di   vendita}  pari   a
-\Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}, il \emph{rendimento in valuta} risulta:
+Il \textbf{rendimento \underline{in  valuta} dell'operazione di vendita}  \(\Rval{}\), rispetto alle
+quote in carico  nel saldo precedente, si  calcola considerando il \emph{prezzo medio  di carico nel
+   saldo precedente}  e il \emph{prezzo  medio netto di  vendita}; in caso  di guadagno è  un numero
+positivo,   in  caso   di   perdita  è   un   numero   negativo.   Per   esempio,   se  si   vendono
+\(\Nven  = \num{\dueEsVenVenditaNumeroQuote}\)  quote con  \emph{prezzo  medio di  carico nel  saldo
+   precedente} pari a \(\Pmcs{} = \Eur{\unoEsVenSaldoPrezzoMedioCarico}\) e \emph{prezzo medio netto
+   di   vendita}   pari   a    \(\Pmnv{}   =   \Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}\),   il
+\emph{rendimento in valuta} risulta:
 \begin{equation*}
-  \num{\dueEsVenVenditaNumeroQuote} \times{} \left(
+  \Rval{}
+  = \Nven{} \times{} \left( \Pmnv{} - \Pmcs{} \right)
+  = \num{\dueEsVenVenditaNumeroQuote} \times{} \left(
     \num{\dueEsVenVenditaPrezzoMedioNettoVendita} - \num{\unoEsVenSaldoPrezzoMedioCarico}
   \right) = \Eur{\dueEsVenVenditaRendimentoInValuta}
 \end{equation*}
