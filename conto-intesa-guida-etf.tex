@@ -34,7 +34,11 @@
 \newcommand{\MediaPonderataDue}[4]{\frac{\num{#1} \times{} \num{#2} + \num{#3} \times{} \num{#4}}{\num{#1} + \num{#3}}}
 \newcommand{\MediaPonderataTre}[6]{\frac{\num{#1} \times{} \num{#2} + \num{#3} \times{} \num{#4} + \num{#5} \times{} \num{#6}}{\num{#1} + \num{#3} + \num{#5}}}
 
+\newcommand{\MediaPonderataDueSim}[4]{\frac{#1 \times{} #2 + #3 \times{} #4}{#1 + #3}}
+\newcommand{\MediaPonderataTreSim}[6]{\frac{#1 \times{} #2 + #3 \times{} #4 + #5 \times{} #6}{#1 + #3 + #5}}
+
 \newcommand{\CalcoloCostoOperazione}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{#1}}
+\newcommand{\CalcoloCostoOperazioneSim}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} #1}
 
 \newcommand{\CalcoloRendimentoPercentuale}[2]{\frac{\num{#1} - \num{#2}}{#2} \times{} \num{100}}
 
@@ -42,31 +46,92 @@
 \newcommand{\Virgolette}[1]{``#1''}
 \newcommand{\Etf}[1]{\textsc{etf}}
 
+\newcommand{\Nquo}[1]{\mathcal{N}_{#1}}
+\newcommand{\Nacq}[1]{\mathcal{N}_{\textrm{acq}#1}}
+\newcommand{\Nven}[1]{\mathcal{N}_{\textrm{ven}#1}}
+\newcommand{\Nsal}[1]{\mathcal{N}_{\textrm{sal}#1}}
+
 %% ------------------------------------------------------------------------
 
+% Generico  prezzo di  acquisto di  una quota,  per esempio  il prezzo  di acquisto  in una  fase di
+% un'operazione di acquisto.
+\newcommand{\Pacq}[1]{\mathcal{P}_{\mathrm{acq}#1}}
+
+% Generico  prezzo di  vendia  di una  quota,  per  esempio il  prezzo  di vendita  in  una fase  di
+% un'operazione di acquisto.
+\newcommand{\Pven}[1]{\mathcal{P}_{\mathrm{ven}#1}}
+
 % Prezzo medio di effettivo, prezzo medio eseguito
-\newcommand{\Pme}[1]{P_{\mathrm{me}#1}}
+\newcommand{\Pme}[1]{\mathcal{P}_{\mathrm{me}#1}}
+% Prezzo medio di effettivo di acquisto, prezzo medio eseguito di acquisto.
+\newcommand{\Pmea}[1]{\mathcal{P}_{\mathrm{mea}#1}}
+% Prezzo medio di effettivo di vendit, prezzo medio eseguito di vendita.
+\newcommand{\Pmev}[1]{\mathcal{P}_{\mathrm{mev}#1}}
 
-% Prezzo medio effettivo di acquisto
-\newcommand{\Pmea}[1]{\Pme{\mathrm{a}#1}}
-
-% Prezzo medio effettivo di vendita
-\newcommand{\Pmev}[1]{\Pme{\mathrm{v}#1}}
-
-% Prezzo medio effettivo nel saldo
+% Prezzo medio effettivo nel saldo.
 \newcommand{\Pmes}[1]{\Pme{\mathrm{s}#1}}
 
-% Prezzo medio di carico
-\newcommand{\Pmc}[1]{P_{\mathrm{mc}#1}}
-
-% Prezzo medio di carico di acquisto
+% Prezzo medio di carico.
+\newcommand{\Pmc}[1]{\mathcal{P}_{\mathrm{mc}#1}}
+% Prezzo medio di carico di acquisto.
 \newcommand{\Pmca}[1]{\Pmc{\mathrm{a}#1}}
-
-% Prezzo medio di carico nel saldo
+% Prezzo medio di carico nel saldo.
 \newcommand{\Pmcs}[1]{\Pmc{\mathrm{s}#1}}
 
 % Prezzo medio netto di vendita
-\newcommand{\Pmnv}[1]{P_{\mathrm{mnv}#1}}
+\newcommand{\Pmnv}[1]{\mathcal{P}_{\mathrm{mnv}#1}}
+
+%% ------------------------------------------------------------------------
+
+% Controvalore di un'operazione di acquisto.
+\newcommand{\Cacq}[1]{\mathcal{C}_{\mathrm{acq}#1}}
+
+% Controvalore di un'operazione di acquisto.
+\newcommand{\Cven}[1]{\mathcal{C}_{\mathrm{ven}#1}}
+
+% Controvalore totale di un'operazione di acquisto.
+\newcommand{\Ctotacq}[1]{\mathcal{C}_{\mathrm{tot,acq}#1}}
+
+% Controvalore totale di un'operazione di acquisto.
+\newcommand{\Ctotven}[1]{\mathcal{C}_{\mathrm{tot,ven}#1}}
+
+%% ------------------------------------------------------------------------
+
+% Reddito da capitale.
+\newcommand{\Rcap}[1]{\mathcal{R}_{\mathrm{cap}#1}}
+
+% Reddito diverso totale.
+\newcommand{\Rdiv}[1]{\mathcal{R}_{\mathrm{div}#1}}
+
+% Reddito diverso da minusvalenza sul capitale.
+\newcommand{\Rdivmin}[1]{\mathcal{R}_{\mathrm{dm}#1}}
+
+% Reddito diverso da pagamento di commissioni.
+\newcommand{\Rdivcom}[1]{\mathcal{R}_{\mathrm{df}#1}}
+
+% Tassa sul reddito da capitale.
+\newcommand{\Tredcap}[1]{\mathcal{T}_{\mathrm{red}#1}}
+
+% Costo di un'operazione di acquisto.
+\newcommand{\Facq}[1]{\mathcal{F}_{\mathrm{acq}#1}}
+
+% Costo totale di piú operazioni di acquisto.
+\newcommand{\Ftotacq}[1]{\mathcal{F}_{\mathrm{tot,acq}#1}}
+
+% Costo di un'operazione di vendita.
+\newcommand{\Fven}[1]{\mathcal{F}_{\mathrm{ven}#1}}
+
+% Costo totale di piú operazioni di vendita.
+\newcommand{\Ftotven}[1]{\mathcal{F}_{\mathrm{tot,ven}#1}}
+
+% Costo medio per ogni quota in carico nel saldo.
+\newcommand{\Fmcs}[1]{\mathcal{F}_{\mathrm{mcs}#1}}
+
+% Rendimento percentuale.
+\newcommand{\Rperc}[1]{\eta_{\percent{}#1}}
+
+% Rendimento in valuta.
+\newcommand{\Rval}[1]{\eta_{\euro{}#1}}
 
 %page
 %% ------------------------------------------------------------
@@ -242,7 +307,8 @@ acquistare  \num{3} quote  di un  fondo al  prezzo di  \Eur{11,00}, poi  acquist
 al \textbf{prezzo medio di acquisto} di \Eur{20,17}.
 
 Il  numero  totale   di  quote  acquistate  \(\num{6}   =  \num{3}  +  \num{1}  +   \num{2}\)  è  la
-\emph{molteplicità equivalente} del \emph{prezzo medio di acquisto} \Eur{20,17}, infatti si può scrivere:
+\emph{molteplicità  equivalente} del  \emph{prezzo medio  di acquisto}  \Eur{20,17}, infatti  si può
+scrivere:
 \begin{align*}
   \frac{\num{3} \times{} \num{11} + \num{1} \times{} \num{22} + \num{2} \times{} \num{33}}{\num{6}}
   \simeq \frac{\num{6} \times{} \num{20,17}}{\num{6}}
@@ -398,26 +464,34 @@ interessa solo la  frazione \Virgolette{eseguita} dell'ordine.  Il \textbf{prezz
 acquisto rispetto al numero di quote acquistate.  Per  esempio, se un singolo ordine di acquisto per
 \num{\unoEsAcqAcquistoNumeroQuote} quote è eseguito nelle tre fasi:
 \begin{enumerate}
-\item acquisto di \num{20} quote al prezzo di \Eur{52,00};
-\item acquisto di \num{30} quote al prezzo di \Eur{53,00};
-\item acquisto di \num{50} quote al prezzo di \Eur{55,00};
+\item acquisto di \(\Nquo{1} = \num{20}\) quote al prezzo di \(\Pacq{1} = \Eur{52,00}\);
+\item acquisto di \(\Nquo{2} = \num{30}\) quote al prezzo di \(\Pacq{2} = \Eur{53,00}\);
+\item acquisto di \(\Nquo{3} = \num{50}\) quote al prezzo di \(\Pacq{3} = \Eur{55,00}\);
 \end{enumerate}
-allora il \emph{prezzo medio eseguito di acquisto} risulta:
-\begin{equation*}
-  \MediaPonderataTre{20}{52,00}{30}{53,00}{50}{55,00} = \Eur{\unoEsAcqAcquistoPrezzoMedioEffettivo{}}
-\end{equation*}
+allora il \emph{prezzo medio eseguito di acquisto} \(\Pmea{}\) risulta:
+\begin{align*}
+  \Pmea{}
+  &= \MediaPonderataTreSim{\Nquo{1}}{\Pacq{1}}{\Nquo{2}}{\Pacq{2}}{\Nquo{3}}{\Pacq{3}} \\
+  &= \MediaPonderataTre{20}{52,00}{30}{53,00}{50}{55,00}
+  = \Eur{\unoEsAcqAcquistoPrezzoMedioEffettivo{}}
+\end{align*}
 
-Il \textbf{controvalore  dell'operazione di acquisto}  è il prodotto tra  il numero totale  di quote
-acquistate e il  \emph{prezzo medio eseguito}.  Per esempio, se  si acquistano \num{\unoEsAcqAcquistoNumeroQuote}
-quote   al   \emph{prezzo  medio   eseguito}   di   \Eur{\unoEsAcqAcquistoPrezzoMedioEffettivo}  il   controvalore
-dell'operazione risulta:
+Il \textbf{controvalore dell'operazione di acquisto} \(\Cacq{}\)  è il prodotto tra il numero totale
+di  quote   acquistate  e  il  \emph{prezzo   medio  eseguito}.   Per  esempio,   se  si  acquistano
+\(\Nacq{}  =   \num{\unoEsAcqAcquistoNumeroQuote}\)  quote   al  \emph{prezzo  medio   eseguito}  di
+\(\Pmea{} = \Eur{\unoEsAcqAcquistoPrezzoMedioEffettivo}\) il controvalore dell'operazione risulta:
 \begin{equation*}
-  \num{\unoEsAcqAcquistoNumeroQuote} \times{} \num{\unoEsAcqAcquistoPrezzoMedioEffettivo{}}
+  \Cacq{}
+  = \Nacq{} \times {} \Pmea{}
+  = \num{\unoEsAcqAcquistoNumeroQuote} \times{} \num{\unoEsAcqAcquistoPrezzoMedioEffettivo{}}
   = \Eur{\unoEsAcqAcquistoControvaloreOperazione}
 \end{equation*}
 
-Il \textbf{costo dell'operazione  di acquisto} è la  somma tra costi, spese  e commissioni associate
-all'operazione; per ogni ordine di acquisto eseguito, occorre pagare:
+Il \textbf{costo  dell'operazione di acquisto}\footnote{Il  \emph{costo di un'operazione}  si indica
+   con  il simbolo  \(\mathcal{F}\) dall'inglese  \emph{fee}, perché  la lettera  \(\mathcal{C}\) di
+   \emph{costo}  è già  assegnata al  simbolo di  \emph{controvalore}.} \(\Facq{}\)  è la  somma tra
+costi, spese e  commissioni associate all'operazione; per ogni ordine  di acquisto eseguito, occorre
+pagare:
 \begin{itemize}
 \item  le commissioni  per  l'intermediario, fissate  a  \Eur{2,50} quale  che  sia il  controvalore
   dell'operazione eseguita  \Parentesi{la Borsa  di negoziazione  su cui  si eseguono  le operazioni
@@ -429,30 +503,35 @@ all'operazione; per ogni ordine di acquisto eseguito, occorre pagare:
 Se un ordine non è  eseguito: si paga nulla.  Se un ordine è eseguito in  piú fasi: nella prima fase
 si pagano  i costi  fissi piú  la commissione  percentuale; nelle  fasi successive  si paga  solo la
 commissione   percentuale.     Per   esempio,   se   il    \emph{controvalore   dell'operazione}   è
-\Eur{\unoEsAcqAcquistoControvaloreOperazione} il \emph{costo dell'operazione} risulta:
-\begin{equation*}
-  \CalcoloCostoOperazione{\unoEsAcqAcquistoControvaloreOperazione}
+\(\Cacq{} = \Eur{\unoEsAcqAcquistoControvaloreOperazione}\) il \emph{costo dell'operazione} risulta:
+\begin{align*}
+  \Facq{}
+  &= \CalcoloCostoOperazioneSim{\Cacq{}} \\
+  &= \CalcoloCostoOperazione{\unoEsAcqAcquistoControvaloreOperazione}
   = \Eur{\unoEsAcqAcquistoCostoOperazione}
-\end{equation*}
+\end{align*}
 
-Il \textbf{controvalore totale di un acquisto}  è la somma tra \emph{controvalore dell'operazione} e
-\emph{costo dell'operazione} ed è la quantità di  denaro addebitata sul Conto Corrente; per esempio,
-se  il \emph{controvalore  dell'operazione} è  \Eur{\unoEsAcqAcquistoControvaloreOperazione{}} e  il
-\emph{costo dell'operazione} è pari  a \Eur{\unoEsAcqAcquistoCostoOperazione}, il \emph{controvalore
-   totale} risulta:
-\begin{equation*}
-  \num{\unoEsAcqAcquistoControvaloreOperazione} +
-  \num{\unoEsAcqAcquistoCostoOperazione}
+Il \textbf{controvalore  totale di  un acquisto}  \(\Ctotacq{}\) è  la somma  tra \emph{controvalore
+   dell'operazione} e \emph{costo  dell'operazione} ed è la quantità di  denaro addebitata sul Conto
+Corrente;      per      esempio,      se     il      \emph{controvalore      dell'operazione}      è
+\(\Cacq{} =  \Eur{\unoEsAcqAcquistoControvaloreOperazione{}}\) e  il \emph{costo  dell'operazione} è
+pari a \(\Facq{} = \Eur{\unoEsAcqAcquistoCostoOperazione}\), il \emph{controvalore totale} risulta:
+\begin{align*}
+  \Ctotacq{}
+  = \Cacq{} + \Facq{}
+  = \num{\unoEsAcqAcquistoControvaloreOperazione} + \num{\unoEsAcqAcquistoCostoOperazione}
   = \Eur{\unoEsAcqAcquistoControvaloreTotale}
-\end{equation*}
+\end{align*}
 
-Il \textbf{prezzo medio di carico di un acquisto}  é il rapporto tra il \emph{controvalore totale} e
-il numero di  quote acquistate ed è  usato per l'aggiornamento del  saldo: è il prezzo  medio di una
-singola   quota    acquistata,   tutto    incluso.    Per   esempio,    se   si    sono   acquistate
-\num{\unoEsAcqAcquistoNumeroQuote}      quote       al      \emph{controvalore       totale}      di
+Il  \textbf{prezzo   medio  di   carico  di  un   acquisto}  \(\Pmca{}\)  é   il  rapporto   tra  il
+\emph{controvalore totale} e il numero di quote acquistate ed è usato per l'aggiornamento del saldo:
+è  il prezzo  medio  di una  singola  quota acquistata,  tutto  incluso.  Per  esempio,  se si  sono
+acquistate    \num{\unoEsAcqAcquistoNumeroQuote}   quote    al    \emph{controvalore   totale}    di
 \Eur{\unoEsAcqAcquistoControvaloreTotale}, il \emph{prezzo medio di carico} risulta:
 \begin{equation*}
-  \num{\unoEsAcqAcquistoControvaloreTotale} / \num{\unoEsAcqAcquistoNumeroQuote}
+  \Pmca{}
+  = \Ctotacq{} / \Nacq{}
+  = \num{\unoEsAcqAcquistoControvaloreTotale} / \num{\unoEsAcqAcquistoNumeroQuote}
   = \Eur{\unoEsAcqAcquistoPrezzoMedioCarico}
 \end{equation*}
 
@@ -483,115 +562,131 @@ si  calcola  come differenza  tra  il  \emph{prezzo medio  di  \underline{carico
 
 Per esempio, si supponga di eseguire le operazioni:
 \begin{enumerate}
-\item acquisto di \num{\unoEsSaldoAcqAcquistoNumeroQuote} quote  al \emph{prezzo medio effettivo} di
-  \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo};
-\item acquisto di \num{\dueEsSaldoAcqAcquistoNumeroQuote} quote  al \emph{prezzo medio effettivo} di
-  \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo};
-\item acquisto di \num{\treEsSaldoAcqAcquistoNumeroQuote} quote  al \emph{prezzo medio effettivo} di
-  \Eur{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo};
+\item acquisto di \(\Nacq{1} = \num{\unoEsSaldoAcqAcquistoNumeroQuote}\) quote al \emph{prezzo medio
+     effettivo} di \(\Pmea{1} = \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo}\);
+\item acquisto di \(\Nacq{2} = \num{\dueEsSaldoAcqAcquistoNumeroQuote}\) quote al \emph{prezzo medio
+     effettivo} di \(\Pmea{2} = \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo}\);
+\item acquisto di \(\Nacq{3} = \num{\treEsSaldoAcqAcquistoNumeroQuote}\) quote al \emph{prezzo medio
+     effettivo} di \(\Pmea{3} = \Eur{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo}\);
 \end{enumerate}
-all'inizio  si consideri  un  Conto Titoli  vuoto,  con  saldo convenzionale  di:  \num{0} quote  di
-quell'\Etf{}; \emph{prezzo  medio di carico} di  \Eur{0}; \emph{prezzo medio effettivo}  di \Eur{0}.
-L'aggiornamento del saldo avviene come segue.
+all'inizio si  consideri un Conto  Titoli vuoto, con saldo  convenzionale di: \(\Nacq{}  = \num{0}\)
+quote di  quell'\Etf{}; \emph{prezzo medio di  carico} di \Eur{0}; \emph{prezzo  medio effettivo} di
+\(\Pmes{} = \Eur{0}\).  L'aggiornamento del saldo avviene come segue.
 \begin{enumerate}
 \item Per la prima operazione:
   \begin{itemize}
-  \item numero di quote acquistate: \num{\unoEsSaldoAcqAcquistoNumeroQuote};
-  \item \emph{prezzo medio effettivo}: \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo};
-  \item \emph{controvalore dell'operazione}: \Eur{\unoEsSaldoAcqAcquistoControvaloreOperazione};
-  \item \emph{costo dell'operazione}: \Eur{\unoEsSaldoAcqAcquistoCostoOperazione};
-  \item \emph{controvalore totale}: \Eur{\unoEsSaldoAcqAcquistoControvaloreTotale};
-  \item \emph{prezzo medio di carico}: \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioCarico}.
+  \item numero di quote acquistate: \(\Nacq{1} = \num{\unoEsSaldoAcqAcquistoNumeroQuote}\);
+  \item \emph{prezzo medio effettivo}: \(\Pmea{1} = \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo}\);
+  \item \emph{controvalore dell'operazione}: \(\Cacq{1} = \Eur{\unoEsSaldoAcqAcquistoControvaloreOperazione}\);
+  \item \emph{costo dell'operazione}: \(\Facq{1} = \Eur{\unoEsSaldoAcqAcquistoCostoOperazione}\);
+  \item \emph{controvalore totale}: \(\Ctotacq{1} = \Eur{\unoEsSaldoAcqAcquistoControvaloreTotale}\);
+  \item \emph{prezzo medio di carico}: \(\Pmca{1} = \Eur{\unoEsSaldoAcqAcquistoPrezzoMedioCarico}\).
   \end{itemize}
 
   Dopo la prima operazione:
   \begin{itemize}
-  \item numero  quote nel  saldo: \num{\unoEsSaldoAcqSaldoNumeroQuote}; uguale  al numero  quote del
-    primo acquisto;
-  \item \emph{prezzo  medio di effettivo nel  saldo}: \Eur{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo};
-    uguale al \emph{prezzo medio effettivo} del primo acquisto;
-  \item \emph{prezzo medio di  carico nel saldo}: \Eur{\unoEsSaldoAcqSaldoPrezzoMedioCarico}; uguale
-    al \emph{prezzo medio di carico} del primo acquisto;
+  \item  numero quote  nel saldo:  \(\Nsal{1} =  \Nacq{1} =  \num{\unoEsSaldoAcqSaldoNumeroQuote}\);
+    uguale al numero quote del primo acquisto;
+  \item         \emph{prezzo         medio          di         effettivo         nel         saldo}:
+    \(\Pmes{1} = \Pmea{1} =  \Eur{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo}\); uguale al \emph{prezzo
+       medio effettivo} del primo acquisto;
+  \item          \emph{prezzo         medio          di          carico         nel          saldo}:
+    \(\Pmcs{1}  = \Pmca{1}  = \Eur{\unoEsSaldoAcqSaldoPrezzoMedioCarico}\);  uguale al  \emph{prezzo
+       medio di carico} del primo acquisto;
   \end{itemize}
-  il \emph{costo medio per quota nel saldo} risulta:
+  il \emph{costo medio per ogni quota in carico} risulta:
   \begin{equation*}
-    \num{\unoEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo}
+    \Fmcs{1}
+    = \Pmcs{1} - \Pmes{1}
+    = \num{\unoEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo}
     = \Eur{\unoEsSaldoAcqSaldoCostoMedio}
   \end{equation*}
 
 \item Per la seconda operazione:
   \begin{itemize}
-  \item numero di quote acquistate: \num{\dueEsSaldoAcqAcquistoNumeroQuote};
-  \item \emph{prezzo medio effettivo}: \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo};
-  \item \emph{controvalore dell'operazione}: \Eur{\dueEsSaldoAcqAcquistoControvaloreOperazione};
-  \item \emph{costo dell'operazione}: \Eur{\dueEsSaldoAcqAcquistoCostoOperazione};
-  \item \emph{controvalore totale}: \Eur{\dueEsSaldoAcqAcquistoControvaloreTotale};
-  \item \emph{prezzo medio di carico}: \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}.
+  \item numero di quote acquistate: \(\Nacq{2} = \num{\dueEsSaldoAcqAcquistoNumeroQuote}\);
+  \item \emph{prezzo medio effettivo}: \(\Pmea{2} = \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo}\);
+  \item \emph{controvalore dell'operazione}: \(\Cacq{2} = \Eur{\dueEsSaldoAcqAcquistoControvaloreOperazione}\);
+  \item \emph{costo dell'operazione}: \(\Facq{2} = \Eur{\dueEsSaldoAcqAcquistoCostoOperazione}\);
+  \item \emph{controvalore totale}: \(\Ctotacq{2} = \Eur{\dueEsSaldoAcqAcquistoControvaloreTotale}\);
+  \item \emph{prezzo medio di carico}: \(\Pmca{2} = \Eur{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}\).
   \end{itemize}
 
   Dopo la seconda operazione:
   \begin{itemize}
   \item                  numero                   quote                  nel                  saldo:
-    \(\num{\unoEsSaldoAcqSaldoNumeroQuote}      +     \num{\dueEsSaldoAcqAcquistoNumeroQuote}      =
-    \num{\dueEsSaldoAcqSaldoNumeroQuote}\);
+    \(\Nsal{2}    =    \Nacq{1}    +     \Nacq{2}    =    \num{\unoEsSaldoAcqSaldoNumeroQuote}    +
+    \num{\dueEsSaldoAcqAcquistoNumeroQuote} = \num{\dueEsSaldoAcqSaldoNumeroQuote}\);
   \item  il \emph{prezzo  medio effettivo  nel saldo}  è la  media ponderata  dei \emph{prezzi  medi
        effettivi} del saldo precedente e del nuovo acquisto:
-    \begin{equation*}
-      \MediaPonderataDue
+    \begin{align*}
+      \Pmes{2}
+      &= \MediaPonderataDueSim{\Nsal{1}}{\Pmes{1}}{\Nacq{2}}{\Pmea{2}} \\
+      &= \MediaPonderataDue
       {\unoEsSaldoAcqSaldoNumeroQuote}{\unoEsSaldoAcqSaldoPrezzoMedioEffettivo}
       {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo}
       = \Eur{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
-    \end{equation*}
+    \end{align*}
   \item il  \emph{prezzo medio di carico  nel saldo} è la  media ponderata dei \emph{prezzi  medi di
        carico} del saldo precedente e del nuovo acquisto:
-    \begin{equation*}
-      \MediaPonderataDue
+    \begin{align*}
+      \Pmcs{2}
+      &= \MediaPonderataDueSim{\Nsal{1}}{\Pmcs{1}}{\Nacq{2}}{\Pmca{2}} \\
+      &= \MediaPonderataDue
       {\unoEsSaldoAcqSaldoNumeroQuote}{\unoEsSaldoAcqSaldoPrezzoMedioCarico}
       {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}
       = \Eur{\dueEsSaldoAcqSaldoPrezzoMedioCarico}
-    \end{equation*}
+    \end{align*}
   \end{itemize}
-  il \emph{costo medio per quota nel saldo} risulta:
+  il \emph{costo medio per ogni quota in carico} risulta:
   \begin{equation*}
-    \num{\dueEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
+    \Fmcs{2}
+    = \Pmcs{2} - \Pmes{2}
+    = \num{\dueEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
     = \Eur{\dueEsSaldoAcqSaldoCostoMedio}
   \end{equation*}
 
 \item Per la terza operazione:
   \begin{itemize}
-  \item numero di quote acquistate: \num{\treEsSaldoAcqAcquistoNumeroQuote};
-  \item \emph{prezzo medio effettivo}: \Eur{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo};
-  \item \emph{controvalore dell'operazione}: \Eur{\treEsSaldoAcqAcquistoControvaloreOperazione};
-  \item \emph{costo dell'operazione}: \Eur{\treEsSaldoAcqAcquistoCostoOperazione};
-  \item \emph{controvalore totale}: \Eur{\treEsSaldoAcqAcquistoControvaloreTotale};
-  \item \emph{prezzo medio di carico}: \Eur{\treEsSaldoAcqAcquistoPrezzoMedioCarico}.
+  \item numero di quote acquistate: \(\Nacq{3} = \num{\treEsSaldoAcqAcquistoNumeroQuote}\);
+  \item \emph{prezzo medio effettivo}: \(\Pmea{3} = \Eur{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo}\);
+  \item \emph{controvalore dell'operazione}: \(\Cacq{3} = \Eur{\treEsSaldoAcqAcquistoControvaloreOperazione}\);
+  \item \emph{costo dell'operazione}: \(\Facq{3} = \Eur{\treEsSaldoAcqAcquistoCostoOperazione}\);
+  \item \emph{controvalore totale}: \(\Ctotacq{3} = \Eur{\treEsSaldoAcqAcquistoControvaloreTotale}\);
+  \item \emph{prezzo medio di carico}: \(\Pmca{3} = \Eur{\treEsSaldoAcqAcquistoPrezzoMedioCarico}\).
   \end{itemize}
 
   Dopo la terza operazione:
   \begin{itemize}
   \item                  numero                   quote                  nel                  saldo:
-    \(\num{\dueEsSaldoAcqSaldoNumeroQuote}      +     \num{\treEsSaldoAcqAcquistoNumeroQuote}      =
-    \num{\treEsSaldoAcqSaldoNumeroQuote}\);
+    \(\Nsal{3}    =     \Nsal{2}    +    \Nacq{3}    =     \num{\dueEsSaldoAcqSaldoNumeroQuote}    +
+    \num{\treEsSaldoAcqAcquistoNumeroQuote} = \num{\treEsSaldoAcqSaldoNumeroQuote}\);
   \item  il \emph{prezzo  medio effettivo  nel saldo}  è la  media ponderata  dei \emph{prezzi  medi
        effettivi} del saldo precedente e del nuovo acquisto:
-    \begin{equation*}
-      \MediaPonderataDue
+    \begin{align*}
+      \Pmes{3}
+      &= \MediaPonderataDueSim{\Nsal{2}}{\Pmes{2}}{\Nacq{3}}{\Pmea{3}} \\
+      &= \MediaPonderataDue
       {\dueEsSaldoAcqSaldoNumeroQuote}{\dueEsSaldoAcqSaldoPrezzoMedioEffettivo}
       {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo}
       = \Eur{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
-    \end{equation*}
+    \end{align*}
   \item il  \emph{prezzo medio di carico  nel saldo} è la  media ponderata dei \emph{prezzi  medi di
        carico} del saldo precedente e del nuovo acquisto:
-    \begin{equation*}
-      \MediaPonderataDue
+    \begin{align*}
+      \Pmcs{3}
+      &= \MediaPonderataDueSim{\Nsal{2}}{\Pmcs{2}}{\Nacq{3}}{\Pmca{3}} \\
+      &= \MediaPonderataDue
       {\dueEsSaldoAcqSaldoNumeroQuote}{\dueEsSaldoAcqSaldoPrezzoMedioCarico}
       {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioCarico}
       = \Eur{\treEsSaldoAcqSaldoPrezzoMedioCarico}
-    \end{equation*}
+    \end{align*}
   \end{itemize}
-  il \emph{costo medio per quota nel saldo} risulta:
+  il \emph{costo medio per ogni quota in carico} risulta:
   \begin{equation*}
-    \num{\treEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
+    \Fmcs{3}
+    = \Pmcs{3} - \Pmes{3}
+    = \num{\treEsSaldoAcqSaldoPrezzoMedioCarico} - \num{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
     = \Eur{\treEsSaldoAcqSaldoCostoMedio}
   \end{equation*}
 \end{enumerate}
@@ -604,25 +699,31 @@ Si osservi come, \textbf{solo quando si sono eseguiti degli acquisti ma nessuna 
 \begin{itemize}
 \item il \emph{prezzo medio effettivo nel saldo} si possa calcolare anche come media ponderata tra i
   \emph{prezzi medi effettivi degli acquisti}:
-  \begin{equation*}
-    \MediaPonderataTre
+  \begin{align*}
+    \Pmes{3}
+    &= \MediaPonderataTreSim{\Nacq{1}}{\Pmea{1}}{\Nacq{2}}{\Pmea{2}}{\Nacq{3}}{\Pmea{3}} \\
+    &= \MediaPonderataTre
     {\unoEsSaldoAcqAcquistoNumeroQuote}{\unoEsSaldoAcqAcquistoPrezzoMedioEffettivo}
     {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioEffettivo}
     {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioEffettivo}
     = \Eur{\treEsSaldoAcqSaldoPrezzoMedioEffettivo}
-  \end{equation*}
+  \end{align*}
 \item il \emph{prezzo medio di carico nel saldo} si possa calcolare anche come media ponderata tra i
   \emph{prezzi medi di carico degli acquisti}:
-  \begin{equation*}
-    \MediaPonderataTre
+  \begin{align*}
+    \Pmcs{3}
+    &= \MediaPonderataTreSim{\Nacq{1}}{\Pmca{1}}{\Nacq{2}}{\Pmca{2}}{\Nacq{3}}{\Pmca{3}} \\
+    &= \MediaPonderataTre
     {\unoEsSaldoAcqAcquistoNumeroQuote}{\unoEsSaldoAcqAcquistoPrezzoMedioCarico}
     {\dueEsSaldoAcqAcquistoNumeroQuote}{\dueEsSaldoAcqAcquistoPrezzoMedioCarico}
     {\treEsSaldoAcqAcquistoNumeroQuote}{\treEsSaldoAcqAcquistoPrezzoMedioCarico}
     = \Eur{\treEsSaldoAcqSaldoPrezzoMedioCarico}
-  \end{equation*}
+  \end{align*}
 \item il costo totale di tutte le operazioni si possa calcolare sia come somma tra tutti i costi:
   \begin{equation*}
-    \num{\unoEsSaldoAcqAcquistoCostoOperazione} +
+    \Ftotacq{3}
+    = \Facq{1} + \Facq{2} +  \Facq{3}
+    = \num{\unoEsSaldoAcqAcquistoCostoOperazione} +
     \num{\dueEsSaldoAcqAcquistoCostoOperazione} +
     \num{\treEsSaldoAcqAcquistoCostoOperazione}
     = \Eur{\treEsSaldoAcqSaldoCostoTotaleQuote}
@@ -630,8 +731,9 @@ Si osservi come, \textbf{solo quando si sono eseguiti degli acquisti ma nessuna 
   che come prodotto tra il numero di quote nel saldo e il \emph{costo medio di acquisto per quota in
      carico}:
   \begin{equation*}
-    \num{\treEsSaldoAcqSaldoNumeroQuote} \times{}
-    \num{\treEsSaldoAcqSaldoCostoMedio}
+    \Ftotacq{3}
+    = \Nsal{3} \times{} \Fmcs{3}
+    = \num{\treEsSaldoAcqSaldoNumeroQuote} \times{} \num{\treEsSaldoAcqSaldoCostoMedio}
     = \Eur{\treEsSaldoAcqSaldoCostoTotaleQuote}
   \end{equation*}
 \end{itemize}
