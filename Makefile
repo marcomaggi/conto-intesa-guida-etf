@@ -93,6 +93,7 @@ PREREQUISITES	= \
 	conto-intesa--calcoli-esempio--operazione-acquisto.inc				\
 	conto-intesa--calcoli-esempio--saldo-acquisto.inc				\
 	conto-intesa--calcoli-esempio--operazione-vendita.inc				\
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.inc	\
 	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc
 
 CLEANFILES	+= \
@@ -141,6 +142,10 @@ conto-intesa--calcoli-esempio--saldo-acquisto.inc: \
 conto-intesa--calcoli-esempio--operazione-vendita.inc: \
 		conto-intesa--calcoli-esempio--operazione-vendita
 	./conto-intesa--calcoli-esempio--operazione-vendita latex >$(@)
+
+conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.inc: \
+		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata
+	./conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata latex >$(@)
 
 conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc: \
 		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento

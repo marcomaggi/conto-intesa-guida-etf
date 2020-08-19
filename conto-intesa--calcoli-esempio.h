@@ -38,6 +38,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
 
 typedef enum tipo_operazione_t { ACQUISTO, VENDITA } tipo_operazione_t;
 
@@ -209,9 +210,17 @@ print_latex_newline (latex_output_cfg_t config)
 }
 
 void
-print_latex_comment (latex_output_cfg_t config, char const * comment)
+print_latex_comment (latex_output_cfg_t config, char const * comment, ...)
 {
-  fprintf(config->stream, "%% %s\n", comment);
+  va_list	ap;
+
+  va_start(ap, comment);
+  {
+    fprintf(config->stream, "%% ");
+    vfprintf(config->stream, comment, ap);
+    fprintf(config->stream, "\n");
+  }
+  va_end(ap);
 }
 
 /* ------------------------------------------------------------------ */
@@ -311,7 +320,7 @@ saldo_print_latex (FILE * stream, char const * prefisso, saldo_t const * const S
     .oggetto	= "Saldo",
   };
 
-  print_latex_comment			(&config, "Saldo contabile");
+  print_latex_comment			(&config, "Saldo contabile %u", S->numero_ordine);
   print_latex_numero_ordine		(&config, S->numero_ordine);
   print_latex_numero_quote		(&config, S->numero_quote);
   print_latex_prezzo_medio_effettivo	(&config, S->prezzo_medio_effettivo);
@@ -394,7 +403,7 @@ operazione_acquisto_print_latex (FILE * stream, char const * prefisso, operazion
     .oggetto	= "Acquisto",
   };
 
-  print_latex_comment			(&config, "Operazione di acquisto");
+  print_latex_comment			(&config, "Operazione di acquisto %u", O->numero_ordine);
   print_latex_numero_ordine		(&config, O->numero_ordine);
   print_latex_numero_quote		(&config, O->numero_quote);
   print_latex_prezzo_medio_eseguito	(&config, O->prezzo_medio_eseguito);
@@ -571,7 +580,7 @@ operazione_vendita_print_latex (FILE * stream, char const * prefisso, operazione
     .oggetto	= "Vendita",
   };
 
-  print_latex_comment				(&config, "Operazione di vendita");
+  print_latex_comment				(&config, "Operazione di vendita %u", O->numero_ordine);
   print_latex_numero_ordine			(&config, O->numero_ordine);
   print_latex_numero_quote			(&config, O->numero_quote);
   print_latex_prezzo_medio_eseguito		(&config, O->prezzo_medio_eseguito);

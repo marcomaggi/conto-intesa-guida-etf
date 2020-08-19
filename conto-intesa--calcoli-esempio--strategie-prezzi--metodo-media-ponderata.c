@@ -35,21 +35,20 @@
 
 
 /** --------------------------------------------------------------------
- ** Function prototypes.
- ** ----------------------------------------------------------------- */
-
-static void strategia_medie_ponderate (void);
-
-
-/** --------------------------------------------------------------------
  ** Main.
  ** ----------------------------------------------------------------- */
 
+static bool print_latex_output = false;
+static void strategia_medie_ponderate (void);
+
 int
-main (void)
+main (int argc, const char *const argv[])
 {
+  if (2 == argc) {
+    print_latex_output = true;
+  }
   setlocale(LC_ALL, "it_IT");
-  printf("\n*** Calcoli per gli esempi nella guida: sezione \"Strategie per la scelta dei prezzi di vendita\"\n\n");
+  printf("\n%%%%%% Calcoli per gli esempi nella guida: sezione \"Strategie per la scelta dei prezzi di vendita, metodo media ponderata\"\n\n");
   strategia_medie_ponderate();
   exit(EXIT_SUCCESS);
 }
@@ -59,31 +58,32 @@ main (void)
  ** Metodo delle medie ponderate.
  ** ----------------------------------------------------------------- */
 
-static void strategia_medie_ponderate__esempio_guadagno   (void);
-static void strategia_medie_ponderate__esempio_perdita_1  (void);
-static void strategia_medie_ponderate__esempio_perdita_2  (void);
+static void strategia_medie_ponderate__esempio_guadagno   (operazione_t * acquisto_iniziale);
+static void strategia_medie_ponderate__esempio_perdita_1  (operazione_t * acquisto_iniziale);
+static void strategia_medie_ponderate__esempio_perdita_2  (operazione_t * acquisto_iniziale);
 
 void
 strategia_medie_ponderate (void)
 {
-  strategia_medie_ponderate__esempio_guadagno();
-  strategia_medie_ponderate__esempio_perdita_1();
-  strategia_medie_ponderate__esempio_perdita_2();
-  fflush(stdout);
+  operazione_t	acquisto_iniziale = {
+    .numero_ordine		= 1,
+    .tipo			= ACQUISTO,
+    .numero_quote		= 100,
+    .prezzo_medio_eseguito	= 50.00,
+  };
+
+  strategia_medie_ponderate__esempio_guadagno(&acquisto_iniziale);
+  strategia_medie_ponderate__esempio_perdita_1(&acquisto_iniziale);
+  strategia_medie_ponderate__esempio_perdita_2(&acquisto_iniziale);
 }
 
 void
-strategia_medie_ponderate__esempio_guadagno (void)
+strategia_medie_ponderate__esempio_guadagno (operazione_t * acquisto_iniziale)
 {
 #undef NUMERO_OPERAZIONI
 #define NUMERO_OPERAZIONI	2
   operazione_t	O[NUMERO_OPERAZIONI] = {
-    {
-      .numero_ordine		= 1,
-      .tipo			= ACQUISTO,
-      .numero_quote		= 100,
-      .prezzo_medio_eseguito	= 50.00,
-    },
+    *acquisto_iniziale,
     {
       .numero_ordine		= 2,
       .tipo			= VENDITA,
@@ -93,23 +93,22 @@ strategia_medie_ponderate__esempio_guadagno (void)
   };
   saldo_t	S[NUMERO_OPERAZIONI];
 
-  printf("\n* Metodo delle medie ponderate: esempio di guadagno\n\n");
+  printf("\n%%%% Metodo delle medie ponderate: esempio di guadagno\n\n");
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
-  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  if (print_latex_output) {
+    calcolo_storico_print_latex(stdout, "StratMediaEsUno", NUMERO_OPERAZIONI, O, S);
+  } else {
+    calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  }
 }
 
 void
-strategia_medie_ponderate__esempio_perdita_1 (void)
+strategia_medie_ponderate__esempio_perdita_1 (operazione_t * acquisto_iniziale)
 {
 #undef NUMERO_OPERAZIONI
 #define NUMERO_OPERAZIONI	2
   operazione_t	O[NUMERO_OPERAZIONI] = {
-    {
-      .numero_ordine		= 1,
-      .tipo			= ACQUISTO,
-      .numero_quote		= 100,
-      .prezzo_medio_eseguito	= 50.00,
-    },
+    *acquisto_iniziale,
     {
       .numero_ordine		= 2,
       .tipo			= VENDITA,
@@ -119,23 +118,22 @@ strategia_medie_ponderate__esempio_perdita_1 (void)
   };
   saldo_t	S[NUMERO_OPERAZIONI];
 
-  printf("\n* Metodo delle medie ponderate: esempio di perdita 1\n\n");
+  printf("\n%%%% Metodo delle medie ponderate: esempio di perdita 1\n\n");
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
-  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  if (print_latex_output) {
+    calcolo_storico_print_latex(stdout, "StratMediaEsDue", NUMERO_OPERAZIONI, O, S);
+  } else {
+    calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  }
 }
 
 void
-strategia_medie_ponderate__esempio_perdita_2 (void)
+strategia_medie_ponderate__esempio_perdita_2 (operazione_t * acquisto_iniziale)
 {
 #undef NUMERO_OPERAZIONI
 #define NUMERO_OPERAZIONI	2
   operazione_t	O[NUMERO_OPERAZIONI] = {
-    {
-      .numero_ordine		= 1,
-      .tipo			= ACQUISTO,
-      .numero_quote		= 100,
-      .prezzo_medio_eseguito	= 50.00,
-    },
+    *acquisto_iniziale,
     {
       .numero_ordine		= 2,
       .tipo			= VENDITA,
@@ -145,9 +143,13 @@ strategia_medie_ponderate__esempio_perdita_2 (void)
   };
   saldo_t	S[NUMERO_OPERAZIONI];
 
-  printf("\n* Metodo delle medie ponderate: esempio di perdita 2\n\n");
+  printf("\n%%%% Metodo delle medie ponderate: esempio di perdita 2\n\n");
   calcolo_storico(NUMERO_OPERAZIONI, O, S);
-  calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  if (print_latex_output) {
+    calcolo_storico_print_latex(stdout, "StratMediaEsTre", NUMERO_OPERAZIONI, O, S);
+  } else {
+    calcolo_storico_print_ascii(stdout, NUMERO_OPERAZIONI, O, S);
+  }
 }
 
 /* end of file */

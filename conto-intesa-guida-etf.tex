@@ -921,34 +921,37 @@ proprie spese: si potrebbe essere costretti a disinvestire, vendendo a prezzi in
 %page
 \subsection{Metodo delle medie ponderate}
 
+\input{conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.inc}
+
 
 Si considerano tutte le quote di uno stesso  \Etf{}, acquistate a qualsiasi prezzo, come parte dello
 stesso insieme.  Si cerca  di vendere le quote a un prezzo talmente  maggiore del prezzo di acquisto
 che, recuperati i costi e pagate le tasse, si realizza un guadagno.
 \begin{itemize}
 \item Se  il \emph{prezzo medio netto  di vendita} è maggiore  del \emph{prezzo medio di  carico nel
-     saldo} in quel momento: si recuperano i costi di acquisto e vendita; si recuperano le tasse; si
-  chiude con un guadagno.
+     saldo} precedente  la vendita: si recuperano  i costi di  acquisto e vendita; si  recuperano le
+  tasse; si chiude con un guadagno.
 
 \item Se il \emph{prezzo medio netto di vendita} è uguale al \emph{prezzo medio di carico nel saldo}
-  in quel  momento: si recuperano i  costi di acquisto e  vendita; si recuperano le  tasse; ma resta
-  nessun guadagno, si chiude in pareggio.
+  precedente la  vendita: si recuperano i  costi di acquisto e  vendita; si recuperano le  tasse; ma
+  resta nessun guadagno, si chiude in pareggio.
 
 \item Se  il \emph{prezzo  medio netto di  vendita} è  minore del \emph{prezzo  medio di  carico nel
-     saldo}: tolti i costi di acquisto e  vendita ed eventualmente le tasse, l'operazione genera una
-  perdita.
+     saldo} precedente la  vendita: tolti i costi  di acquisto e vendita ed  eventualmente le tasse,
+  l'operazione genera una perdita.
 \end{itemize}
-In ogni caso, restano  le minusvalenze accumulate che, se e quando  possibile, potranno essere usate
-per ridurre le tasse da pagare in future operazioni che generano \emph{redditi diversi}.
+In ogni  caso, restano le  \emph{minusvalenze} accumulate nella Posizione  Fiscale che, se  e quando
+possibile, potranno essere  usate per ridurre le  tasse da pagare in future  operazioni che generano
+\emph{redditi diversi}.
 
 Si supponga di avere un Conto Titoli con il seguente saldo:
 \begin{itemize}
-\item numero quote: \num{100};
-\item prezzo medio effettivo: \Eur{50,00};
-\item costo medio per quota: \Eur{0,15};
-\item prezzo medio di carico: \Eur{50,15};
-\item controvalore di carico: \Eur{5015,00};
-\item minusvalenze accumulate: \Eur{0,00};
+\item numero quote: \num{\unoStratMediaEsUnoSaldoNumeroQuote};
+\item \emph{prezzo medio effettivo}: \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo};
+\item \emph{prezzo medio di carico}: \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico};
+\item \emph{costo medio di acquisto per quota in carico}: \Eur{\unoStratMediaEsUnoSaldoCostoMedio};
+\item \emph{controvalore di carico}: \Eur{\unoStratMediaEsUnoSaldoControvaloreCarico};
+\item \emph{minusvalenze accumulate}: \Eur{\unoStratMediaEsUnoSaldoMinusvalenza};
 \end{itemize}
 si vogliano vendere tutte le quote.
 
@@ -956,88 +959,110 @@ si vogliano vendere tutte le quote.
 
 Come esempio di guadagno, si venda come segue:
 \begin{itemize}
-\item numero quote: \num{100};
-\item prezzo medio eseguito: \Eur{52,00};
-\item controvalore dell'operazione: \Eur{5200,00};
-\item controvalore totale: \Eur{5132,52};
-\item prezzo medio netto di vendita: \Eur{51,33};
+\item numero quote: \num{\dueStratMediaEsUnoVenditaNumeroQuote};
+\item \emph{prezzo medio eseguito}: \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioEffettivo};
+\item \emph{controvalore dell'operazione}: \Eur{\dueStratMediaEsUnoVenditaControvaloreOperazione};
 
-\item reddito da capitale: \Eur{200,00};
-\item tasse sul reddito: \Eur{52,00};
-\item costo dell'operazione di vendita: \Eur{15,48};
-\item costo convenzionale di acquisto delle quote vendute: \Eur{15,00};
-\item reddito diverso: \Eur{-30,48};
+\item \emph{reddito da capitale}: \Eur{\dueStratMediaEsUnoVenditaRedditoCapitale};
+\item \emph{tasse sul reddito da capitale}: \Eur{\dueStratMediaEsUnoVenditaTassaRedditoCapitale};
 
-\item rendimento percentuale: \SI{2,3434}{\percent};
-\item rendimento in valuta: \Eur{117,52};
+\item \emph{costo dell'operazione di vendita}: \Eur{\dueStratMediaEsUnoVenditaCostoOperazione};
+\item \emph{costo medio di acquisto delle quote vendute}: \Eur{\dueStratMediaEsUnoVenditaCostoAcquistoQuoteVendute};
+\item \emph{reddito diverso da minusvalenza sul capitale}: \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoMinusvalenzaCapitale};
+\item \emph{reddito diverso da pagamento delle commissioni}: \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoPagamentoCommissioni};
+\item \emph{reddito diverso totale}: \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoTotale};
+
+\item \emph{controvalore totale}: \Eur{\dueStratMediaEsUnoVenditaControvaloreTotale};
+
+\item \emph{prezzo medio netto di vendita}: \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioNettoVendita};
+\item \emph{rendimento percentuale}: \SI{\dueStratMediaEsUnoVenditaRendimentoPercentuale}{\percent};
+\item \emph{rendimento in valuta}: \Eur{\dueStratMediaEsUnoVenditaRendimentoInValuta};
 \end{itemize}
-il \emph{prezzo  medio netto di  vendita} pari  a \Eur{51,33} è  maggiore del \emph{prezzo  medio di
-   carico nel saldo} pari a \Eur{50,15}, quindi,  recuperati costi e tasse, si realizza un guadagno;
-il reddito diverso è una minusvalenza da compensare con future operazioni.
+il         \emph{prezzo        medio         netto         di         vendita}        pari         a
+\Eur{\dueStratMediaEsUnoVenditaPrezzoMedioNettoVendita} è maggiore del  \emph{prezzo medio di carico
+   nel  saldo} pari  a \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico},  quindi, recuperati  costi e
+tasse, si  realizza un  guadagno; il  reddito diverso è  una minusvalenza  da compensare  con future
+operazioni.
 
 %% ------------------------------------------------------------------------
 
 Come esempio di perdita, si venda come segue:
 \begin{itemize}
-\item numero quote: \num{100};
-\item prezzo medio eseguito: \Eur{50,30};
-\item controvalore dell'operazione: \Eur{5030,00};
-\item controvalore totale: \Eur{5007,13};
-\item prezzo medio netto di vendita: \Eur{50,07};
+\item numero quote: \num{\dueStratMediaEsDueVenditaNumeroQuote};
+\item \emph{prezzo medio eseguito}: \Eur{\dueStratMediaEsDueVenditaPrezzoMedioEffettivo};
+\item \emph{controvalore dell'operazione}: \Eur{\dueStratMediaEsDueVenditaControvaloreOperazione};
 
-\item reddito da capitale: \Eur{30,00};
-\item tasse sul reddito: \Eur{7,80};
-\item costo dell'operazione di vendita: \Eur{15,07};
-\item costo convenzionale di acquisto delle quote vendute: \Eur{15,00};
-\item reddito diverso: \Eur{-30,07};
+\item \emph{reddito da capitale}: \Eur{\dueStratMediaEsDueVenditaRedditoCapitale};
+\item \emph{tasse sul reddito da capitale}: \Eur{\dueStratMediaEsDueVenditaTassaRedditoCapitale};
 
-\item rendimento percentuale: \SI{-0,1570}{\percent};
-\item rendimento in valuta: \Eur{-7,87};
+\item \emph{costo dell'operazione di vendita}: \Eur{\dueStratMediaEsDueVenditaCostoOperazione};
+\item \emph{costo medio di acquisto delle quote vendute}: \Eur{\dueStratMediaEsDueVenditaCostoAcquistoQuoteVendute};
+\item \emph{reddito diverso da minusvalenza sul capitale}: \Eur{\dueStratMediaEsDueVenditaRedditoDiversoMinusvalenzaCapitale};
+\item \emph{reddito diverso da pagamento delle commissioni}: \Eur{\dueStratMediaEsDueVenditaRedditoDiversoPagamentoCommissioni};
+\item \emph{reddito diverso totale}: \Eur{\dueStratMediaEsDueVenditaRedditoDiversoTotale};
+
+\item \emph{controvalore totale}: \Eur{\dueStratMediaEsDueVenditaControvaloreTotale};
+
+\item \emph{prezzo medio netto di vendita}: \Eur{\dueStratMediaEsDueVenditaPrezzoMedioNettoVendita};
+\item \emph{rendimento percentuale}: \SI{\dueStratMediaEsDueVenditaRendimentoPercentuale}{\percent};
+\item \emph{rendimento in valuta}: \Eur{\dueStratMediaEsDueVenditaRendimentoInValuta};
 \end{itemize}
-nonostante il \emph{prezzo medio eseguito} pari a \Eur{50,30} sia maggiore del \emph{prezzo medio di
-   carico nel saldo}  pari a \Eur{50,15}, il  \emph{prezzo medio netto di vendita}  di \Eur{50,07} è
-minore, quindi, tolti costi e tasse, si realizza  una perdita; il reddito diverso è una minusvalenza
-da compensare con future operazioni.
+nonostante          il         \emph{prezzo          medio         eseguito}          pari         a
+\Eur{\dueStratMediaEsDueVenditaPrezzoMedioEffettivo} sia  maggiore del \emph{prezzo medio  di carico
+   nel saldo} pari a \Eur{\unoStratMediaEsDueSaldoPrezzoMedioCarico}, il \emph{prezzo medio netto di
+   vendita} di \Eur{\dueStratMediaEsDueVenditaPrezzoMedioNettoVendita} è minore, quindi, tolti costi
+e tasse,  si realizza una  perdita; il  reddito diverso è  una minusvalenza compensabile  con future
+operazioni.
 
 %% ------------------------------------------------------------------------
 
 Come ulteriore esempio di perdita, si venda come segue:
 \begin{itemize}
-\item numero quote: \num{100};
-\item prezzo medio eseguito: \Eur{48,00};
-\item controvalore dell'operazione: \Eur{4800,00};
-\item controvalore totale: \Eur{4785,48};
-\item prezzo medio netto di vendita: \Eur{47,85};
+\item numero quote: \num{\dueStratMediaEsTreVenditaNumeroQuote};
+\item \emph{prezzo medio eseguito}: \Eur{\dueStratMediaEsTreVenditaPrezzoMedioEffettivo};
+\item \emph{controvalore dell'operazione}: \Eur{\dueStratMediaEsTreVenditaControvaloreOperazione};
 
-\item reddito da capitale: \Eur{0,00};
-\item tasse sul reddito: \Eur{0,00};
-\item costo dell'operazione di vendita: \Eur{14,52};
-\item costo convenzionale di acquisto delle quote vendute: \Eur{15,00};
-\item redditi diversi: \Eur{-229,52};
+\item \emph{reddito da capitale}: \Eur{\dueStratMediaEsTreVenditaRedditoCapitale};
+\item \emph{tasse sul reddito da capitale}: \Eur{\dueStratMediaEsTreVenditaTassaRedditoCapitale};
 
-\item rendimento percentuale: \SI{-4,5767}{\percent};
-\item rendimento in valuta: \Eur{-229,52};
+\item \emph{costo dell'operazione di vendita}: \Eur{\dueStratMediaEsTreVenditaCostoOperazione};
+\item \emph{costo medio di acquisto delle quote vendute}: \Eur{\dueStratMediaEsTreVenditaCostoAcquistoQuoteVendute};
+\item \emph{reddito diverso da minusvalenza sul capitale}: \Eur{\dueStratMediaEsTreVenditaRedditoDiversoMinusvalenzaCapitale};
+\item \emph{reddito diverso da pagamento delle commissioni}: \Eur{\dueStratMediaEsTreVenditaRedditoDiversoPagamentoCommissioni};
+\item \emph{reddito diverso totale}: \Eur{\dueStratMediaEsTreVenditaRedditoDiversoTotale};
+
+\item \emph{controvalore totale}: \Eur{\dueStratMediaEsTreVenditaControvaloreTotale};
+
+\item \emph{prezzo medio netto di vendita}: \Eur{\dueStratMediaEsTreVenditaPrezzoMedioNettoVendita};
+\item \emph{rendimento percentuale}: \SI{\dueStratMediaEsTreVenditaRendimentoPercentuale}{\percent};
+\item \emph{rendimento in valuta}: \Eur{\dueStratMediaEsTreVenditaRendimentoInValuta};
 \end{itemize}
-il \emph{prezzo medio netto di vendita} pari a \Eur{47,85} è minore del \emph{prezzo medio di carico
-   nel saldo} pari a \Eur{50,15}, quindi si realizza una perdita; si osserva che:
+il         \emph{prezzo        medio         netto         di         vendita}        pari         a
+\Eur{\dueStratMediaEsTreVenditaPrezzoMedioNettoVendita} è  minore del  \emph{prezzo medio  di carico
+   nel  saldo}  pari  a  \Eur{\unoStratMediaEsTreSaldoPrezzoMedioCarico},  quindi  si  realizza  una
+perdita; si osserva che:
 \begin{itemize}
 \item il \emph{reddito da capitale} è zero e le tasse sono nulle;
 \item la differenza tra il \emph{controvalore dell'operazione di vendita} e il \emph{controvalore di
      carico nel saldo}:
   \begin{equation*}
-    \num{4800,00} - \num{5015,00} = \Eur{-215,00}
+    \num{\dueStratMediaEsTreVenditaControvaloreOperazione} -
+    \num{\unoStratMediaEsTreSaldoControvaloreCarico}
+    = \Eur{\dueStratMediaEsTreVenditaRedditoDiversoMinusvalenzaCapitale}
   \end{equation*}
-  rappresenta la  perdita di reddito dovuta  alla vendita, è  negativa ed è registrata  come reddito
-  diverso;
-\item   la  differenza   tra  il   \emph{controvalore   totale  di   vendita}  e   il
-  \emph{controvalore di carico nel saldo}:
+  rappresenta la perdita di  reddito sul capitale dovuta alla vendita, è  negativa e contribuisce al
+  calcolo del \emph{reddito diverso};
+\item la differenza tra  il \emph{controvalore totale di vendita} e  il \emph{controvalore di carico
+     nel saldo}:
   \begin{equation*}
-    \num{4785,48} - \num{5015,00} = \Eur{-229,52}
+    \num{\dueStratMediaEsTreVenditaControvaloreTotale} -
+    \num{\unoStratMediaEsTreSaldoControvaloreCarico}
+    = \Eur{\dueStratMediaEsTreVenditaRedditoDiversoTotale}
   \end{equation*}
-  è negativa  e rappresenta l'intero  reddito diverso, includendo sia  la perdita di  reddito dovuta
-  alla vendita che il costo delle operazioni;
+  è negativa  e rappresenta l'intero  \emph{reddito diverso}, includendo  sia la perdita  di reddito
+  dovuta alla vendita che il costo delle operazioni;
 \end{itemize}
-il reddito diverso è una minusvalenza da compensare con future operazioni.
+il \emph{reddito diverso totale} è una \emph{minusvalenza} da compensare con future operazioni.
 
 %% ------------------------------------------------------------------------
 
@@ -1045,51 +1070,53 @@ La domanda  fondamentale è:  \textbf{possedendo un  numero di  quote a  un cert
       effettivo} e un  certo \emph{prezzo medio di  carico} nel saldo, qual'è  il \emph{prezzo medio
       eseguito di vendita} che permette di realizzare un guadagno?}
 
-Per esempio,  si posseggano  \num{100} quote  a un \emph{prezzo  medio effettivo  nel saldo}  pari a
-\Eur{50,00} e a un \emph{prezzo medio di carico nel saldo} pari a \Eur{50,15}, si voglia determinare
-il \emph{prezzo medio \underline{eseguito} di vendita} per  tutte le quote che realizzi un guadagno.
-Detto \(X\) tale valore, risulta:
+Per esempio, si  posseggano \num{\unoStratMediaEsUnoSaldoNumeroQuote} quote a  un \emph{prezzo medio
+   effettivo   nel  saldo}   pari  a   \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo}  e   a  un
+\emph{prezzo medio di  carico nel saldo} pari  a \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}, si
+voglia determinare  il \emph{prezzo medio  \underline{eseguito} di vendita}  per tutte le  quote che
+realizzi un guadagno.  Detto \(X\) tale valore, risulta:
 \begin{itemize}
-\item \emph{controvalore dell'operazione}: \(\num{100} \times{} X\);
+\item \emph{controvalore dell'operazione di vendita}: \(\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X\);
 \item \emph{costo dell'operazione di vendita}:
   \begin{align*}
-    \num{0,50} + \num{2,50} + \num{0,0024} \times{} (\num{100} \times{} X)
-    &= \num{3} + \num{0,0024} \times{} \num{100} \times{} X = \\
+    \num{0,50} + \num{2,50} + \num{0,0024} \times{} (\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X)
+    &= \num{3} + \num{0,0024} \times{} \num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X = \\
     &= \num{3} + \num{0,24} \times{} X
   \end{align*}
 \item \emph{tassa sul reddito da capitale}:
   \begin{align*}
-    \num{0,26} \times{} \num{100} \times{} (X - \num{50,00})
+    \num{0,26} \times{} \num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} (X - \num{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo})
     &= \num{26} \times{} X - \num{26} \times{} \num{50} = \\
     &= \num{26} \times{} X - \num{1300}
   \end{align*}
-\item \emph{controvalore totale di vendita}:
+\item \emph{controvalore  totale di vendita}, la  quantità di denaro accreditata  sul Conto Corrente
+  dopo la vendita:
   \begin{align*}
-    (\num{100} \times{} X)
+    (\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X)
     &- (\num{3} + \num{0,24} \times{} X)
       - (\num{26} \times{} X - \num{1300})
       = \\
-    &= \num{100} \times{} X
+    &= \num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X
       - \num{3} - \num{0,24} \times{} X
       - \num{26} \times{} X + \num{1300}
       = \\
-    &= (\num{100} - \num{0,24} - \num{26}) \times{} X + (\num{1300} - \num{3})
+    &= (\num{\unoStratMediaEsUnoSaldoNumeroQuote} - \num{0,24} - \num{26}) \times{} X + (\num{1300} - \num{3})
       = \\
     &= \num{73,76} \times{} X + \num{1297}
   \end{align*}
 \item \emph{prezzo medio netto di vendita}:
   \begin{equation*}
-    \frac{\num{73,76} \times{} X + \num{1297}}{100}
+    \frac{\num{73,76} \times{} X + \num{1297}}{\unoStratMediaEsUnoSaldoNumeroQuote}
   \end{equation*}
 \end{itemize}
 il  pareggio  si  raggiungerebbe  vendendo  le  quote a  un  \emph{prezzo  medio  netto}  uguale  al
-\emph{prezzo medio di carico nel saldo} pari a \Eur{50,15}; quindi:
+\emph{prezzo medio di carico nel saldo} pari a \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}; quindi:
 \begin{equation*}
-  \frac{\num{73,76} \times{} X + \num{1297}}{100} = \num{50,15}
+  \frac{\num{73,76} \times{} X + \num{1297}}{\unoStratMediaEsUnoSaldoNumeroQuote} = \num{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}
 \end{equation*}
 risolvendo rispetto a \(X\):
 \begin{equation*}
-  X = \frac{\num{100} \times{} \num{50,15} - \num{1297}}{\num{73,76}}
+  X = \frac{\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} \num{\unoStratMediaEsUnoSaldoPrezzoMedioCarico} - \num{1297}}{\num{73,76}}
   = \Eur{50,4067}
 \end{equation*}
 vendendo con un \emph{prezzo medio eseguito} maggiore di \Eur{50,4067} si realizza un guadagno.
@@ -1098,6 +1125,7 @@ vendendo con un \emph{prezzo medio eseguito} maggiore di \Eur{50,4067} si realiz
 \subsection{Metodo delle linee di investimento}
 
 \input{conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc}
+
 
 Si è visto  come, dal punto di  vista contabile: tutte le quote  di uno stesso \Etf{}  in carico nel
 Conto Titoli siano  parte dello stesso insieme;  in particolare, per ogni operazione  di vendita: le
@@ -1130,11 +1158,11 @@ Le operazioni di acquisto siano come segue:
   il riassunto dell'operazione di acquisto per la prima linea è:
   \begin{itemize}
   \item numero quote \num{\unoStratInvLineeAcquistoNumeroQuote{}};
-  \item prezzo medio eseguito di acquisto \Eur{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}};
-  \item controvalore dell'operazione \Eur{\unoStratInvLineeAcquistoControvaloreOperazione{}};
-  \item costo dell'operazione di acquisto \Eur{\unoStratInvLineeAcquistoCostoOperazione{}};
-  \item controvalore totale \Eur{\unoStratInvLineeAcquistoControvaloreTotale};
-  \item prezzo medio di carico di acquisto \Eur{\unoStratInvLineeAcquistoPrezzoMedioCarico};
+  \item \emph{prezzo medio eseguito} \Eur{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}};
+  \item \emph{controvalore dell'operazione} \Eur{\unoStratInvLineeAcquistoControvaloreOperazione{}};
+  \item \emph{costo dell'operazione} \Eur{\unoStratInvLineeAcquistoCostoOperazione{}};
+  \item \emph{controvalore totale} \Eur{\unoStratInvLineeAcquistoControvaloreTotale};
+  \item \emph{prezzo medio di carico} \Eur{\unoStratInvLineeAcquistoPrezzoMedioCarico};
   \end{itemize}
 
 \item  per  la  seconda   linea  di  investimento  si  acquisti  quando  il   prezzo  di  mercato  è
@@ -1148,11 +1176,11 @@ Le operazioni di acquisto siano come segue:
   il riassunto dell'operazione di acquisto per la seconda linea è:
   \begin{itemize}
   \item numero quote \num{\dueStratInvLineeAcquistoNumeroQuote{}};
-  \item prezzo medio eseguito di acquisto \Eur{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}};
-  \item controvalore dell'operazione \Eur{\dueStratInvLineeAcquistoControvaloreOperazione{}};
-  \item costo dell'operazione di acquisto \Eur{\dueStratInvLineeAcquistoCostoOperazione{}};
-  \item controvalore totale \Eur{\dueStratInvLineeAcquistoControvaloreTotale};
-  \item prezzo medio di carico di acquisto \Eur{\dueStratInvLineeAcquistoPrezzoMedioCarico};
+  \item \emph{prezzo medio eseguito} \Eur{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}};
+  \item \emph{controvalore dell'operazione} \Eur{\dueStratInvLineeAcquistoControvaloreOperazione{}};
+  \item \emph{costo dell'operazione} \Eur{\dueStratInvLineeAcquistoCostoOperazione{}};
+  \item \emph{controvalore totale} \Eur{\dueStratInvLineeAcquistoControvaloreTotale};
+  \item \emph{prezzo medio di carico} \Eur{\dueStratInvLineeAcquistoPrezzoMedioCarico};
   \end{itemize}
 
 \item  per   la  terza  linea  di   investimento  si  acquisti   quando  il  prezzo  di   mercato  è
@@ -1162,16 +1190,16 @@ Le operazioni di acquisto siano come segue:
     \num{\unoStratInvLineeCapitaleIniziale{}} /
     \num{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}}
     \simeq{} \num{\treStratInvLineeNumeroQuoteNonArrotondato{}}
-    = \num{\treStratInvLineeAcquistoNumeroQuote{}}
+    \simeq{} \num{\treStratInvLineeAcquistoNumeroQuote{}}
   \end{equation*}
   il riassunto dell'operazione di acquisto per la terza linea è:
   \begin{itemize}
   \item numero quote \num{\treStratInvLineeAcquistoNumeroQuote{}};
-  \item prezzo medio eseguito di acquisto \Eur{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}};
-  \item controvalore dell'operazione \Eur{\treStratInvLineeAcquistoControvaloreOperazione{}};
-  \item costo dell'operazione di acquisto \Eur{\treStratInvLineeAcquistoCostoOperazione{}};
-  \item controvalore totale \Eur{\treStratInvLineeAcquistoControvaloreTotale};
-  \item prezzo medio di carico di acquisto \Eur{\treStratInvLineeAcquistoPrezzoMedioCarico};
+  \item \emph{prezzo medio eseguito} \Eur{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}};
+  \item \emph{controvalore dell'operazione} \Eur{\treStratInvLineeAcquistoControvaloreOperazione{}};
+  \item \emph{costo dell'operazione} \Eur{\treStratInvLineeAcquistoCostoOperazione{}};
+  \item \emph{controvalore totale} \Eur{\treStratInvLineeAcquistoControvaloreTotale};
+  \item \emph{prezzo medio di carico} \Eur{\treStratInvLineeAcquistoPrezzoMedioCarico};
   \end{itemize}
 \end{enumerate}
 
@@ -1212,116 +1240,152 @@ significa che: se si eseguono prima tutti gli  acquisti e poi tutte le vendite, 
 
 %page
 \paragraph{Vendita delle quote della prima linea di investimento.}
-Si liquidino le \num{125} quote della prima linea di investimento al \emph{prezzo medio effettivo di
-   vendita}  di \Eur{46,00},  maggiore del  \emph{prezzo medio  di carico  di acquisto}  delle quote
-stesse  \Eur{40,12}, ma  minore  del \emph{prezzo  medio  di carico  nel  saldo} \Eur{48,7823}.   Il
-riassunto della contabilità fiscale come calcolato dalla Banca è il seguente:
+Si   liquidino  le   \num{\quattroStratInvLineeVenditaNumeroQuote}  quote   della  prima   linea  di
+investimento       al       \emph{prezzo       medio      effettivo       di       vendita}       di
+\Eur{\quattroStratInvLineeVenditaPrezzoMedioEffettivo}, maggiore del \emph{prezzo medio di carico di
+   acquisto}  delle quote  stesse  \Eur{\unoStratInvLineeAcquistoPrezzoMedioCarico},  ma minore  del
+\emph{prezzo medio di carico nel saldo} \Eur{\treStratInvLineeSaldoPrezzoMedioCarico}.  Il riassunto
+della contabilità fiscale come calcolato dalla Banca è il seguente:
 \begin{itemize}
-\item numero quote \num{125};
-\item prezzo medio effettivo di vendita \Eur{46,00};
-\item controvalore dell'operazione di vendita \Eur{5750,00};
-\item reddito da capitale da plusvalenza sul capitale \Eur{0,00};
-\item tassa sul reddito da capitale \Eur{0,00};
-\item costo dell'operazione di vendita \Eur{16,80};
-\item costo di acquisto delle quote vendute \Eur{18,24};
-\item reddito diverso da minusvalenza sul capitale \Eur{-329,55};
-\item reddito diverso da pagamento commissioni \Eur{-35,04};
-\item reddito diverso totale \Eur{-364,59};
-\item minusvalenza registrata nella posizione fiscale \Eur{364,59};
-\item controvalore totale di vendita \Eur{5733,20}, sono i soldi che tornano sul Conto Corrente;
-\item prezzo medio netto di vendita \Eur{45,8656};
-\item rendimento percentuale rispetto al \emph{prezzo medio di carico nel saldo} \SI{-5,9790}{\percent};
-\item rendimento in valuta rispetto al \emph{prezzo medio di carico nel saldo} \Eur{-364,59}.
+\item numero quote \num{\quattroStratInvLineeVenditaNumeroQuote};
+\item \emph{prezzo medio effettivo} \Eur{\quattroStratInvLineeVenditaPrezzoMedioEffettivo};
+\item \emph{controvalore dell'operazione} \Eur{\quattroStratInvLineeVenditaControvaloreOperazione};
+\item \emph{reddito da capitale da plusvalenza sul capitale} \Eur{\quattroStratInvLineeVenditaRedditoCapitale};
+\item \emph{tassa sul reddito da capitale} \Eur{\quattroStratInvLineeVenditaTassaRedditoCapitale};
+\item \emph{costo dell'operazione} \Eur{\quattroStratInvLineeVenditaCostoOperazione};
+\item \emph{costo di acquisto delle quote vendute} \Eur{\quattroStratInvLineeVenditaCostoAcquistoQuoteVendute};
+\item \emph{reddito diverso da minusvalenza sul capitale} \Eur{\quattroStratInvLineeVenditaRedditoDiversoMinusvalenzaCapitale};
+\item \emph{reddito diverso da pagamento commissioni} \Eur{\quattroStratInvLineeVenditaRedditoDiversoPagamentoCommissioni};
+\item \emph{reddito diverso totale} \Eur{\quattroStratInvLineeVenditaRedditoDiversoTotale};
+\item \emph{minusvalenza} registrata nella Posizione Fiscale \Eur{\quattroStratInvLineeVenditaMinusvalenza};
+\item \emph{controvalore totale}  \Eur{\quattroStratInvLineeVenditaControvaloreTotale}, sono i soldi
+  accreditati sul Conto Corrente;
+\item \emph{prezzo medio netto} \Eur{\quattroStratInvLineeVenditaPrezzoMedioNettoVendita};
+\item  \emph{rendimento   percentuale}  rispetto  al   \emph{prezzo  medio  di  carico   nel  saldo}
+  \SI{\quattroStratInvLineeVenditaRendimentoPercentuale}{\percent};
+\item  \emph{rendimento   in  valuta}  rispetto   al  \emph{prezzo   medio  di  carico   nel  saldo}
+  \Eur{\quattroStratInvLineeVenditaRendimentoInValuta}.
 \end{itemize}
 Il risultato di  questa operazione dal punto di  vista della prima linea di  investimento può essere
 calcolato in due modi:
 \begin{enumerate}
-\item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
-  \emph{controvalore totale  di acquisto} \Eur{5015,00},  e la quantità  di soldi entrata  nel Conto
-  Corrente dopo la vendita delle quote, cioè il \emph{controvalore totale di vendita} \Eur{5733,20};
-\item con il \emph{prezzo medio di carico di  acquisto} \Eur{40,12} e il \emph{prezzo medio netto di
-     vendita} \Eur{45,8656};
+\item con  la quantità  di soldi  addebitata sul  Conto Corrente  per acquistare  le quote,  cioè il
+  \emph{controvalore  totale di  acquisto}  \Eur{\unoStratInvLineeAcquistoControvaloreTotale}, e  la
+  quantità  di  soldi  accreditata  sul  Conto  Corrente  dopo  la  vendita  delle  quote,  cioè  il
+  \emph{controvalore totale di vendita} \Eur{\quattroStratInvLineeVenditaControvaloreTotale};
+\item       con       il      \emph{prezzo       medio       di       carico      di       acquisto}
+  \Eur{\unoStratInvLineeAcquistoPrezzoMedioCarico}  e  il  \emph{prezzo   medio  netto  di  vendita}
+  \Eur{\quattroStratInvLineeVenditaPrezzoMedioNettoVendita};
 \end{enumerate}
 il rendimento della compravendita risulta:
 \begin{equation*}
-  \CalcoloRendimentoPercentuale{5733,20}{5015,00} =
-  \CalcoloRendimentoPercentuale{45,8656}{40,12} = \SI{14,32}{\percent}
+  \CalcoloRendimentoPercentuale
+  {\quattroStratInvLineeVenditaControvaloreTotale}
+  {\unoStratInvLineeAcquistoControvaloreTotale} =
+  \CalcoloRendimentoPercentuale
+  {\quattroStratInvLineeVenditaPrezzoMedioNettoVendita}
+  {\unoStratInvLineeAcquistoPrezzoMedioCarico} =
+  \SI{\quattroStratInvLineeRendimentoPercentualeLinea}{\percent}
 \end{equation*}
 
 %page
 \paragraph{Vendita delle quote della seconda linea di investimento.}
-Si    liquidino    le    \num{100}    quote    della    seconda    linea    di    investimento    al
-\emph{prezzo medio effettivo di vendita} di  \Eur{49,50}, minore del \emph{prezzo medio di carico di acquisto}  delle quote
-stesse \Eur{50,00},  ma maggiore  del \emph{prezzo medio di carico nel saldo}  \Eur{48,7823}.  Il  riassunto della
-contabilità fiscale come calcolato dalla Banca è il seguente:
+Si  liquidino   le  \num{\cinqueStratInvLineeVenditaNumeroQuote}   quote  della  seconda   linea  di
+investimento       al       \emph{prezzo       medio      effettivo       di       vendita}       di
+\Eur{\cinqueStratInvLineeVenditaPrezzoMedioEffettivo}, minore  del \emph{prezzo  medio di  carico di
+   acquisto} delle  quote stesse  \Eur{\dueStratInvLineeAcquistoPrezzoMedioCarico}, ma  maggiore del
+\emph{prezzo medio di carico nel saldo} \Eur{\treStratInvLineeSaldoPrezzoMedioCarico}.  Il riassunto
+della contabilità fiscale come calcolato dalla Banca è il seguente:
 \begin{itemize}
-\item numero quote \num{100};
-\item prezzo medio effettivo di vendita \Eur{49,50};
-\item controvalore dell'operazione di vendita \Eur{4950,00};
-\item reddito da capitale da plusvalenza sul capitale \Eur{86,36};
-\item tassa sul reddito da capitale \Eur{22,45};
-\item costo dell'operazione di vendita \Eur{14,88};
-\item costo di acquisto delle quote vendute \Eur{14,59};
-\item reddito diverso da minusvalenza sul capitale \Eur{0,00};
-\item reddito diverso da pagamento commissioni \Eur{-29,47};
-\item reddito diverso totale \Eur{-29,47};
-\item minusvalenza registrata nella posizione fiscale \Eur{29,47};
-\item controvalore totale di vendita \Eur{4912,67}, sono i soldi che tornano sul Conto Corrente;
-\item prezzo medio netto di vendita \Eur{49,1267};
-\item rendimento percentuale rispetto al \emph{prezzo medio di carico nel saldo} \SI{0,7059}{\percent};
-\item rendimento in valuta rispetto al \emph{prezzo medio di carico nel saldo} \Eur{34,43}.
+\item numero quote \num{\cinqueStratInvLineeVenditaNumeroQuote};
+\item \emph{prezzo medio effettivo} \Eur{\cinqueStratInvLineeVenditaPrezzoMedioEffettivo};
+\item \emph{controvalore dell'operazione} \Eur{\cinqueStratInvLineeVenditaControvaloreOperazione};
+\item \emph{reddito da capitale da plusvalenza sul capitale} \Eur{\cinqueStratInvLineeVenditaRedditoCapitale};
+\item \emph{tassa sul reddito da capitale} \Eur{\cinqueStratInvLineeVenditaTassaRedditoCapitale};
+\item \emph{costo dell'operazione} \Eur{\cinqueStratInvLineeVenditaCostoOperazione};
+\item \emph{costo di acquisto delle quote vendute} \Eur{\cinqueStratInvLineeVenditaCostoAcquistoQuoteVendute};
+\item \emph{reddito diverso da minusvalenza sul capitale} \Eur{\cinqueStratInvLineeVenditaRedditoDiversoMinusvalenzaCapitale};
+\item \emph{reddito diverso da pagamento commissioni} \Eur{\cinqueStratInvLineeVenditaRedditoDiversoPagamentoCommissioni};
+\item \emph{reddito diverso totale} \Eur{\cinqueStratInvLineeVenditaRedditoDiversoTotale};
+\item \emph{minusvalenza} registrata nella Posizione Fiscale \Eur{\cinqueStratInvLineeVenditaMinusvalenza};
+\item \emph{controvalore totale}  \Eur{\cinqueStratInvLineeVenditaControvaloreTotale}, sono i soldi
+  accreditati sul Conto Corrente;
+\item \emph{prezzo medio netto} \Eur{\cinqueStratInvLineeVenditaPrezzoMedioNettoVendita};
+\item  \emph{rendimento   percentuale}  rispetto  al   \emph{prezzo  medio  di  carico   nel  saldo}
+  \SI{\cinqueStratInvLineeVenditaRendimentoPercentuale}{\percent};
+\item  \emph{rendimento   in  valuta}  rispetto   al  \emph{prezzo   medio  di  carico   nel  saldo}
+  \Eur{\cinqueStratInvLineeVenditaRendimentoInValuta}.
 \end{itemize}
 Il risultato di questa operazione dal punto di  vista della seconda linea di investimento può essere
 calcolato in due modi:
 \begin{enumerate}
-\item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
-  \emph{controvalore totale  di acquisto} \Eur{5000,00},  e la quantità  di soldi entrata  nel Conto
-  Corrente dopo la vendita delle quote, cioè il \emph{controvalore totale di vendita} \Eur{4912,67};
-\item con il \emph{prezzo medio di carico di  acquisto} \Eur{40,12} e il \emph{prezzo medio netto di
-     vendita} \Eur{45,8656};
+\item con  la quantità  di soldi  addebitata sul  Conto Corrente  per acquistare  le quote,  cioè il
+  \emph{controvalore  totale di  acquisto}  \Eur{\dueStratInvLineeAcquistoControvaloreTotale}, e  la
+  quantità  di  soldi  accreditata  sul  Conto  Corrente  dopo  la  vendita  delle  quote,  cioè  il
+  \emph{controvalore totale di vendita} \Eur{\cinqueStratInvLineeVenditaControvaloreTotale};
+\item       con       il      \emph{prezzo       medio       di       carico      di       acquisto}
+  \Eur{\dueStratInvLineeAcquistoPrezzoMedioCarico}  e  il  \emph{prezzo   medio  netto  di  vendita}
+  \Eur{\cinqueStratInvLineeVenditaPrezzoMedioNettoVendita};
 \end{enumerate}
 il rendimento della compravendita risulta:
 \begin{equation*}
-  \CalcoloRendimentoPercentuale{4912,67}{5000,00} =
-  \CalcoloRendimentoPercentuale{49,13}{50,15} = \SI{-2,04}{\percent}
+  \CalcoloRendimentoPercentuale
+  {\cinqueStratInvLineeVenditaControvaloreTotale}
+  {\dueStratInvLineeAcquistoControvaloreTotale} =
+  \CalcoloRendimentoPercentuale
+  {\cinqueStratInvLineeVenditaPrezzoMedioNettoVendita}
+  {\dueStratInvLineeAcquistoPrezzoMedioCarico} =
+  \SI{\cinqueStratInvLineeRendimentoPercentualeLinea}{\percent}
 \end{equation*}
 
 %page
 \paragraph{Vendita delle quote della terza linea di investimento.}
-Si liquidino le \num{83} quote della terza  linea di investimento al \emph{prezzo medio effettivo di
-   vendita}  di \Eur{65,00},  maggiore del  \emph{prezzo medio  di carico  di acquisto}  delle quote
-stesse  \Eur{60,00} e  maggiore  del \emph{prezzo  medio  di carico  nel  saldo} \Eur{48,7823}.   Il
-riassunto della contabilità fiscale come calcolato dalla Banca è il seguente:
+Si liquidino le \num{\seiStratInvLineeVenditaNumeroQuote} quote della terza linea di investimento al
+\emph{prezzo  medio  effettivo  di vendita}  di  \Eur{\seiStratInvLineeVenditaPrezzoMedioEffettivo},
+maggiore    del   \emph{prezzo    medio    di    carico   di    acquisto}    delle   quote    stesse
+\Eur{\treStratInvLineeAcquistoPrezzoMedioCarico}, e  maggiore del  \emph{prezzo medio di  carico nel
+   saldo}  \Eur{\treStratInvLineeSaldoPrezzoMedioCarico}.  Il  riassunto  della contabilità  fiscale
+come calcolato dalla Banca è il seguente:
 \begin{itemize}
-\item numero quote \num{83};
-\item prezzo medio effettivo di vendita \Eur{65,00};
-\item controvalore dell'operazione di vendita \Eur{5395,00};
-\item reddito da capitale da plusvalenza sul capitale \Eur{1358,18};
-\item tassa sul reddito da capitale \Eur{353,13};
-\item costo dell'operazione di vendita \Eur{15,95};
-\item costo di acquisto delle quote vendute \Eur{12,11};
-\item reddito diverso da minusvalenza sul capitale \Eur{0,00};
-\item reddito diverso da pagamento commissioni \Eur{-28,06};
-\item reddito diverso totale \Eur{-28,06};
-\item minusvalenza registrata nella posizione fiscale \Eur{28,06};
-\item controvalore totale di vendita \Eur{5025,92}, sono i soldi che tornano sul Conto Corrente;
-\item prezzo medio netto di vendita \Eur{60,5533};
-\item rendimento percentuale rispetto al \emph{prezzo medio di carico nel saldo} {\SI{24,1296}{\percent}};
-\item rendimento in valuta rispetto al \emph{prezzo medio di carico nel saldo} \Eur{976,99}.
+\item numero quote \num{\seiStratInvLineeVenditaNumeroQuote};
+\item \emph{prezzo medio effettivo} \Eur{\seiStratInvLineeVenditaPrezzoMedioEffettivo};
+\item \emph{controvalore dell'operazione} \Eur{\seiStratInvLineeVenditaControvaloreOperazione};
+\item \emph{reddito da capitale da plusvalenza sul capitale} \Eur{\seiStratInvLineeVenditaRedditoCapitale};
+\item \emph{tassa sul reddito da capitale} \Eur{\seiStratInvLineeVenditaTassaRedditoCapitale};
+\item \emph{costo dell'operazione} \Eur{\seiStratInvLineeVenditaCostoOperazione};
+\item \emph{costo di acquisto delle quote vendute} \Eur{\seiStratInvLineeVenditaCostoAcquistoQuoteVendute};
+\item \emph{reddito diverso da minusvalenza sul capitale} \Eur{\seiStratInvLineeVenditaRedditoDiversoMinusvalenzaCapitale};
+\item \emph{reddito diverso da pagamento commissioni} \Eur{\seiStratInvLineeVenditaRedditoDiversoPagamentoCommissioni};
+\item \emph{reddito diverso totale} \Eur{\seiStratInvLineeVenditaRedditoDiversoTotale};
+\item \emph{minusvalenza} registrata nella Posizione Fiscale \Eur{\seiStratInvLineeVenditaMinusvalenza};
+\item \emph{controvalore totale}  \Eur{\seiStratInvLineeVenditaControvaloreTotale}, sono i soldi
+  accreditati sul Conto Corrente;
+\item \emph{prezzo medio netto} \Eur{\seiStratInvLineeVenditaPrezzoMedioNettoVendita};
+\item  \emph{rendimento   percentuale}  rispetto  al   \emph{prezzo  medio  di  carico   nel  saldo}
+  \SI{\seiStratInvLineeVenditaRendimentoPercentuale}{\percent};
+\item  \emph{rendimento   in  valuta}  rispetto   al  \emph{prezzo   medio  di  carico   nel  saldo}
+  \Eur{\seiStratInvLineeVenditaRendimentoInValuta}.
 \end{itemize}
 Il risultato di  questa operazione dal punto di  vista della terza linea di  investimento può essere
 calcolato in due modi:
 \begin{enumerate}
-\item  con la  quantità  di  soldi uscita  dal  Conto  Corrente per  acquistare  le  quote, cioè  il
-  \emph{controvalore totale  di acquisto} \Eur{4994,95},  e la quantità  di soldi entrata  nel Conto
-  Corrente dopo la vendita delle quote, cioè il \emph{controvalore totale di vendita} \Eur{5025,92};
-\item con il \emph{prezzo  medio di carico di acquisto} \Eur{60,1801} e  il \emph{prezzo medio netto
-     di vendita} \Eur{60,5533};
+\item con  la quantità  di soldi  addebitata sul  Conto Corrente  per acquistare  le quote,  cioè il
+  \emph{controvalore  totale di  acquisto}  \Eur{\treStratInvLineeAcquistoControvaloreTotale}, e  la
+  quantità  di  soldi  accreditata  sul  Conto  Corrente  dopo  la  vendita  delle  quote,  cioè  il
+  \emph{controvalore totale di vendita} \Eur{\seiStratInvLineeVenditaControvaloreTotale};
+\item       con       il      \emph{prezzo       medio       di       carico      di       acquisto}
+  \Eur{\treStratInvLineeAcquistoPrezzoMedioCarico}  e  il  \emph{prezzo   medio  netto  di  vendita}
+  \Eur{\seiStratInvLineeVenditaPrezzoMedioNettoVendita};
 \end{enumerate}
 il rendimento della compravendita risulta:
 \begin{equation*}
-  \CalcoloRendimentoPercentuale{5733,20}{4994,95} =
-  \CalcoloRendimentoPercentuale{60,5533}{60,1801} = \SI{0,62}{\percent}
+  \CalcoloRendimentoPercentuale
+  {\seiStratInvLineeVenditaControvaloreTotale}
+  {\treStratInvLineeAcquistoControvaloreTotale} =
+  \CalcoloRendimentoPercentuale
+  {\seiStratInvLineeVenditaPrezzoMedioNettoVendita}
+  {\treStratInvLineeAcquistoPrezzoMedioCarico} =
+  \SI{\seiStratInvLineeRendimentoPercentualeLinea}{\percent}
 \end{equation*}
 
 %page
