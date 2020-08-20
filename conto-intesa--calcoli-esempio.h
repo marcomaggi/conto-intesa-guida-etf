@@ -70,7 +70,7 @@ calcolo_rendimento_percentuale (double out, double in)
 bool
 compare_double (double A, double B)
 {
-  return ((fabs(A - B) < 0.01)? true : false);
+  return ((fabs(A - B) < 0.001)? true : false);
 }
 
 char const *
@@ -234,6 +234,8 @@ DEFINE_LATEX_PRINTER_DOUBLE_4(prezzo_medio_carico,	"PrezzoMedioCarico")
 DEFINE_LATEX_PRINTER_DOUBLE_4(costo_medio,		"CostoMedio")
 DEFINE_LATEX_PRINTER_DOUBLE_2(costo_operazione,		"CostoOperazione")
 
+DEFINE_LATEX_PRINTER_DOUBLE_4(prezzo_medio_effettivo_vendita_in_pareggio, "PrezzoMedioEffettivoVenditaInPareggio");
+
 DEFINE_LATEX_PRINTER_DOUBLE_2(controvalore_carico,	"ControvaloreCarico")
 DEFINE_LATEX_PRINTER_DOUBLE_2(controvalore_operazione,	"ControvaloreOperazione")
 DEFINE_LATEX_PRINTER_DOUBLE_2(controvalore_totale,	"ControvaloreTotale")
@@ -284,16 +286,20 @@ struct saldo_t {
   /* Le  minusvalenze accumulate,  dovute ai  costi di  compravendita e  alle perdite
      classificate come redditi diversi.  È un numero negativo. */
   double	minusvalenze_accumulate;
+
+  /* Prezzo medio effettivo di vendita in pareggio. */
+  double	prezzo_medio_effettivo_vendita_in_pareggio;
 };
 
 saldo_t const saldo_precedente_convenzionale = {
-  .numero_ordine		= 0,
-  .numero_quote			= 0.0,
-  .prezzo_medio_effettivo	= 0.0,
-  .prezzo_medio_carico		= 0.0,
-  .costo_medio_quote		= 0.0,
-  .controvalore_carico		= 0.0,
-  .minusvalenze_accumulate	= 0.0,
+  .numero_ordine				= 0,
+  .numero_quote					= 0.0,
+  .prezzo_medio_effettivo			= 0.0,
+  .prezzo_medio_carico				= 0.0,
+  .costo_medio_quote				= 0.0,
+  .controvalore_carico				= 0.0,
+  .minusvalenze_accumulate			= 0.0,
+  .prezzo_medio_effettivo_vendita_in_pareggio	= 0.0,
 };
 
 void
@@ -307,6 +313,8 @@ saldo_print_ascii (FILE * stream, saldo_t const * const S)
   fprintf(stream, "%-50s= %12.4f EUR\n",	"costo medio per quota",	S->costo_medio_quote);
   fprintf(stream, "%-50s= %10.2f EUR\n",	"controvalore di carico",	S->controvalore_carico);
   fprintf(stream, "%-50s= %10.2f EUR\n",	"minusvalenze accumulate",	S->minusvalenze_accumulate);
+  fprintf(stream, "%-50s= %10.4f EUR\n",	"prezzo medio effettivo di vendita in pareggio", S->prezzo_medio_effettivo_vendita_in_pareggio);
+
   fprintf(stream, "\n");
 }
 
@@ -328,6 +336,7 @@ saldo_print_latex (FILE * stream, char const * prefisso, saldo_t const * const S
   print_latex_costo_medio		(&config, S->costo_medio_quote);
   print_latex_controvalore_carico	(&config, S->controvalore_carico);
   print_latex_minusvalenza		(&config, S->minusvalenze_accumulate);
+  print_latex_prezzo_medio_effettivo_vendita_in_pareggio(&config, S->prezzo_medio_effettivo_vendita_in_pareggio);
   print_latex_newline			(&config);
 }
 
@@ -427,6 +436,10 @@ saldo_acquisto_init (saldo_t * const S, operazione_acquisto_t const * const O, s
   S->costo_medio_quote		= S->prezzo_medio_carico - S->prezzo_medio_effettivo;
   S->controvalore_carico	= S->numero_quote * S->prezzo_medio_carico;
   S->minusvalenze_accumulate	= S_precedente->minusvalenze_accumulate;
+
+  S->prezzo_medio_effettivo_vendita_in_pareggio =
+    (S->prezzo_medio_carico - (0.26 * S->prezzo_medio_effettivo) + (3.0 / S->numero_quote)) /
+    0.7376;
 }
 
 
@@ -617,11 +630,13 @@ saldo_vendita_init (saldo_t * const S, operazione_vendita_t const * const O, sal
     S->prezzo_medio_carico	= S_precedente->prezzo_medio_carico;
     S->costo_medio_quote	= S_precedente->costo_medio_quote;
     S->controvalore_carico	= S->numero_quote * S->prezzo_medio_carico;
+    S->prezzo_medio_effettivo_vendita_in_pareggio = S_precedente->prezzo_medio_effettivo_vendita_in_pareggio;
   } else {
     S->prezzo_medio_effettivo	= 0.0;
     S->prezzo_medio_carico	= 0.0;
     S->costo_medio_quote	= 0.0;
     S->controvalore_carico	= 0.0;
+    S->prezzo_medio_effettivo_vendita_in_pareggio = 0.0;
   }
   S->minusvalenze_accumulate	= S_precedente->minusvalenze_accumulate - O->reddito_diverso_totale;
 }

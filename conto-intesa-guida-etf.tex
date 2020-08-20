@@ -39,8 +39,11 @@
 \newcommand{\MediaPonderataDueSim}[4]{\frac{#1 \times{} #2 + #3 \times{} #4}{#1 + #3}}
 \newcommand{\MediaPonderataTreSim}[6]{\frac{#1 \times{} #2 + #3 \times{} #4 + #5 \times{} #6}{#1 + #3 + #5}}
 
-\newcommand{\CalcoloCostoOperazione}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{#1}}
-\newcommand{\CalcoloCostoOperazioneSim}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} #1}
+\newcommand{\CalcoloCostoOperazione}[1]{\num{0,50} + \num{2,50} + \left(\num{24}/\num{10000}\right) \times{} \num{#1}}
+\newcommand{\CalcoloCostoOperazioneSim}[1]{\num{0,50} + \num{2,50} + \left(\num{24}/\num{10000}\right) \times{} #1}
+
+% Calcolo delle tasse sul reddito da capitale.
+\newcommand{\CalcoloTasseSim}[1]{\left(26/100\right) \times{} #1}
 
 \newcommand{\CalcoloRendimentoPercentuale}[2]{\frac{\num{#1} - \num{#2}}{\num{#2}} \times{} \num{100}}
 \newcommand{\CalcoloRendimentoPercentualeSim}[2]{\frac{#1 - #2}{#2} \times{} \num{100}}
@@ -84,6 +87,8 @@
 % Prezzo medio netto di vendita
 \newcommand{\Pmnv}[1]{\mathcal{P}_{\mathrm{mnv}#1}}
 
+\newcommand{\Plimmev}{\mathcal{P}_{\mathrm{mev}}^{*}}
+
 %% ------------------------------------------------------------------------
 
 % Controvalore di un'operazione di acquisto.
@@ -97,6 +102,9 @@
 
 % Controvalore totale di un'operazione di acquisto.
 \newcommand{\Ctotven}[1]{\mathcal{C}_{\mathrm{tot,ven}#1}}
+
+% Controvalore totale di carico nel saldo.
+\newcommand{\Csal}[1]{\mathcal{C}_{\mathrm{sal}#1}}
 
 %% ------------------------------------------------------------------------
 
@@ -556,10 +564,20 @@ un investimento in quote di \Etf{}, la parte da aggiornare è rappresentata dall
      \underline{carico}   di  un   nuovo   acquisto}   e  il   precedente   \emph{prezzo  medio   di
      \underline{carico} nel saldo}.
 \end{itemize}
-
-Dai valori nel saldo si può calcolare il  \textbf{costo medio di acquisto per ogni quota in carico}:
-si  calcola  come differenza  tra  il  \emph{prezzo medio  di  \underline{carico}  nel saldo}  e  il
-\emph{prezzo medio \underline{effettivo} nel saldo}.
+dai valori nel saldo si possono calcolare:
+\begin{itemize}
+\item il \textbf{costo medio di acquisto per ogni quota in carico}, \(\Fmcs{}\), come differenza tra
+  il   \emph{prezzo   medio   di   \underline{carico}   nel   saldo}   e   il   \emph{prezzo   medio
+     \underline{effettivo} nel saldo}:
+  \begin{equation*}
+    \Fmcs{} = \Pmcs{} - \Pmes{}
+  \end{equation*}
+\item il  \textbf{controvalore di  carico nel saldo},  \(\Csal{}\), come prodotto  tra il  numero di
+  quote in carico e il \emph{prezzo medio di carico nel saldo}:
+  \begin{equation*}
+    \Csal{} = \Nsal{} \times{} \Pmcs{}
+  \end{equation*}
+\end{itemize}
 
 Per  esempio, si  consideri un  Conto  Titoli \Virgolette{vuoto}  rispetto  a un  \Etf{}, con  saldo
 convenzionale:
@@ -989,12 +1007,12 @@ risulta:
 \section{Aggiornamento del saldo dopo una vendita}
 
 
-Dopo  l'esecuzione di  ogni operazione  di vendita  occorre ricalcolare  il saldo.   Il saldo  di un
-investimento in quote di \Etf{} è rappresentato dalle tre quantità:
+Dopo l'esecuzione di ogni  operazione di vendita occorre ricalcolare il saldo  del Conto Titoli.  Il
+saldo di un investimento in quote di \Etf{} è rappresentato dalle tre quantità:
 \begin{itemize}
-\item numero di quote di quell'\Etf{} in carico nel Conto Titoli;
-\item \emph{prezzo medio effettivo nel saldo} per ogni quota in carico;
-\item \emph{prezzo medio di carico nel saldo} per ogni quota in carico;
+\item numero di quote \(\Nsal{}\) di quell'\Etf{} in carico nel Conto Titoli;
+\item \emph{prezzo medio effettivo nel saldo} \(\Pmes{}\) per ogni quota in carico;
+\item \emph{prezzo medio di carico nel saldo} \(\Pmcs{}\) per ogni quota in carico;
 \end{itemize}
 sia  il \emph{prezzo  medio effettivo  nel saldo}  che il  \emph{prezzo medio  di carico  nel saldo}
 restano  \textbf{immutati} dopo  una  vendita: essa  modifica  solo  il numero  di  quote in  carico
@@ -1097,180 +1115,325 @@ possibile, potranno essere  usate per ridurre le  tasse da pagare in future  ope
 
 Si supponga di avere un Conto Titoli con il seguente saldo:
 \begin{itemize}
-\item numero quote: \num{\unoStratMediaEsUnoSaldoNumeroQuote};
-\item \emph{prezzo medio effettivo}: \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo};
-\item \emph{prezzo medio di carico}: \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico};
-\item \emph{costo medio di acquisto per quota in carico}: \Eur{\unoStratMediaEsUnoSaldoCostoMedio};
-\item \emph{controvalore di carico}: \Eur{\unoStratMediaEsUnoSaldoControvaloreCarico};
-\item \emph{minusvalenze accumulate}: \Eur{\unoStratMediaEsUnoSaldoMinusvalenza};
+\item numero di quote in carico:
+  \(\Nsal{} = \num{\unoStratMediaEsUnoSaldoNumeroQuote}\);
+\item \emph{prezzo medio effettivo}:
+  \(\Pmes{} = \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo}\);
+\item \emph{prezzo medio di carico}:
+  \(\Pmcs{} = \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}\);
 \end{itemize}
+si può calcolare il \emph{costo medio di acquisto per quota in carico}:
+\begin{equation*}
+  \Fmcs{} = \Pmcs{} - \Pmes{} = \Eur{\unoStratMediaEsUnoSaldoCostoMedio}
+\end{equation*}
 si vogliano vendere tutte le quote.
 
-%% ------------------------------------------------------------------------
+%page
+\subsubsection{Esempio di guadagno}
+
 
 Come esempio di guadagno, si venda come segue:
 \begin{itemize}
-\item numero quote: \num{\dueStratMediaEsUnoVenditaNumeroQuote};
-\item \emph{prezzo medio eseguito}: \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioEffettivo};
-\item \emph{controvalore dell'operazione}: \Eur{\dueStratMediaEsUnoVenditaControvaloreOperazione};
+\item numero di quote vendute:
+  \(\Nven{} = \num{\dueStratMediaEsUnoVenditaNumeroQuote}\);
+\item \emph{prezzo medio eseguito}:
+  \(\Pmev{} = \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioEffettivo}\);
+\item \emph{controvalore dell'operazione}:
+  \(\Cven{} = \Eur{\dueStratMediaEsUnoVenditaControvaloreOperazione}\);
 
-\item \emph{reddito da capitale}: \Eur{\dueStratMediaEsUnoVenditaRedditoCapitale};
-\item \emph{tasse sul reddito da capitale}: \Eur{\dueStratMediaEsUnoVenditaTassaRedditoCapitale};
+\item \emph{reddito da capitale}:
+  \begin{equation*}
+    \Rcap{}
+    = \Cven{} - \Nven{} \times{} \left( \Pmev{} - \Pmes{} \right)
+    = \Eur{\dueStratMediaEsUnoVenditaRedditoCapitale}
+  \end{equation*}
+\item \emph{tasse sul reddito da capitale}:
+  \begin{equation*}
+    \Tredcap{} = \CalcoloTasseSim{\Rcap{}} = \Eur{\dueStratMediaEsUnoVenditaTassaRedditoCapitale}
+  \end{equation*}
 
-\item \emph{costo dell'operazione di vendita}: \Eur{\dueStratMediaEsUnoVenditaCostoOperazione};
-\item \emph{costo medio di acquisto delle quote vendute}: \Eur{\dueStratMediaEsUnoVenditaCostoAcquistoQuoteVendute};
-\item \emph{reddito diverso da minusvalenza sul capitale}: \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoMinusvalenzaCapitale};
-\item \emph{reddito diverso da pagamento delle commissioni}: \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoPagamentoCommissioni};
-\item \emph{reddito diverso totale}: \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoTotale};
+\item \emph{costo dell'operazione di vendita}:
+  \begin{equation*}
+    \Fven{} = \CalcoloCostoOperazioneSim{\Cven{}} = \Eur{\dueStratMediaEsUnoVenditaCostoOperazione}
+  \end{equation*}
+\item \emph{costo medio di acquisto delle quote vendute}:
+  \begin{equation*}
+    \Facq{} = \Nven{} \times{} \Fmcs{} = \Eur{\dueStratMediaEsUnoVenditaCostoAcquistoQuoteVendute}
+  \end{equation*}
+\item \emph{reddito diverso da minusvalenza sul capitale}:
+  \(\Rdivmin{} = \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoMinusvalenzaCapitale}\);
+\item \emph{reddito diverso da pagamento delle commissioni}:
+  \begin{equation*}
+    \Rdivcom{}
+    = - \left( \Fven{} + \Facq{} \right)
+    = \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoPagamentoCommissioni}
+  \end{equation*}
+\item \emph{reddito diverso totale}:
+  \(\Rdiv{} = \Rdivmin{} + \Rdivcom{} = \Eur{\dueStratMediaEsUnoVenditaRedditoDiversoTotale}\);
 
-\item \emph{controvalore totale}: \Eur{\dueStratMediaEsUnoVenditaControvaloreTotale};
+\item \emph{controvalore totale}:
+  \(\Ctotven{} = \Cven{} - \left( \Fven{} + \Tredcap{} \right) = \Eur{\dueStratMediaEsUnoVenditaControvaloreTotale}\);
 
-\item \emph{prezzo medio netto di vendita}: \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioNettoVendita};
-\item \emph{rendimento percentuale}: \SI{\dueStratMediaEsUnoVenditaRendimentoPercentuale}{\percent};
-\item \emph{rendimento in valuta}: \Eur{\dueStratMediaEsUnoVenditaRendimentoInValuta};
+\item \emph{prezzo medio netto di vendita}:
+  \(\Pmnv{} = \Ctotven{} / \Nven{} = \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioNettoVendita}\);
+\item \emph{rendimento percentuale}:
+  \begin{equation*}
+    \Rperc{}
+    = \CalcoloRendimentoPercentualeSim{\Pmnv{}}{\Pmcs{}}
+    = \SI{\dueStratMediaEsUnoVenditaRendimentoPercentuale}{\percent};
+  \end{equation*}
+\item \emph{rendimento in valuta}:
+  \begin{equation*}
+    \Rval{}
+    = \Nven{} \times{} \left( \Pmnv{} - \Pmcs{} \right)
+    = \Eur{\dueStratMediaEsUnoVenditaRendimentoInValuta}
+  \end{equation*}
 \end{itemize}
-il         \emph{prezzo        medio         netto         di         vendita}        pari         a
-\Eur{\dueStratMediaEsUnoVenditaPrezzoMedioNettoVendita} è maggiore del  \emph{prezzo medio di carico
-   nel  saldo} pari  a \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico},  quindi, recuperati  costi e
-tasse, si  realizza un  guadagno; il  reddito diverso è  una minusvalenza  da compensare  con future
+sia                 il                  \emph{prezzo                 medio                 eseguito}
+\(\Pmev{} =  \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioEffettivo}\) che il \emph{prezzo  medio netto
+   di vendita}  \(\Pmnv{} = \Eur{\dueStratMediaEsUnoVenditaPrezzoMedioNettoVendita}\)  sono maggiori
+del           \emph{prezzo          medio           di          carico           nel          saldo}
+\(\Pmcs{} = \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}\), quindi,  recuperati costi e tasse, si
+realizza un guadagno; il  \emph{reddito diverso totale} è una minusvalenza  da compensare con future
 operazioni.
 
-%% ------------------------------------------------------------------------
+%page
+\subsubsection{Esempio di perdita}
+
 
 Come esempio di perdita, si venda come segue:
 \begin{itemize}
-\item numero quote: \num{\dueStratMediaEsDueVenditaNumeroQuote};
-\item \emph{prezzo medio eseguito}: \Eur{\dueStratMediaEsDueVenditaPrezzoMedioEffettivo};
-\item \emph{controvalore dell'operazione}: \Eur{\dueStratMediaEsDueVenditaControvaloreOperazione};
+\item numero di quote vendute:
+  \(\Nven{} = \num{\dueStratMediaEsDueVenditaNumeroQuote}\);
+\item \emph{prezzo medio eseguito}:
+  \(\Pmev{} = \Eur{\dueStratMediaEsDueVenditaPrezzoMedioEffettivo}\);
+\item \emph{controvalore dell'operazione}:
+  \(\Cven{} = \Eur{\dueStratMediaEsDueVenditaControvaloreOperazione}\);
 
-\item \emph{reddito da capitale}: \Eur{\dueStratMediaEsDueVenditaRedditoCapitale};
-\item \emph{tasse sul reddito da capitale}: \Eur{\dueStratMediaEsDueVenditaTassaRedditoCapitale};
+\item \emph{reddito da capitale}:
+  \begin{equation*}
+    \Rcap{}
+    = \Cven{} - \Nven{} \times{} \left( \Pmev{} - \Pmes{} \right)
+    = \Eur{\dueStratMediaEsDueVenditaRedditoCapitale}
+  \end{equation*}
+\item \emph{tasse sul reddito da capitale}:
+  \begin{equation*}
+    \Tredcap{} = \CalcoloTasseSim{\Rcap{}} = \Eur{\dueStratMediaEsDueVenditaTassaRedditoCapitale}
+  \end{equation*}
 
-\item \emph{costo dell'operazione di vendita}: \Eur{\dueStratMediaEsDueVenditaCostoOperazione};
-\item \emph{costo medio di acquisto delle quote vendute}: \Eur{\dueStratMediaEsDueVenditaCostoAcquistoQuoteVendute};
-\item \emph{reddito diverso da minusvalenza sul capitale}: \Eur{\dueStratMediaEsDueVenditaRedditoDiversoMinusvalenzaCapitale};
-\item \emph{reddito diverso da pagamento delle commissioni}: \Eur{\dueStratMediaEsDueVenditaRedditoDiversoPagamentoCommissioni};
-\item \emph{reddito diverso totale}: \Eur{\dueStratMediaEsDueVenditaRedditoDiversoTotale};
+\item \emph{costo dell'operazione di vendita}:
+  \begin{equation*}
+    \Fven{} = \CalcoloCostoOperazioneSim{\Cven{}} = \Eur{\dueStratMediaEsDueVenditaCostoOperazione}
+  \end{equation*}
+\item \emph{costo medio di acquisto delle quote vendute}:
+  \begin{equation*}
+    \Facq{} = \Nven{} \times{} \Fmcs{} = \Eur{\dueStratMediaEsDueVenditaCostoAcquistoQuoteVendute}
+  \end{equation*}
+\item \emph{reddito diverso da minusvalenza sul capitale}:
+  \(\Rdivmin{} = \Eur{\dueStratMediaEsDueVenditaRedditoDiversoMinusvalenzaCapitale}\);
+\item \emph{reddito diverso da pagamento delle commissioni}:
+  \begin{equation*}
+    \Rdivcom{}
+    = - \left( \Fven{} + \Facq{} \right)
+    = \Eur{\dueStratMediaEsDueVenditaRedditoDiversoPagamentoCommissioni}
+  \end{equation*}
+\item \emph{reddito diverso totale}:
+  \(\Rdiv{} = \Rdivmin{} + \Rdivcom{} = \Eur{\dueStratMediaEsDueVenditaRedditoDiversoTotale}\);
 
-\item \emph{controvalore totale}: \Eur{\dueStratMediaEsDueVenditaControvaloreTotale};
+\item \emph{controvalore totale}:
+  \(\Ctotven{} = \Cven{} - \left( \Fven{} + \Tredcap{} \right) = \Eur{\dueStratMediaEsDueVenditaControvaloreTotale}\);
 
-\item \emph{prezzo medio netto di vendita}: \Eur{\dueStratMediaEsDueVenditaPrezzoMedioNettoVendita};
-\item \emph{rendimento percentuale}: \SI{\dueStratMediaEsDueVenditaRendimentoPercentuale}{\percent};
-\item \emph{rendimento in valuta}: \Eur{\dueStratMediaEsDueVenditaRendimentoInValuta};
+\item \emph{prezzo medio netto di vendita}:
+  \(\Pmnv{} = \Ctotven{} / \Nven{} = \Eur{\dueStratMediaEsDueVenditaPrezzoMedioNettoVendita}\);
+\item \emph{rendimento percentuale}:
+  \begin{equation*}
+    \Rperc{}
+    = \CalcoloRendimentoPercentualeSim{\Pmnv{}}{\Pmcs{}}
+    = \SI{\dueStratMediaEsDueVenditaRendimentoPercentuale}{\percent};
+  \end{equation*}
+\item \emph{rendimento in valuta}:
+  \begin{equation*}
+    \Rval{}
+    = \Nven{} \times{} \left( \Pmnv{} - \Pmcs{} \right)
+    = \Eur{\dueStratMediaEsDueVenditaRendimentoInValuta}
+  \end{equation*}
 \end{itemize}
-nonostante          il         \emph{prezzo          medio         eseguito}          pari         a
-\Eur{\dueStratMediaEsDueVenditaPrezzoMedioEffettivo} sia  maggiore del \emph{prezzo medio  di carico
-   nel saldo} pari a \Eur{\unoStratMediaEsDueSaldoPrezzoMedioCarico}, il \emph{prezzo medio netto di
-   vendita} di \Eur{\dueStratMediaEsDueVenditaPrezzoMedioNettoVendita} è minore, quindi, tolti costi
-e tasse,  si realizza una  perdita; il  reddito diverso è  una minusvalenza compensabile  con future
-operazioni.
+nonostante         il         \emph{prezzo         medio        eseguito         di         vendita}
+\(\Pmev{} =  \Eur{\dueStratMediaEsDueVenditaPrezzoMedioEffettivo}\) sia maggiore  \emph{prezzo medio
+   di   carico  nel   saldo}  \(\Pmcs{}   =  \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}\),   il
+\emph{prezzo             medio             netto              di             vendita}             di
+\(\Pmnv{} = \Eur{\dueStratMediaEsDueVenditaPrezzoMedioNettoVendita}\) è  minore, quindi, tolti costi
+e tasse, si realizza  una perdita; il \emph{reddito diverso totale}  è una minusvalenza compensabile
+con future operazioni.
 
-%% ------------------------------------------------------------------------
+%page
+\subsubsection{Altro esempio di perdita}
+
 
 Come ulteriore esempio di perdita, si venda come segue:
 \begin{itemize}
-\item numero quote: \num{\dueStratMediaEsTreVenditaNumeroQuote};
-\item \emph{prezzo medio eseguito}: \Eur{\dueStratMediaEsTreVenditaPrezzoMedioEffettivo};
-\item \emph{controvalore dell'operazione}: \Eur{\dueStratMediaEsTreVenditaControvaloreOperazione};
+\item numero di quote vendute:
+  \(\Nven{} = \num{\dueStratMediaEsTreVenditaNumeroQuote}\);
+\item \emph{prezzo medio eseguito}:
+  \(\Pmev{} = \Eur{\dueStratMediaEsTreVenditaPrezzoMedioEffettivo}\);
+\item \emph{controvalore dell'operazione}:
+  \(\Cven{} = \Eur{\dueStratMediaEsTreVenditaControvaloreOperazione}\);
 
-\item \emph{reddito da capitale}: \Eur{\dueStratMediaEsTreVenditaRedditoCapitale};
-\item \emph{tasse sul reddito da capitale}: \Eur{\dueStratMediaEsTreVenditaTassaRedditoCapitale};
+\item \emph{reddito da capitale}: \(\Rcap{} = \Eur{\dueStratMediaEsTreVenditaRedditoCapitale}\)
+\item \emph{tasse sul reddito da capitale}:
+  \(\Tredcap{} = \CalcoloTasseSim{\Rcap{}} = \Eur{\dueStratMediaEsTreVenditaTassaRedditoCapitale}\);
 
-\item \emph{costo dell'operazione di vendita}: \Eur{\dueStratMediaEsTreVenditaCostoOperazione};
-\item \emph{costo medio di acquisto delle quote vendute}: \Eur{\dueStratMediaEsTreVenditaCostoAcquistoQuoteVendute};
-\item \emph{reddito diverso da minusvalenza sul capitale}: \Eur{\dueStratMediaEsTreVenditaRedditoDiversoMinusvalenzaCapitale};
-\item \emph{reddito diverso da pagamento delle commissioni}: \Eur{\dueStratMediaEsTreVenditaRedditoDiversoPagamentoCommissioni};
-\item \emph{reddito diverso totale}: \Eur{\dueStratMediaEsTreVenditaRedditoDiversoTotale};
-
-\item \emph{controvalore totale}: \Eur{\dueStratMediaEsTreVenditaControvaloreTotale};
-
-\item \emph{prezzo medio netto di vendita}: \Eur{\dueStratMediaEsTreVenditaPrezzoMedioNettoVendita};
-\item \emph{rendimento percentuale}: \SI{\dueStratMediaEsTreVenditaRendimentoPercentuale}{\percent};
-\item \emph{rendimento in valuta}: \Eur{\dueStratMediaEsTreVenditaRendimentoInValuta};
-\end{itemize}
-il         \emph{prezzo        medio         netto         di         vendita}        pari         a
-\Eur{\dueStratMediaEsTreVenditaPrezzoMedioNettoVendita} è  minore del  \emph{prezzo medio  di carico
-   nel  saldo}  pari  a  \Eur{\unoStratMediaEsTreSaldoPrezzoMedioCarico},  quindi  si  realizza  una
-perdita; si osserva che:
-\begin{itemize}
-\item il \emph{reddito da capitale} è zero e le tasse sono nulle;
-\item la differenza tra il \emph{controvalore dell'operazione di vendita} e il \emph{controvalore di
-     carico nel saldo}:
+\item \emph{costo dell'operazione di vendita}:
   \begin{equation*}
-    \num{\dueStratMediaEsTreVenditaControvaloreOperazione} -
-    \num{\unoStratMediaEsTreSaldoControvaloreCarico}
+    \Fven{} = \CalcoloCostoOperazioneSim{\Cven{}} = \Eur{\dueStratMediaEsTreVenditaCostoOperazione}
+  \end{equation*}
+\item \emph{costo medio di acquisto delle quote vendute}:
+  \begin{equation*}
+    \Facq{} = \Nven{} \times{} \Fmcs{} = \Eur{\dueStratMediaEsTreVenditaCostoAcquistoQuoteVendute}
+  \end{equation*}
+\item \emph{reddito diverso da minusvalenza sul capitale}:
+  \begin{equation*}
+    \Rdivmin{}
+    = \Cven{} - \Nven{} \times{} \left( \Pmev{} - \Pmes{} \right)
     = \Eur{\dueStratMediaEsTreVenditaRedditoDiversoMinusvalenzaCapitale}
   \end{equation*}
-  rappresenta la perdita di  reddito sul capitale dovuta alla vendita, è  negativa e contribuisce al
-  calcolo del \emph{reddito diverso};
-\item la differenza tra  il \emph{controvalore totale di vendita} e  il \emph{controvalore di carico
-     nel saldo}:
+\item \emph{reddito diverso da pagamento delle commissioni}:
   \begin{equation*}
-    \num{\dueStratMediaEsTreVenditaControvaloreTotale} -
-    \num{\unoStratMediaEsTreSaldoControvaloreCarico}
-    = \Eur{\dueStratMediaEsTreVenditaRedditoDiversoTotale}
+    \Rdivcom{}
+    = - \left( \Fven{} + \Facq{} \right)
+    = \Eur{\dueStratMediaEsTreVenditaRedditoDiversoPagamentoCommissioni}
   \end{equation*}
-  è negativa  e rappresenta l'intero  \emph{reddito diverso}, includendo  sia la perdita  di reddito
-  dovuta alla vendita che il costo delle operazioni;
-\end{itemize}
-il \emph{reddito diverso totale} è una \emph{minusvalenza} da compensare con future operazioni.
+\item \emph{reddito diverso totale}:
+  \(\Rdiv{} = \Rdivmin{} + \Rdivcom{} = \Eur{\dueStratMediaEsTreVenditaRedditoDiversoTotale}\);
 
-%% ------------------------------------------------------------------------
+\item \emph{controvalore totale}:
+  \(\Ctotven{} = \Cven{} - \left( \Fven{} + \Tredcap{} \right) = \Eur{\dueStratMediaEsTreVenditaControvaloreTotale}\);
+
+\item \emph{prezzo medio netto di vendita}:
+  \(\Pmnv{} = \Ctotven{} / \Nven{} = \Eur{\dueStratMediaEsTreVenditaPrezzoMedioNettoVendita}\);
+\item \emph{rendimento percentuale}:
+  \begin{equation*}
+    \Rperc{}
+    = \CalcoloRendimentoPercentualeSim{\Pmnv{}}{\Pmcs{}}
+    = \SI{\dueStratMediaEsTreVenditaRendimentoPercentuale}{\percent};
+  \end{equation*}
+\item \emph{rendimento in valuta}:
+  \begin{equation*}
+    \Rval{}
+    = \Nven{} \times{} \left( \Pmnv{} - \Pmcs{} \right)
+    = \Eur{\dueStratMediaEsTreVenditaRendimentoInValuta}
+  \end{equation*}
+\end{itemize}
+sia                 il                 \emph{prezzo                 medio                 eseguito},
+\(\Pmev{} = \Eur{\dueStratMediaEsTreVenditaPrezzoMedioEffettivo}\), che  il \emph{prezzo medio netto
+   di vendita},  \(\Pmnv{} = \Eur{\dueStratMediaEsTreVenditaPrezzoMedioNettoVendita}\),  sono minori
+del          \emph{prezzo           medio          di          carico           nel          saldo},
+\(\Pmcs{} =  \Eur{\unoStratMediaEsTreSaldoPrezzoMedioCarico}\), quindi  si realizza una  perdita; il
+\emph{reddito diverso totale} è una minusvalenza da compensare con future operazioni.
+
+%page
+\subsubsection{Soluzione del problema generale}
+
 
 La domanda  fondamentale è:  \textbf{possedendo un  numero di  quote a  un certo  \emph{prezzo medio
-      effettivo} e un  certo \emph{prezzo medio di  carico} nel saldo, qual'è  il \emph{prezzo medio
-      eseguito di vendita} che permette di realizzare un guadagno?}
+      effettivo} e un certo  \emph{prezzo medio di carico} nel saldo,  qual'è il minimo \emph{prezzo
+      medio eseguito di vendita} che permette di realizzare un guadagno?}
 
-Per esempio, si  posseggano \num{\unoStratMediaEsUnoSaldoNumeroQuote} quote a  un \emph{prezzo medio
-   effettivo   nel  saldo}   pari  a   \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo}  e   a  un
-\emph{prezzo medio di  carico nel saldo} pari  a \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}, si
-voglia determinare  il \emph{prezzo medio  \underline{eseguito} di vendita}  per tutte le  quote che
-realizzi un guadagno.  Detto \(X\) tale valore, risulta:
-\begin{itemize}
-\item \emph{controvalore dell'operazione di vendita}: \(\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X\);
-\item \emph{costo dell'operazione di vendita}:
-  \begin{align*}
-    \num{0,50} + \num{2,50} + \num{0,0024} \times{} (\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X)
-    &= \num{3} + \num{0,0024} \times{} \num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X = \\
-    &= \num{3} + \num{0,24} \times{} X
-  \end{align*}
-\item \emph{tassa sul reddito da capitale}:
-  \begin{align*}
-    \num{0,26} \times{} \num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} (X - \num{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo})
-    &= \num{26} \times{} X - \num{26} \times{} \num{50} = \\
-    &= \num{26} \times{} X - \num{1300}
-  \end{align*}
-\item \emph{controvalore  totale di vendita}, la  quantità di denaro accreditata  sul Conto Corrente
-  dopo la vendita:
-  \begin{align*}
-    (\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X)
-    &- (\num{3} + \num{0,24} \times{} X)
-      - (\num{26} \times{} X - \num{1300})
-      = \\
-    &= \num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} X
-      - \num{3} - \num{0,24} \times{} X
-      - \num{26} \times{} X + \num{1300}
-      = \\
-    &= (\num{\unoStratMediaEsUnoSaldoNumeroQuote} - \num{0,24} - \num{26}) \times{} X + (\num{1300} - \num{3})
-      = \\
-    &= \num{73,76} \times{} X + \num{1297}
-  \end{align*}
-\item \emph{prezzo medio netto di vendita}:
-  \begin{equation*}
-    \frac{\num{73,76} \times{} X + \num{1297}}{\unoStratMediaEsUnoSaldoNumeroQuote}
-  \end{equation*}
-\end{itemize}
+Nominato \(\Plimmev{}\) tale valore, il \emph{controvalore dell'operazione di vendita} risulta:
+\begin{equation*}
+  \Cven{} = \Nven{} \times{} \Plimmev{}
+\end{equation*}
+Il \emph{costo dell'operazione di vendita} risulta:
+\begin{equation*}
+  \Fven{}
+  = \CalcoloCostoOperazioneSim{\Cven{}}
+  = \num{0,0024} \times{} \Cven{} + \num{3}
+\end{equation*}
+e per ogni quota venduta:
+\begin{equation*}
+  \Fven{} / \Nven{}
+  = \num{0,0024} \times{} \Plimmev{} + \num{3} / \Nven{}
+\end{equation*}
+Il \emph{reddito da capitale} risulta:
+\begin{equation*}
+  \Rcap{}
+  = \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{equation*}
+e per ogni quota venduta risulta:
+\begin{equation*}
+  \Rcap{} / \Nven{} = \Plimmev{} - \Pmes{}
+\end{equation*}
+La \emph{tassa sul reddito a capitale} risulta:
+\begin{align*}
+  \Tredcap{} = \num{0,26} \times{} \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{align*}
+e per ogni quota venduta risulta:
+\begin{equation*}
+  \Tredcap{} / \Nven{}
+  = \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{equation*}
+Il \emph{controvalore totale dell'operazione di vendita} risulta:
+\begin{equation*}
+  \Ctotven{}
+  = \Cven{} - \left( \Fven{} + \Tredcap{} \right) =  \Cven{} - \Fven{} - \Tredcap{}
+\end{equation*}
+e per ogni quota venduta è pari al \emph{prezzo medio netto di vendita}:
+\begin{align*}
+  \Pmnv{}
+  &= \Ctotven{} / \Nven{}
+  \\
+  &= \Plimmev{} - \Fven{} / \Nven{} - \Tredcap{} / \Nven{}
+    \\
+  &= \Plimmev{}
+    - \num{0,0024} \times{} \Plimmev{} - \num{3} / \Nven{}
+    - \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{align*}
+Raccogliendo a fattor comune i coefficienti di \(\Plimmev{}\) e semplificando:
+\begin{equation*}
+  \left( 1 - \num{0,0024} - \num{0,26} \right) \times{} \Plimmev{}
+  = \num{0,7376} \times{} \Plimmev{}
+\end{equation*}
+quindi:
+\begin{align*}
+  \Pmnv{}
+  = \num{0,7376} \times{} \Plimmev{}
+  + \num{0,26} \times{} \Pmes{}
+  - \num{3} / \Nven{}
+\end{align*}
 il  pareggio  si  raggiungerebbe  vendendo  le  quote a  un  \emph{prezzo  medio  netto}  uguale  al
-\emph{prezzo medio di carico nel saldo} pari a \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}; quindi:
+\emph{prezzo medio di carico nel saldo}, \(\Pmnv{} = \Pmcs{}\):
 \begin{equation*}
-  \frac{\num{73,76} \times{} X + \num{1297}}{\unoStratMediaEsUnoSaldoNumeroQuote} = \num{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}
+  \Pmcs{}
+  = \num{0,7376} \times{} \Plimmev{}
+  + \num{0,26} \times{} \Pmes{}
+  - \num{3} / \Nven{}
 \end{equation*}
-risolvendo rispetto a \(X\):
+risolvendo rispetto a \(\Plimmev{}\):
 \begin{equation*}
-  X = \frac{\num{\unoStratMediaEsUnoSaldoNumeroQuote} \times{} \num{\unoStratMediaEsUnoSaldoPrezzoMedioCarico} - \num{1297}}{\num{73,76}}
-  = \Eur{50,4067}
+  \Plimmev{}
+  = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{} + \num{3} / \Nven{}}
+  {\num{0,7376}}
 \end{equation*}
-vendendo con un \emph{prezzo medio eseguito} maggiore di \Eur{50,4067} si realizza un guadagno.
+
+Per esempio, si supponga di avere un Conto Titoli con il seguente saldo:
+\begin{itemize}
+\item numero di quote in carico:
+  \(\Nsal{} = \num{\unoStratMediaEsUnoSaldoNumeroQuote}\);
+\item \emph{prezzo medio effettivo}:
+  \(\Pmes{} = \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivo}\);
+\item \emph{prezzo medio di carico}:
+  \(\Pmcs{} = \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioCarico}\);
+\end{itemize}
+il \emph{prezzo medio effettivo di vendita in pareggio} risulta:
+\begin{equation*}
+  \Plimmev{}
+  = \frac{\unoStratMediaEsUnoSaldoPrezzoMedioCarico
+     - \num{0,26} \times{} \unoStratMediaEsUnoSaldoPrezzoMedioEffettivo
+     + \num{3} / \unoStratMediaEsUnoSaldoNumeroQuote}
+  {\num{0,7376}}
+  = \Eur{\unoStratMediaEsUnoSaldoPrezzoMedioEffettivoVenditaInPareggio}
+\end{equation*}
+ogni valore maggiore di questo porta a un guadagno.
 
 %page
 \subsection{Metodo delle linee di investimento}

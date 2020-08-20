@@ -9,7 +9,8 @@ PROGRAMS	= \
 	conto-intesa--calcoli-esempio--operazione-vendita				\
 	conto-intesa--calcoli-esempio--rendimento-riepilogo				\
 	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata		\
-	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento	\
+	conto-intesa--calcoli-esempio--verifica-prezzo-pareggio
 
 DOCUMENTS	= \
 	conto-intesa-guida-etf.pdf
@@ -76,6 +77,11 @@ conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata:			\
 
 conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento:		        \
 		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.c	\
+		conto-intesa--calcoli-esempio.h
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
+
+conto-intesa--calcoli-esempio--verifica-prezzo-pareggio:			\
+		conto-intesa--calcoli-esempio--verifica-prezzo-pareggio.c	\
 		conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
 
