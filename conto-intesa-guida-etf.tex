@@ -39,8 +39,8 @@
 \newcommand{\MediaPonderataDueSim}[4]{\frac{#1 \times{} #2 + #3 \times{} #4}{#1 + #3}}
 \newcommand{\MediaPonderataTreSim}[6]{\frac{#1 \times{} #2 + #3 \times{} #4 + #5 \times{} #6}{#1 + #3 + #5}}
 
-\newcommand{\CalcoloCostoOperazione}[1]{\num{0,50} + \num{2,50} + \left(\num{24}/\num{10000}\right) \times{} \num{#1}}
-\newcommand{\CalcoloCostoOperazioneSim}[1]{\num{0,50} + \num{2,50} + \left(\num{24}/\num{10000}\right) \times{} #1}
+\newcommand{\CalcoloCostoOperazione}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} \num{#1}}
+\newcommand{\CalcoloCostoOperazioneSim}[1]{\num{0,50} + \num{2,50} + \num{0,0024} \times{} #1}
 
 % Calcolo delle tasse sul reddito da capitale.
 \newcommand{\CalcoloTasseSim}[1]{\num{0,26} \times{} #1}
@@ -87,7 +87,7 @@
 % Prezzo medio netto di vendita
 \newcommand{\Pmnv}[1]{\mathcal{P}_{\mathrm{mnv}#1}}
 
-\newcommand{\Plimmev}{\mathcal{P}_{\mathrm{mev}}^{*}}
+\newcommand{\Pmevp}[1]{\mathcal{P}_{\mathrm{mevp}#1}}
 
 %% ------------------------------------------------------------------------
 
@@ -172,8 +172,9 @@
   \Etf{}, né  l'operatività del  sito di  \emph{banca telematica}  di \emph{Banca  Intesa Sanpaolo}.
   Questa guida è pericolosa: ognuno la usa a suo rischio e pericolo.
 
-  In questa guida si  tenta di mantenere il testo matematicamente ``facile'';  chi ha frequentato le
-  Scuole Medie Inferiori, e ne ricorda le basi del programma di matematica, dovrebbe farcela.
+  In questa guida si  tenta di mantenere il testo matematicamente ``facile'';  chi ha frequentato li
+  primo anno  di una Scuole Secondaria  di Secondo Grado con  indirizzo tecnico o scientifico,  e ne
+  ricorda le basi del programma di matematica, dovrebbe farcela.
 \end{abstract}
 
 \tableofcontents
@@ -1345,11 +1346,12 @@ del          \emph{prezzo           medio          di          carico           
 
 La domanda  fondamentale è:  \textbf{possedendo un  numero di  quote a  un certo  \emph{prezzo medio
       effettivo} e un certo  \emph{prezzo medio di carico} nel saldo,  qual'è il minimo \emph{prezzo
-      medio eseguito di vendita} che permette di realizzare un guadagno?}
+      medio effettivo di vendita} che permette di realizzare un guadagno?}
 
-Nominato \(\Plimmev{}\) tale valore, il \emph{controvalore dell'operazione di vendita} risulta:
+Denominato  \emph{prezzo medio  effettivo di  vendita in  pareggio}, \(\Pmevp{}\),  tale valore,  il
+\emph{controvalore dell'operazione di vendita} risulta:
 \begin{equation*}
-  \Cven{} = \Nven{} \times{} \Plimmev{}
+  \Cven{} = \Nven{} \times{} \Pmevp{}
 \end{equation*}
 Il \emph{costo dell'operazione di vendita} risulta:
 \begin{equation*}
@@ -1360,25 +1362,25 @@ Il \emph{costo dell'operazione di vendita} risulta:
 e per ogni quota venduta:
 \begin{equation*}
   \Fven{} / \Nven{}
-  = \num{0,0024} \times{} \Plimmev{} + \num{3} / \Nven{}
+  = \num{0,0024} \times{} \Pmevp{} + \num{3} / \Nven{}
 \end{equation*}
 Il \emph{reddito da capitale} risulta:
 \begin{equation*}
   \Rcap{}
-  = \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  = \Nven{} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{equation*}
 e per ogni quota venduta:
 \begin{equation*}
-  \Rcap{} / \Nven{} = \Plimmev{} - \Pmes{}
+  \Rcap{} / \Nven{} = \Pmevp{} - \Pmes{}
 \end{equation*}
 La \emph{tassa sul reddito a capitale} risulta:
 \begin{align*}
-  \Tredcap{} = \num{0,26} \times{} \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  \Tredcap{} = \num{0,26} \times{} \Nven{} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{align*}
 e per ogni quota venduta:
 \begin{equation*}
   \Tredcap{} / \Nven{}
-  = \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  = \num{0,26} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{equation*}
 Il \emph{controvalore totale dell'operazione di vendita} risulta:
 \begin{equation*}
@@ -1390,21 +1392,21 @@ e per ogni quota venduta è pari al \emph{prezzo medio netto di vendita}:
   \Pmnv{}
   &= \Ctotven{} / \Nven{}
   \\
-  &= \Plimmev{} - \Fven{} / \Nven{} - \Tredcap{} / \Nven{}
+  &= \Pmevp{} - \Fven{} / \Nven{} - \Tredcap{} / \Nven{}
     \\
-  &= \Plimmev{}
-    - \num{0,0024} \times{} \Plimmev{} - \num{3} / \Nven{}
-    - \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  &= \Pmevp{}
+    - \num{0,0024} \times{} \Pmevp{} - \num{3} / \Nven{}
+    - \num{0,26} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{align*}
-Raccogliendo a fattor comune i coefficienti di \(\Plimmev{}\) e semplificando:
+Raccogliendo a fattor comune i coefficienti di \(\Pmevp{}\) e semplificando:
 \begin{equation*}
-  \left( 1 - \num{0,0024} - \num{0,26} \right) \times{} \Plimmev{}
-  = \num{0,7376} \times{} \Plimmev{}
+  \left( 1 - \num{0,0024} - \num{0,26} \right) \times{} \Pmevp{}
+  = \num{0,7376} \times{} \Pmevp{}
 \end{equation*}
 quindi:
 \begin{align*}
   \Pmnv{}
-  = \num{0,7376} \times{} \Plimmev{}
+  = \num{0,7376} \times{} \Pmevp{}
   + \num{0,26} \times{} \Pmes{}
   - \num{3} / \Nven{}
 \end{align*}
@@ -1412,13 +1414,13 @@ il  pareggio  si  raggiungerebbe  vendendo  le  quote a  un  \emph{prezzo  medio
 \emph{prezzo medio di carico nel saldo}, \(\Pmnv{} = \Pmcs{}\):
 \begin{equation*}
   \Pmcs{}
-  = \num{0,7376} \times{} \Plimmev{}
+  = \num{0,7376} \times{} \Pmevp{}
   + \num{0,26} \times{} \Pmes{}
   - \num{3} / \Nven{}
 \end{equation*}
-risolvendo rispetto a \(\Plimmev{}\):
+risolvendo rispetto a \(\Pmevp{}\):
 \begin{equation*}
-  \Plimmev{}
+  \Pmevp{}
   = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{} + \num{3} / \Nven{}}
   {\num{0,7376}}
 \end{equation*}
@@ -1434,7 +1436,7 @@ Per esempio, si supponga di avere un Conto Titoli con il seguente saldo:
 \end{itemize}
 il \emph{prezzo medio effettivo di vendita in pareggio} risulta:
 \begin{equation*}
-  \Plimmev{}
+  \Pmevp{}
   = \frac{\unoStratMediaEsUnoSaldoPrezzoMedioCarico
      - \num{0,26} \times{} \unoStratMediaEsUnoSaldoPrezzoMedioEffettivo
      + \num{3} / \unoStratMediaEsUnoSaldoNumeroQuote}
@@ -1589,7 +1591,7 @@ significa che: se si eseguono prima tutti gli  acquisti e poi tutte le vendite, 
    ottenuti}.
 
 %page
-\subsubsection{Esempio: vendita delle quote della prima linea di investimento.}
+\subsubsection{Esempio: vendita delle quote della prima linea.}
 
 
 Si liquidino le \(\Nacq{1} = \num{\quattroStratInvLineeVenditaNumeroQuote}\) quote della prima linea
@@ -1640,7 +1642,7 @@ Dal punto di vista della prima linea di investimento, il rendimento risulta:
 \end{equation*}
 
 %page
-\subsubsection{Esempio: vendita delle quote della seconda linea di investimento.}
+\subsubsection{Esempio: vendita delle quote della seconda linea.}
 
 
 Si  liquidino le  \(\Nacq{2}  = \num{\cinqueStratInvLineeVenditaNumeroQuote}\)  quote della  seconda
@@ -1691,7 +1693,7 @@ Dal punto di vista della seconda linea di investimento, il rendimento risulta:
 \end{equation*}
 
 %page
-\subsubsection{Esempio: vendita delle quote della terza linea di investimento.}
+\subsubsection{Esempio: vendita delle quote della terza linea.}
 
 
 Si liquidino le  \(\Nacq{3} =\num{\seiStratInvLineeVenditaNumeroQuote}\) quote della  terza linea di
@@ -1767,10 +1769,10 @@ altre banche applicano solo una commissione fissa di \Eur{18,95}, quindi:
 \end{equation*}
 
 Come  cambia il  calcolo del  \emph{prezzo medio  effettivo di  vendita in  pareggio} quando  si usa
-l'espressione generale delle  commissioni?  Nominato \(\Plimmev{}\) il  \emph{prezzo medio effettivo
+l'espressione generale delle  commissioni?  Nominato \(\Pmevp{}\) il  \emph{prezzo medio effettivo
    di vendita in pareggio}, il \emph{controvalore dell'operazione di vendita} risulta:
 \begin{equation*}
-  \Cven{} = \Nven{} \times{} \Plimmev{}
+  \Cven{} = \Nven{} \times{} \Pmevp{}
 \end{equation*}
 Il \emph{costo dell'operazione di vendita} risulta:
 \begin{equation*}
@@ -1779,25 +1781,25 @@ Il \emph{costo dell'operazione di vendita} risulta:
 e per ogni quota venduta:
 \begin{equation*}
   \Fven{} / \Nven{}
-  = \left(b / \Nven{}\right) \times{} \Plimmev{} + \left(a / \Nven{}\right)
+  = \left(b / \Nven{}\right) \times{} \Pmevp{} + \left(a / \Nven{}\right)
 \end{equation*}
 Il \emph{reddito da capitale} risulta:
 \begin{equation*}
   \Rcap{}
-  = \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  = \Nven{} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{equation*}
 e per ogni quota venduta:
 \begin{equation*}
-  \Rcap{} / \Nven{} = \Plimmev{} - \Pmes{}
+  \Rcap{} / \Nven{} = \Pmevp{} - \Pmes{}
 \end{equation*}
 La \emph{tassa sul reddito a capitale} risulta:
 \begin{align*}
-  \Tredcap{} = \num{0,26} \times{} \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  \Tredcap{} = \num{0,26} \times{} \Nven{} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{align*}
 e per ogni quota venduta:
 \begin{equation*}
   \Tredcap{} / \Nven{}
-  = \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  = \num{0,26} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{equation*}
 Il \emph{controvalore totale dell'operazione di vendita} risulta:
 \begin{equation*}
@@ -1809,21 +1811,21 @@ e per ogni quota venduta è pari al \emph{prezzo medio netto di vendita}:
   \Pmnv{}
   &= \Ctotven{} / \Nven{}
   \\
-  &= \Plimmev{} - \Fven{} / \Nven{} - \Tredcap{} / \Nven{}
+  &= \Pmevp{} - \Fven{} / \Nven{} - \Tredcap{} / \Nven{}
     \\
-  &= \Plimmev{}
-    - b \times{} \Plimmev{} - a / \Nven{}
-    - \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+  &= \Pmevp{}
+    - b \times{} \Pmevp{} - a / \Nven{}
+    - \num{0,26} \times{} \left(\Pmevp{} - \Pmes{}\right)
 \end{align*}
-Raccogliendo a fattor comune i coefficienti di \(\Plimmev{}\) e semplificando:
+Raccogliendo a fattor comune i coefficienti di \(\Pmevp{}\) e semplificando:
 \begin{equation*}
-  \left( 1 - \num{0,26} - b \right) \times{} \Plimmev{}
-  = \left( \num{0,74} - b \right) \times{} \Plimmev{}
+  \left( 1 - \num{0,26} - b \right) \times{} \Pmevp{}
+  = \left( \num{0,74} - b \right) \times{} \Pmevp{}
 \end{equation*}
 quindi:
 \begin{align*}
   \Pmnv{}
-  = \left( \num{0,74} - b \right) \times{} \Plimmev{}
+  = \left( \num{0,74} - b \right) \times{} \Pmevp{}
   + \num{0,26} \times{} \Pmes{}
   - a / \Nven{}
 \end{align*}
@@ -1831,20 +1833,20 @@ il  pareggio  si  raggiungerebbe  vendendo  le  quote a  un  \emph{prezzo  medio
 \emph{prezzo medio di carico nel saldo}, \(\Pmnv{} = \Pmcs{}\):
 \begin{equation*}
   \Pmcs{}
-  = \left( \num{0,74} - b \right) \times{} \Plimmev{}
+  = \left( \num{0,74} - b \right) \times{} \Pmevp{}
   + \num{0,26} \times{} \Pmes{}
   - a / \Nven{}
 \end{equation*}
-risolvendo rispetto a \(\Plimmev{}\):
+risolvendo rispetto a \(\Pmevp{}\):
 \begin{equation*}
-  \Plimmev{}
+  \Pmevp{}
   = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{} + a / \Nven{}}
   {\num{0,74} - b}
 \end{equation*}
 
 Per esempio, se \(a = 0\) e \(b = \num{0,0019}\):
 \begin{equation*}
-  \Plimmev{}
+  \Pmevp{}
   = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{}}{\num{0,74} - \num{0,0019}}
   = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{}}{\num{0,7381}}
 \end{equation*}
