@@ -1444,13 +1444,35 @@ ogni valore maggiore di questo porta a un guadagno.
 \input{conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc}
 
 
-Si è visto  come, dal punto di  vista contabile: tutte le quote  di uno stesso \Etf{}  in carico nel
-Conto Titoli siano  parte dello stesso insieme;  in particolare, per ogni operazione  di vendita: le
-\emph{tasse sul reddito da capitale} si calcolano  rispetto al valore attuale del \emph{prezzo medio
-   effettivo nel  saldo}, indipendentemente da  quanti acquisti si siano  eseguiti in passato  e dal
-loro \emph{prezzo medio effettivo di acquisto}.
+Si  è  visto come,  dal  punto  di  vista della  contabilità  tenuta  dalla Banca,  come  prescritto
+dall'Agenzia dell'Entrate:  tutte le quote  di uno  stesso \Etf{} in  carico nel Conto  Titoli siano
+parte dello  stesso insieme;  in particolare,  per ogni  operazione di  vendita: le  \emph{tasse sul
+   reddito da capitale} si calcolano rispetto al valore attuale del \emph{prezzo medio effettivo nel
+   saldo}, indipendentemente da quanti acquisti si siano eseguiti in passato e dal loro \emph{prezzo
+   medio effettivo  di acquisto}.   Perciò, sempre  dal punto  di vista  contabile: si  definisce il
+rendimento di una vendita rispetto ai prezzi medi nel saldo del Conto Titoli.
 
-Nonostante ciò, si immagini questo scenario:
+Nonostante  ciò:  ogni  volta  che  si  acquistano   delle  quote,  una  somma  di  denaro  pari  al
+\emph{controvalore totale di  acquisto} è addebitata sul  Conto corrente; ogni volta  che si vendono
+delle quote,  una somma di denaro  pari al \emph{controvalore  totale di vendita} è  accreditata sul
+Conto corrente.
+
+Si   può   sempre   ripetere   questo   ragionamento   per   ogni   quota   acquistata   e   venduta
+\Parentesi{singolarmente o  insieme ad altre}: ogni  volta che si  acquista una quota, una  somma di
+denaro pari al \emph{prezzo medio di carico di acquisto} è addebitata sul Conto corrente; ogni volta
+che  si vende  una  quota, una  somma di  denaro  pari al  \emph{prezzo  medio netto  di vendita}  è
+accreditata sul Conto corrente.  Perciò si  può definire il rendimento percentuale dell'investimento
+in quella  specifica quota, relativamente  alle somme di denaro  addebitate e accreditate  sul Conto
+Corrente:
+\begin{equation*}
+  \eta = \CalcoloRendimentoPercentualeSim{\Pmnv{}}{\Pmca{}}
+\end{equation*}
+
+%page
+\subsubsection{Esempio di linee di investimento}
+
+
+Si immagini questo scenario:
 \begin{itemize}
 \item si disponga di un capitale di \Eur{15000,00};
 \item si vogliano  definire tre \Virgolette{linee di investimento} formalmente  separate, dal nostro
