@@ -98,11 +98,11 @@ strategia_linee_investimento (void)
 
     {
       config.ordine = "uno",
-      print_latex_newcommand_double_4(&config, "CapitaleIniziale", capitale_iniziale_1);
+      print_latex_newcommand_double_2(&config, "CapitaleIniziale", capitale_iniziale_1);
       config.ordine = "due";
-      print_latex_newcommand_double_4(&config, "CapitaleIniziale", capitale_iniziale_2);
+      print_latex_newcommand_double_2(&config, "CapitaleIniziale", capitale_iniziale_2);
       config.ordine = "tre";
-      print_latex_newcommand_double_4(&config, "CapitaleIniziale", capitale_iniziale_3);
+      print_latex_newcommand_double_2(&config, "CapitaleIniziale", capitale_iniziale_3);
     }
     print_latex_newline(&config);
     {

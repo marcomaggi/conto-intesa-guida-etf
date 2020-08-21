@@ -1478,7 +1478,7 @@ Si immagini questo scenario:
 \item si vogliano  definire tre \Virgolette{linee di investimento} formalmente  separate, dal nostro
   punto di vista; a ciascuna linea si allochino \Eur{\unoStratInvLineeCapitaleIniziale{}};
 \item come primo investimento, per ciascuna linea, si acquistino quote dello stesso \Etf{};
-\item in futuro si  prevede di vendere queste quote e acquistare, per  ogni linea, prodotti diversi,
+\item in futuro si  preveda di vendere queste quote e acquistare, per  ogni linea, prodotti diversi,
   mantenendo    separato    il    destino    di    ognuno   dei    tre    capitali    iniziali    da
   \Eur{\unoStratInvLineeCapitaleIniziale{}}.
 \end{itemize}
@@ -1499,12 +1499,6 @@ Le operazioni di acquisto siano come segue:
     \(\Nacq{1} = \num{\unoStratInvLineeAcquistoNumeroQuote{}}\);
   \item \emph{prezzo medio eseguito}:
     \(\Pmea{1} = \Eur{\unoStratInvLineeAcquistoPrezzoMedioEffettivo{}}\);
-  \item \emph{controvalore dell'operazione}:
-    \(\Cacq{1} = \Eur{\unoStratInvLineeAcquistoControvaloreOperazione{}}\);
-  \item \emph{costo dell'operazione}:
-    \(\Facq{1} = \Eur{\unoStratInvLineeAcquistoCostoOperazione{}}\);
-  \item \emph{controvalore totale}:
-    \(\Ctotacq{1} = \Eur{\unoStratInvLineeAcquistoControvaloreTotale}\);
   \item \emph{prezzo medio di carico}:
     \(\Pmca{1} = \Eur{\unoStratInvLineeAcquistoPrezzoMedioCarico}\);
   \end{itemize}
@@ -1523,12 +1517,6 @@ Le operazioni di acquisto siano come segue:
     \(\Nacq{2} = \num{\dueStratInvLineeAcquistoNumeroQuote{}}\);
   \item \emph{prezzo medio eseguito}:
     \(\Pmea{2} = \Eur{\dueStratInvLineeAcquistoPrezzoMedioEffettivo{}}\);
-  \item \emph{controvalore dell'operazione}:
-    \(\Cacq{2} = \Eur{\dueStratInvLineeAcquistoControvaloreOperazione{}}\);
-  \item \emph{costo dell'operazione}:
-    \(\Facq{2} = \Eur{\dueStratInvLineeAcquistoCostoOperazione{}}\);
-  \item \emph{controvalore totale}:
-    \(\Ctotacq{2} = \Eur{\dueStratInvLineeAcquistoControvaloreTotale}\);
   \item \emph{prezzo medio di carico}:
     \(\Pmca{2} = \Eur{\dueStratInvLineeAcquistoPrezzoMedioCarico}\);
   \end{itemize}
@@ -1548,12 +1536,6 @@ Le operazioni di acquisto siano come segue:
     \(\Nacq{3} = \num{\treStratInvLineeAcquistoNumeroQuote{}}\);
   \item \emph{prezzo medio eseguito}:
     \(\Pmea{3} = \Eur{\treStratInvLineeAcquistoPrezzoMedioEffettivo{}}\);
-  \item \emph{controvalore dell'operazione}:
-    \(\Cacq{3} = \Eur{\treStratInvLineeAcquistoControvaloreOperazione{}}\);
-  \item \emph{costo dell'operazione}:
-    \(\Facq{3} = \Eur{\treStratInvLineeAcquistoCostoOperazione{}}\);
-  \item \emph{controvalore totale}:
-    \(\Ctotacq{3} = \Eur{\treStratInvLineeAcquistoControvaloreTotale}\);
   \item \emph{prezzo medio di carico}:
     \(\Pmca{3} = \Eur{\treStratInvLineeAcquistoPrezzoMedioCarico}\);
   \end{itemize}
@@ -1602,7 +1584,7 @@ significa che: se si eseguono prima tutti gli  acquisti e poi tutte le vendite, 
    ottenuti}.
 
 %page
-\subsubsection{Vendita delle quote della prima linea di investimento.}
+\subsubsection{Esempio: vendita delle quote della prima linea di investimento.}
 
 
 Si liquidino le \(\Nacq{1} = \num{\quattroStratInvLineeVenditaNumeroQuote}\) quote della prima linea
@@ -1643,27 +1625,17 @@ della contabilità fiscale come calcolato dalla Banca è il seguente:
 \item \emph{rendimento in valuta} rispetto al \emph{prezzo medio di carico nel saldo}
   \(\Rval{1} = \Eur{\quattroStratInvLineeVenditaRendimentoInValuta}\).
 \end{itemize}
-Il risultato di  questa operazione dal punto di  vista della prima linea di  investimento può essere
-calcolato in due modi:
-\begin{enumerate}
-\item con  la quantità  di soldi  addebitata sul  Conto Corrente  per acquistare  le quote,  cioè il
-  \emph{controvalore totale di acquisto}, e la quantità di soldi accreditata sul Conto Corrente dopo
-  la vendita delle quote, cioè il \emph{controvalore totale di vendita};
-\item con il \emph{prezzo medio di carico di acquisto} e il \emph{prezzo medio netto di vendita};
-\end{enumerate}
-il rendimento percentuale della compravendita risulta:
-\begin{align*}
-  \eta
-  &= \CalcoloRendimentoPercentualeSim{\Ctotven{1}}{\Ctotacq{1}}
-    = \CalcoloRendimentoPercentuale{\quattroStratInvLineeVenditaControvaloreTotale}{\unoStratInvLineeAcquistoControvaloreTotale}
-  \\
-  &= \CalcoloRendimentoPercentualeSim{\Pmnv{1}}{\Pmca{1}}
-    = \CalcoloRendimentoPercentuale{\quattroStratInvLineeVenditaPrezzoMedioNettoVendita}{\unoStratInvLineeAcquistoPrezzoMedioCarico}
-    = \SI{\quattroStratInvLineeRendimentoPercentualeLinea}{\percent}
-\end{align*}
+
+Dal punto di vista della prima linea di investimento, il rendimento risulta:
+\begin{equation*}
+  \eta_1
+  = \CalcoloRendimentoPercentualeSim{\Pmnv{1}}{\Pmca{1}}
+  = \CalcoloRendimentoPercentuale{\quattroStratInvLineeVenditaPrezzoMedioNettoVendita}{\unoStratInvLineeAcquistoPrezzoMedioCarico}
+  = \SI{\quattroStratInvLineeRendimentoPercentualeLinea}{\percent}
+\end{equation*}
 
 %page
-\subsubsection{Vendita delle quote della seconda linea di investimento.}
+\subsubsection{Esempio: vendita delle quote della seconda linea di investimento.}
 
 
 Si  liquidino le  \(\Nacq{2}  = \num{\cinqueStratInvLineeVenditaNumeroQuote}\)  quote della  seconda
@@ -1704,27 +1676,17 @@ della contabilità fiscale come calcolato dalla Banca è il seguente:
 \item \emph{rendimento in valuta} rispetto al \emph{prezzo medio di carico nel saldo}
   \(\Rval{2} = \Eur{\cinqueStratInvLineeVenditaRendimentoInValuta}\).
 \end{itemize}
-Il risultato di questa operazione dal punto di  vista della seconda linea di investimento può essere
-calcolato in due modi:
-\begin{enumerate}
-\item con  la quantità  di soldi  addebitata sul  Conto Corrente  per acquistare  le quote,  cioè il
-  \emph{controvalore totale di acquisto}, e la quantità di soldi accreditata sul Conto Corrente dopo
-  la vendita delle quote, cioè il \emph{controvalore totale di vendita};
-\item con il \emph{prezzo medio di carico di acquisto} e il \emph{prezzo medio netto di vendita};
-\end{enumerate}
-il rendimento percentuale della compravendita risulta:
-\begin{align*}
-  \eta
-  &= \CalcoloRendimentoPercentualeSim{\Ctotven{2}}{\Ctotacq{2}}
-    = \CalcoloRendimentoPercentuale{\cinqueStratInvLineeVenditaControvaloreTotale}{\unoStratInvLineeAcquistoControvaloreTotale}
-  \\
-  &= \CalcoloRendimentoPercentualeSim{\Pmnv{2}}{\Pmca{2}}
-    = \CalcoloRendimentoPercentuale{\cinqueStratInvLineeVenditaPrezzoMedioNettoVendita}{\unoStratInvLineeAcquistoPrezzoMedioCarico}
-    = \SI{\cinqueStratInvLineeRendimentoPercentualeLinea}{\percent}
-\end{align*}
+
+Dal punto di vista della seconda linea di investimento, il rendimento risulta:
+\begin{equation*}
+  \eta_2
+  = \CalcoloRendimentoPercentualeSim{\Pmnv{2}}{\Pmca{2}}
+  = \CalcoloRendimentoPercentuale{\cinqueStratInvLineeVenditaPrezzoMedioNettoVendita}{\dueStratInvLineeAcquistoPrezzoMedioCarico}
+  = \SI{\cinqueStratInvLineeRendimentoPercentualeLinea}{\percent}
+\end{equation*}
 
 %page
-\subsubsection{Vendita delle quote della terza linea di investimento.}
+\subsubsection{Esempio: vendita delle quote della terza linea di investimento.}
 
 
 Si liquidino le  \(\Nacq{3} =\num{\seiStratInvLineeVenditaNumeroQuote}\) quote della  terza linea di
@@ -1765,23 +1727,13 @@ della contabilità fiscale come calcolato dalla Banca è il seguente:
 \item \emph{rendimento in valuta} rispetto al \emph{prezzo medio di carico nel saldo}
   \(\Rval{3} = \Eur{\seiStratInvLineeVenditaRendimentoInValuta}\).
 \end{itemize}
-Il risultato di  questa operazione dal punto di  vista della terza linea di  investimento può essere
-calcolato in due modi:
-\begin{enumerate}
-\item con  la quantità  di soldi  addebitata sul  Conto Corrente  per acquistare  le quote,  cioè il
-  \emph{controvalore totale di acquisto}, e la quantità di soldi accreditata sul Conto Corrente dopo
-  la vendita delle quote, cioè il \emph{controvalore totale di vendita};
-\item con il \emph{prezzo medio di carico di acquisto} e il \emph{prezzo medio netto di vendita};
-\end{enumerate}
-il rendimento percentuale della compravendita risulta:
+
+Dal punto di vista della terza linea di investimento, il rendimento risulta:
 \begin{align*}
-  \eta
-  &= \CalcoloRendimentoPercentualeSim{\Ctotven{3}}{\Ctotacq{3}}
-    = \CalcoloRendimentoPercentuale{\seiStratInvLineeVenditaControvaloreTotale}{\unoStratInvLineeAcquistoControvaloreTotale}
-  \\
-  &= \CalcoloRendimentoPercentualeSim{\Pmnv{3}}{\Pmca{3}}
-    = \CalcoloRendimentoPercentuale{\seiStratInvLineeVenditaPrezzoMedioNettoVendita}{\unoStratInvLineeAcquistoPrezzoMedioCarico}
-    = \SI{\seiStratInvLineeRendimentoPercentualeLinea}{\percent}
+  \eta_3
+  = \CalcoloRendimentoPercentualeSim{\Pmnv{3}}{\Pmca{3}}
+  = \CalcoloRendimentoPercentuale{\seiStratInvLineeVenditaPrezzoMedioNettoVendita}{\treStratInvLineeAcquistoPrezzoMedioCarico}
+  = \SI{\seiStratInvLineeRendimentoPercentualeLinea}{\percent}
 \end{align*}
 
 %page
