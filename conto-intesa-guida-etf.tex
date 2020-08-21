@@ -776,14 +776,21 @@ la frazione \Virgolette{eseguita} dell'ordine.  Il  \textbf{\emph{prezzo medio e
 (nella terminologia dell'Agenzia dell'Entrate), è la  media ponderata dei prezzi di vendita rispetto
 al numero di quote vendute.
 
-Per  esempio, se  un  singolo  ordine di  vendita  per  \num{\dueEsVenVenditaNumeroQuote{}} quote  è
-eseguito nelle fasi:
+Si supponga di avere un Conto Titoli con il seguente saldo riguardo un \Etf{}:
+\begin{itemize}
+\item numero di quote in carico: \(\Nsal{} = \unoEsVenSaldoNumeroQuote\);
+\item \emph{prezzo medio effettivo nel saldo}: \(\Pmes{} = \unoEsVenSaldoPrezzoMedioEffettivo\);
+\item \emph{prezzo medio di carico nel saldo}: \(\Pmcs{} = \unoEsVenSaldoPrezzoMedioCarico\);
+\item \emph{costo medio di acquisto per ogni quota in carico}: \(\Fmcs{} = \unoEsVenSaldoCostoMedio\);
+\end{itemize}
+si inserisca un ordine di liquidazione totale delle quote in carico; se il singolo ordine di vendita
+per \num{\dueEsVenVenditaNumeroQuote{}} quote è eseguito nelle fasi:
 \begin{enumerate}
 \item vendita di \(\Nquo{1} = \num{\UnoNumeroQuote}\) quote al prezzo di \(\Pven{1} = \Eur{\UnoPrezzoEseguito}\);
 \item vendita di \(\Nquo{2} = \num{\DueNumeroQuote}\) quote al prezzo di \(\Pven{2} = \Eur{\DuePrezzoEseguito}\);
 \item vendita di \(\Nquo{3} = \num{\TreNumeroQuote}\) quote al prezzo di \(\Pven{3} = \Eur{\TrePrezzoEseguito}\);
 \end{enumerate}
-allora il \emph{prezzo medio effettivo di vendita} \(\Pmev{}\) risulta:
+allora il \emph{prezzo medio effettivo di vendita}, \(\Pmev{}\), risulta:
 \begin{align*}
   \Pmev{}
   &= \MediaPonderataTreSim{\Nquo{1}}{\Pven{1}}{\Nquo{2}}{\Pven{2}}{\Nquo{3}}{\Pven{3}} \\
@@ -794,7 +801,7 @@ allora il \emph{prezzo medio effettivo di vendita} \(\Pmev{}\) risulta:
   = \Eur{\dueEsVenVenditaPrezzoMedioEffettivo}
 \end{align*}
 
-Il \textbf{controvalore dell'operazione  di vendita} \(\Cven{}\) è il prodotto  tra il numero totale
+Il \textbf{controvalore dell'operazione di vendita}, \(\Cven{}\), è il prodotto tra il numero totale
 di quote vendute e il \emph{prezzo medio effettivo}.  Nell'esempio:
 \begin{equation*}
   \Cven{} = \Nven{} \times{} \Pmev{}
@@ -825,11 +832,11 @@ l'operazione genera un \emph{reddito da capitale}:
 \end{align*}
 
 Quando  il reddito  di  una vendita  è  positivo: occorre  pagare la  \textbf{tassa  sul reddito  da
-   capitale}\footnote{Per quanto riguarda la tassazione degli  investimenti: si deve pagare anche il
+   capitale},\footnote{Per quanto riguarda la tassazione degli investimenti: si deve pagare anche il
    bollo sull'estratto  conto trimestrale del  Conto Titoli, pari allo  \SI{0,2}{\percent} all'anno;
    per  ogni trimestre,  l'importo è  pari allo  \SI{0,05}{\percent} del  controvalore alla  data di
    chiusura dei conti trimestrali; il bollo è  addebitato direttamente sul Conto Corrente, perciò in
-   questa guida lo si considera conteggiato a parte.}, \(\Tredcap{}\).  Per fondi che non contengono
+   questa guida lo si considera conteggiato a  parte.} \(\Tredcap{}\).  Per fondi che non contengono
 Titoli  dello Stato  Italiano, e  assimilati, l'aliquota  unica è  del \SI{26}{\percent};  allora la
 \emph{tassa sul reddito da capitale} risulta:
 \begin{equation*}
@@ -849,8 +856,8 @@ associate all'operazione; per ogni ordine di vendita eseguito, occorre pagare:
 \item le  commissioni variabili per  la Banca  pari allo \SI{0,24}{\percent}  del \emph{controvalore
      dell'operazione};
 \end{itemize}
-se un ordine non è eseguito: si paga nulla; se un ordine è eseguito in piú fasi: nella prima fase si
-pagano  i costi  fissi  piú  la commissione  percentuale;  nelle fasi  successive  si  paga solo  la
+Se un ordine non è  eseguito: si paga nulla.  Se un ordine è eseguito in  piú fasi: nella prima fase
+si pagano  i costi  fissi piú  la commissione  percentuale; nelle  fasi successive  si paga  solo la
 commissione percentuale.  Nell'esempio, il \emph{costo dell'operazione di vendita} risulta:
 \begin{align*}
   \Fven{}
@@ -918,9 +925,9 @@ Nell'esempio, il \emph{prezzo medio netto di vendita} risulta:
   = \Eur{\dueEsVenVenditaPrezzoMedioNettoVendita}
 \end{equation*}
 
-Il \textbf{rendimento \underline{percentuale} dell'operazione  di vendita}\footnote{Il rendimento si
+Il \textbf{rendimento \underline{percentuale} dell'operazione di vendita},\footnote{Il rendimento si
    indica con la lettera  dell'alfabeto greco \(\eta\), che si chiama  \emph{eta}, come in \emph{Eta
-      Beta} il  personaggio dei fumetti  della Walt Disney.},  \(\Rperc{}\), rispetto alle  quote in
+      Beta} il  personaggio dei fumetti  della Walt Disney.}   \(\Rperc{}\), rispetto alle  quote in
 carico nel  saldo precedente,  si calcola  considerando il  \emph{prezzo medio  di carico  nel saldo
    precedente} e il \emph{prezzo medio netto di vendita};  in caso di guadagno è un numero positivo,
 in caso di perdita è un numero negativo.  Nell'esempio, il \emph{rendimento percentuale} risulta:
@@ -988,8 +995,9 @@ contratto di compravendita sulla Borsa di negoziazione del titolo:
 
 Si supponga di possedere \num{100} quote al \emph{prezzo medio di carico nel saldo} di \Eur{50,00}:
 \begin{itemize}
-\item  se l'ultimo  contratto  di  compravendita è  stato  chiuso  al prezzo  di  una  quota pari  a
-  \Eur{52,00}, l'\emph{Utile percentuale} mostrato nella tabella del patrimonio risulterebbe:
+\item se l'ultimo contratto di compravendita sulla Borsa di negoziazione è stato chiuso al prezzo di
+  una quota  pari a \Eur{52,00},  l'\emph{Utile percentuale}  mostrato nella tabella  del patrimonio
+  risulterebbe:
   \begin{equation*}
     \CalcoloRendimentoPercentuale{52,00}{50,00} = \SI{+3,6889}{\percent}
   \end{equation*}
@@ -1004,8 +1012,9 @@ Si supponga di possedere \num{100} quote al \emph{prezzo medio di carico nel sal
   \item \emph{rendimento in valuta}: \Eur{+117,52};
   \end{itemize}
 
-\item  se l'ultimo  contratto  di  compravendita è  stato  chiuso  al prezzo  di  una  quota pari  a
-  \Eur{48,00}, la \emph{Perdita percentuale} mostrata nella tabella del patrimonio risulterebbe:
+\item se l'ultimo contratto di compravendita sulla Borsa di negoziazione è stato chiuso al prezzo di
+  una quota pari a \Eur{48,00}, la  \emph{Perdita percentuale} mostrata nella tabella del patrimonio
+  risulterebbe:
   \begin{equation*}
     \CalcoloRendimentoPercentuale{48,00}{50,00} = \SI{-4,2871}{\percent}
   \end{equation*}
