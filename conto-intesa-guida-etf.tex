@@ -147,6 +147,11 @@
 % Rendimento in valuta.
 \newcommand{\Rval}[1]{\eta_{\textrm{\euro{}}#1}}
 
+%% ------------------------------------------------------------------------
+
+\newcommand{\Cop}{\mathcal{C}}
+\newcommand{\Fop}{\mathcal{F}}
+
 %page
 %% ------------------------------------------------------------
 %% Intestazione
@@ -1735,6 +1740,114 @@ Dal punto di vista della terza linea di investimento, il rendimento risulta:
   = \CalcoloRendimentoPercentuale{\seiStratInvLineeVenditaPrezzoMedioNettoVendita}{\treStratInvLineeAcquistoPrezzoMedioCarico}
   = \SI{\seiStratInvLineeRendimentoPercentualeLinea}{\percent}
 \end{align*}
+
+%page
+\appendix
+\section{Espressione generale delle commissioni}
+
+
+In  generale, le  commissioni applicate  dalle banche  alle operazioni  di compravendita  si possono
+esprimere come:
+\begin{equation*}
+  \Fop{} = a + b \times{} \Cop{}
+\end{equation*}
+in cui \(a\) è un costo fisso e \(b\) è il coefficiente da applicare al controvalore dell'operazione
+\(\Cop{}\).  Per Banca Intesa Sanpaolo il costo risulta:
+\begin{align*}
+  \Fop{} = \num{3,00} + \num{0,0024} \times{} \Cop{}
+\end{align*}
+altre banche applicano  solo una commissione variabile pari a  \SI{0,19}{\percent} del controvalore,
+quindi:
+\begin{equation*}
+  \Fop{} = \num{0,0019} \times{} \Cop{}
+\end{equation*}
+altre banche applicano solo una commissione fissa di \Eur{18,95}, quindi:
+\begin{equation*}
+  \Fop{} = \Eur{18,95}
+\end{equation*}
+
+Come  cambia il  calcolo del  \emph{prezzo medio  effettivo di  vendita in  pareggio} quando  si usa
+l'espressione generale delle  commissioni?  Nominato \(\Plimmev{}\) il  \emph{prezzo medio effettivo
+   di vendita in pareggio}, il \emph{controvalore dell'operazione di vendita} risulta:
+\begin{equation*}
+  \Cven{} = \Nven{} \times{} \Plimmev{}
+\end{equation*}
+Il \emph{costo dell'operazione di vendita} risulta:
+\begin{equation*}
+  \Fven{} = a + b \times{} \Cven{}
+\end{equation*}
+e per ogni quota venduta:
+\begin{equation*}
+  \Fven{} / \Nven{}
+  = \left(b / \Nven{}\right) \times{} \Plimmev{} + \left(a / \Nven{}\right)
+\end{equation*}
+Il \emph{reddito da capitale} risulta:
+\begin{equation*}
+  \Rcap{}
+  = \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{equation*}
+e per ogni quota venduta:
+\begin{equation*}
+  \Rcap{} / \Nven{} = \Plimmev{} - \Pmes{}
+\end{equation*}
+La \emph{tassa sul reddito a capitale} risulta:
+\begin{align*}
+  \Tredcap{} = \num{0,26} \times{} \Nven{} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{align*}
+e per ogni quota venduta:
+\begin{equation*}
+  \Tredcap{} / \Nven{}
+  = \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{equation*}
+Il \emph{controvalore totale dell'operazione di vendita} risulta:
+\begin{equation*}
+  \Ctotven{}
+  = \Cven{} - \left( \Fven{} + \Tredcap{} \right) =  \Cven{} - \Fven{} - \Tredcap{}
+\end{equation*}
+e per ogni quota venduta è pari al \emph{prezzo medio netto di vendita}:
+\begin{align*}
+  \Pmnv{}
+  &= \Ctotven{} / \Nven{}
+  \\
+  &= \Plimmev{} - \Fven{} / \Nven{} - \Tredcap{} / \Nven{}
+    \\
+  &= \Plimmev{}
+    - b \times{} \Plimmev{} - a / \Nven{}
+    - \num{0,26} \times{} \left(\Plimmev{} - \Pmes{}\right)
+\end{align*}
+Raccogliendo a fattor comune i coefficienti di \(\Plimmev{}\) e semplificando:
+\begin{equation*}
+  \left( 1 - \num{0,26} - b \right) \times{} \Plimmev{}
+  = \left( \num{0,74} - b \right) \times{} \Plimmev{}
+\end{equation*}
+quindi:
+\begin{align*}
+  \Pmnv{}
+  = \left( \num{0,74} - b \right) \times{} \Plimmev{}
+  + \num{0,26} \times{} \Pmes{}
+  - a / \Nven{}
+\end{align*}
+il  pareggio  si  raggiungerebbe  vendendo  le  quote a  un  \emph{prezzo  medio  netto}  uguale  al
+\emph{prezzo medio di carico nel saldo}, \(\Pmnv{} = \Pmcs{}\):
+\begin{equation*}
+  \Pmcs{}
+  = \left( \num{0,74} - b \right) \times{} \Plimmev{}
+  + \num{0,26} \times{} \Pmes{}
+  - a / \Nven{}
+\end{equation*}
+risolvendo rispetto a \(\Plimmev{}\):
+\begin{equation*}
+  \Plimmev{}
+  = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{} + a / \Nven{}}
+  {\num{0,74} - b}
+\end{equation*}
+
+Per esempio, se \(a = 0\) e \(b = \num{0,0019}\):
+\begin{equation*}
+  \Plimmev{}
+  = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{}}{\num{0,74} - \num{0,0019}}
+  = \frac{\Pmcs{} - \num{0,26} \times{} \Pmes{}}{\num{0,7381}}
+\end{equation*}
 
 %page
 %% ------------------------------------------------------------
