@@ -1,16 +1,16 @@
 # Makefile --
 
 PROGRAMS	= \
-	conto-intesa--calcoli-esempio--etf-abcd						\
-	conto-intesa--calcoli-esempio--etf-xyz						\
+	conto-intesa--calcoli-esempio--etf-abcd.exe					\
+	conto-intesa--calcoli-esempio--etf-xyz.exe					\
 	\
-	conto-intesa--calcoli-esempio--operazione-acquisto				\
-	conto-intesa--calcoli-esempio--saldo-acquisto					\
-	conto-intesa--calcoli-esempio--operazione-vendita				\
-	conto-intesa--calcoli-esempio--rendimento-riepilogo				\
-	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata		\
-	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento	\
-	conto-intesa--calcoli-esempio--verifica-prezzo-pareggio
+	conto-intesa--calcoli-esempio--operazione-acquisto.exe				\
+	conto-intesa--calcoli-esempio--saldo-acquisto.exe				\
+	conto-intesa--calcoli-esempio--operazione-vendita.exe				\
+	conto-intesa--calcoli-esempio--rendimento-riepilogo.exe				\
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.exe	\
+	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.exe	\
+	conto-intesa--calcoli-esempio--verifica-prezzo-pareggio.exe
 
 DOCUMENTS	= \
 	conto-intesa-guida-etf.pdf
@@ -38,69 +38,20 @@ CFLAGS		= -Wall
 CPPFLAGS	= -I.
 LDFLAGS		= -lm
 
-## --------------------------------------------------------------------
-
-conto-intesa--calcoli-esempio--etf-abcd:		\
-		conto-intesa--calcoli-esempio--etf-abcd.c conto-intesa--calcoli-esempio.h
+%.exe: %.c conto-intesa--calcoli-esempio.h
 	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--etf-xyz:		\
-		conto-intesa--calcoli-esempio--etf-xyz.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-## --------------------------------------------------------------------
-
-conto-intesa--calcoli-esempio--operazione-acquisto:	\
-		conto-intesa--calcoli-esempio--operazione-acquisto.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--saldo-acquisto:		\
-		conto-intesa--calcoli-esempio--saldo-acquisto.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--operazione-vendita:	\
-		conto-intesa--calcoli-esempio--operazione-vendita.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--saldo-vendita:		\
-		 conto-intesa--calcoli-esempio--saldo-vendita.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--rendimento-riepilogo:		\
-		 conto-intesa--calcoli-esempio--rendimento-riepilogo.c conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata:			\
-		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.c	\
-		conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento:		        \
-		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.c	\
-		conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-conto-intesa--calcoli-esempio--verifica-prezzo-pareggio:			\
-		conto-intesa--calcoli-esempio--verifica-prezzo-pareggio.c	\
-		conto-intesa--calcoli-esempio.h
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
-
-## --------------------------------------------------------------------
-
-CLEANFILES	+= demo
-
-demo: demo.c
-	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $< && ./demo
 
 
 #### documenti
 
-PREREQUISITES	= \
+MY_INC_FILES	= \
 	conto-intesa--calcoli-esempio--operazione-acquisto.inc				\
 	conto-intesa--calcoli-esempio--saldo-acquisto.inc				\
 	conto-intesa--calcoli-esempio--operazione-vendita.inc				\
 	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.inc	\
 	conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc
+
+PREREQUISITES	= $(MY_INC_FILES)
 
 CLEANFILES	+= \
 	*.aux *.log *.toc *.dvi *.ps* *.pdf *.eps *.bbl *.blg \
@@ -121,7 +72,7 @@ endif
 
 ## --------------------------------------------------------------------
 
-.PHONY: bootstrap clean-latex latex-clean
+.PHONY: bootstrap clean-latex latex-clean incs
 
 bootstrap: $(PREREQUISITES)
 	$(LATEX) conto-intesa-guida-etf.tex
@@ -137,25 +88,10 @@ conto-intesa-guida-etf.dvi: conto-intesa-guida-etf.tex fdl-1.3.tex $(PREREQUISIT
 
 ## --------------------------------------------------------------------
 
-conto-intesa--calcoli-esempio--operazione-acquisto.inc: \
-		conto-intesa--calcoli-esempio--operazione-acquisto
-	./conto-intesa--calcoli-esempio--operazione-acquisto latex >$(@)
+incs: $(MY_INC_FILES)
 
-conto-intesa--calcoli-esempio--saldo-acquisto.inc: \
-		conto-intesa--calcoli-esempio--saldo-acquisto
-	./conto-intesa--calcoli-esempio--saldo-acquisto latex >$(@)
-
-conto-intesa--calcoli-esempio--operazione-vendita.inc: \
-		conto-intesa--calcoli-esempio--operazione-vendita
-	./conto-intesa--calcoli-esempio--operazione-vendita latex >$(@)
-
-conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata.inc: \
-		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata
-	./conto-intesa--calcoli-esempio--strategie-prezzi--metodo-media-ponderata latex >$(@)
-
-conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento.inc: \
-		conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento
-	./conto-intesa--calcoli-esempio--strategie-prezzi--metodo-linee-investimento latex >$(@)
+%.inc: %.exe
+	./$(^) latex >$(@)
 
 ## --------------------------------------------------------------------
 
