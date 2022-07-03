@@ -1,0 +1,102 @@
+# makefile-rules --
+
+CLEANFILES	= $(DOCUMENTS) $(PROGRAMS)					\
+		  *.aux *.log *.toc *.dvi *.ps* *.pdf *.eps *.bbl *.blg *.bcf	\
+		  *.idx *.out *.texdraw _region_.tex "=auto" *.run.xml
+
+RM		= /bin/rm --verbose --force --recursive
+
+## --------------------------------------------------------------------
+
+.PHONY: all clean run bootstrap bootstrap-latex latex-bootstrap view
+
+all: $(DOCUMENTS)
+
+clean:
+	$(RM) $(CLEANFILES)
+
+bibtex: $(BIBS)
+
+.PHONY: bootstrap bootstrap-latex latex-bootstrap
+
+bootstrap bootstrap-latex latex-bootstrap: $(MY_DVI_PREREQUISITES)
+	$(foreach SRC, $(SOURCES), $(LATEX) $(SRC) && $(LATEX) $(SRC);)
+
+view: $(DOCUMENTS)
+	{ for f in $(DOCUMENTS) ; do browser safe file $$f ; done ; } &
+
+
+#### programmi per calcoli negli esempi della guida
+
+.SECONDARY: %.exe
+
+CLEANFILES	+= *.o *.inc
+
+CC		= gcc -std=c11
+CFLAGS		= -Wall
+CPPFLAGS	= -I.
+LDFLAGS		= -lm
+
+%.exe: %.c
+	$(CC) $(CPPFLAGS) $(LDFLAGS) $(CFLAGS) -o $@ $<
+
+%.inc: %.exe
+	./$(^) latex >$(@)
+
+
+#### bibliography
+
+BIBFILES	= $(patsubst %.tex, %.bbl, $(SOURCES))
+BIBTEX_PROGRAM	= bibtex
+BIBTEX_RUN	= BIBINPUTS=$(BIBINPUTS) $(BIBTEX_PROGRAM)
+
+.PHONY: bib bibtex bib-bootstrap
+
+bib bibtex: $(BIBFILES)
+
+%.bbl %.blg: %.tex
+	$(foreach SRC, $(BIBSOURCES), $(BIBTEX_RUN) $(patsubst %.tex, %, $(SRC));)
+
+bib-bootstrap:
+	make clean && make bootstrap && make bib && make bootstrap
+
+
+#### documenti
+
+.SECONDARY: %.dvi .%.ps
+
+LATEX		= latex
+PS2PDF		= ps2pdf
+DVIPS		= dvips
+
+PDFLATEX	= pdflatex
+
+PAPER		?= a4
+ifeq ($(PAPER),a5)
+DVIPSFLAGS	:= -T 420pt,595pt
+endif
+
+## --------------------------------------------------------------------
+
+ifeq (1,1)
+
+%.dvi: %.tex $(MY_DVI_PREREQUISITES)
+	$(LATEX) $(<)
+
+%.ps: %.dvi
+	$(DVIPS) $(DVIPSFLAGS) -o $(@) $(<)
+
+%.pdf: %.ps
+	$(PS2PDF) $(<) $(@)
+
+else
+
+%.pdf: %.tex
+	$(LATEX) $(<) && $(PDFLATEX) $(<)
+
+endif
+
+### end of file
+# Local Variables:
+# mode: makefile
+# End:
