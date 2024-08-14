@@ -16,21 +16,21 @@ provare i calcoli.
 
 Il codice sorgente di questa guida è disponibile in Rete all'indirizzo:
 
-[https://github.com/marcomaggi/conto-intesa-guida-etf](https://github.com/marcomaggi/conto-intesa-guida-etf)
+[https://github.com/marcomaggi/mmux-latex-personal-finance](https://github.com/marcomaggi/mmux-latex-personal-finance)
 
 con backup all'indirizzo:
 
-[https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/](https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/)
+[https://bitbucket.org/marcomaggi/mmux-latex-personal-finance/](https://bitbucket.org/marcomaggi/mmux-latex-personal-finance/)
 
 una  versione della  guida  precompilata in  formato  PDF è  disponibile
 all'indirizzo:
 
-[https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/downloads](https://bitbucket.org/marcomaggi/conto-intesa-guida-etf/downloads)
+[https://bitbucket.org/marcomaggi/mmux-latex-personal-finance/downloads](https://bitbucket.org/marcomaggi/mmux-latex-personal-finance/downloads)
 
 
 ## Licenza del testo
 
-Copyright (c) 2017, 2018, 2020 Marco Maggi <mrc.mgg@gmail.com><br/>
+Copyright (c) 2017, 2018, 2020, 2024 Marco Maggi <mrc.mgg@gmail.com><br/>
 All rights reserved.
 
 Permission is  granted to copy,  distribute and/or modify  this document

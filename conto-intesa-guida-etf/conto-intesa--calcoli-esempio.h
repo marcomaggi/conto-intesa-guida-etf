@@ -9,7 +9,7 @@
 	Libreria  di funzioni  per  i calcoli  di contabilità  per  le operazioni  di
 	compravendita in ETF eseguite con i servizi di Banca Intesa Sanpaolo.
 
-   Copyright (C) 2017, 2018, 2020 Marco Maggi <mrc.mgg@gmail.com>
+   Copyright (C) 2017, 2018, 2020, 2024 Marco Maggi <mrc.mgg@gmail.com>
 
    This program is free software: you can  redistribute it and/or modify it under the
    terms  of  the GNU  General  Public  License as  published  by  the Free  Software
@@ -116,6 +116,8 @@ static void
 print_latex_newcommand (FILE * stream, char const * const command_name, char const * const command_value)
 {
   fprintf(stream, "\\newcommand{%s}{%s}\n", command_name, command_value);
+  fprintf(stream, "\\newcommand{%sEur}{\\Eur{%s}}\n", command_name, command_value);
+  fprintf(stream, "\\newcommand{%sNum}{\\num{%s}}\n", command_name, command_value);
 }
 
 static void
